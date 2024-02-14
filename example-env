@@ -1,0 +1,19 @@
+# Django Secret Key
+DJANGO_SECRET_KEY=your-secret-key
+
+# Debug Mode
+DJANGO_DEBUG=True
+
+# Database Configuration
+DB_NAME=your-database-name
+DB_USER=your-database-user
+DB_PASSWORD=your-database-password
+DB_HOST=your-database-host
+DB_PORT=5432  # Adjust the port as needed
+
+# Email Configuration (SMTP)
+EMAIL_HOST=smtp.example.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=your-email@example.com
+EMAIL_HOST_PASSWORD=your-email-password
+EMAIL_USE_TLS=True

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Supplier List{% endblock %}
+
+{% block content %}
+    <h1>Supplier List</h1>
+    <!-- Add the table or list of suppliers here -->
+    <a class="btn btn-primary mb-3" href="{% url 'suppliers:create' %}">Add New Supplier</a>
+{% endblock %}

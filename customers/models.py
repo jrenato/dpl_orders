@@ -50,8 +50,8 @@ class CustomerAddress(models.Model):
         '''
         Meta options
         '''
-        verbose_name = 'Endereço'
-        verbose_name_plural = 'Endereços'
+        verbose_name = 'Endereço de Cliente'
+        verbose_name_plural = 'Endereços de Clientes'
         ordering = ['customer', 'street']
 
     def __str__(self):

@@ -23,6 +23,14 @@ class Supplier(models.Model):
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
+    class Meta:
+        '''
+        Meta options
+        '''
+        verbose_name = 'Fornecedor'
+        verbose_name_plural = 'Fornecedores'
+        ordering = ['name']
+
     def __str__(self):
         return f'{self.name}'
 
@@ -41,6 +49,14 @@ class SupplierAddress(models.Model):
 
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        '''
+        Meta options
+        '''
+        verbose_name = 'Endereço de Fornecedor'
+        verbose_name_plural = 'Endereços de Fornecedores'
+        ordering = ['supplier', 'street']
 
     def __str__(self):
         return f'{self.street}, {self.number} - {self.city} - {self.state} - CEP {self.zip_code}'

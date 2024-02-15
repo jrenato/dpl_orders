@@ -1,3 +1,6 @@
+'''
+Admin for Products
+'''
 from django.contrib import admin
 
 from .models import ProductCategory, Product
@@ -5,17 +8,23 @@ from .models import ProductCategory, Product
 
 @admin.register(ProductCategory)
 class ProductCategoryAdmin(admin.ModelAdmin):
+    '''
+    Admin for the ProductCategory model
+    '''
     list_display = ('name',)
     search_fields = ('name',)
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'stock', 'available')
+    '''
+    Admin for the Product model
+    '''
+    list_display = ('name', 'category', 'price', 'stock')
     search_fields = ('name', 'category__name')
-    list_filter = ('category', 'created', 'modified', 'available')
+    list_filter = ('category',)
     prepopulated_fields = {'slug': ('name',)}
-    list_editable = ('price', 'stock', 'available')
+    list_editable = ('price', 'stock')
     list_per_page = 20
     # actions = ['make_available', 'make_unavailable']
 

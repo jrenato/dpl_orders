@@ -12,6 +12,8 @@ click==8.1.7
     # via pip-tools
 crispy-bootstrap5==2023.10
     # via -r requirements.in
+defusedxml==0.7.1
+    # via odfpy
 django==5.0.2
     # via
     #   -r requirements.in
@@ -26,9 +28,17 @@ django-environ==0.11.2
     # via -r requirements.in
 django-localflavor==4.0
     # via -r requirements.in
+lml==0.1.0
+    # via pyexcel-io
+odfpy==1.4.1
+    # via pyexcel-ods
 packaging==23.2
     # via build
 pip-tools==7.3.0
+    # via -r requirements.in
+pyexcel-io==0.6.6
+    # via pyexcel-ods
+pyexcel-ods==0.6.0
     # via -r requirements.in
 pyproject-hooks==1.0.0
     # via build

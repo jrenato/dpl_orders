@@ -4,3 +4,4 @@ django-crispy-forms
 django-environ
 django-localflavor
 pip-tools
+pyexcel-ods

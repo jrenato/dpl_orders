@@ -33,11 +33,11 @@ class Product(models.Model):
         'suppliers.Supplier', on_delete=models.CASCADE, verbose_name='Fornecedor'
     )
     category = models.ForeignKey(
-        ProductCategory, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Categoria'
+        ProductCategory, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Categoria',
     )
 
     name = models.CharField('Nome', max_length=120)
-    slug = models.SlugField('Slug', max_length=120, unique=True)
+    slug = models.SlugField('Slug', max_length=120, unique=True, blank=True, null=True)
     isbn = models.CharField('ISBN', max_length=13, blank=True, null=True)
     price = models.DecimalField('Preço', decimal_places=2, max_digits=10000, blank=True, null=True)
     release_date = models.DateField('Data de lançamento', blank=True, null=True)

@@ -18,6 +18,7 @@ class Customer(models.Model):
     cnpj = models.CharField(_('CNPJ'), max_length=14, blank=True, unique=True)
     cpf = models.CharField(_('CPF'), max_length=11, blank=True, unique=True)
     phone = models.CharField(_('Phone'), max_length=15, blank=True, null=True)
+    contact_person = models.CharField(_('Contact Person'), max_length=120, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     modified = models.DateTimeField(_('Modified at'), auto_now=True)

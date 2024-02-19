@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 14:49-0300\n"
+"POT-Creation-Date: 2024-02-19 15:22-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,173 +18,200 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: customers/apps.py:8 customers/models.py:28
+#: customers/apps.py:8 customers/models.py:31
 msgid "Customers"
-msgstr ""
+msgstr "Clientes"
 
-#: customers/models.py:12 product_groups/models.py:22 products/models.py:12
-#: products/models.py:41
+#: customers/models.py:12 products/models.py:30 suppliers/models.py:12
+msgid "Internal id"
+msgstr "Código Interno"
+
+#: customers/models.py:14 product_groups/models.py:22 products/models.py:12
+#: products/models.py:43 suppliers/models.py:14
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
-#: customers/models.py:13 products/models.py:42
+#: customers/models.py:15 products/models.py:44 suppliers/models.py:16
 msgid "Slug"
-msgstr ""
+msgstr "Slug"
 
-#: customers/models.py:14
+#: customers/models.py:16 suppliers/models.py:15
 msgid "Short Name"
-msgstr ""
+msgstr "Nome Reduzido"
 
-#: customers/models.py:15
+#: customers/models.py:17 suppliers/models.py:21
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
-#: customers/models.py:16
+#: customers/models.py:18 suppliers/models.py:19
 msgid "CNPJ"
-msgstr ""
+msgstr "CNPJ"
 
-#: customers/models.py:17
+#: customers/models.py:19 suppliers/models.py:18
 msgid "CPF"
-msgstr ""
+msgstr "CPF"
 
-#: customers/models.py:18
+#: customers/models.py:20
 msgid "Phone"
-msgstr ""
+msgstr "Telefone"
 
-#: customers/models.py:20 customers/models.py:48 product_groups/models.py:31
-#: products/models.py:50
+#: customers/models.py:21 suppliers/models.py:20
+msgid "Contact Person"
+msgstr "Contato"
+
+#: customers/models.py:23 customers/models.py:51 product_groups/models.py:31
+#: products/models.py:52 suppliers/models.py:24 suppliers/models.py:52
 msgid "Created at"
-msgstr ""
+msgstr "Criado em"
 
-#: customers/models.py:21 customers/models.py:49 product_groups/models.py:32
-#: products/models.py:51
+#: customers/models.py:24 customers/models.py:52 product_groups/models.py:32
+#: products/models.py:53 suppliers/models.py:25 suppliers/models.py:53
 msgid "Modified at"
-msgstr ""
+msgstr "Modificado em"
 
-#: customers/models.py:27
+#: customers/models.py:30
 msgid "Customer"
-msgstr ""
+msgstr "Cliente"
 
-#: customers/models.py:41
+#: customers/models.py:44 suppliers/models.py:45
 msgid "Street"
-msgstr ""
+msgstr "Rua"
 
-#: customers/models.py:42
+#: customers/models.py:45 suppliers/models.py:46
 msgid "Number"
-msgstr ""
+msgstr "Número"
 
-#: customers/models.py:43
+#: customers/models.py:46 suppliers/models.py:47
 msgid "Complement"
-msgstr ""
+msgstr "Complemento"
 
-#: customers/models.py:44
+#: customers/models.py:47 suppliers/models.py:48
 msgid "City"
-msgstr ""
+msgstr "Cidade"
 
-#: customers/models.py:45
+#: customers/models.py:48 suppliers/models.py:49
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
-#: customers/models.py:46
+#: customers/models.py:49 suppliers/models.py:50
 msgid "Zip Code"
-msgstr ""
+msgstr "CEP"
 
-#: customers/models.py:55
+#: customers/models.py:58
 msgid "Customer Address"
-msgstr ""
+msgstr "Endereço do Cliente"
 
-#: customers/models.py:56
+#: customers/models.py:59
 msgid "Customer Addresses"
-msgstr ""
+msgstr "Endereços dos Clientes"
 
 #: product_groups/apps.py:8 product_groups/models.py:39
 msgid "Products Groups"
-msgstr ""
+msgstr "Grupos de Produtos"
 
 #: product_groups/models.py:9
 msgid "Pending"
-msgstr ""
+msgstr "Pendente"
 
 #: product_groups/models.py:10
 msgid "Ordered"
-msgstr ""
+msgstr "Pedido"
 
 #: product_groups/models.py:11
 msgid "In Separation"
-msgstr ""
+msgstr "Em Separação"
 
 #: product_groups/models.py:12
 msgid "Finished"
-msgstr ""
+msgstr "Concluído"
 
 #: product_groups/models.py:13
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 #: product_groups/models.py:14
 msgid "Archived"
-msgstr ""
+msgstr "Arquivado"
 
 #: product_groups/models.py:23
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
-#: product_groups/models.py:25 products/apps.py:8 products/models.py:58
+#: product_groups/models.py:25 products/apps.py:8 products/models.py:60
 msgid "Products"
-msgstr ""
+msgstr "Produtos"
 
 #: product_groups/models.py:28
 msgid "Limit Date for the Customer"
-msgstr ""
+msgstr "Data Limite para o Cliente"
 
 #: product_groups/models.py:29
 msgid "Limit Date for the Supplier"
-msgstr ""
+msgstr "Data Limite para o Fornecedor"
 
 #: product_groups/models.py:38
 msgid "Products Group"
-msgstr ""
+msgstr "Grupo de Produto"
 
 #: products/models.py:18
 msgid "Product Category"
-msgstr ""
+msgstr "Categoria de Produto"
 
 #: products/models.py:19
 msgid "Product Categories"
-msgstr ""
+msgstr "Categorias de Produto"
 
-#: products/models.py:30
-msgid "Local app ID"
-msgstr ""
+#: products/models.py:32
+#, fuzzy
+#| msgid "Internal id"
+msgid "Supplier Internal id"
+msgstr "Código Interno do Fornecedor"
 
-#: products/models.py:31
-msgid "Supplier ID"
-msgstr ""
-
-#: products/models.py:34
+#: products/models.py:35 suppliers/models.py:31
 msgid "Supplier"
-msgstr ""
+msgstr "Fornecedor"
 
-#: products/models.py:38
+#: products/models.py:40
 msgid "Category"
-msgstr ""
-
-#: products/models.py:43
-msgid "ISBN"
-msgstr ""
+msgstr "Categoria"
 
 #: products/models.py:45
-msgid "Price"
-msgstr ""
+msgid "ISBN"
+msgstr "ISBN"
 
 #: products/models.py:47
+msgid "Price"
+msgstr "Preço"
+
+#: products/models.py:49
 msgid "Release Date"
-msgstr ""
+msgstr "Data de Lançamento"
 
-#: products/models.py:48
+#: products/models.py:50
 msgid "Stock"
-msgstr ""
+msgstr "Estoque"
 
-#: products/models.py:57
+#: products/models.py:59
 msgid "Product"
-msgstr ""
+msgstr "Produto"
+
+#: suppliers/apps.py:8 suppliers/models.py:32
+msgid "Suppliers"
+msgstr "Fornecedores"
+
+#: suppliers/models.py:22
+msgid "Phone Number"
+msgstr "Telefone"
+
+#: suppliers/models.py:59
+msgid "Supplier Address"
+msgstr "Endereço do Fornecedor"
+
+#: suppliers/models.py:60
+msgid "Supplier Addresses"
+msgstr "Endereços dos Fornecedores"
+
+#, fuzzy
+#~| msgid "Supplier"
+#~ msgid "Supplier id"
+#~ msgstr "Fornecedor"

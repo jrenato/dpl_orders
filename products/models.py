@@ -28,11 +28,13 @@ class Product(models.Model):
     Model for the Product
     '''
     internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
-    supplier_internal_id = models.CharField(_('Supplier id'), max_length=40, blank=True, null=True)
-
+    supplier_internal_id = models.CharField(
+        _('Supplier Internal id'), max_length=40, blank=True, null=True
+    )
     supplier = models.ForeignKey(
         'suppliers.Supplier', on_delete=models.CASCADE, verbose_name=_('Supplier'),
     )
+
     category = models.ForeignKey(
         ProductCategory, on_delete=models.CASCADE,
         verbose_name=_('Category'), blank=True, null=True,

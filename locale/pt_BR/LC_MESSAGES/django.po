@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 15:22-0300\n"
+"POT-Creation-Date: 2024-02-19 16:28-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,8 +26,8 @@ msgstr "Clientes"
 msgid "Internal id"
 msgstr "Código Interno"
 
-#: customers/models.py:14 product_groups/models.py:22 products/models.py:12
-#: products/models.py:43 suppliers/models.py:14
+#: customers/models.py:14 products/models.py:12 products/models.py:43
+#: products/models.py:81 suppliers/models.py:14
 msgid "Name"
 msgstr "Nome"
 
@@ -59,13 +59,13 @@ msgstr "Telefone"
 msgid "Contact Person"
 msgstr "Contato"
 
-#: customers/models.py:23 customers/models.py:51 product_groups/models.py:31
-#: products/models.py:52 suppliers/models.py:24 suppliers/models.py:52
+#: customers/models.py:23 customers/models.py:51 products/models.py:52
+#: products/models.py:90 suppliers/models.py:24 suppliers/models.py:52
 msgid "Created at"
 msgstr "Criado em"
 
-#: customers/models.py:24 customers/models.py:52 product_groups/models.py:32
-#: products/models.py:53 suppliers/models.py:25 suppliers/models.py:53
+#: customers/models.py:24 customers/models.py:52 products/models.py:53
+#: products/models.py:91 suppliers/models.py:25 suppliers/models.py:53
 msgid "Modified at"
 msgstr "Modificado em"
 
@@ -105,53 +105,9 @@ msgstr "Endereço do Cliente"
 msgid "Customer Addresses"
 msgstr "Endereços dos Clientes"
 
-#: product_groups/apps.py:8 product_groups/models.py:39
-msgid "Products Groups"
-msgstr "Grupos de Produtos"
-
-#: product_groups/models.py:9
-msgid "Pending"
-msgstr "Pendente"
-
-#: product_groups/models.py:10
-msgid "Ordered"
-msgstr "Pedido"
-
-#: product_groups/models.py:11
-msgid "In Separation"
-msgstr "Em Separação"
-
-#: product_groups/models.py:12
-msgid "Finished"
-msgstr "Concluído"
-
-#: product_groups/models.py:13
-msgid "Cancelled"
-msgstr "Cancelado"
-
-#: product_groups/models.py:14
-msgid "Archived"
-msgstr "Arquivado"
-
-#: product_groups/models.py:23
-msgid "Status"
-msgstr "Status"
-
-#: product_groups/models.py:25 products/apps.py:8 products/models.py:60
+#: products/apps.py:8 products/models.py:60 products/models.py:84
 msgid "Products"
 msgstr "Produtos"
-
-#: product_groups/models.py:28
-msgid "Limit Date for the Customer"
-msgstr "Data Limite para o Cliente"
-
-#: product_groups/models.py:29
-msgid "Limit Date for the Supplier"
-msgstr "Data Limite para o Fornecedor"
-
-#: product_groups/models.py:38
-msgid "Products Group"
-msgstr "Grupo de Produto"
 
 #: products/models.py:18
 msgid "Product Category"
@@ -194,6 +150,50 @@ msgstr "Estoque"
 #: products/models.py:59
 msgid "Product"
 msgstr "Produto"
+
+#: products/models.py:68
+msgid "Pending"
+msgstr "Pendente"
+
+#: products/models.py:69
+msgid "Ordered"
+msgstr "Pedido"
+
+#: products/models.py:70
+msgid "In Separation"
+msgstr "Em Separação"
+
+#: products/models.py:71
+msgid "Finished"
+msgstr "Concluído"
+
+#: products/models.py:72
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#: products/models.py:73
+msgid "Archived"
+msgstr "Arquivado"
+
+#: products/models.py:82
+msgid "Status"
+msgstr "Status"
+
+#: products/models.py:87
+msgid "Limit Date for the Customer"
+msgstr "Data Limite para o Cliente"
+
+#: products/models.py:88
+msgid "Limit Date for the Supplier"
+msgstr "Data Limite para o Fornecedor"
+
+#: products/models.py:97
+msgid "Products Group"
+msgstr "Grupo de Produtos"
+
+#: products/models.py:98
+msgid "Products Groups"
+msgstr "Grupos de Produtos"
 
 #: suppliers/apps.py:8 suppliers/models.py:32
 msgid "Suppliers"

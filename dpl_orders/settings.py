@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'customers',
     'suppliers',
     'products',
-    'product_groups',
 ]
 
 MIDDLEWARE = [
@@ -117,11 +116,9 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = (
+    # TODO: Consider moving this to a subdirectory
     os.path.join(BASE_DIR, 'locale'),
-    os.path.join(BASE_DIR, 'dpl_orders/locale'),
 )
-
-print(LOCALE_PATHS)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

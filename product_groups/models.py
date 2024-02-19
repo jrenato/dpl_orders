@@ -19,24 +19,24 @@ class ProductGroup(models.Model):
     '''
     Model for the Product Group
     '''
-    name = models.CharField('Nome', max_length=100)
-    status = models.CharField('Status', max_length=2, choices=PRODUCT_GROUP_STATUS, default='PE')
+    name = models.CharField(_('Name'), max_length=100)
+    status = models.CharField(_('Status'), max_length=2, choices=PRODUCT_GROUP_STATUS, default='PE')
     products = models.ManyToManyField(
-        'products.Product', verbose_name='Produtos', blank=True
+        'products.Product', verbose_name=_('Products'), related_name='product_groups', blank=True
     )
 
-    customer_limit_date = models.DateField('Data limite para o cliente', blank=True, null=True)
-    supplier_limit_date = models.DateField('Data limite para o fornecedor', blank=True, null=True)
+    customer_limit_date = models.DateField(_('Limit Date for the Customer'), blank=True, null=True)
+    supplier_limit_date = models.DateField(_('Limit Date for the Supplier'), blank=True, null=True)
 
-    created = models.DateTimeField('Criado em', auto_now_add=True)
-    modified = models.DateTimeField('Modificado em', auto_now=True)
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+    modified = models.DateTimeField(_('Modified at'), auto_now=True)
 
     class Meta:
         '''
         Meta options
         '''
-        verbose_name = 'Grupo de Produtos'
-        verbose_name_plural = 'Grupos de Produtos'
+        verbose_name = _('Products Group')
+        verbose_name_plural = _('Products Groups')
         ordering = ['name']
 
     def __str__(self):

@@ -2,13 +2,14 @@
 Models for the Suppliers app
 '''
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Supplier(models.Model):
     '''
     Model for the Supplier
     '''
-    vl_id = models.IntegerField('Código do Vialogos', blank=True, null=True)
+    internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
 
     name = models.CharField('Nome', max_length=100)
     short_name = models.CharField('Nome curto', max_length=50, blank=True, null=True)

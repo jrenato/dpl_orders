@@ -1,0 +1,190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-19 14:49-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: customers/apps.py:8 customers/models.py:28
+msgid "Customers"
+msgstr ""
+
+#: customers/models.py:12 product_groups/models.py:22 products/models.py:12
+#: products/models.py:41
+msgid "Name"
+msgstr ""
+
+#: customers/models.py:13 products/models.py:42
+msgid "Slug"
+msgstr ""
+
+#: customers/models.py:14
+msgid "Short Name"
+msgstr ""
+
+#: customers/models.py:15
+msgid "Email"
+msgstr ""
+
+#: customers/models.py:16
+msgid "CNPJ"
+msgstr ""
+
+#: customers/models.py:17
+msgid "CPF"
+msgstr ""
+
+#: customers/models.py:18
+msgid "Phone"
+msgstr ""
+
+#: customers/models.py:20 customers/models.py:48 product_groups/models.py:31
+#: products/models.py:50
+msgid "Created at"
+msgstr ""
+
+#: customers/models.py:21 customers/models.py:49 product_groups/models.py:32
+#: products/models.py:51
+msgid "Modified at"
+msgstr ""
+
+#: customers/models.py:27
+msgid "Customer"
+msgstr ""
+
+#: customers/models.py:41
+msgid "Street"
+msgstr ""
+
+#: customers/models.py:42
+msgid "Number"
+msgstr ""
+
+#: customers/models.py:43
+msgid "Complement"
+msgstr ""
+
+#: customers/models.py:44
+msgid "City"
+msgstr ""
+
+#: customers/models.py:45
+msgid "State"
+msgstr ""
+
+#: customers/models.py:46
+msgid "Zip Code"
+msgstr ""
+
+#: customers/models.py:55
+msgid "Customer Address"
+msgstr ""
+
+#: customers/models.py:56
+msgid "Customer Addresses"
+msgstr ""
+
+#: product_groups/apps.py:8 product_groups/models.py:39
+msgid "Products Groups"
+msgstr ""
+
+#: product_groups/models.py:9
+msgid "Pending"
+msgstr ""
+
+#: product_groups/models.py:10
+msgid "Ordered"
+msgstr ""
+
+#: product_groups/models.py:11
+msgid "In Separation"
+msgstr ""
+
+#: product_groups/models.py:12
+msgid "Finished"
+msgstr ""
+
+#: product_groups/models.py:13
+msgid "Cancelled"
+msgstr ""
+
+#: product_groups/models.py:14
+msgid "Archived"
+msgstr ""
+
+#: product_groups/models.py:23
+msgid "Status"
+msgstr ""
+
+#: product_groups/models.py:25 products/apps.py:8 products/models.py:58
+msgid "Products"
+msgstr ""
+
+#: product_groups/models.py:28
+msgid "Limit Date for the Customer"
+msgstr ""
+
+#: product_groups/models.py:29
+msgid "Limit Date for the Supplier"
+msgstr ""
+
+#: product_groups/models.py:38
+msgid "Products Group"
+msgstr ""
+
+#: products/models.py:18
+msgid "Product Category"
+msgstr ""
+
+#: products/models.py:19
+msgid "Product Categories"
+msgstr ""
+
+#: products/models.py:30
+msgid "Local app ID"
+msgstr ""
+
+#: products/models.py:31
+msgid "Supplier ID"
+msgstr ""
+
+#: products/models.py:34
+msgid "Supplier"
+msgstr ""
+
+#: products/models.py:38
+msgid "Category"
+msgstr ""
+
+#: products/models.py:43
+msgid "ISBN"
+msgstr ""
+
+#: products/models.py:45
+msgid "Price"
+msgstr ""
+
+#: products/models.py:47
+msgid "Release Date"
+msgstr ""
+
+#: products/models.py:48
+msgid "Stock"
+msgstr ""
+
+#: products/models.py:57
+msgid "Product"
+msgstr ""

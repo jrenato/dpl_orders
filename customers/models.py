@@ -2,29 +2,32 @@
 Models for Customers app
 '''
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Customer(models.Model):
     '''
     Customer model
     '''
-    name = models.CharField('Nome', max_length=120)
-    slug = models.SlugField('Identificador', max_length=120, unique=True)
-    short_name = models.CharField('Nome reduzido', max_length=50, unique=True)
-    email = models.EmailField('E-mail', blank=True, unique=True)
-    cnpj = models.CharField('CNPJ', max_length=14, blank=True, unique=True)
-    cpf = models.CharField('CPF', max_length=11, blank=True, unique=True)
-    phone = models.CharField('Telefone', max_length=20)
+    internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
 
-    created = models.DateTimeField('Criado em', auto_now_add=True)
-    modified = models.DateTimeField('Modificado em', auto_now=True)
+    name = models.CharField(_('Name'), max_length=120)
+    slug = models.SlugField(_('Slug'), max_length=120, unique=True, blank=True, null=True)
+    short_name = models.CharField(_('Short Name'), max_length=60, blank=True, null=True)
+    email = models.EmailField(_('Email'), blank=True, null=True)
+    cnpj = models.CharField(_('CNPJ'), max_length=14, blank=True, unique=True)
+    cpf = models.CharField(_('CPF'), max_length=11, blank=True, unique=True)
+    phone = models.CharField(_('Phone'), max_length=15, blank=True, null=True)
+
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+    modified = models.DateTimeField(_('Modified at'), auto_now=True)
 
     class Meta:
         '''
         Meta options
         '''
-        verbose_name = 'Cliente'
-        verbose_name_plural = 'Clientes'
+        verbose_name = _('Customer')
+        verbose_name_plural = _('Customers')
         ordering = ['name']
 
     def __str__(self):
@@ -37,21 +40,22 @@ class CustomerAddress(models.Model):
     '''
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
 
-    street = models.CharField('Logradouro', max_length=100)
-    number = models.CharField('Número', max_length=15)
-    city = models.CharField('Cidade', max_length=50, blank=True, null=True)
-    state = models.CharField('Estado', max_length=50, blank=True, null=True)
-    zip_code = models.CharField('CEP', max_length=10, blank=True, null=True)
+    street = models.CharField(_('Street'), max_length=120)
+    number = models.CharField(_('Number'), max_length=10)
+    complement = models.CharField(_('Complement'), max_length=120, blank=True, null=True)
+    city = models.CharField(_('City'), max_length=120, blank=True, null=True)
+    state = models.CharField(_('State'), max_length=2, blank=True, null=True)
+    zip_code = models.CharField(_('Zip Code'), max_length=8, blank=True, null=True)
 
-    created = models.DateTimeField('Criado em', auto_now_add=True)
-    modified = models.DateTimeField('Modificado em', auto_now=True)
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+    modified = models.DateTimeField(_('Modified at'), auto_now=True)
 
     class Meta:
         '''
         Meta options
         '''
-        verbose_name = 'Endereço de Cliente'
-        verbose_name_plural = 'Endereços de Clientes'
+        verbose_name = _('Customer Address')
+        verbose_name_plural = _('Customer Addresses')
         ordering = ['customer', 'street']
 
     def __str__(self):

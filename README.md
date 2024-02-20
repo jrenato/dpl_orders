@@ -33,24 +33,17 @@ sequenceDiagram
 
 ```mermaid
   graph TD;
-        id1(Início)--->id2(Pendente);
-        
+        id1(Início)-->id2(Pendente);
         id2-->|Liberado|id3(Em separação);
-        id2-->|Cancelar|id8(Cancelado);
-        
         id3-->|Conferido|id4(Aguardando confirmação);
-        id3-->id9(Ajuste solicitado);
-        id9-->id2;
-        id3-->id10(Cancelamento solicitado);
-        id10-->id8;
-        
         id4-->|Confirmado|id5(Faturado);
-        id4-->id9(Ajuste solicitado);
-        id4-->id10;
-        
         id5-->|Coleta solicitada|id6(Aguardando transporte);
-        
         id6-->|Coletado|id7(Finalizado);
 
+        id3--->|Ajuste|id2
+        id4--->|Ajuste|id2
 
+        id2--->|Cancelado|id8(Cancelado);
+        id3--->|Cancelado|id8;
+        id4--->|Cancelado|id8;
 ```

@@ -13,6 +13,18 @@ Add the following to settings.json
 }
 ```
 
+## To update the translations
+
+### To create/update the translations files
+```
+manage.py makemessages -l pt_BR
+```
+
+### To compile the translations
+```
+manage.py compilemessages
+```
+
 ## Naming conventions
 
 **Reserva (*Preorder*)**: a distribuidora não tem a mercadoria para pronta entrega. Fará o pedido para o fornecedor e repassará para os clientes.

@@ -1,3 +1,6 @@
+'''
+Models for Orders app
+'''
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -11,3 +14,111 @@ ORDER_STATUS_CHOICES = (
     ('FI', _('Finished')),
     ('CA', _('Cancelled')),
 )
+
+
+class Order(models.Model):
+    '''
+    Model for Order
+    '''
+    internal_id = models.CharField(_('Internal ID'), max_length=100, blank=True, null=True)
+
+    status = models.CharField(
+        max_length=2,
+        choices=ORDER_STATUS_CHOICES,
+        default='PE',
+    )
+
+    customer = models.ForeignKey(
+        'customers.Customer', on_delete=models.CASCADE,
+        verbose_name=_('Customer'),
+    )
+
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _('Order')
+        verbose_name_plural = _('Orders')
+        ordering = ('-created',)
+
+    def __str__(self):
+        return f'{self.customer} - {self.created}'
+
+
+class OrderStatusHistory(models.Model):
+    '''
+    Model for Order Status History
+    '''
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE,
+        verbose_name=_('Order'),
+    )
+
+    status = models.CharField(
+        max_length=2,
+        choices=ORDER_STATUS_CHOICES,
+        default='PE',
+    )
+
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Order Status History')
+        verbose_name_plural = _('Order Status Histories')
+        ordering = ('-created',)
+
+    def __str__(self):
+        return f'{self.created} - {self.status}'
+
+
+class OrderItem(models.Model):
+    '''
+    Model for Order Item
+    '''
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE,
+        verbose_name=_('Order'),
+    )
+
+    product = models.ForeignKey(
+        'products.Product', on_delete=models.CASCADE,
+        verbose_name=_('Product'),
+    )
+
+    quantity = models.PositiveIntegerField(_('Quantity'), default=1)
+    price = models.DecimalField(
+        _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
+    )
+
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _('Order Item')
+        verbose_name_plural = _('Order Items')
+
+    def __str__(self):
+        return f'{self.product} - {self.quantity}'
+
+
+class OrderItemHistory(models.Model):
+    '''
+    Model for Order Item History
+    '''
+    order_item = models.ForeignKey(
+        OrderItem, on_delete=models.CASCADE,
+        verbose_name=_('Order Item'),
+    )
+
+    quantity = models.PositiveIntegerField(_('Quantity'), default=1)
+    comment = models.TextField(_('Comment'), blank=True, null=True)
+
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Order Item History')
+        verbose_name_plural = _('Order Item Histories')
+        ordering = ('-created',)
+
+    def __str__(self):
+        return f'{self.created} - {self.quantity}'

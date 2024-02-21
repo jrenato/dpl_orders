@@ -5,3 +5,4 @@ django-environ
 django-localflavor
 pip-tools
 pyexcel-ods
+tqdm

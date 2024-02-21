@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 16:28-0300\n"
+"POT-Creation-Date: 2024-02-21 09:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,8 +59,10 @@ msgstr "Telefone"
 msgid "Contact Person"
 msgstr "Contato"
 
-#: customers/models.py:23 customers/models.py:51 products/models.py:52
-#: products/models.py:90 suppliers/models.py:24 suppliers/models.py:52
+#: customers/models.py:23 customers/models.py:51 orders/models.py:36
+#: orders/models.py:63 orders/models.py:93 orders/models.py:116
+#: products/models.py:52 products/models.py:90 suppliers/models.py:24
+#: suppliers/models.py:52
 msgid "Created at"
 msgstr "Criado em"
 
@@ -69,7 +71,7 @@ msgstr "Criado em"
 msgid "Modified at"
 msgstr "Modificado em"
 
-#: customers/models.py:30
+#: customers/models.py:30 orders/models.py:33
 msgid "Customer"
 msgstr "Cliente"
 
@@ -105,6 +107,98 @@ msgstr "Endereço do Cliente"
 msgid "Customer Addresses"
 msgstr "Endereços dos Clientes"
 
+#: orders/apps.py:8 orders/models.py:41
+#, fuzzy
+#| msgid "Ordered"
+msgid "Orders"
+msgstr "Pedido"
+
+#: orders/models.py:9 products/models.py:68
+msgid "Pending"
+msgstr "Pendente"
+
+#: orders/models.py:10 products/models.py:70
+msgid "In Separation"
+msgstr "Em Separação"
+
+#: orders/models.py:11
+msgid "Waiting for Confirmation"
+msgstr "Aguardando Confirmação"
+
+#: orders/models.py:12
+msgid "Invoiced"
+msgstr "Faturado"
+
+#: orders/models.py:13
+msgid "Waiting Transport"
+msgstr "Aguardando Transporte"
+
+#: orders/models.py:14 products/models.py:71
+msgid "Finished"
+msgstr "Concluído"
+
+#: orders/models.py:15 products/models.py:72
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#: orders/models.py:23
+#, fuzzy
+#| msgid "Internal id"
+msgid "Internal ID"
+msgstr "Código Interno"
+
+#: orders/models.py:37 orders/models.py:94
+#, fuzzy
+#| msgid "Created at"
+msgid "Updated at"
+msgstr "Criado em"
+
+#: orders/models.py:40 orders/models.py:54 orders/models.py:80
+#, fuzzy
+#| msgid "Ordered"
+msgid "Order"
+msgstr "Pedido"
+
+#: orders/models.py:66
+msgid "Order Status History"
+msgstr ""
+
+#: orders/models.py:67
+msgid "Order Status Histories"
+msgstr "Histórico de Status do Pedido"
+
+#: orders/models.py:85 products/models.py:59
+msgid "Product"
+msgstr "Produto"
+
+#: orders/models.py:88 orders/models.py:113
+msgid "Quantity"
+msgstr "Quantidade"
+
+#: orders/models.py:90 products/models.py:47
+msgid "Price"
+msgstr "Preço"
+
+#: orders/models.py:97 orders/models.py:110
+msgid "Order Item"
+msgstr "Item de Pedido"
+
+#: orders/models.py:98
+msgid "Order Items"
+msgstr "Itens de Pedido"
+
+#: orders/models.py:114
+msgid "Comment"
+msgstr "Comentário"
+
+#: orders/models.py:119
+msgid "Order Item History"
+msgstr "Histórico do Item de Pedido"
+
+#: orders/models.py:120
+msgid "Order Item Histories"
+msgstr "Históricos de Itens de Pedido"
+
 #: products/apps.py:8 products/models.py:60 products/models.py:84
 msgid "Products"
 msgstr "Produtos"
@@ -135,10 +229,6 @@ msgstr "Categoria"
 msgid "ISBN"
 msgstr "ISBN"
 
-#: products/models.py:47
-msgid "Price"
-msgstr "Preço"
-
 #: products/models.py:49
 msgid "Release Date"
 msgstr "Data de Lançamento"
@@ -147,29 +237,9 @@ msgstr "Data de Lançamento"
 msgid "Stock"
 msgstr "Estoque"
 
-#: products/models.py:59
-msgid "Product"
-msgstr "Produto"
-
-#: products/models.py:68
-msgid "Pending"
-msgstr "Pendente"
-
 #: products/models.py:69
 msgid "Ordered"
 msgstr "Pedido"
-
-#: products/models.py:70
-msgid "In Separation"
-msgstr "Em Separação"
-
-#: products/models.py:71
-msgid "Finished"
-msgstr "Concluído"
-
-#: products/models.py:72
-msgid "Cancelled"
-msgstr "Cancelado"
 
 #: products/models.py:73
 msgid "Archived"

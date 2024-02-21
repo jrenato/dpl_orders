@@ -1,6 +1,0 @@
-{
-    "pylint.args": [
-        "--load-plugins=pylint_django",
-        "--django-settings-module=dpl_orders.settings",
-    ],
-}

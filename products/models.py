@@ -64,6 +64,28 @@ class Product(models.Model):
         return f'{self.name}'
 
 
+class ProductReleaseDateHistory(models.Model):
+    '''
+    Model for the Product Release Date History
+    '''
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, verbose_name=_('Product'), related_name='release_dates'
+    )
+    release_date = models.DateField(_('Release Date'))
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+
+    class Meta:
+        '''
+        Meta options
+        '''
+        verbose_name = _('Product Release Date History')
+        verbose_name_plural = _('Product Release Date Histories')
+        ordering = ['product', '-release_date']
+
+    def __str__(self):
+        return f'{self.product.name} - {self.release_date}'
+
+
 PRODUCT_GROUP_STATUS = [
     ('PE', _('Pending')),
     ('OR', _('Ordered')),

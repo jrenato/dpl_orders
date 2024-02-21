@@ -42,7 +42,7 @@ class Product(models.Model):
 
     name = models.CharField(_('Name'), max_length=120)
     slug = models.SlugField(_('Slug'), max_length=120, unique=True, blank=True, null=True)
-    isbn = models.CharField(_('ISBN'), max_length=13, blank=True, null=True)
+    sku = models.CharField(_('SKU'), max_length=13, blank=True, null=True)
     price = models.DecimalField(
         _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
     )

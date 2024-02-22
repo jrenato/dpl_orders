@@ -13,6 +13,7 @@ class ProductGroupItemInline(admin.TabularInline):
     '''
     model = ProductGroupItem
     extra = 1
+    autocomplete_fields = ['product',]
 
 
 @admin.register(ProductGroup)

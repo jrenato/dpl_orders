@@ -2,6 +2,7 @@
 Admin for Products
 '''
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from .models import ProductCategory, Product, ProductGroup, ProductGroupItem
 
@@ -36,17 +37,19 @@ class ProductCategoryAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     '''
     Admin for the Product model
     '''
-    list_display = ('name', 'category', 'price', 'stock')
-    search_fields = ('name', 'category__name')
+    list_display = ('name', 'sku', 'category', 'price', 'stock')
+    search_fields = ('name', 'sku', 'suppplier_internal_id')
     list_filter = ('category',)
     prepopulated_fields = {'slug': ('name',)}
-    list_editable = ('price', 'stock')
+
     list_per_page = 20
+
     # actions = ['make_available', 'make_unavailable']
 
     # def make_available(self, request, queryset):

@@ -9,7 +9,7 @@ from django.core.management.base import BaseCommand, CommandError
 from pyexcel_ods import get_data
 from tqdm import tqdm
 
-from products.models import Product, ProductGroup, ProductGroupItem
+from products.models import Product, ProductCategory, ProductGroup, ProductGroupItem
 from suppliers.models import Supplier
 
 
@@ -29,17 +29,19 @@ class Command(BaseCommand):
         if not os.path.isfile(file):
             raise CommandError(f'The file "{file}" does not exist')
 
+        # Get the raw data from the file and convert it to a list of dictionaries
         raw_data = get_data(file)
         products = self.get_products_data(raw_data)
+
+        # If the supplier name is not passed as an argument,
+        # check if the supplier name is available in the products data
+        if not options['supplier'] and 'EDITORA' not in products[0]:
+            raise CommandError('The supplier name is required')
+        supplier = self.get_supplier(options['supplier'])
 
         # Get the file name without the extension and create the group
         file_name = os.path.basename(file).split('.')[0]
         group = self.get_products_group(file_name)
-
-        if not options['supplier'] and 'EDITORA' not in products[0]:
-            raise CommandError('The supplier name is required')
-
-        supplier = self.get_supplier(options['supplier'])
 
         for product_data in tqdm(products, desc='Importing products'):
             self.import_product(product_data, supplier, group)
@@ -85,15 +87,23 @@ class Command(BaseCommand):
         if release_date and isinstance(release_date, str):
             release_date = datetime.datetime.strptime(release_date, '%d/%m/%Y')
 
+        category, _ = ProductCategory.objects.get_or_create(
+            name=product_data['Categoria'].strip().upper()
+        )
+
+        # Remove trailing 'BRL' from the price
+        product_data['Preço R$'] = float(product_data['Preço R$'].replace('BRL', '').strip())
+
         product, _ = Product.objects.get_or_create(
             name=product_data['Título'].strip().upper(),
             sku=product_data['ISBN'],
             defaults={
                 'supplier': supplier,
-                'release_date': release_date,
-                'description': product_data['Sinopse'],
-                'price': product_data['Preço R$'],
                 'supplier_internal_id': product_data['Cód. Panini'],
+                'release_date': release_date,
+                'category': category,
+                'price': product_data['Preço R$'],
+                'description': product_data['Sinopse'].strip(),
             }
         )
 

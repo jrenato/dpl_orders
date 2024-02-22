@@ -15,8 +15,8 @@ class Customer(models.Model):
     slug = models.SlugField(_('Slug'), max_length=120, unique=True, blank=True, null=True)
     short_name = models.CharField(_('Short Name'), max_length=60, blank=True, null=True)
     email = models.EmailField(_('Email'), blank=True, null=True)
-    cnpj = models.CharField(_('CNPJ'), max_length=14, blank=True, unique=True)
-    cpf = models.CharField(_('CPF'), max_length=11, blank=True, unique=True)
+    cnpj = models.CharField(_('CNPJ'), max_length=14, blank=True, null=True)
+    cpf = models.CharField(_('CPF'), max_length=11, blank=True, null=True)
     phone = models.CharField(_('Phone'), max_length=15, blank=True, null=True)
     contact_person = models.CharField(_('Contact Person'), max_length=120, blank=True, null=True)
 

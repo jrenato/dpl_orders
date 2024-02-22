@@ -22,7 +22,9 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('directory', type=str, help='Directory where the files are located')
-        parser.add_argument('--reset', action='store_true', help='Reset the database before importing the data')
+        parser.add_argument(
+            '--reset', action='store_true', help='Reset the database before importing the data'
+        )
 
     def handle(self, *args, **options):
         directory = options['directory']

@@ -25,7 +25,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         file = options['file']
-
         if not os.path.isfile(file):
             raise CommandError(f'The file "{file}" does not exist')
 

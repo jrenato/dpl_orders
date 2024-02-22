@@ -50,6 +50,7 @@ class Product(models.Model):
     )
     release_date = models.DateField(_('Release Date'), blank=True, null=True)
     stock = models.IntegerField(_('Stock'), blank=True, null=True)
+    description = models.TextField(_('Description'), blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     modified = models.DateTimeField(_('Modified at'), auto_now=True)

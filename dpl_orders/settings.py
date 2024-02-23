@@ -126,7 +126,7 @@ LOCALE_PATHS = (
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'dpl_orders', 'static')
 STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, 'dpl_orders', 'static'),
+    os.path.join(BASE_DIR, 'dpl_orders', 'static'),
 ]
 
 # Default primary key field type

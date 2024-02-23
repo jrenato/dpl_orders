@@ -1,3 +1,17 @@
-from django.shortcuts import render
+'''
+Views for the customers app.
+'''
+from django.views.generic import ListView
 
-# Create your views here.
+from .models import Customer
+
+
+class CustomerListView(ListView):
+    '''
+    List view for the customers
+    '''
+    model = Customer
+
+    context_object_name = 'customers'
+    paginate_by = 20
+    ordering = ['name']

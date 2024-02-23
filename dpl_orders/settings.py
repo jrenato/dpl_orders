@@ -124,7 +124,7 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'dpl_orders', 'static')
+STATIC_ROOT = env('DJANGO_STATIC_ROOT')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'dpl_orders', 'static'),
 ]

@@ -2,6 +2,7 @@
 Models for the Products app
 '''
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 
@@ -43,13 +44,13 @@ class Product(models.Model):
     )
 
     name = models.CharField(_('Name'), max_length=120)
-    slug = models.SlugField(_('Slug'), max_length=120, unique=True, blank=True, null=True)
+    slug = models.SlugField(_('Slug'), max_length=140, unique=True, null=False)
     sku = models.CharField(_('SKU'), max_length=13, blank=True, null=True)
     price = models.DecimalField(
         _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
     )
     release_date = models.DateField(_('Release Date'), blank=True, null=True)
-    stock = models.IntegerField(_('Stock'), blank=True, null=True)
+    stock = models.IntegerField(_('Stock'), default=0)
     description = models.TextField(_('Description'), blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
@@ -65,6 +66,29 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    def get_absolute_url(self):
+        '''
+        Return the absolute url for the product
+        '''
+        # TODO: Change the url to the correct one
+        return f'/products/{self.slug}/'
+
+    # Save a copy of the original name
+    def __init__(self, *args, **kwargs):
+        super(Product, self).__init__(*args, **kwargs)
+        self._original_name = self.name
+
+    # If the name is changed, update the slug.
+    # Make sure the slug is unique
+    def save(self, *args, **kwargs):
+        if self.name != self._original_name:
+            self.slug = slugify(self.name)
+            i = 1
+            while Product.objects.filter(slug=self.slug).exists():
+                self.slug = f'{self.slug}-{i}'
+                i += 1
+        super(Product, self).save(*args, **kwargs)
 
 
 class ProductReleaseDateHistory(models.Model):
@@ -104,6 +128,7 @@ class ProductGroup(models.Model):
     Model for the Product Group
     '''
     name = models.CharField(_('Name'), max_length=100)
+    slug = models.SlugField(_('Slug'), max_length=110, unique=True, null=False)
     status = models.CharField(_('Status'), max_length=2, choices=PRODUCT_GROUP_STATUS, default='PE')
 
     customer_limit_date = models.DateField(_('Limit Date for the Customer'), blank=True, null=True)
@@ -122,6 +147,29 @@ class ProductGroup(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    def get_absolute_url(self):
+        '''
+        Return the absolute url for the product group
+        '''
+        # TODO: Change the url to the correct one
+        return f'/products/groups/{self.slug}/'
+
+    # Save a copy of the original name
+    def __init__(self, *args, **kwargs):
+        super(ProductGroup, self).__init__(*args, **kwargs)
+        self._original_name = self.name
+
+    # If the name is changed, update the slug.
+    # Make sure the slug is unique
+    def save(self, *args, **kwargs):
+        if self.name != self._original_name:
+            self.slug = slugify(self.name)
+            i = 1
+            while ProductGroup.objects.filter(slug=self.slug).exists():
+                self.slug = f'{self.slug}-{i}'
+                i += 1
+        super(ProductGroup, self).save(*args, **kwargs)
 
 
 class ProductGroupItem(models.Model):

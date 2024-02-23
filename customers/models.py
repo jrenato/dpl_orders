@@ -2,6 +2,7 @@
 Models for Customers app
 '''
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 
@@ -12,8 +13,8 @@ class Customer(models.Model):
     internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
 
     name = models.CharField(_('Name'), max_length=120)
-    slug = models.SlugField(_('Slug'), max_length=120, unique=True, blank=True, null=True)
     short_name = models.CharField(_('Short Name'), max_length=60, blank=True, null=True)
+    slug = models.SlugField(_('Slug'), max_length=140, unique=True, null=False)
     email = models.EmailField(_('Email'), blank=True, null=True)
     cnpj = models.CharField(_('CNPJ'), max_length=14, blank=True, null=True)
     cpf = models.CharField(_('CPF'), max_length=11, blank=True, null=True)
@@ -33,6 +34,30 @@ class Customer(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    def get_absolute_url(self):
+        '''
+        Return the absolute url for the product
+        '''
+        # TODO: Change the url to the correct one
+        return f'/customers/{self.slug}'
+
+    # Save a copy of the original name
+    def __init__(self, *args, **kwargs):
+        super(Customer, self).__init__(*args, **kwargs)
+        self._original_name = self.name
+
+    # If the name is changed, update the slug.
+    # Make sure the slug is unique
+    def save(self, *args, **kwargs):
+        if self.name != self._original_name:
+            self.slug = slugify(self.name)
+            i = 1
+            while Customer.objects.filter(slug=self.slug).exists():
+                self.slug = f'{self.slug}-{i}'
+                i += 1
+        super(Customer, self).save(*args, **kwargs)
+
 
 
 class CustomerAddress(models.Model):

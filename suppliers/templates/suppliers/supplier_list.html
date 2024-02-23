@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}Supplier List{% endblock %}
 
 {% block content %}
-    <h1>Supplier List</h1>
-    <!-- Add the table or list of suppliers here -->
+    <h1>{% translate 'Suppliers' %}</h1>
+    <div class="d-flex p-2 bd-highlight">
+    {% for supplier in suppliers %}
+        <div class="card" style="width: 18rem;">
+            <!--<img src="..." class="card-img-top" alt="...">-->
+            <div class="card-body">
+            <h5 class="card-title">{{ supplier.name }}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
     <a class="btn btn-primary mb-3" href="{% url 'suppliers:create' %}">Add New Supplier</a>
 {% endblock %}

@@ -14,7 +14,7 @@ class Supplier(models.Model):
 
     name = models.CharField(_('Name'), max_length=120)
     short_name = models.CharField(_('Short Name'), max_length=60, blank=True, null=True)
-    slug = models.SlugField(_('Slug'), max_length=140, unique=True, null=False)
+    slug = models.SlugField(_('Slug'), max_length=140, unique=True, blank=True, null=True)
 
     cpf = models.CharField(_('CPF'), max_length=14, blank=True, null=True)
     cnpj = models.CharField(_('CNPJ'), max_length=18, blank=True, null=True)
@@ -43,21 +43,15 @@ class Supplier(models.Model):
         # TODO: Change the url to the correct one
         return f'/suppliers/{self.slug}'
 
-    # Save a copy of the original name
-    def __init__(self, *args, **kwargs):
-        super(Supplier, self).__init__(*args, **kwargs)
-        self._original_name = self.name
-
-    # If the name is changed, update the slug.
-    # Make sure the slug is unique
     def save(self, *args, **kwargs):
-        if self.name != self._original_name:
-            self.slug = slugify(self.name)
+        new_slug = slugify(self.name)
+        if new_slug != self.slug:
+            self.slug = new_slug
             i = 1
             while Supplier.objects.filter(slug=self.slug).exists():
                 self.slug = f'{self.slug}-{i}'
                 i += 1
-        super(Supplier, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 class SupplierAddress(models.Model):

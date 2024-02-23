@@ -2,6 +2,8 @@
 Models for the Products app
 '''
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
@@ -44,7 +46,7 @@ class Product(models.Model):
     )
 
     name = models.CharField(_('Name'), max_length=120)
-    slug = models.SlugField(_('Slug'), max_length=140, unique=True, null=False)
+    slug = models.SlugField(_('Slug'), max_length=140, unique=True, blank=True, null=True)
     sku = models.CharField(_('SKU'), max_length=13, blank=True, null=True)
     price = models.DecimalField(
         _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
@@ -74,21 +76,15 @@ class Product(models.Model):
         # TODO: Change the url to the correct one
         return f'/products/{self.slug}/'
 
-    # Save a copy of the original name
-    def __init__(self, *args, **kwargs):
-        super(Product, self).__init__(*args, **kwargs)
-        self._original_name = self.name
-
-    # If the name is changed, update the slug.
-    # Make sure the slug is unique
     def save(self, *args, **kwargs):
-        if self.name != self._original_name:
-            self.slug = slugify(self.name)
+        new_slug = slugify(self.name)
+        if new_slug != self.slug:
+            self.slug = new_slug
             i = 1
             while Product.objects.filter(slug=self.slug).exists():
                 self.slug = f'{self.slug}-{i}'
                 i += 1
-        super(Product, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 class ProductReleaseDateHistory(models.Model):

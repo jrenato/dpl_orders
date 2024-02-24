@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{{ supplier.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{% translate 'Supplier Details' %}</h1>
+        <hr>
+        <div class="row detail-section">
+            <div class="col-md-6">
+                <h2 class="detail-title">{% translate 'Basic Information' %}</h2>
+                <ul>
+                    <li><b>{% translate 'Name' %}:</b> {{ supplier.name }}</li>
+                    <li><b>{% translate 'Short Name' %}:</b> {{ supplier.short_name }}</li>
+                    <li><b>{% translate 'Internal ID' %}:</b> {{ supplier.internal_id }}</li>
+                    <li><b>{% translate 'Created at' %}:</b> {{ supplier.created }}</li>
+                    <li><b>{% translate 'Modified at' %}:</b> {{ supplier.modified }}</li>
+                    {% if supplier.cnpj %}
+                        <li><b>{% translate 'CNPJ' %}:</b> {{ supplier.cnpj }}</li>
+                    {% endif %}
+                    {% if supplier.cnpj %}
+                        <li><b>{% translate 'CPF' %}:</b> {{ supplier.cpf }}</li>
+                        {% endif %}
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2 class="detail-title">{% translate 'Contact Details' %}</h2>
+                <ul>
+                    <li><b>{% translate 'Contact Person' %}:</b> {{ supplier.contact_person }}</li>
+                    <li><b>{% translate 'Email' %}:</b> <a href="mailto:{{ supplier.email }}">{{ supplier.email }}</a></li>
+                    <li><b>{% translate 'Phone Number' %}:</b> {{ supplier.phone_number }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row detail-section">
+            <div class="col-md-12">
+                <h2 class="detail-title">{% translate 'Address' %}</h2>
+                <p>{{ supplier.supplieraddress.street }}, {{ supplier.supplieraddress.number }}</p>
+                <p>{{ supplier.supplieraddress.complement }}</p>
+                <p>{{ supplier.supplieraddress.city }}, {{ supplier.supplieraddress.state }} - {% translate 'ZIPCODE' %}: {{ supplier.supplieraddress.zip_code }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

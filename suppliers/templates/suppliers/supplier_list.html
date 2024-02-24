@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}Supplier List{% endblock %}
+{% block title %}{% translate Supplier List %}{% endblock %}
 
 {% block content %}
     <h1>{% translate 'Suppliers' %}</h1>
@@ -19,7 +19,7 @@
             <tbody>
                 {% for supplier in suppliers %}
                 <tr>
-                    <td>{{ supplier.name }}</td>
+                    <td><a href="{% url 'suppliers:detail' supplier.id %}">{{ supplier.name }}</a></td>
                     <td>{{ supplier.products.count }}</td>
                     <td>0</td>
                 </tr>

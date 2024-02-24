@@ -79,15 +79,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="bar-chart-2"></span>
-                  {% translate 'Reports' %}
+                <a class="nav-link" href="{% url 'suppliers:list' %}">
+                  <span data-feather="package"></span>
+                  {% translate 'Suppliers' %}
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="repeat"></span>
                   {% translate 'Automatic' %}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="bar-chart-2"></span>
+                  {% translate 'Reports' %}
                 </a>
               </li>
             </ul>

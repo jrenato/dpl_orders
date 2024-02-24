@@ -2,7 +2,9 @@
 This command will import orders from a ODS file
 '''
 import os
+
 from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings
 
 from pyexcel_ods import get_data
 from tqdm import tqdm
@@ -18,22 +20,33 @@ class Command(BaseCommand):
     '''
     help = 'Import orders from a ODS file'
 
-
-    def add_arguments(self, parser):
-        parser.add_argument('file', type=str, help='File to import')
+    # def add_arguments(self, parser):
+    #     parser.add_argument('file', type=str, help='File to import')
 
 
     def handle(self, *args, **options):
-        file = options['file']
-        if not os.path.isfile(file):
-            raise CommandError(f'The file "{file}" does not exist')
+        # Load IMPORT_PATH from settings
+        import_path = settings.IMPORT_PATH
+        import_path = os.path.join(import_path, 'Pedidos Antigos')
 
-        # Get the raw data from the file and convert it to a list of dictionaries
-        raw_data = get_data(file)
-        products = self.get_products_data(raw_data)
+        # Check if the import path exists
+        if not os.path.isdir(import_path):
+            raise CommandError(f'The import path "{import_path}" does not exist')
 
-        for product_data in tqdm(products, desc='Importing products orders'):
-            self.import_order(product_data)
+        # List all ODS files from the import path
+        files = []
+        for root, _, filenames in os.walk(import_path):
+            for filename in filenames:
+                if filename.endswith('.ods'):
+                    files.append(os.path.join(root, filename))
+
+        for filename in files:
+            # Get the raw data from the file and convert it to a list of dictionaries
+            raw_data = get_data(filename)
+            products = self.get_products_data(raw_data)
+
+            for product_data in tqdm(products, desc='Importing products orders'):
+                self.import_order(product_data)
 
 
     def get_products_data(self, raw_data):

@@ -3,6 +3,8 @@ Models for Orders app
 '''
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 ORDER_STATUS_CHOICES = (
@@ -99,6 +101,29 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.product} - {self.quantity}'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__original_quantity = self.quantity
+
+    def save(self, *args, **kwargs):
+        if self.id and self.quantity != self.__original_quantity:
+            OrderItemHistory.objects.create(
+                order_item=self,
+                quantity=self.quantity,
+            )
+        super().save(*args, **kwargs)
+
+@receiver(post_save, sender=OrderItem)
+def order_item_post_save(sender, instance, created, **kwargs):
+    '''
+    Post save signal for the order item
+    '''
+    if created:
+        OrderItemHistory.objects.create(
+            order_item=instance,
+            quantity=instance.quantity,
+        )
 
 
 class OrderItemHistory(models.Model):

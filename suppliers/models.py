@@ -2,8 +2,9 @@
 Models for the Suppliers app
 '''
 from django.db import models
-from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+
+from dpl_orders.helpers import slugify_uniquely
 
 
 class Supplier(models.Model):
@@ -44,13 +45,11 @@ class Supplier(models.Model):
         return f'/suppliers/{self.slug}'
 
     def save(self, *args, **kwargs):
-        new_slug = slugify(self.name)
-        if new_slug != self.slug:
-            self.slug = new_slug
-            i = 1
-            while Supplier.objects.filter(slug=self.slug).exists():
-                self.slug = f'{self.slug}-{i}'
-                i += 1
+        '''
+        Save the model
+        '''
+        if not self.id:
+            self.slug = slugify_uniquely(self.name, self.__class__)
         super().save(*args, **kwargs)
 
 

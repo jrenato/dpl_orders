@@ -2,10 +2,9 @@
 Models for the Products app
 '''
 from django.db import models
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+
+from dpl_orders.helpers import slugify_uniquely
 
 
 class ProductCategory(models.Model):
@@ -77,13 +76,8 @@ class Product(models.Model):
         return f'/products/{self.slug}/'
 
     def save(self, *args, **kwargs):
-        new_slug = slugify(self.name)
-        if new_slug != self.slug:
-            self.slug = new_slug
-            i = 1
-            while Product.objects.filter(slug=self.slug).exists():
-                self.slug = f'{self.slug}-{i}'
-                i += 1
+        if not self.id:
+            self.slug = slugify_uniquely(self.name, self.__class__)
         super().save(*args, **kwargs)
 
 
@@ -151,21 +145,11 @@ class ProductGroup(models.Model):
         # TODO: Change the url to the correct one
         return f'/products/groups/{self.slug}/'
 
-    # Save a copy of the original name
-    def __init__(self, *args, **kwargs):
-        super(ProductGroup, self).__init__(*args, **kwargs)
-        self._original_name = self.name
-
-    # If the name is changed, update the slug.
-    # Make sure the slug is unique
     def save(self, *args, **kwargs):
-        if self.name != self._original_name:
-            self.slug = slugify(self.name)
-            i = 1
-            while ProductGroup.objects.filter(slug=self.slug).exists():
-                self.slug = f'{self.slug}-{i}'
-                i += 1
-        super(ProductGroup, self).save(*args, **kwargs)
+        if not self.id:
+            # replace self.name with your prepopulate_from field
+            self.slug = slugify_uniquely(self.name, self.__class__)
+        super().save(*args, **kwargs)
 
 
 class ProductGroupItem(models.Model):

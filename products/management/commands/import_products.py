@@ -5,6 +5,7 @@ import os
 import datetime
 
 from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings
 
 from pyexcel_ods import get_data
 from tqdm import tqdm
@@ -19,40 +20,64 @@ class Command(BaseCommand):
     '''
     help = 'Import products from a ODS file'
 
-    def add_arguments(self, parser):
-        parser.add_argument('file', type=str, help='File to import')
-        parser.add_argument('--supplier', type=str, help='Supplier name')
+    # def add_arguments(self, parser):
+    #     parser.add_argument('file', type=str, help='File to import')
+    #     parser.add_argument('--supplier', type=str, help='Supplier name')
 
     def handle(self, *args, **options):
-        file = options['file']
-        if not os.path.isfile(file):
-            raise CommandError(f'The file "{file}" does not exist')
+        # Load IMPORT_PATH from settings
+        import_path = settings.IMPORT_PATH
 
-        # Get the raw data from the file and convert it to a list of dictionaries
-        raw_data = get_data(file)
-        products = self.get_products_data(raw_data)
+        import_path = os.path.join(import_path, 'Produtos')
 
-        # If the supplier name is not passed as an argument,
-        # check if the supplier name is available in the products data
-        if not options['supplier'] and 'EDITORA' not in products[0]:
-            raise CommandError('The supplier name is required')
-        supplier = self.get_supplier(options['supplier'])
+        # Check if the import path exists
+        if not os.path.isdir(import_path):
+            raise CommandError(f'The import path "{import_path}" does not exist')
 
-        # Get the file name without the extension and create the group
-        file_name = os.path.basename(file).split('.')[0]
-        group = self.get_products_group(file_name)
+        # List all ODS files from the import path
+        files = []
+        for root, _, filenames in os.walk(import_path):
+            for filename in filenames:
+                if filename.endswith('.ods'):
+                    files.append(os.path.join(root, filename))
 
-        for product_data in tqdm(products, desc='Importing products'):
-            self.import_product(product_data, supplier, group)
+        for filename in files:
+            # Get the filename without the extension
+            base_filename = os.path.basename(filename).split('.')[0]
+
+            # Get the supplier and the group
+            supplier_name = base_filename.split(' - ')[0]
+            supplier = self.get_supplier(supplier_name)
+            group = self.get_products_group(base_filename)
+
+            # Get the raw data from the file and convert it to a list of dictionaries
+            raw_data = get_data(filename)
+            products = self.get_products_data(raw_data)
+
+            for product_data in tqdm(products, desc='Importing products'):
+                self.import_product(product_data, supplier, group)
 
 
     def get_products_data(self, raw_data):
         '''
         Get the products data from the raw data
         '''
+        # Get the first sheet
         sheet_data = list(raw_data.values())[0]
-        sheet_data = sheet_data[1:]
-        products = [dict(zip(sheet_data[0], row)) for row in sheet_data[1:]]
+
+        # Identify the row with the headers
+        header_row_number = 0
+        for i, row in enumerate(sheet_data):
+            if 'ISBN' in row:
+                header_row_number = i
+                break
+
+        # Get the header row
+        header_row = sheet_data[header_row_number]
+
+        # Get the products rows
+        product_rows = sheet_data[header_row_number + 1:]
+        products = [dict(zip(header_row, product_row)) for product_row in product_rows]
 
         # Remove empty rows
         products = [product for product in products if product]
@@ -81,7 +106,12 @@ class Command(BaseCommand):
         Import a product
         '''
 
-        release_date = product_data['Lançamento']
+        try:
+            release_date = product_data['Lançamento']
+        except KeyError:
+            print(product_data)
+            raise CommandError('Lançamento não encontrado')
+
         # If release_date is not None and it's a string, convert it to a date
         if release_date and isinstance(release_date, str):
             release_date = datetime.datetime.strptime(release_date, '%d/%m/%Y')

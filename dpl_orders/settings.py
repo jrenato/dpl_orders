@@ -21,6 +21,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = env('DJANGO_DEBUG')
 
+IMPORT_PATH = env('IMPORT_PATH')
+
 ALLOWED_HOSTS = []
 
 # Application definition

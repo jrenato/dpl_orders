@@ -3,6 +3,8 @@ Models for the Products app
 '''
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 from dpl_orders.helpers import slugify_uniquely
 
@@ -75,10 +77,31 @@ class Product(models.Model):
         # TODO: Change the url to the correct one
         return f'/products/{self.slug}/'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._release_date = self.release_date
+
+
     def save(self, *args, **kwargs):
+        # If the product is being created, generate the slug
         if not self.id:
             self.slug = slugify_uniquely(self.name, self.__class__)
+        elif self._release_date != self.release_date:
+            ProductReleaseDateHistory.objects.create(
+                product=self, release_date=self.release_date
+            )
         super().save(*args, **kwargs)
+
+
+@receiver(post_save, sender=Product)
+def product_post_save(sender, instance, created, **kwargs):
+    '''
+    Post save signal for the product
+    '''
+    if created:
+        ProductReleaseDateHistory.objects.create(
+            product=instance, release_date=instance.release_date
+        )
 
 
 class ProductReleaseDateHistory(models.Model):

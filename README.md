@@ -25,6 +25,51 @@ manage.py makemessages -l pt_BR
 manage.py compilemessages
 ```
 
+## Restore datase in Linux
+
+Reference:
+* [Run SQL Server Linux container images with Docker](https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver16&tabs=cli&pivots=cs1-bash)
+* [Restore a SQL Server database in a Linux container](https://learn.microsoft.com/en-us/sql/linux/tutorial-restore-backup-in-sql-server-container?view=sql-server-ver16&tabs=cli)
+
+### Pull the docker image
+```
+sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
+```
+
+### Run the container
+```
+sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=***password***" \
+   -p 1433:1433 --name sql1 --hostname sql1 \
+   -d \
+   mcr.microsoft.com/mssql/server:2022-latest
+
+```
+
+### Create a directory in the container to store the backup file
+```
+sudo docker exec -it sql1 mkdir /var/opt/mssql/backup
+```
+
+### Copy the backup file to the container
+```
+sudo docker cp vldados.bak sql1:/var/opt/mssql/backup
+```
+
+### Unpack the backup file
+```
+sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost \
+   -U SA -P '***password***' \
+   -Q 'RESTORE FILELISTONLY FROM DISK = "/var/opt/mssql/backup/vldados.bak"' \
+   | tr -s ' ' | cut -d ' ' -f 1-2
+```
+
+### Restore the database
+```
+sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd \
+   -S localhost -U SA -P '***password***' \
+   -Q 'RESTORE DATABASE vldados FROM DISK = "/var/opt/mssql/backup/vldados.bak" WITH MOVE "vldados_Data" TO "/var/opt/mssql/data/vldados_1.mdf", MOVE "vldados_Data2" TO "/var/opt/mssql/data/vldados_2.mdf", MOVE "vldados_Data3" TO "/var/opt/mssql/data/vldados_3.mdf", MOVE "vldados_Data4" TO "/var/opt/mssql/data/vldados_4.mdf", MOVE "vldados_Data5" TO "/var/opt/mssql/data/vldados_5.mdf", MOVE "vldados_Data6" TO "/var/opt/mssql/data/vldados_6.mdf", MOVE "vldados_Data7" TO "/var/opt/mssql/data/vldados_7.mdf", MOVE "vldados_Data8" TO "/var/opt/mssql/data/vldados_8.mdf", MOVE "vldados_Data9" TO "/var/opt/mssql/data/vldados_9.mdf", MOVE "vldados_Data10" TO "/var/opt/mssql/data/vldados_10.mdf", MOVE "vldados_Log" TO "/var/opt/mssql/data/vldados_1.ldf", MOVE "vldados_Log2" TO "/var/opt/mssql/data/vldados_2.ldf", MOVE "vldados_Log3" TO "/var/opt/mssql/data/vldados_3.ldf", MOVE "vldados_Log4" TO "/var/opt/mssql/data/vldados_4.ldf", MOVE "vldados_Log5" TO "/var/opt/mssql/data/vldados_5.ldf", MOVE "vldados_Log6" TO "/var/opt/mssql/data/vldados_6.ldf", MOVE "vldados_Log7" TO "/var/opt/mssql/data/vldados_7.ldf", MOVE "vldados_Log8" TO "/var/opt/mssql/data/vldados_8.ldf", MOVE "vldados_Log9" TO "/var/opt/mssql/data/vldados_9.ldf", MOVE "vldados_Log10" TO "/var/opt/mssql/data/vldados_10.ldf"'
+```
+
 ## Naming conventions
 
 **Reserva (*Preorder*)**: a distribuidora não tem a mercadoria para pronta entrega. Fará o pedido para o fornecedor e repassará para os clientes.

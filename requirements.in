@@ -1,5 +1,6 @@
 crispy-bootstrap5
 django
+django-allauth
 django-crispy-forms
 django-environ
 django-localflavor

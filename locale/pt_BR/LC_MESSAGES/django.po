@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-24 18:39-0300\n"
+"POT-Creation-Date: 2024-02-25 12:47-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: customers/apps.py:8 customers/models.py:33 dpl_orders/templates/base.html:78
+#: customers/apps.py:8 customers/models.py:33 dpl_orders/templates/base.html:75
 msgid "Customers"
 msgstr "Clientes"
 
@@ -28,10 +28,12 @@ msgstr "Código Interno"
 
 #: customers/models.py:16 products/models.py:16 products/models.py:49
 #: products/models.py:143 suppliers/models.py:16
+#: suppliers/templates/suppliers/supplier_detail.html:14
 msgid "Name"
 msgstr "Nome"
 
 #: customers/models.py:17 suppliers/models.py:17
+#: suppliers/templates/suppliers/supplier_detail.html:15
 msgid "Short Name"
 msgstr "Nome Reduzido"
 
@@ -41,14 +43,17 @@ msgid "Slug"
 msgstr "Slug"
 
 #: customers/models.py:19 suppliers/models.py:23
+#: suppliers/templates/suppliers/supplier_detail.html:31
 msgid "Email"
 msgstr "Email"
 
 #: customers/models.py:20 suppliers/models.py:21
+#: suppliers/templates/suppliers/supplier_detail.html:20
 msgid "CNPJ"
 msgstr "CNPJ"
 
 #: customers/models.py:21 suppliers/models.py:20
+#: suppliers/templates/suppliers/supplier_detail.html:23
 msgid "CPF"
 msgstr "CPF"
 
@@ -57,6 +62,7 @@ msgid "Phone"
 msgstr "Telefone"
 
 #: customers/models.py:23 suppliers/models.py:22
+#: suppliers/templates/suppliers/supplier_detail.html:30
 msgid "Contact Person"
 msgstr "Contato"
 
@@ -64,11 +70,13 @@ msgstr "Contato"
 #: orders/models.py:65 orders/models.py:95 orders/models.py:141
 #: products/models.py:59 products/models.py:115 products/models.py:150
 #: suppliers/models.py:26 suppliers/models.py:69
+#: suppliers/templates/suppliers/supplier_detail.html:17
 msgid "Created at"
 msgstr "Criado em"
 
 #: customers/models.py:26 customers/models.py:69 products/models.py:60
 #: products/models.py:151 suppliers/models.py:27 suppliers/models.py:70
+#: suppliers/templates/suppliers/supplier_detail.html:18
 msgid "Modified at"
 msgstr "Modificado em"
 
@@ -108,68 +116,101 @@ msgstr "Endereço do Cliente"
 msgid "Customer Addresses"
 msgstr "Endereços dos Clientes"
 
-#: dpl_orders/templates/base.html:47
+#: dpl_orders/templates/account/login.html:6
+#: dpl_orders/templates/account/login.html:9
+msgid "Sign In"
+msgstr "Entrar"
+
+#: dpl_orders/templates/account/login.html:11
+msgid "If you have not created an account yet, then please"
+msgstr "Se você ainda não criou uma conta, então por favor"
+
+#: dpl_orders/templates/account/login.html:11
+msgid "sign up"
+msgstr "cadastre-se"
+
+#: dpl_orders/templates/account/login.html:11
+msgid "first"
+msgstr "primeiro"
+
+#: dpl_orders/templates/account/login.html:16
+msgid "Log In"
+msgstr "Entrar"
+
+#: dpl_orders/templates/account/logout.html:4
+#: dpl_orders/templates/account/logout.html:7
+#: dpl_orders/templates/account/logout.html:12
+#, fuzzy
+#| msgid "Sign out"
+msgid "Sign Out"
+msgstr "Sair"
+
+#: dpl_orders/templates/account/logout.html:8
+msgid "Are you sure you want to sign out?"
+msgstr "Você tem certeza que deseja sair?"
+
+#: dpl_orders/templates/base.html:44
 msgid "Sign out"
 msgstr "Sair"
 
-#: dpl_orders/templates/base.html:60 dpl_orders/templates/base.html:140
+#: dpl_orders/templates/base.html:57 dpl_orders/templates/base.html:137
 msgid "Dashboard"
 msgstr "Tela Inicial"
 
-#: dpl_orders/templates/base.html:66 orders/apps.py:8 orders/models.py:43
+#: dpl_orders/templates/base.html:63 orders/apps.py:8 orders/models.py:43
 msgid "Orders"
 msgstr "Pedidos"
 
-#: dpl_orders/templates/base.html:72 products/apps.py:8 products/models.py:67
+#: dpl_orders/templates/base.html:69 products/apps.py:8 products/models.py:67
 msgid "Products"
 msgstr "Produtos"
 
-#: dpl_orders/templates/base.html:84 suppliers/apps.py:8 suppliers/models.py:34
+#: dpl_orders/templates/base.html:81 suppliers/apps.py:8 suppliers/models.py:34
 #: suppliers/templates/suppliers/supplier_list.html:7
 msgid "Suppliers"
 msgstr "Fornecedores"
 
-#: dpl_orders/templates/base.html:90
+#: dpl_orders/templates/base.html:87
 msgid "Automatic"
 msgstr "Automático"
 
-#: dpl_orders/templates/base.html:96
+#: dpl_orders/templates/base.html:93
 msgid "Reports"
 msgstr "Relatórios"
 
-#: dpl_orders/templates/base.html:103
+#: dpl_orders/templates/base.html:100
 msgid "Saved reports"
 msgstr "Relatórios salvos"
 
-#: dpl_orders/templates/base.html:110
+#: dpl_orders/templates/base.html:107
 msgid "Current month"
 msgstr "Mês atual"
 
-#: dpl_orders/templates/base.html:116
+#: dpl_orders/templates/base.html:113
 msgid "Last quarter"
 msgstr "Último trimestre"
 
-#: dpl_orders/templates/base.html:122
+#: dpl_orders/templates/base.html:119
 msgid "Social engagement"
 msgstr "Engajamento social"
 
-#: dpl_orders/templates/base.html:128
+#: dpl_orders/templates/base.html:125
 msgid "Year-end sale"
 msgstr "Promoção de fim de ano"
 
-#: dpl_orders/templates/base.html:143
+#: dpl_orders/templates/base.html:140
 msgid "Share"
 msgstr "Compartilhar"
 
-#: dpl_orders/templates/base.html:144
+#: dpl_orders/templates/base.html:141
 msgid "Export"
 msgstr "Exportar"
 
-#: dpl_orders/templates/base.html:148
+#: dpl_orders/templates/base.html:145
 msgid "This week"
 msgstr "Esta semana"
 
-#: dpl_orders/templates/base.html:159
+#: dpl_orders/templates/base.html:156
 msgid "Section title"
 msgstr "Título da seção"
 
@@ -203,7 +244,7 @@ msgstr "Concluído"
 msgid "Cancelled"
 msgstr "Cancelado"
 
-#: orders/models.py:25
+#: orders/models.py:25 suppliers/templates/suppliers/supplier_detail.html:16
 #, fuzzy
 #| msgid "Internal id"
 msgid "Internal ID"
@@ -349,7 +390,7 @@ msgstr "Item do Grupo de Produtos"
 msgid "Product Group Items"
 msgstr "Itens do Grupo de Produtos"
 
-#: suppliers/models.py:24
+#: suppliers/models.py:24 suppliers/templates/suppliers/supplier_detail.html:32
 msgid "Phone Number"
 msgstr "Telefone"
 
@@ -360,6 +401,32 @@ msgstr "Endereço do Fornecedor"
 #: suppliers/models.py:77
 msgid "Supplier Addresses"
 msgstr "Endereços dos Fornecedores"
+
+#: suppliers/templates/suppliers/supplier_detail.html:8
+#, fuzzy
+#| msgid "Suppliers"
+msgid "Supplier Details"
+msgstr "Fornecedores"
+
+#: suppliers/templates/suppliers/supplier_detail.html:12
+msgid "Basic Information"
+msgstr "Informações Básicas"
+
+#: suppliers/templates/suppliers/supplier_detail.html:28
+#, fuzzy
+#| msgid "Contact Person"
+msgid "Contact Details"
+msgstr "Contato"
+
+#: suppliers/templates/suppliers/supplier_detail.html:38
+#, fuzzy
+#| msgid "Customer Address"
+msgid "Address"
+msgstr "Endereço do Cliente"
+
+#: suppliers/templates/suppliers/supplier_detail.html:41
+msgid "ZIPCODE"
+msgstr "CEP"
 
 #: suppliers/templates/suppliers/supplier_list.html:8
 msgid "Add New Supplier"

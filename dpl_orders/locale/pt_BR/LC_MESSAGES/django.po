@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-26 15:23-0300\n"
+"POT-Creation-Date: 2024-02-26 15:56-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,7 +141,8 @@ msgstr "Esta conta está atualmente inativa."
 
 #: dpl_orders/allauth/account/forms.py:99
 msgid "The email address and/or password you specified are not correct."
-msgstr "O endereço de email e/ou senha que você especificou não estão corretos."
+msgstr ""
+"O endereço de email e/ou senha que você especificou não estão corretos."
 
 #: dpl_orders/allauth/account/forms.py:102
 msgid "The username and/or password you specified are not correct."
@@ -222,6 +223,72 @@ msgstr "Nova Senha (novamente)"
 msgid "The password reset token was invalid."
 msgstr "O token de redefinição de senha é inválido."
 
+#: dpl_orders/templates/account/email_change.html:5
+#: dpl_orders/templates/account/email_change.html:9
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "Endereço de email"
+
+#: dpl_orders/templates/account/email_change.html:21
+#: dpl_orders/templates/account/email_change.html:29
+msgid "Current email"
+msgstr "Email atual"
+
+#: dpl_orders/templates/account/email_change.html:31
+msgid "Changing to"
+msgstr "Alterando para"
+
+#: dpl_orders/templates/account/email_change.html:35
+msgid "Your email address is still pending verification."
+msgstr "Seu endereço de email ainda está pendente de verificação."
+
+#: dpl_orders/templates/account/email_change.html:37
+msgid "Re-send Verification"
+msgstr "Reenviar Verificação"
+
+#: dpl_orders/templates/account/email_change.html:41
+msgid "Cancel Change"
+msgstr "Cancelar Alteração"
+
+#: dpl_orders/templates/account/email_change.html:49
+msgid "Change to"
+msgstr "Alterar para"
+
+#: dpl_orders/templates/account/email_change.html:55
+msgid "Change Email"
+msgstr "Alterar Email"
+
+#: dpl_orders/templates/account/email_confirm.html:6
+#: dpl_orders/templates/account/email_confirm.html:10
+msgid "Confirm Email Address"
+msgstr "Confirmar Endereço de Email"
+
+#: dpl_orders/templates/account/email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an email "
+"address for user %(user_display)s."
+msgstr "Por favor, confirme que <a href=\"mailto:%(email)s\">%(email)s</a> é um endereço de email para o usuário %(user_display)s."
+
+#: dpl_orders/templates/account/email_confirm.html:23
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: dpl_orders/templates/account/email_confirm.html:29
+#, python-format
+msgid ""
+"Unable to confirm %(email)s because it is already confirmed by a different "
+"account."
+msgstr "Não é possível confirmar %(email)s porque ele já foi confirmado por uma conta diferente."
+
+#: dpl_orders/templates/account/email_confirm.html:35
+#, python-format
+msgid ""
+"This email confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new email confirmation request</a>."
+msgstr "Este link de confirmação de email expirou ou é inválido. Por favor, <a href=\"%(email_url)s\">emita uma nova solicitação de confirmação de email</a>."
+
 #: dpl_orders/templates/account/login.html:6
 #: dpl_orders/templates/account/login.html:9
 msgid "Sign In"
@@ -254,6 +321,117 @@ msgstr "Sair"
 #: dpl_orders/templates/account/logout.html:8
 msgid "Are you sure you want to sign out?"
 msgstr "Você tem certeza que deseja sair?"
+
+#: dpl_orders/templates/account/password_change.html:4
+#: dpl_orders/templates/account/password_change.html:8
+#: dpl_orders/templates/account/password_change.html:19
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nova Senha"
+
+#: dpl_orders/templates/account/password_change.html:21
+#, fuzzy
+#| msgid "Forgot your password?"
+msgid "Forgot Password?"
+msgstr "Esqueceu sua senha?"
+
+#: dpl_orders/templates/account/password_reset.html:4
+#: dpl_orders/templates/account/password_reset.html:8
+#: dpl_orders/templates/account/password_reset_done.html:6
+#: dpl_orders/templates/account/password_reset_done.html:10
+#, fuzzy
+#| msgid "Password"
+msgid "Password Reset"
+msgstr "Senha"
+
+#: dpl_orders/templates/account/password_reset.html:14
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+msgstr "Esqueceu sua senha? Digite seu endereço de email abaixo, e nós enviaremos um email permitindo que você a redefina."
+
+#: dpl_orders/templates/account/password_reset.html:25
+msgid "Reset My Password"
+msgstr "Redefinir Minha Senha"
+
+#: dpl_orders/templates/account/password_reset.html:29
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr "Por favor, entre em contato conosco se você tiver qualquer problema redefinindo sua senha."
+
+#: dpl_orders/templates/account/password_reset_done.html:16
+msgid ""
+"We have sent you an email. If you have not received it please check your "
+"spam folder. Otherwise contact us if you do not receive it in a few minutes."
+msgstr "Nós enviamos um email para você. Se você não o recebeu, por favor, verifique sua pasta de spam. Caso contrário, entre em contato conosco se você não o receber em alguns minutos."
+
+#: dpl_orders/templates/account/signup.html:4
+#, fuzzy
+#| msgid "Sign out"
+msgid "Signup"
+msgstr "Sair"
+
+#: dpl_orders/templates/account/signup.html:8
+#: dpl_orders/templates/account/signup.html:27
+#, fuzzy
+#| msgid "Sign In"
+msgid "Sign Up"
+msgstr "Entrar"
+
+#: dpl_orders/templates/account/signup.html:11
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: dpl_orders/templates/account/signup_closed.html:5
+#: dpl_orders/templates/account/signup_closed.html:9
+msgid "Sign Up Closed"
+msgstr ""
+
+#: dpl_orders/templates/account/signup_closed.html:11
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: dpl_orders/templates/account/verification_sent.html:5
+#: dpl_orders/templates/account/verification_sent.html:9
+#: dpl_orders/templates/account/verified_email_required.html:5
+#: dpl_orders/templates/account/verified_email_required.html:9
+#, fuzzy
+#| msgid "Email address"
+msgid "Verify Your Email Address"
+msgstr "Endereço de email"
+
+#: dpl_orders/templates/account/verification_sent.html:12
+msgid ""
+"We have sent an email to you for verification. Follow the link provided to "
+"finalize the signup process. If you do not see the verification email in "
+"your main inbox, check your spam folder. Please contact us if you do not "
+"receive the verification email within a few minutes."
+msgstr ""
+
+#: dpl_orders/templates/account/verified_email_required.html:13
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your email address. "
+msgstr ""
+
+#: dpl_orders/templates/account/verified_email_required.html:18
+msgid ""
+"We have sent an email to you for\n"
+"verification. Please click on the link inside that email. If you do not see "
+"the verification email in your main inbox, check your spam folder. "
+"Otherwise\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: dpl_orders/templates/account/verified_email_required.html:23
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your "
+"email address</a>."
+msgstr ""
 
 #: dpl_orders/templates/base.html:44
 msgid "Sign out"

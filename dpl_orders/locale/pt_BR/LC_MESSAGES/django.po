@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-25 12:47-0300\n"
+"POT-Creation-Date: 2024-02-26 15:23-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,10 @@ msgstr "Nome Reduzido"
 msgid "Slug"
 msgstr "Slug"
 
-#: customers/models.py:19 suppliers/models.py:23
+#: customers/models.py:19 dpl_orders/allauth/account/forms.py:116
+#: dpl_orders/allauth/account/forms.py:325
+#: dpl_orders/allauth/account/forms.py:474
+#: dpl_orders/allauth/account/forms.py:569 suppliers/models.py:23
 #: suppliers/templates/suppliers/supplier_detail.html:31
 msgid "Email"
 msgstr "Email"
@@ -115,6 +118,109 @@ msgstr "Endereço do Cliente"
 #: customers/models.py:76
 msgid "Customer Addresses"
 msgstr "Endereços dos Clientes"
+
+#: dpl_orders/allauth/account/forms.py:60
+#: dpl_orders/allauth/account/forms.py:449
+msgid "You must type the same password each time."
+msgstr "Você deve repetir a mesma senha."
+
+#: dpl_orders/allauth/account/forms.py:92
+#: dpl_orders/allauth/account/forms.py:412
+#: dpl_orders/allauth/account/forms.py:554
+#: dpl_orders/allauth/account/forms.py:683
+msgid "Password"
+msgstr "Senha"
+
+#: dpl_orders/allauth/account/forms.py:93
+msgid "Remember Me"
+msgstr "Lembrar-me"
+
+#: dpl_orders/allauth/account/forms.py:97
+msgid "This account is currently inactive."
+msgstr "Esta conta está atualmente inativa."
+
+#: dpl_orders/allauth/account/forms.py:99
+msgid "The email address and/or password you specified are not correct."
+msgstr "O endereço de email e/ou senha que você especificou não estão corretos."
+
+#: dpl_orders/allauth/account/forms.py:102
+msgid "The username and/or password you specified are not correct."
+msgstr "O nome de usuário e/ou senha que você especificou não estão corretos."
+
+#: dpl_orders/allauth/account/forms.py:112
+#: dpl_orders/allauth/account/forms.py:287
+#: dpl_orders/allauth/account/forms.py:477
+#: dpl_orders/allauth/account/forms.py:574
+msgid "Email address"
+msgstr "Endereço de email"
+
+#: dpl_orders/allauth/account/forms.py:119
+#: dpl_orders/allauth/account/forms.py:122
+#: dpl_orders/allauth/account/forms.py:277
+#: dpl_orders/allauth/account/forms.py:280
+msgid "Username"
+msgstr "Nome de usuário"
+
+#: dpl_orders/allauth/account/forms.py:132
+msgid "Username or email"
+msgstr "Nome de usuário ou email"
+
+#: dpl_orders/allauth/account/forms.py:135
+msgctxt "field label"
+msgid "Login"
+msgstr "Entrar"
+
+#: dpl_orders/allauth/account/forms.py:146
+msgid "Forgot your password?"
+msgstr "Esqueceu sua senha?"
+
+#: dpl_orders/allauth/account/forms.py:316
+msgid "Email (again)"
+msgstr "Email (novamente)"
+
+#: dpl_orders/allauth/account/forms.py:320
+msgid "Email address confirmation"
+msgstr "Confirmação do endereço de email"
+
+#: dpl_orders/allauth/account/forms.py:328
+msgid "Email (optional)"
+msgstr "Email (opcional)"
+
+#: dpl_orders/allauth/account/forms.py:383
+msgid "You must type the same email each time."
+msgstr "Você deve repetir o mesmo email."
+
+#: dpl_orders/allauth/account/forms.py:418
+#: dpl_orders/allauth/account/forms.py:557
+msgid "Password (again)"
+msgstr "Senha (novamente)"
+
+#: dpl_orders/allauth/account/forms.py:489
+msgid "This email address is already associated with this account."
+msgstr "Este endereço de email já está associado a esta conta."
+
+#: dpl_orders/allauth/account/forms.py:491
+#, python-format
+msgid "You cannot add more than %d email addresses."
+msgstr "Você não pode adicionar mais do que %d endereços de email."
+
+#: dpl_orders/allauth/account/forms.py:529
+msgid "Current Password"
+msgstr "Senha Atual"
+
+#: dpl_orders/allauth/account/forms.py:532
+#: dpl_orders/allauth/account/forms.py:632
+msgid "New Password"
+msgstr "Nova Senha"
+
+#: dpl_orders/allauth/account/forms.py:535
+#: dpl_orders/allauth/account/forms.py:633
+msgid "New Password (again)"
+msgstr "Nova Senha (novamente)"
+
+#: dpl_orders/allauth/account/forms.py:653
+msgid "The password reset token was invalid."
+msgstr "O token de redefinição de senha é inválido."
 
 #: dpl_orders/templates/account/login.html:6
 #: dpl_orders/templates/account/login.html:9

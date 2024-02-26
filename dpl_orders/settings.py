@@ -55,13 +55,14 @@ MIDDLEWARE = [
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 
-    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'dpl_orders.urls'
@@ -150,7 +151,7 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, 'dpl_orders', 'locale'),
 )
 
 # Static files (CSS, JavaScript, Images)
@@ -175,6 +176,17 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 #LOGIN_URL = 'account_login'
+
+ACCOUNT_FORMS = {
+    # 'add_email': 'allauth.account.forms.AddEmailForm',
+    # 'change_password': 'allauth.account.forms.ChangePasswordForm',
+    'login': 'dpl_orders.allauth.account.forms.LoginForm',
+    # 'reset_password': 'allauth.account.forms.ResetPasswordForm',
+    # 'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
+    # 'set_password': 'allauth.account.forms.SetPasswordForm',
+    # 'signup': 'allauth.account.forms.SignupForm',
+    # 'user_token': 'allauth.account.forms.UserTokenForm',
+}
 
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {

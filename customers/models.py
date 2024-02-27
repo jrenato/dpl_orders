@@ -14,7 +14,8 @@ class Customer(models.Model):
     internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
 
     name = models.CharField(_('Name'), max_length=120)
-    short_name = models.CharField(_('Short Name'), max_length=60, blank=True, null=True)
+    short_name = models.CharField(_('Short Name'), max_length=20, blank=True, null=True)
+    sheet_label = models.CharField(_('Sheet Label'), max_length=60, blank=True, null=True)
     slug = models.SlugField(_('Slug'), max_length=140, unique=True, blank=True, null=True)
     email = models.EmailField(_('Email'), blank=True, null=True)
     cnpj = models.CharField(_('CNPJ'), max_length=14, blank=True, null=True)

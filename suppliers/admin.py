@@ -2,7 +2,7 @@
 Admin for Suppliers app
 '''
 from django.contrib import admin
-from .models import Supplier, SupplierAddress
+from .models import Supplier, SupplierAddress, SupplierCNPJ
 
 
 class SupplierAddressInline(admin.StackedInline):
@@ -10,6 +10,15 @@ class SupplierAddressInline(admin.StackedInline):
     SupplierAddressInline class
     '''
     model = SupplierAddress
+    readonly_fields = ('created', 'modified',)
+    extra = 1
+
+
+class SupplierCNPJInline(admin.StackedInline):
+    '''
+    SupplierCNPJInline class
+    '''
+    model = SupplierCNPJ
     readonly_fields = ('created', 'modified',)
     extra = 1
 
@@ -22,4 +31,4 @@ class SupplierAdmin(admin.ModelAdmin):
     list_display = ('name', 'short_name', 'contact_person', 'email', 'phone_number')
     search_fields = ('name', 'short_name', 'contact_person', 'email', 'phone_number')
     readonly_fields = ('created', 'modified',)
-    inlines = [SupplierAddressInline]
+    inlines = [SupplierAddressInline, SupplierCNPJInline]

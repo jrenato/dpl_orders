@@ -17,7 +17,6 @@ class Supplier(models.Model):
     short_name = models.CharField(_('Short Name'), max_length=60, blank=True, null=True)
     slug = models.SlugField(_('Slug'), max_length=140, unique=True, blank=True, null=True)
 
-    cpf = models.CharField(_('CPF'), max_length=14, blank=True, null=True)
     cnpj = models.CharField(_('CNPJ'), max_length=18, blank=True, null=True)
     contact_person = models.CharField(_('Contact Person'), max_length=120, blank=True, null=True)
     email = models.EmailField(_('Email'), blank=True, null=True)
@@ -51,6 +50,29 @@ class Supplier(models.Model):
         if not self.id:
             self.slug = slugify_uniquely(self.name, self.__class__)
         super().save(*args, **kwargs)
+
+
+class SupplierCNPJ(models.Model):
+    '''
+    Model for the Supplier CNPJ
+    '''
+    supplier = models.OneToOneField(Supplier, on_delete=models.CASCADE)
+
+    cnpj = models.CharField(_('CNPJ'), max_length=18, blank=True, null=True)
+
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+    modified = models.DateTimeField(_('Modified at'), auto_now=True)
+
+    class Meta:
+        '''
+        Meta options
+        '''
+        verbose_name = _('Supplier CNPJ')
+        verbose_name_plural = _('Supplier CNPJs')
+        ordering = ['supplier', 'cnpj']
+
+    def __str__(self):
+        return f'{self.cnpj}'
 
 
 class SupplierAddress(models.Model):

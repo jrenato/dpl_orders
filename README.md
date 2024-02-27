@@ -63,11 +63,38 @@ sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost \
    | tr -s ' ' | cut -d ' ' -f 1-2
 ```
 
-### Restore the database
+### Restore the database to a SQL Server container
 ```
 sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd \
    -S localhost -U SA -P '***password***' \
    -Q 'RESTORE DATABASE vldados FROM DISK = "/var/opt/mssql/backup/vldados.bak" WITH MOVE "vldados_Data" TO "/var/opt/mssql/data/vldados_1.mdf", MOVE "vldados_Data2" TO "/var/opt/mssql/data/vldados_2.mdf", MOVE "vldados_Data3" TO "/var/opt/mssql/data/vldados_3.mdf", MOVE "vldados_Data4" TO "/var/opt/mssql/data/vldados_4.mdf", MOVE "vldados_Data5" TO "/var/opt/mssql/data/vldados_5.mdf", MOVE "vldados_Data6" TO "/var/opt/mssql/data/vldados_6.mdf", MOVE "vldados_Data7" TO "/var/opt/mssql/data/vldados_7.mdf", MOVE "vldados_Data8" TO "/var/opt/mssql/data/vldados_8.mdf", MOVE "vldados_Data9" TO "/var/opt/mssql/data/vldados_9.mdf", MOVE "vldados_Data10" TO "/var/opt/mssql/data/vldados_10.mdf", MOVE "vldados_Log" TO "/var/opt/mssql/data/vldados_1.ldf", MOVE "vldados_Log2" TO "/var/opt/mssql/data/vldados_2.ldf", MOVE "vldados_Log3" TO "/var/opt/mssql/data/vldados_3.ldf", MOVE "vldados_Log4" TO "/var/opt/mssql/data/vldados_4.ldf", MOVE "vldados_Log5" TO "/var/opt/mssql/data/vldados_5.ldf", MOVE "vldados_Log6" TO "/var/opt/mssql/data/vldados_6.ldf", MOVE "vldados_Log7" TO "/var/opt/mssql/data/vldados_7.ldf", MOVE "vldados_Log8" TO "/var/opt/mssql/data/vldados_8.ldf", MOVE "vldados_Log9" TO "/var/opt/mssql/data/vldados_9.ldf", MOVE "vldados_Log10" TO "/var/opt/mssql/data/vldados_10.ldf"'
+```
+
+### Restore the database to a local SQL Server
+
+```
+USE [master]
+RESTORE DATABASE [vldados] FROM DISK = N'/mnt/sdb1/vldados/vldados.bak'
+WITH MOVE 'vldados_Data' TO '/mnt/sdb1/vldados/vldados_1.mdf', 
+MOVE 'vldados_Data2' TO '/mnt/sdb1/vldados/vldados_2.mdf', 
+MOVE 'vldados_Data3' TO '/mnt/sdb1/vldados/vldados_3.mdf', 
+MOVE 'vldados_Data4' TO '/mnt/sdb1/vldados/vldados_4.mdf', 
+MOVE 'vldados_Data5' TO '/mnt/sdb1/vldados/vldados_5.mdf', 
+MOVE 'vldados_Data6' TO '/mnt/sdb1/vldados/vldados_6.mdf', 
+MOVE 'vldados_Data7' TO '/mnt/sdb1/vldados/vldados_7.mdf', 
+MOVE 'vldados_Data8' TO '/mnt/sdb1/vldados/vldados_8.mdf', 
+MOVE 'vldados_Data9' TO '/mnt/sdb1/vldados/vldados_9.mdf', 
+MOVE 'vldados_Data10' TO '/mnt/sdb1/vldados/vldados_10.mdf', 
+MOVE 'vldados_Log' TO '/mnt/sdb1/vldados/vldados_1.ldf',
+MOVE 'vldados_Log2' TO '/mnt/sdb1/vldados/vldados_2.ldf',
+MOVE 'vldados_Log3' TO '/mnt/sdb1/vldados/vldados_3.ldf',
+MOVE 'vldados_Log4' TO '/mnt/sdb1/vldados/vldados_4.ldf',
+MOVE 'vldados_Log5' TO '/mnt/sdb1/vldados/vldados_5.ldf',
+MOVE 'vldados_Log6' TO '/mnt/sdb1/vldados/vldados_6.ldf',
+MOVE 'vldados_Log7' TO '/mnt/sdb1/vldados/vldados_7.ldf',
+MOVE 'vldados_Log8' TO '/mnt/sdb1/vldados/vldados_8.ldf',
+MOVE 'vldados_Log9' TO '/mnt/sdb1/vldados/vldados_9.ldf',
+MOVE 'vldados_Log10' TO '/mnt/sdb1/vldados/vldados_10.ldf'
 ```
 
 ## Naming conventions

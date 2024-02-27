@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-26 15:56-0300\n"
+"POT-Creation-Date: 2024-02-27 11:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,18 +45,17 @@ msgstr "Slug"
 #: customers/models.py:19 dpl_orders/allauth/account/forms.py:116
 #: dpl_orders/allauth/account/forms.py:325
 #: dpl_orders/allauth/account/forms.py:474
-#: dpl_orders/allauth/account/forms.py:569 suppliers/models.py:23
+#: dpl_orders/allauth/account/forms.py:569 suppliers/models.py:22
 #: suppliers/templates/suppliers/supplier_detail.html:31
 msgid "Email"
 msgstr "Email"
 
-#: customers/models.py:20 suppliers/models.py:21
+#: customers/models.py:20 suppliers/models.py:20 suppliers/models.py:61
 #: suppliers/templates/suppliers/supplier_detail.html:20
 msgid "CNPJ"
 msgstr "CNPJ"
 
-#: customers/models.py:21 suppliers/models.py:20
-#: suppliers/templates/suppliers/supplier_detail.html:23
+#: customers/models.py:21 suppliers/templates/suppliers/supplier_detail.html:23
 msgid "CPF"
 msgstr "CPF"
 
@@ -64,7 +63,7 @@ msgstr "CPF"
 msgid "Phone"
 msgstr "Telefone"
 
-#: customers/models.py:23 suppliers/models.py:22
+#: customers/models.py:23 suppliers/models.py:21
 #: suppliers/templates/suppliers/supplier_detail.html:30
 msgid "Contact Person"
 msgstr "Contato"
@@ -72,14 +71,14 @@ msgstr "Contato"
 #: customers/models.py:25 customers/models.py:68 orders/models.py:38
 #: orders/models.py:65 orders/models.py:95 orders/models.py:141
 #: products/models.py:59 products/models.py:115 products/models.py:150
-#: suppliers/models.py:26 suppliers/models.py:69
+#: suppliers/models.py:25 suppliers/models.py:63 suppliers/models.py:91
 #: suppliers/templates/suppliers/supplier_detail.html:17
 msgid "Created at"
 msgstr "Criado em"
 
 #: customers/models.py:26 customers/models.py:69 products/models.py:60
-#: products/models.py:151 suppliers/models.py:27 suppliers/models.py:70
-#: suppliers/templates/suppliers/supplier_detail.html:18
+#: products/models.py:151 suppliers/models.py:26 suppliers/models.py:64
+#: suppliers/models.py:92 suppliers/templates/suppliers/supplier_detail.html:18
 msgid "Modified at"
 msgstr "Modificado em"
 
@@ -87,27 +86,27 @@ msgstr "Modificado em"
 msgid "Customer"
 msgstr "Cliente"
 
-#: customers/models.py:61 suppliers/models.py:62
+#: customers/models.py:61 suppliers/models.py:84
 msgid "Street"
 msgstr "Rua"
 
-#: customers/models.py:62 suppliers/models.py:63
+#: customers/models.py:62 suppliers/models.py:85
 msgid "Number"
 msgstr "Número"
 
-#: customers/models.py:63 suppliers/models.py:64
+#: customers/models.py:63 suppliers/models.py:86
 msgid "Complement"
 msgstr "Complemento"
 
-#: customers/models.py:64 suppliers/models.py:65
+#: customers/models.py:64 suppliers/models.py:87
 msgid "City"
 msgstr "Cidade"
 
-#: customers/models.py:65 suppliers/models.py:66
+#: customers/models.py:65 suppliers/models.py:88
 msgid "State"
 msgstr "Estado"
 
-#: customers/models.py:66 suppliers/models.py:67
+#: customers/models.py:66 suppliers/models.py:89
 msgid "Zip Code"
 msgstr "CEP"
 
@@ -269,7 +268,9 @@ msgstr "Confirmar Endereço de Email"
 msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an email "
 "address for user %(user_display)s."
-msgstr "Por favor, confirme que <a href=\"mailto:%(email)s\">%(email)s</a> é um endereço de email para o usuário %(user_display)s."
+msgstr ""
+"Por favor, confirme que <a href=\"mailto:%(email)s\">%(email)s</a> é um "
+"endereço de email para o usuário %(user_display)s."
 
 #: dpl_orders/templates/account/email_confirm.html:23
 msgid "Confirm"
@@ -280,14 +281,19 @@ msgstr "Confirmar"
 msgid ""
 "Unable to confirm %(email)s because it is already confirmed by a different "
 "account."
-msgstr "Não é possível confirmar %(email)s porque ele já foi confirmado por uma conta diferente."
+msgstr ""
+"Não é possível confirmar %(email)s porque ele já foi confirmado por uma "
+"conta diferente."
 
 #: dpl_orders/templates/account/email_confirm.html:35
 #, python-format
 msgid ""
 "This email confirmation link expired or is invalid. Please <a "
 "href=\"%(email_url)s\">issue a new email confirmation request</a>."
-msgstr "Este link de confirmação de email expirou ou é inválido. Por favor, <a href=\"%(email_url)s\">emita uma nova solicitação de confirmação de email</a>."
+msgstr ""
+"Este link de confirmação de email expirou ou é inválido. Por favor, <a "
+"href=\"%(email_url)s\">emita uma nova solicitação de confirmação de email</"
+"a>."
 
 #: dpl_orders/templates/account/login.html:6
 #: dpl_orders/templates/account/login.html:9
@@ -349,7 +355,9 @@ msgstr "Senha"
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll send you "
 "an email allowing you to reset it."
-msgstr "Esqueceu sua senha? Digite seu endereço de email abaixo, e nós enviaremos um email permitindo que você a redefina."
+msgstr ""
+"Esqueceu sua senha? Digite seu endereço de email abaixo, e nós enviaremos um "
+"email permitindo que você a redefina."
 
 #: dpl_orders/templates/account/password_reset.html:25
 msgid "Reset My Password"
@@ -357,13 +365,18 @@ msgstr "Redefinir Minha Senha"
 
 #: dpl_orders/templates/account/password_reset.html:29
 msgid "Please contact us if you have any trouble resetting your password."
-msgstr "Por favor, entre em contato conosco se você tiver qualquer problema redefinindo sua senha."
+msgstr ""
+"Por favor, entre em contato conosco se você tiver qualquer problema "
+"redefinindo sua senha."
 
 #: dpl_orders/templates/account/password_reset_done.html:16
 msgid ""
 "We have sent you an email. If you have not received it please check your "
 "spam folder. Otherwise contact us if you do not receive it in a few minutes."
-msgstr "Nós enviamos um email para você. Se você não o recebeu, por favor, verifique sua pasta de spam. Caso contrário, entre em contato conosco se você não o receber em alguns minutos."
+msgstr ""
+"Nós enviamos um email para você. Se você não o recebeu, por favor, verifique "
+"sua pasta de spam. Caso contrário, entre em contato conosco se você não o "
+"receber em alguns minutos."
 
 #: dpl_orders/templates/account/signup.html:4
 #, fuzzy
@@ -449,7 +462,7 @@ msgstr "Pedidos"
 msgid "Products"
 msgstr "Produtos"
 
-#: dpl_orders/templates/base.html:81 suppliers/apps.py:8 suppliers/models.py:34
+#: dpl_orders/templates/base.html:81 suppliers/apps.py:8 suppliers/models.py:33
 #: suppliers/templates/suppliers/supplier_list.html:7
 msgid "Suppliers"
 msgstr "Fornecedores"
@@ -601,7 +614,7 @@ msgstr "Categorias de Produto"
 msgid "Supplier Internal id"
 msgstr "Código Interno do Fornecedor"
 
-#: products/models.py:40 suppliers/models.py:33
+#: products/models.py:40 suppliers/models.py:32
 #: suppliers/templates/suppliers/supplier_list.html:14
 msgid "Supplier"
 msgstr "Fornecedor"
@@ -674,15 +687,27 @@ msgstr "Item do Grupo de Produtos"
 msgid "Product Group Items"
 msgstr "Itens do Grupo de Produtos"
 
-#: suppliers/models.py:24 suppliers/templates/suppliers/supplier_detail.html:32
+#: suppliers/models.py:23 suppliers/templates/suppliers/supplier_detail.html:32
 msgid "Phone Number"
 msgstr "Telefone"
 
-#: suppliers/models.py:76
+#: suppliers/models.py:70
+#, fuzzy
+#| msgid "Supplier"
+msgid "Supplier CNPJ"
+msgstr "Fornecedor"
+
+#: suppliers/models.py:71
+#, fuzzy
+#| msgid "Suppliers"
+msgid "Supplier CNPJs"
+msgstr "Fornecedores"
+
+#: suppliers/models.py:98
 msgid "Supplier Address"
 msgstr "Endereço do Fornecedor"
 
-#: suppliers/models.py:77
+#: suppliers/models.py:99
 msgid "Supplier Addresses"
 msgstr "Endereços dos Fornecedores"
 
@@ -711,6 +736,12 @@ msgstr "Endereço do Cliente"
 #: suppliers/templates/suppliers/supplier_detail.html:41
 msgid "ZIPCODE"
 msgstr "CEP"
+
+#: suppliers/templates/suppliers/supplier_list.html:4
+#, fuzzy
+#| msgid "Suppliers"
+msgid "Supplier List"
+msgstr "Fornecedores"
 
 #: suppliers/templates/suppliers/supplier_list.html:8
 msgid "Add New Supplier"

@@ -105,7 +105,10 @@ DATABASES = {
         'PORT': env('VL_DB_PORT'),
         'OPTIONS':
         {
-            'driver': 'ODBC Driver 18 for SQL Server',
+            'driver': 'ODBC Driver 17 for SQL Server',
+            # 'Trusted_Connection': 'yes',
+            # 'Encrypt': 'yes',
+            # 'options': '-c search_path=myschema'
         },
     },
 }

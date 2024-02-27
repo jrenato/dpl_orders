@@ -96,7 +96,12 @@ class Command(BaseCommand):
         '''
         Get the supplier
         '''
-        supplier, _ = Supplier.objects.get_or_create(name=supplier_name)
+        supplier, _ = Supplier.objects.get_or_create(
+            short_name=supplier_name,
+            defaults={
+                'name': supplier_name,
+            }
+        )
         return supplier
 
 

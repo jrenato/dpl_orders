@@ -115,5 +115,11 @@ class Command(BaseCommand):
         '''
         Get the customer
         '''
-        customer, _ = Customer.objects.get_or_create(name=customer_name.strip().upper())
+        customer, _ = Customer.objects.get_or_create(
+            sheet_label=customer_name.strip().upper(),
+            defaults={
+                'name': customer_name.strip().upper(),
+                'short_name': customer_name.strip().upper(),
+            }
+        )
         return customer

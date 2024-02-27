@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
 
+    'vldados',
     'customers',
     'suppliers',
     'products',
@@ -112,6 +113,8 @@ DATABASES = {
         },
     },
 }
+
+DATABASE_ROUTERS = ('vldados.routers.VialogosRouter',)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

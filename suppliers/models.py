@@ -6,6 +6,8 @@ from django.utils.translation import gettext_lazy as _
 
 from dpl_orders.helpers import slugify_uniquely
 
+from vldados.models import Cliforn
+
 
 class Supplier(models.Model):
     '''
@@ -14,6 +16,7 @@ class Supplier(models.Model):
     internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
 
     name = models.CharField(_('Name'), max_length=120)
+    company_name = models.CharField(_('Company Name'), max_length=120, blank=True, null=True)
     short_name = models.CharField(_('Short Name'), max_length=60, blank=True, null=True)
     slug = models.SlugField(_('Slug'), max_length=140, unique=True, blank=True, null=True)
 
@@ -49,6 +52,11 @@ class Supplier(models.Model):
         '''
         if not self.id:
             self.slug = slugify_uniquely(self.name, self.__class__)
+
+        if self.internal_id:
+            cliforn, _ = Cliforn.objects.get(codigo=self.internal_id)
+            self.name = cliforn.nome
+            self.cnpj = cliforn.cgc
         super().save(*args, **kwargs)
 
 

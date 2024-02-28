@@ -2122,17 +2122,17 @@ class Cliforn(models.Model):
 #         unique_together = (('codassin', 'exemplar'),)
 
 
-# class Espec(models.Model):
-#     codigo = models.CharField(db_column='CODIGO', primary_key=True, max_length=3, db_collation='Latin1_General_CI_AI')  # Field name made lowercase.
-#     nome = models.CharField(db_column='NOME', max_length=45, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     estante = models.CharField(db_column='ESTANTE', max_length=50, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     wpress = models.IntegerField(db_column='WPRESS', blank=True, null=True)  # Field name made lowercase.
-#     catavento = models.CharField(db_column='CATAVENTO', max_length=50, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     li = models.IntegerField(db_column='LI', blank=True, null=True)  # Field name made lowercase.
+class Espec(models.Model):
+    codigo = models.CharField(db_column='CODIGO', primary_key=True, max_length=3, db_collation='Latin1_General_CI_AI')  # Field name made lowercase.
+    nome = models.CharField(db_column='NOME', max_length=45, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    estante = models.CharField(db_column='ESTANTE', max_length=50, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    wpress = models.IntegerField(db_column='WPRESS', blank=True, null=True)  # Field name made lowercase.
+    catavento = models.CharField(db_column='CATAVENTO', max_length=50, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    li = models.IntegerField(db_column='LI', blank=True, null=True)  # Field name made lowercase.
 
-#     class Meta:
-#         managed = False
-#         db_table = 'ESPEC'
+    class Meta:
+        managed = False
+        db_table = 'ESPEC'
 
 
 # class EspecMp(models.Model):
@@ -2157,31 +2157,31 @@ class Cliforn(models.Model):
 #         db_table = 'ESTANTES'
 
 
-# class Estoque(models.Model):
-#     nbook = models.CharField(db_column='NBOOK', primary_key=True, max_length=6, db_collation='Latin1_General_CI_AI')  # Field name made lowercase. The composite primary key (NBOOK, FILIAL) found, that is not supported. The first column is selected.
-#     disp = models.IntegerField(db_column='DISP', blank=True, null=True)  # Field name made lowercase.
-#     reserva = models.IntegerField(db_column='RESERVA', blank=True, null=True)  # Field name made lowercase.
-#     qtped = models.IntegerField(db_column='QTPED', blank=True, null=True)  # Field name made lowercase.
-#     exame = models.IntegerField(db_column='EXAME', blank=True, null=True)  # Field name made lowercase.
-#     consig = models.IntegerField(db_column='CONSIG', blank=True, null=True)  # Field name made lowercase.
-#     dtatu = models.DateTimeField(db_column='DTATU', blank=True, null=True)  # Field name made lowercase.
-#     di = models.CharField(db_column='DI', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     dp = models.IntegerField(db_column='DP', blank=True, null=True)  # Field name made lowercase.
-#     ev = models.IntegerField(db_column='EV', blank=True, null=True)  # Field name made lowercase.
-#     filial = models.CharField(db_column='FILIAL', max_length=3, db_collation='Latin1_General_CI_AI')  # Field name made lowercase.
-#     locest = models.CharField(db_column='LOCEST', max_length=40, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     qtsep = models.IntegerField(db_column='QTSEP', blank=True, null=True)  # Field name made lowercase.
-#     atualizar = models.CharField(db_column='Atualizar', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     cod_ff = models.CharField(db_column='COD_FF', max_length=6, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     disp_ff = models.IntegerField(db_column='DISP_FF', blank=True, null=True)  # Field name made lowercase.
-#     li = models.BooleanField(db_column='LI', blank=True, null=True)  # Field name made lowercase.
-#     cad_ok = models.BooleanField(db_column='CAD_OK', blank=True, null=True)  # Field name made lowercase.
-#     codprod_ff = models.IntegerField(db_column='CODPROD_FF', blank=True, null=True)  # Field name made lowercase.
+class Estoque(models.Model):
+    nbook = models.CharField(db_column='NBOOK', primary_key=True, max_length=6, db_collation='Latin1_General_CI_AI')  # Field name made lowercase. The composite primary key (NBOOK, FILIAL) found, that is not supported. The first column is selected.
+    disp = models.IntegerField(db_column='DISP', blank=True, null=True)  # Field name made lowercase.
+    reserva = models.IntegerField(db_column='RESERVA', blank=True, null=True)  # Field name made lowercase.
+    qtped = models.IntegerField(db_column='QTPED', blank=True, null=True)  # Field name made lowercase.
+    exame = models.IntegerField(db_column='EXAME', blank=True, null=True)  # Field name made lowercase.
+    consig = models.IntegerField(db_column='CONSIG', blank=True, null=True)  # Field name made lowercase.
+    dtatu = models.DateTimeField(db_column='DTATU', blank=True, null=True)  # Field name made lowercase.
+    di = models.CharField(db_column='DI', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    dp = models.IntegerField(db_column='DP', blank=True, null=True)  # Field name made lowercase.
+    ev = models.IntegerField(db_column='EV', blank=True, null=True)  # Field name made lowercase.
+    filial = models.CharField(db_column='FILIAL', max_length=3, db_collation='Latin1_General_CI_AI')  # Field name made lowercase.
+    locest = models.CharField(db_column='LOCEST', max_length=40, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    qtsep = models.IntegerField(db_column='QTSEP', blank=True, null=True)  # Field name made lowercase.
+    atualizar = models.CharField(db_column='Atualizar', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    cod_ff = models.CharField(db_column='COD_FF', max_length=6, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    disp_ff = models.IntegerField(db_column='DISP_FF', blank=True, null=True)  # Field name made lowercase.
+    li = models.BooleanField(db_column='LI', blank=True, null=True)  # Field name made lowercase.
+    cad_ok = models.BooleanField(db_column='CAD_OK', blank=True, null=True)  # Field name made lowercase.
+    codprod_ff = models.IntegerField(db_column='CODPROD_FF', blank=True, null=True)  # Field name made lowercase.
 
-#     class Meta:
-#         managed = False
-#         db_table = 'ESTOQUE'
-#         unique_together = (('nbook', 'filial'),)
+    class Meta:
+        managed = False
+        db_table = 'ESTOQUE'
+        unique_together = (('nbook', 'filial'),)
 
 
 # class Estorno(models.Model):
@@ -4475,52 +4475,52 @@ class Cliforn(models.Model):
 #         unique_together = (('id', 'property'),)
 
 
-# class Livros(models.Model):
-#     nbook = models.CharField(db_column='NBOOK', primary_key=True, max_length=6, db_collation='Latin1_General_CI_AI')  # Field name made lowercase.
-#     publisher = models.CharField(db_column='PUBLISHER', max_length=6, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     supplier = models.CharField(db_column='SUPPLIER', max_length=6, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     author = models.CharField(db_column='AUTHOR', max_length=20, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     title = models.CharField(db_column='TITLE', max_length=75, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     edition = models.CharField(db_column='EDITION', max_length=4, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     volume = models.CharField(db_column='VOLUME', max_length=6, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     binding = models.CharField(db_column='BINDING', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     subj1 = models.CharField(db_column='SUBJ1', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     statcd = models.CharField(db_column='STATCD', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     statdt = models.CharField(db_column='STATDT', max_length=8, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     list = models.FloatField(db_column='LIST', blank=True, null=True)  # Field name made lowercase.
-#     tpprod = models.CharField(db_column='TPPROD', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     di = models.CharField(db_column='DI', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     qtpag = models.IntegerField(db_column='QTPAG', blank=True, null=True)  # Field name made lowercase.
-#     nsuppl = models.CharField(db_column='NSUPPL', max_length=10, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     moeda = models.CharField(db_column='MOEDA', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     dtcad = models.DateTimeField(db_column='DTCAD', blank=True, null=True)  # Field name made lowercase.
-#     dtatual = models.DateTimeField(db_column='DTATUAL', blank=True, null=True)  # Field name made lowercase.
-#     dtlcto = models.DateTimeField(db_column='DTLCTO', blank=True, null=True)  # Field name made lowercase.
-#     autor = models.CharField(db_column='AUTOR', max_length=100, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     subj2 = models.CharField(db_column='SUBJ2', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     subj3 = models.CharField(db_column='SUBJ3', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     peso = models.FloatField(db_column='PESO', blank=True, null=True)  # Field name made lowercase.
-#     formato = models.CharField(db_column='FORMATO', max_length=10, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     ano = models.CharField(db_column='ANO', max_length=4, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     colecao = models.CharField(db_column='COLECAO', max_length=100, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     isbn1 = models.CharField(db_column='ISBN1', max_length=13, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     sellpr = models.FloatField(db_column='SELLPR', blank=True, null=True)  # Field name made lowercase.
-#     disc = models.FloatField(db_column='DISC', blank=True, null=True)  # Field name made lowercase.
-#     flagpr = models.BooleanField(db_column='FLAGPR', blank=True, null=True)  # Field name made lowercase.
-#     prcusto = models.FloatField(db_column='PRCUSTO', blank=True, null=True)  # Field name made lowercase.
-#     marca = models.BooleanField(db_column='MARCA', blank=True, null=True)  # Field name made lowercase.
-#     cadlocal = models.CharField(db_column='CADLOCAL', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     cst = models.CharField(db_column='CST', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     desccli = models.FloatField(db_column='DESCCLI', blank=True, null=True)  # Field name made lowercase.
-#     unid = models.CharField(db_column='UNID', max_length=4, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     ativo = models.BooleanField(db_column='ATIVO', blank=True, null=True)  # Field name made lowercase.
-#     estmin = models.IntegerField(db_column='ESTMIN', blank=True, null=True)  # Field name made lowercase.
-#     flagdados = models.BooleanField(db_column='FLAGDADOS', blank=True, null=True)  # Field name made lowercase.
-#     descricao = models.CharField(db_column='DESCRICAO', max_length=140, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
-#     mgatacado = models.FloatField(db_column='MGATACADO', blank=True, null=True)  # Field name made lowercase.
-#     mgvarejo = models.FloatField(db_column='MGVAREJO', blank=True, null=True)  # Field name made lowercase.
-#     conservacao = models.TextField(db_column='CONSERVACAO', db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+class Livros(models.Model):
+    nbook = models.CharField(db_column='NBOOK', primary_key=True, max_length=6, db_collation='Latin1_General_CI_AI')  # Field name made lowercase.
+    publisher = models.CharField(db_column='PUBLISHER', max_length=6, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    supplier = models.CharField(db_column='SUPPLIER', max_length=6, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    author = models.CharField(db_column='AUTHOR', max_length=20, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    title = models.CharField(db_column='TITLE', max_length=75, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    edition = models.CharField(db_column='EDITION', max_length=4, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    volume = models.CharField(db_column='VOLUME', max_length=6, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    binding = models.CharField(db_column='BINDING', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    subj1 = models.CharField(db_column='SUBJ1', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    statcd = models.CharField(db_column='STATCD', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    statdt = models.CharField(db_column='STATDT', max_length=8, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    list = models.FloatField(db_column='LIST', blank=True, null=True)  # Field name made lowercase.
+    tpprod = models.CharField(db_column='TPPROD', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    di = models.CharField(db_column='DI', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    qtpag = models.IntegerField(db_column='QTPAG', blank=True, null=True)  # Field name made lowercase.
+    nsuppl = models.CharField(db_column='NSUPPL', max_length=10, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    moeda = models.CharField(db_column='MOEDA', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    dtcad = models.DateTimeField(db_column='DTCAD', blank=True, null=True)  # Field name made lowercase.
+    dtatual = models.DateTimeField(db_column='DTATUAL', blank=True, null=True)  # Field name made lowercase.
+    dtlcto = models.DateTimeField(db_column='DTLCTO', blank=True, null=True)  # Field name made lowercase.
+    autor = models.CharField(db_column='AUTOR', max_length=100, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    subj2 = models.CharField(db_column='SUBJ2', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    subj3 = models.CharField(db_column='SUBJ3', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    peso = models.FloatField(db_column='PESO', blank=True, null=True)  # Field name made lowercase.
+    formato = models.CharField(db_column='FORMATO', max_length=10, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    ano = models.CharField(db_column='ANO', max_length=4, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    colecao = models.CharField(db_column='COLECAO', max_length=100, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    isbn1 = models.CharField(db_column='ISBN1', max_length=13, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    sellpr = models.FloatField(db_column='SELLPR', blank=True, null=True)  # Field name made lowercase.
+    disc = models.FloatField(db_column='DISC', blank=True, null=True)  # Field name made lowercase.
+    flagpr = models.BooleanField(db_column='FLAGPR', blank=True, null=True)  # Field name made lowercase.
+    prcusto = models.FloatField(db_column='PRCUSTO', blank=True, null=True)  # Field name made lowercase.
+    marca = models.BooleanField(db_column='MARCA', blank=True, null=True)  # Field name made lowercase.
+    cadlocal = models.CharField(db_column='CADLOCAL', max_length=1, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    cst = models.CharField(db_column='CST', max_length=3, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    desccli = models.FloatField(db_column='DESCCLI', blank=True, null=True)  # Field name made lowercase.
+    unid = models.CharField(db_column='UNID', max_length=4, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    ativo = models.BooleanField(db_column='ATIVO', blank=True, null=True)  # Field name made lowercase.
+    estmin = models.IntegerField(db_column='ESTMIN', blank=True, null=True)  # Field name made lowercase.
+    flagdados = models.BooleanField(db_column='FLAGDADOS', blank=True, null=True)  # Field name made lowercase.
+    descricao = models.CharField(db_column='DESCRICAO', max_length=140, db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase.
+    mgatacado = models.FloatField(db_column='MGATACADO', blank=True, null=True)  # Field name made lowercase.
+    mgvarejo = models.FloatField(db_column='MGVAREJO', blank=True, null=True)  # Field name made lowercase.
+    conservacao = models.TextField(db_column='CONSERVACAO', db_collation='Latin1_General_CI_AI', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
 
-#     class Meta:
-#         managed = False
-#         db_table = 'livros'
+    class Meta:
+        managed = False
+        db_table = 'livros'

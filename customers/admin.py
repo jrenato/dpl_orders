@@ -20,8 +20,8 @@ class CustomerAdmin(admin.ModelAdmin):
     '''
     Admin for the Customer model
     '''
-    list_display = ('name', 'short_name', 'email', 'cnpj', 'cpf',)
-    search_fields = ('name', 'short_name', 'email', 'cnpj', 'cpf', 'phone',)
+    list_display = ('short_name', 'name', 'cnpj', 'cpf',)
+    search_fields = ('name', 'short_name', 'email', 'cnpj', 'cpf',)
     #list_filter = ('created', 'modified')
     list_per_page = 20
     readonly_fields = ('created', 'modified',)

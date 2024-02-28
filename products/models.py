@@ -7,7 +7,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from dpl_orders.helpers import slugify_uniquely
-
+from vldados.models import Livros, Espec, Estoque
 
 class ProductCategory(models.Model):
     '''
@@ -90,6 +90,24 @@ class Product(models.Model):
             ProductReleaseDateHistory.objects.create(
                 product=self, release_date=self.release_date
             )
+
+        isbn = f'{self.sku}'
+        if isbn and isbn.startswith('978') and len(isbn) == 13 and not self.internal_id:
+            livro = Livros.objects.get(isbn=isbn)
+            self.internal_id = livro.NBOOK
+
+        if self.internal_id:
+            livro = Livros.objects.get(NBOOK=self.internal_id)
+            self.name = livro.title
+            self.price = livro.sellpr
+
+            espec = Espec.objects.get(NBOOK=self.internal_id)
+            if espec.nome in ['HQ', 'MANGÁ', 'LIVRO', 'ALBUM']:
+                self.category = ProductCategory.objects.get_or_create(name=espec.nome)
+
+            estoque = Estoque.objects.get(NBOOK=self.internal_id)
+            self.stock = estoque.estoque
+
         super().save(*args, **kwargs)
 
 

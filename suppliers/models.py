@@ -68,9 +68,45 @@ class Supplier(models.Model):
 
         # TODO: Retrieve all the data from the Cliforn model
         if self.internal_id:
-            cliforn, _ = Cliforn.objects.get(codigo=self.internal_id)
+            cliforn = Cliforn.objects.get(codigo=self.internal_id)
+            # Basic data update
             self.name = cliforn.nome
-            self.cnpj = cliforn.cgc
+            self.short_name = cliforn.shortn
+            self.company_name = cliforn.razsocial
+
+            self.person_or_company = cliforn.fj
+            if self.person_or_company == 'F':
+                self.cnpj = cliforn.cgc
+            else:
+                self.cpf = cliforn.cgc
+
+            self.state_registration = cliforn.inscr
+            self.municipal_registration = cliforn.codmun
+            self.contact_person = cliforn.contato
+            self.email = cliforn.email
+            self.emailnfe = cliforn.emailnfe
+
+            # Address update
+            address, _ = SupplierAddress.objects.get_or_create(supplier=self)
+            address.street = cliforn.endereco
+            address.number = cliforn.num
+            address.district = cliforn.bairro
+            address.city = cliforn.cidade
+            address.state = cliforn.estado
+            address.zip_code = cliforn.cep
+            address.complement = cliforn.complemento
+            address.save()
+
+            # Phone numbers update
+            for phone_number in [cliforn.telres, cliforn.telcom, cliforn.tel2, cliforn.fax]:
+                if not self.phone_number:
+                    self.phone_number = phone_number
+                else:
+                    _, __ = SupplierPhone.objects.get_or_create(
+                        supplier=self,
+                        phone_number=phone_number
+                    )
+
         super().save(*args, **kwargs)
 
 

@@ -29,6 +29,6 @@ class SupplierAdmin(admin.ModelAdmin):
     Admin for the Supplier model
     '''
     list_display = ('name', 'short_name', 'contact_person', 'email', 'phone_number')
-    search_fields = ('name', 'short_name', 'contact_person', 'email', 'phone_number')
+    search_fields = ('name', 'short_name', 'cnpj', 'cpf')
     readonly_fields = ('created', 'modified',)
     inlines = [SupplierAddressInline, SupplierCNPJInline]

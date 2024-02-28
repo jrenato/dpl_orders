@@ -66,7 +66,6 @@ class Supplier(models.Model):
         if not self.id:
             self.slug = slugify_uniquely(self.name, self.__class__)
 
-        # TODO: Retrieve all the data from the Cliforn model
         if self.internal_id:
             cliforn = Cliforn.objects.get(codigo=self.internal_id)
             # Basic data update

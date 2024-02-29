@@ -93,8 +93,14 @@ class Product(models.Model):
 
         isbn = f'{self.sku}'
         if isbn and isbn.startswith('978') and len(isbn) == 13 and not self.internal_id:
-            livro = Livros.objects.get(isbn=isbn)
-            self.internal_id = livro.NBOOK
+            livro = None
+            try:
+                livro = Livros.objects.get(isbn1=isbn)
+            except Livros.DoesNotExist:
+                pass
+
+            if livro:
+                self.internal_id = livro.NBOOK
 
         if self.internal_id:
             livro = Livros.objects.get(NBOOK=self.internal_id)

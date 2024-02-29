@@ -42,4 +42,17 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{% url 'suppliers:update' supplier.id %}" class="btn btn-primary d-inline-flex align-items-center">
+                    {% translate 'Edit' %} <i data-feather="edit" class="align-middle"></i>
+                </a>
+                <a href="{% url 'suppliers:delete' supplier.id %}" class="btn btn-danger d-inline-flex align-items-center">
+                    {% translate 'Delete' %} <i data-feather="trash-2" class="align-middle"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

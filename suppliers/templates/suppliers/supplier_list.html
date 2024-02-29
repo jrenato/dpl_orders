@@ -1,30 +1,46 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% translate 'Supplier List' %}{% endblock %}
+{% block title %}
+  {% translate 'Supplier List' %}
+{% endblock %}
 
 {% block content %}
-    <h1>{% translate 'Suppliers' %}</h1>
-    <a class="btn btn-primary mb-3" href="{% url 'suppliers:create' %}">{% translate 'Add New Supplier' %}</a>
-    {{ supplier.name }}
+  <h1>{% translate 'Suppliers' %}</h1>
+  <a class="btn btn-primary mb-3" href="{% url 'suppliers:create' %}">{% translate 'Add New Supplier' %}</a>
+  {{ supplier.name }}
+  {% if suppliers %}
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">{% translate 'Supplier' %}</th>
-                    <th scope="col">{% translate 'Registered Products' %}</th>
-                    <th scope="col">{% translate 'Pending Orders' %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for supplier in suppliers %}
-                <tr>
-                    <td><a href="{% url 'suppliers:detail' supplier.id %}">{{ supplier.name }}</a></td>
-                    <td>{{ supplier.products.count }}</td>
-                    <td>0</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-      </div>
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">
+              {% translate 'Supplier' %}
+            </th>
+            <th scope="col">
+              {% translate 'Registered Products' %}
+            </th>
+            <th scope="col">
+              {% translate 'Pending Orders' %}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for supplier in suppliers %}
+            <tr>
+              <td>
+                <a href="{% url 'suppliers:detail' supplier.id %}">{{ supplier.name }}</a>
+              </td>
+              <td>{{ supplier.products.count }}</td>
+              <td>0</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>
+      {% translate 'No suppliers are available.' %}
+    </p>
+  {% endif %}
 {% endblock %}

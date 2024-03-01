@@ -4,12 +4,12 @@
 {% block title %}Delete {{ supplier.name }}{% endblock %}
 
 {% block content %}
-    <h1>Delete Supplier {{ supplier.name }}</h1>
+    <h1>{% translate 'Delete Supplier' %} {{ supplier.name }}</h1>
 
-    <p>Are you sure you want to delete this Supplier?: {{ supplier.name }}</p>
+    <p>{% blocktranslate %}'Are you sure you want to delete {{ supplier.name }}?{% endblocktranslate %}</p>
 
     <form action="" method="post">
         {% csrf_token %}
-        <input type="submit" value="Delete">
+        <input type="submit" value="{% translate 'Delete' %}" />
     </form>
 {% endblock %}

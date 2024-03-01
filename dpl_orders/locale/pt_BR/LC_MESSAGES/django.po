@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-01 09:18-0300\n"
+"POT-Creation-Date: 2024-03-01 10:28-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -375,10 +375,8 @@ msgstr "Você tem certeza que deseja sair?"
 #: dpl_orders/templates/account/password_change.html:4
 #: dpl_orders/templates/account/password_change.html:8
 #: dpl_orders/templates/account/password_change.html:19
-#, fuzzy
-#| msgid "New Password"
 msgid "Change Password"
-msgstr "Nova Senha"
+msgstr "Alterar Senha"
 
 #: dpl_orders/templates/account/password_change.html:21
 #, fuzzy
@@ -390,10 +388,8 @@ msgstr "Esqueceu sua senha?"
 #: dpl_orders/templates/account/password_reset.html:8
 #: dpl_orders/templates/account/password_reset_done.html:6
 #: dpl_orders/templates/account/password_reset_done.html:10
-#, fuzzy
-#| msgid "Password"
 msgid "Password Reset"
-msgstr "Senha"
+msgstr "Redefinir Senha"
 
 #: dpl_orders/templates/account/password_reset.html:14
 msgid ""
@@ -439,7 +435,8 @@ msgstr "Entrar"
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
-msgstr "Você já tem uma conta? Então por favor <a href=\"%(login_url)s\">entre.</a>"
+msgstr ""
+"Você já tem uma conta? Então por favor <a href=\"%(login_url)s\">entre.</a>"
 
 #: dpl_orders/templates/account/signup_closed.html:5
 #: dpl_orders/templates/account/signup_closed.html:9
@@ -463,18 +460,20 @@ msgid ""
 "finalize the signup process. If you do not see the verification email in "
 "your main inbox, check your spam folder. Please contact us if you do not "
 "receive the verification email within a few minutes."
-msgstr "Nós enviamos um email para você para verificação. Siga o link fornecido "
-"para finalizar o processo de cadastro. Se você não ver o email de verificação "
-"em sua caixa de entrada, verifique sua pasta de spam. Por favor, entre em contato "
-"conosco se você não receber o email de verificação em alguns minutos."
+msgstr ""
+"Nós enviamos um email para você para verificação. Siga o link fornecido para "
+"finalizar o processo de cadastro. Se você não ver o email de verificação em "
+"sua caixa de entrada, verifique sua pasta de spam. Por favor, entre em "
+"contato conosco se você não receber o email de verificação em alguns minutos."
 
 #: dpl_orders/templates/account/verified_email_required.html:13
 msgid ""
 "This part of the site requires us to verify that\n"
 "you are who you claim to be. For this purpose, we require that you\n"
 "verify ownership of your email address. "
-msgstr "Esta parte do site requer uma verificação. Para "
-"este propósito, nós solicitamos que você verifique a propriedade do seu endereço de email."
+msgstr ""
+"Esta parte do site requer uma verificação. Para este propósito, nós "
+"solicitamos que você verifique a propriedade do seu endereço de email."
 
 #: dpl_orders/templates/account/verified_email_required.html:18
 msgid ""
@@ -594,10 +593,8 @@ msgid "Internal ID"
 msgstr "Código Interno"
 
 #: orders/models.py:39 orders/models.py:96
-#, fuzzy
-#| msgid "Created at"
 msgid "Updated at"
-msgstr "Criado em"
+msgstr "Atualizado em"
 
 #: orders/models.py:42 orders/models.py:56 orders/models.py:82
 #, fuzzy
@@ -755,6 +752,20 @@ msgstr "Telefone do Fornecedor"
 msgid "Supplier Phones"
 msgstr "Telefones dos Fornecedores"
 
+#: suppliers/templates/suppliers/supplier_confirm_delete.html:7
+msgid "Delete Supplier"
+msgstr "Excluir Fornecedor"
+
+#: suppliers/templates/suppliers/supplier_confirm_delete.html:9
+#, python-format
+msgid "'Are you sure you want to delete %(supplier.name)s?"
+msgstr "Você tem certeza que deseja excluir %(supplier.name)s?"
+
+#: suppliers/templates/suppliers/supplier_confirm_delete.html:13
+#: suppliers/templates/suppliers/supplier_detail.html:53
+msgid "Delete"
+msgstr "Excluir"
+
 #: suppliers/templates/suppliers/supplier_detail.html:8
 msgid "Supplier Details"
 msgstr "Detalhes do Fornecedor"
@@ -778,10 +789,6 @@ msgstr "CEP"
 #: suppliers/templates/suppliers/supplier_detail.html:50
 msgid "Edit"
 msgstr "Editar"
-
-#: suppliers/templates/suppliers/supplier_detail.html:53
-msgid "Delete"
-msgstr "Excluir"
 
 #: suppliers/templates/suppliers/supplier_list.html:5
 msgid "Supplier List"

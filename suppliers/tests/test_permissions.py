@@ -127,3 +127,78 @@ class SuppliersPermissionsTest(TestCase):
         self.client.login(username='testuser', password='testpass123')
         response = self.client.get(reverse('suppliers:delete', args=[self.supplier.id]))
         self.assertEqual(response.status_code, 200)
+
+    def test_user_without_permission_to_create_cant_see_add_button(self):
+        '''
+        Test if the user without permission to create a supplier can't see the add button
+        '''
+        self.client.login(username='testuser', password='testpass123')
+
+        permission = Permission.objects.get(codename='view_supplier')
+        self.user.user_permissions.add(permission)
+
+        response = self.client.get(reverse('suppliers:list'))
+        self.assertNotContains(response, 'Add')
+
+    def test_user_with_permission_to_create_can_see_add_button(self):
+        '''
+        Test if the user with permission to create a supplier can see the add button
+        '''
+        permission_to_view = Permission.objects.get(codename='view_supplier')
+        self.user.user_permissions.add(permission_to_view)
+        permission_to_add = Permission.objects.get(codename='add_supplier')
+        self.user.user_permissions.add(permission_to_add)
+
+        self.client.login(username='testuser', password='testpass123')
+        response = self.client.get(reverse('suppliers:list'))
+        self.assertContains(response, 'Add')
+
+    def test_user_without_permission_to_update_cant_see_edit_button(self):
+        '''
+        Test if the user without permission to update a supplier can't see the edit button
+        '''
+        self.client.login(username='testuser', password='testpass123')
+
+        permission = Permission.objects.get(codename='view_supplier')
+        self.user.user_permissions.add(permission)
+
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        self.assertNotContains(response, 'Edit')
+
+    def test_user_with_permission_to_update_can_see_edit_button(self):
+        '''
+        Test if the user with permission to update a supplier can see the edit button
+        '''
+        permission_to_view = Permission.objects.get(codename='view_supplier')
+        self.user.user_permissions.add(permission_to_view)
+        permission_to_update = Permission.objects.get(codename='change_supplier')
+        self.user.user_permissions.add(permission_to_update)
+
+        self.client.login(username='testuser', password='testpass123')
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        self.assertContains(response, 'Edit')
+
+    def test_user_without_permission_to_delete_cant_see_delete_button(self):
+        '''
+        Test if the user without permission to delete a supplier can't see the delete button
+        '''
+        self.client.login(username='testuser', password='testpass123')
+
+        permission = Permission.objects.get(codename='view_supplier')
+        self.user.user_permissions.add(permission)
+
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        self.assertNotContains(response, 'Delete')
+
+    def test_user_with_permission_to_delete_can_see_delete_button(self):
+        '''
+        Test if the user with permission to delete a supplier can see the delete button
+        '''
+        permission_to_view = Permission.objects.get(codename='view_supplier')
+        self.user.user_permissions.add(permission_to_view)
+        permission_to_delete = Permission.objects.get(codename='delete_supplier')
+        self.user.user_permissions.add(permission_to_delete)
+
+        self.client.login(username='testuser', password='testpass123')
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        self.assertContains(response, 'Delete')

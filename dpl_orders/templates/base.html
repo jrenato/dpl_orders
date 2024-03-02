@@ -69,12 +69,14 @@
                   {% translate 'Products' %}
                 </a>
               </li>
+              {% if perms.customers.view_customer %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'customers:list' %}">
                   <span data-feather="users"></span>
                   {% translate 'Customers' %}
                 </a>
               </li>
+              {% endif %}
               {% if perms.suppliers.view_supplier %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'suppliers:list' %}">

@@ -9,8 +9,8 @@ from vldados.models import Cliforn
 
 
 CUSTOMER_TYPES = (
-    ('F', _('Física')),
-    ('J', _('Jurídica')),
+    ('F', _('Person')),
+    ('J', _('Company')),
 )
 
 class Customer(models.Model):

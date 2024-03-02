@@ -10,8 +10,8 @@ from vldados.models import Cliforn
 
 
 SUPPLIER_TYPES = (
-    ('F', _('Física')),
-    ('J', _('Jurídica')),
+    ('F', _('Person')),
+    ('J', _('Company')),
 )
 
 

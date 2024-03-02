@@ -17,7 +17,7 @@
         <thead>
           <tr>
             <th scope="col">
-              {% translate 'customer' %}
+              {% translate 'Customer' %}
             </th>
             <th scope="col">
               {% translate 'Pending Orders' %}
@@ -30,7 +30,7 @@
               <td>
                 <a href="{% url 'customers:detail' customer.id %}">{{ customer.name }}</a>
               </td>
-              <td>{{ customer.orders.count }}</td>
+              <td>{{ customer.order_count }}</td>
             </tr>
           {% endfor %}
         </tbody>

@@ -2,6 +2,7 @@
 Views for the customers app.
 '''
 from django.urls import reverse_lazy
+from django.db.models import Count
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
@@ -18,7 +19,10 @@ class CustomerListView(PermissionRequiredMixin, ListView):
     permission_required = 'customers.view_customer'
 
     def get_queryset(self):
-        return Customer.objects.prefetch_related('orders')
+        # Prefetch the count of orders for each customer as order_count
+        return Customer.objects.prefetch_related('orders').annotate(
+            order_count=Count('orders')
+        )
 
 
 class CustomerDetailView(PermissionRequiredMixin, DetailView):

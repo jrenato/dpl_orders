@@ -8,8 +8,10 @@ asgiref==3.7.2
     # via
     #   -c requirements.txt
     #   django
-astroid==3.0.3
+astroid==3.1.0
     # via pylint
+coverage==7.4.3
+    # via -r requirements-dev.in
 dill==0.3.8
     # via pylint
 django==5.0.2
@@ -24,7 +26,7 @@ mccabe==0.7.0
     # via pylint
 platformdirs==4.2.0
     # via pylint
-pylint==3.0.4
+pylint==3.1.0
     # via
     #   -r requirements-dev.in
     #   pylint-django
@@ -38,5 +40,5 @@ sqlparse==0.4.4
     #   -c requirements.txt
     #   django
     #   django-debug-toolbar
-tomlkit==0.12.3
+tomlkit==0.12.4
     # via pylint

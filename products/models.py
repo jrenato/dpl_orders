@@ -1,6 +1,8 @@
 '''
 Models for the Products app
 '''
+from django.conf import settings
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.dispatch import receiver
@@ -91,8 +93,10 @@ class Product(models.Model):
                 product=self, release_date=self.release_date
             )
 
+        # Try to get the internal id from the isbn
         isbn = f'{self.sku}'
-        if isbn and isbn.startswith('978') and len(isbn) == 13 and not self.internal_id:
+        valid_isbn = isbn and isbn.startswith('978') and len(isbn) == 13
+        if settings.VL_INTEGRATION and not self.internal_id and valid_isbn:
             livro = None
             try:
                 livro = Livros.objects.get(isbn1=isbn)
@@ -102,7 +106,8 @@ class Product(models.Model):
             if livro:
                 self.internal_id = livro.NBOOK
 
-        if self.internal_id:
+        # Try to get the product data from the internal id
+        if self.internal_id and settings.VL_INTEGRATION:
             livro = Livros.objects.get(NBOOK=self.internal_id)
             self.name = livro.title
             self.price = livro.sellpr
@@ -118,7 +123,7 @@ class Product(models.Model):
 
 
 @receiver(post_save, sender=Product)
-def product_post_save(_, instance, created, **kwargs):
+def product_post_save(sender, instance, created, **kwargs):
     '''
     Post save signal for the product
     '''

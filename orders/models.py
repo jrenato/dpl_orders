@@ -115,7 +115,7 @@ class OrderItem(models.Model):
         super().save(*args, **kwargs)
 
 @receiver(post_save, sender=OrderItem)
-def order_item_post_save(_, instance, created, **kwargs):
+def order_item_post_save(sender, instance, created, **kwargs):
     '''
     Post save signal for the order item
     '''

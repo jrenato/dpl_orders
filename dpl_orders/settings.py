@@ -8,10 +8,7 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Loading environment file
-env = environ.Env(
-    # set casting, default value
-    DJANGO_DEBUG=(bool, False)
-)
+env = environ.Env()
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -19,9 +16,11 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 SECRET_KEY = env('DJANGO_SECRET_KEY')
-DEBUG = env('DJANGO_DEBUG')
+DEBUG = env.bool('DJANGO_DEBUG', False)
 
 IMPORT_PATH = env('IMPORT_PATH')
+
+VL_INTEGRATION = env.bool('VL_INTEGRATION', False)
 
 ALLOWED_HOSTS = []
 
@@ -97,7 +96,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'vldados': {
+}
+
+if VL_INTEGRATION:
+    DATABASES['vldados'] = {
         'NAME': env('VL_DB_NAME'),
         'ENGINE': 'mssql',
         'USER': env('VL_DB_USER'),
@@ -106,13 +108,12 @@ DATABASES = {
         'PORT': env('VL_DB_PORT'),
         'OPTIONS':
         {
-            'driver': 'ODBC Driver 17 for SQL Server',
+            'driver': env('VL_DB_ODBC_DRIVER'),
             # 'Trusted_Connection': 'yes',
             # 'Encrypt': 'yes',
             # 'options': '-c search_path=myschema'
         },
-    },
-}
+    }
 
 DATABASE_ROUTERS = ('vldados.routers.VialogosRouter',)
 

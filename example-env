@@ -22,11 +22,13 @@ DB_HOST=your-database-host
 DB_PORT=5432
 
 # Vialogos Database Configuration
+VL_INTEGRATION=False
 VL_DB_NAME=vldados
 VL_DB_USER=your-database-user
 VL_DB_PASSWORD=your-database-password
 VL_DB_HOST=localhost
 VL_DB_PORT=1433
+VL_DB_ODBC_DRIVER=ODBC Driver 17 for SQL Server
 
 # Email Configuration (SMTP)
 EMAIL_HOST=smtp.example.com

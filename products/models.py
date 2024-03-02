@@ -118,7 +118,7 @@ class Product(models.Model):
 
 
 @receiver(post_save, sender=Product)
-def product_post_save(sender, instance, created, **kwargs):
+def product_post_save(_, instance, created, **kwargs):
     '''
     Post save signal for the product
     '''
@@ -194,7 +194,6 @@ class ProductGroup(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            # replace self.name with your prepopulate_from field
             self.slug = slugify_uniquely(self.name, self.__class__)
         super().save(*args, **kwargs)
 

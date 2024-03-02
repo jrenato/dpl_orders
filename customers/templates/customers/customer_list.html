@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% translate 'Customer List' %}
+{% endblock %}
+
+{% block content %}
+  <h1>{% translate 'Customer' %}</h1>
+  {% if perms.customers.add_customer %}
+  <a class="btn btn-primary mb-3" href="{% url 'customers:create' %}">{% translate 'Add' %}</a>
+  {% endif %}
+  {{ customer.name }}
+  {% if customers %}
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">
+              {% translate 'customer' %}
+            </th>
+            <th scope="col">
+              {% translate 'Pending Orders' %}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for customer in customers %}
+            <tr>
+              <td>
+                <a href="{% url 'customers:detail' customer.id %}">{{ customer.name }}</a>
+              </td>
+              <td>{{ customer.orders.count }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>
+      {% translate 'No customers are available.' %}
+    </p>
+  {% endif %}
+{% endblock %}

@@ -2,7 +2,7 @@
 This file is used to define the URL patterns for the suppliers app.
 '''
 from django.urls import path
-from .views import SupplierListView, SupplierCreateView, SupplierUpdateView,\
+from .views import SupplierListView, SupplierCreateView, SupplierUpdateView, \
     SupplierDeleteView, SupplierDetailView
 
 app_name = 'suppliers'

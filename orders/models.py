@@ -32,7 +32,7 @@ class Order(models.Model):
 
     customer = models.ForeignKey(
         'customers.Customer', on_delete=models.CASCADE,
-        verbose_name=_('Customer'),
+        verbose_name=_('Customer'), related_name='orders',
     )
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
@@ -115,7 +115,7 @@ class OrderItem(models.Model):
         super().save(*args, **kwargs)
 
 @receiver(post_save, sender=OrderItem)
-def order_item_post_save(sender, instance, created, **kwargs):
+def order_item_post_save(_, instance, created, **kwargs):
     '''
     Post save signal for the order item
     '''

@@ -1,18 +1,18 @@
 '''
-Forms for the suppliers app
+Forms for the customers app
 '''
 from django import forms
 from localflavor.br.forms import BRCPFField, BRCNPJField  # Import BRCPFField and BRCNPJField
-from .models import Supplier
+from .models import Customer
 
 
-class SupplierForm(forms.ModelForm):
+class CustomerForm(forms.ModelForm):
     '''
-    Form for the Supplier model
+    Form for the Customer model
     '''
     cpf = BRCPFField(required=False)
     cnpj = BRCNPJField(required=False)
 
     class Meta:
-        model = Supplier
+        model = Customer
         fields = '__all__'

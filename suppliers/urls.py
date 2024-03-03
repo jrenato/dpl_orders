@@ -8,8 +8,8 @@ from .views import SupplierListView, SupplierCreateView, SupplierUpdateView, \
 app_name = 'suppliers'
 urlpatterns = [
     path('', SupplierListView.as_view(), name='list'),
-    path('detail/<int:pk>/', SupplierDetailView.as_view(), name='detail'),
-    path('add/', SupplierCreateView.as_view(), name='create'),
-    path('update/<int:pk>/', SupplierUpdateView.as_view(), name='update'),
-    path('delete/<int:pk>/', SupplierDeleteView.as_view(), name='delete'),
+    path('create/', SupplierCreateView.as_view(), name='create'),
+    path('detail/<slug:slug>/', SupplierDetailView.as_view(), name='detail'),
+    path('update/<slug:slug>/', SupplierUpdateView.as_view(), name='update'),
+    path('delete/<slug:slug>/', SupplierDeleteView.as_view(), name='delete'),
 ]

@@ -31,7 +31,7 @@
           {% for supplier in suppliers %}
             <tr>
               <td>
-                <a href="{% url 'suppliers:detail' supplier.id %}">{{ supplier.name }}</a>
+                <a href="{% url 'suppliers:detail' supplier.slug %}">{{ supplier.name }}</a>
               </td>
               <td>{{ supplier.products.count }}</td>
               <td>0</td>

@@ -9,7 +9,7 @@ app_name = 'products'
 urlpatterns = [
     path('', ProductListView.as_view(), name='list'),
     path('create/', ProductCreateView.as_view(), name='create'),
-    path('<int:pk>/', ProductDetailView.as_view(), name='detail'),
-    path('<int:pk>/update/', ProductUpdateView.as_view(), name='update'),
-    path('<int:pk>/delete/', ProductDeleteView.as_view(), name='delete'),
+    path('<slug:slug>/', ProductDetailView.as_view(), name='detail'),
+    path('<slug:slug>/update/', ProductUpdateView.as_view(), name='update'),
+    path('<slug:slug>/delete/', ProductDeleteView.as_view(), name='delete'),
 ]

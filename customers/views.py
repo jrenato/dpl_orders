@@ -1,14 +1,15 @@
 '''
 Views for the customers app.
 '''
+from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .models import Customer
 from .forms import CustomerForm
-
+from orders.models import ORDER_STATUS_CHOICES
 
 class CustomerListView(PermissionRequiredMixin, ListView):
     '''
@@ -20,9 +21,12 @@ class CustomerListView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         # Prefetch the count of orders for each customer as order_count
-        return Customer.objects.prefetch_related('orders').annotate(
-            order_count=Count('orders')
-        )
+        return Customer.objects\
+            .prefetch_related('orders', 'orders__order_items')\
+            .annotate(
+                order_count=Count('orders', distinct=True),
+                ordered_total=Sum('orders__order_items__quantity')
+            )
 
 
 class CustomerDetailView(PermissionRequiredMixin, DetailView):
@@ -32,6 +36,16 @@ class CustomerDetailView(PermissionRequiredMixin, DetailView):
     model = Customer
     context_object_name = 'customer'
     permission_required = 'customers.view_customer'
+
+    def get_queryset(self):
+        return Customer.objects\
+            .prefetch_related('orders', 'orders__order_items', 'orders__order_items__product',)\
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_orders'] = self.object.orders.order_by('-created')\
+            .annotate(total_quantity=Sum('order_items__quantity'))
+        return context
 
 
 class CustomerCreateView(PermissionRequiredMixin, CreateView):

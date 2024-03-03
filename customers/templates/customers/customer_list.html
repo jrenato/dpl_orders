@@ -16,21 +16,17 @@
       <table class="table table-striped table-sm">
         <thead>
           <tr>
-            <th scope="col">
-              {% translate 'Customer' %}
-            </th>
-            <th scope="col">
-              {% translate 'Pending Orders' %}
-            </th>
+            <th scope="col">{% translate 'Customer' %}</th>
+            <th scope="col">{% translate 'Pending Orders' %}</th>
+            <th scope="col">{% translate 'Ordered Products' %}</th>
           </tr>
         </thead>
         <tbody>
           {% for customer in customers %}
             <tr>
-              <td>
-                <a href="{% url 'customers:detail' customer.slug %}">{{ customer.name }}</a>
-              </td>
+              <td><a href="{% url 'customers:detail' customer.slug %}">{{ customer.name }}</a></td>
               <td>{{ customer.order_count }}</td>
+              <td>{{ customer.ordered_total }}</td>
             </tr>
           {% endfor %}
         </tbody>

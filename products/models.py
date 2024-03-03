@@ -209,11 +209,11 @@ class ProductGroupItem(models.Model):
     '''
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name=_('Product'),
-        related_name='group_products'
+        related_name='group_items'
     )
     group = models.ForeignKey(
         ProductGroup, on_delete=models.CASCADE, verbose_name=_('Group'),
-        related_name='group_products'
+        related_name='group_items'
     )
 
     class Meta:

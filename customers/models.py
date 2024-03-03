@@ -3,6 +3,7 @@ Models for Customers app
 '''
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 
 from dpl_orders.helpers import slugify_uniquely
 from vldados.models import Cliforn
@@ -61,8 +62,7 @@ class Customer(models.Model):
         '''
         Return the absolute url for the product
         '''
-        # TODO: Change the url to the correct one
-        return f'/customers/{self.slug}'
+        return reverse('customers:detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
         '''
@@ -145,6 +145,17 @@ class CustomerAddress(models.Model):
     def __str__(self):
         return f'{self.street}, {self.number}, {self.city} - {self.state}'
 
+    def get_full_address(self):
+        '''
+        Return the full address
+        '''
+        return f'{self.street}, {self.number}, {self.city} - {self.state}'
+
+    def get_absolute_url(self):
+        '''
+        Return the absolute url for the product
+        '''
+        return reverse('customers:detail', args=[self.customer.slug])
 
 
 class CustomerPhone(models.Model):
@@ -168,3 +179,9 @@ class CustomerPhone(models.Model):
 
     def __str__(self):
         return f'{self.phone_number}'
+
+    def get_absolute_url(self):
+        '''
+        Return the absolute url for the product
+        '''
+        return reverse('customers:detail', args=[self.customer.slug])

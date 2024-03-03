@@ -5,11 +5,13 @@ from django.conf import settings
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from dpl_orders.helpers import slugify_uniquely
 from vldados.models import Livros, Espec, Estoque
+
 
 class ProductCategory(models.Model):
     '''
@@ -76,8 +78,7 @@ class Product(models.Model):
         '''
         Return the absolute url for the product
         '''
-        # TODO: Change the url to the correct one
-        return f'/products/{self.slug}/'
+        return reverse('products:detail', args=[self.slug])
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -194,8 +195,7 @@ class ProductGroup(models.Model):
         '''
         Return the absolute url for the product group
         '''
-        # TODO: Change the url to the correct one
-        return f'/products/groups/{self.slug}/'
+        return reverse('products:group_detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
         if not self.id:

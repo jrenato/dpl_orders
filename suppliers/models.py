@@ -3,6 +3,7 @@ Models for the Suppliers app
 '''
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 
 from dpl_orders.helpers import slugify_uniquely
 
@@ -62,8 +63,7 @@ class Supplier(models.Model):
         '''
         Return the absolute url for the product
         '''
-        # TODO: Change the url to the correct one
-        return f'/suppliers/{self.slug}'
+        return reverse('suppliers:detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
         '''
@@ -137,6 +137,12 @@ class SupplierCNPJ(models.Model):
     def __str__(self):
         return f'{self.cnpj}'
 
+    def get_absolute_url(self):
+        '''
+        Return the absolute url for the product
+        '''
+        return reverse('suppliers:detail', args=[self.supplier.slug])
+
 
 class SupplierAddress(models.Model):
     '''
@@ -166,6 +172,12 @@ class SupplierAddress(models.Model):
     def __str__(self):
         return f'{self.street}, {self.number} - {self.city} - {self.state} - CEP {self.zip_code}'
 
+    def get_absolute_url(self):
+        '''
+        Return the absolute url for the product
+        '''
+        return reverse('suppliers:detail', args=[self.supplier.slug])
+
 
 class SupplierPhone(models.Model):
     '''
@@ -188,3 +200,9 @@ class SupplierPhone(models.Model):
 
     def __str__(self):
         return f'{self.phone_number}'
+
+    def get_absolute_url(self):
+        '''
+        Return the absolute url for the product
+        '''
+        return reverse('suppliers:detail', args=[self.supplier.slug])

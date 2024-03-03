@@ -22,8 +22,8 @@
                 <ul>
                     <li><b>{% translate 'Internal ID' %}:</b> {{ product.internal_id }}</li>
                     <li><b>{% translate 'Supplier Internal ID' %}:</b> {{ product.supplier_internal_id }}</li>
-                    <li><b>{% translate 'Created at' %}:</b> {{ product.created }}</li>
-                    <li><b>{% translate 'Modified at' %}:</b> {{ product.modified }}</li>
+                    <li><b>{% translate 'Created at' %}:</b> {{ product.created|date:"d/m/Y" }}</li>
+                    <li><b>{% translate 'Modified at' %}:</b> {{ product.modified|date:"d/m/Y" }}</li>
                 </ul>
             </div>
         </div>

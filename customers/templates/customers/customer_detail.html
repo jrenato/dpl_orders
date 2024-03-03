@@ -15,8 +15,8 @@
                     <li><b>{% translate 'Short Name' %}:</b> {{ customer.short_name }}</li>
                     <li><b>{% translate 'Sheet Label' %}:</b> {{ customer.sheet_label }}</li>
                     <li><b>{% translate 'Internal ID' %}:</b> {{ customer.internal_id }}</li>
-                    <li><b>{% translate 'Created at' %}:</b> {{ customer.created }}</li>
-                    <li><b>{% translate 'Modified at' %}:</b> {{ customer.modified }}</li>
+                    <li><b>{% translate 'Created at' %}:</b> {{ customer.created|date:"d/m/Y" }}</li>
+                    <li><b>{% translate 'Modified at' %}:</b> {{ customer.modified|date:"d/m/Y" }}</li>
                     {% if customer.cnpj %}
                         <li><b>{% translate 'CNPJ' %}:</b> {{ customer.cnpj }}</li>
                     {% endif %}

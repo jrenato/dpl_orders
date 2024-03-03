@@ -14,8 +14,8 @@
                     <li><b>{% translate 'Name' %}:</b> {{ supplier.name }}</li>
                     <li><b>{% translate 'Short Name' %}:</b> {{ supplier.short_name }}</li>
                     <li><b>{% translate 'Internal ID' %}:</b> {{ supplier.internal_id }}</li>
-                    <li><b>{% translate 'Created at' %}:</b> {{ supplier.created }}</li>
-                    <li><b>{% translate 'Modified at' %}:</b> {{ supplier.modified }}</li>
+                    <li><b>{% translate 'Created at' %}:</b> {{ supplier.created|date:"d/m/Y" }}</li>
+                    <li><b>{% translate 'Modified at' %}:</b> {{ supplier.modified|date:"d/m/Y" }}</li>
                     {% if supplier.cnpj %}
                         <li><b>{% translate 'CNPJ' %}:</b> {{ supplier.cnpj }}</li>
                     {% endif %}

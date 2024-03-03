@@ -5,7 +5,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>{% translate 'Customer Details' %}</h1>
+        <h1>{{ customer.name }}</h1>
         <hr>
         <div class="row detail-section">
             <div class="col-md-6">
@@ -13,6 +13,7 @@
                 <ul>
                     <li><b>{% translate 'Name' %}:</b> {{ customer.name }}</li>
                     <li><b>{% translate 'Short Name' %}:</b> {{ customer.short_name }}</li>
+                    <li><b>{% translate 'Sheet Label' %}:</b> {{ customer.sheet_label }}</li>
                     <li><b>{% translate 'Internal ID' %}:</b> {{ customer.internal_id }}</li>
                     <li><b>{% translate 'Created at' %}:</b> {{ customer.created }}</li>
                     <li><b>{% translate 'Modified at' %}:</b> {{ customer.modified }}</li>

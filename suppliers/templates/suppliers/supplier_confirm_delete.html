@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}Delete {{ supplier.name }}{% endblock %}
+{% block title %}{% translate 'Delete Supplier' %}{% endblock %}
 
 {% block content %}
-    <h1>{% translate 'Delete Supplier' %} {{ supplier.name }}</h1>
+    <h1>{% translate 'Delete Supplier' %}</h1>
 
-    <p>{% blocktranslate %}'Are you sure you want to delete {{ supplier.name }}?{% endblocktranslate %}</p>
+    <p>{% blocktranslate with name=supplier.name %}Are you sure you want to delete {{ name }}?{% endblocktranslate %}</p>
 
     <form action="" method="post">
         {% csrf_token %}

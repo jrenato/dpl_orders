@@ -28,9 +28,33 @@
             </div>
         </div>
         <div class="row detail-section">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <h2 class="detail-title">{% translate 'Orders' %}</h2>
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>{% translate 'Customer' %}</th>
+                            <th>{% translate 'Quantity' %}</th>
+                            <th>{% translate 'Date' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order_item in product.order_items.all %}
+                            <tr>
+                                <td><a href="{% url 'customers:detail' order_item.order.customer.slug %}">{{ order_item.order.customer }}</a></td>
+                                <td>{{ order_item.quantity }}</td>
+                                <td>{{ order_item.created|date:"d/m/Y" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h2 class="detail-title">{% translate 'Groups' %}</h2>
                 <ul>
+                    {% for group_item in product.group_items.all %}
+                        <li><a href="#">{{ group_item.group.name }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

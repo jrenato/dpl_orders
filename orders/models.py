@@ -80,11 +80,13 @@ class OrderItem(models.Model):
     order = models.ForeignKey(
         Order, on_delete=models.CASCADE,
         verbose_name=_('Order'),
+        related_name='order_items',
     )
 
     product = models.ForeignKey(
         'products.Product', on_delete=models.CASCADE,
         verbose_name=_('Product'),
+        related_name='order_items',
     )
 
     quantity = models.PositiveIntegerField(_('Quantity'), default=1)

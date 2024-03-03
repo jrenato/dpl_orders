@@ -32,7 +32,10 @@
               {% translate 'Price' %}
             </th>
             <th scope="col">
-              {% translate 'Pending Orders' %}
+              {% translate 'Ordered Quantity' %}
+            </th>
+            <th scope="col">
+              {% translate 'Product Groups' %}
             </th>
           </tr>
         </thead>
@@ -55,7 +58,10 @@
                 {{ product.price }}
               </td>
               <td>
-                0
+                {{ product.order_items_sum }}
+              </td>
+              <td>
+                {{ product.groups_count }}
               </td>
             </tr>
           {% endfor %}

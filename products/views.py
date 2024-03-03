@@ -1,7 +1,7 @@
 '''
 Views for the products app
 '''
-
+from django.db.models import Count, Sum
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -18,6 +18,15 @@ class ProductListView(PermissionRequiredMixin, ListView):
     context_object_name = 'products'
     permission_required = 'products.view_product'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()\
+            .select_related('category', 'supplier')\
+            .annotate(
+                order_items_sum=Sum('order_items__quantity'),
+                groups_count=Count('group_items', distinct=True)
+            )
+        return queryset
+
 
 class ProductDetailView(PermissionRequiredMixin, DetailView):
     '''
@@ -26,6 +35,15 @@ class ProductDetailView(PermissionRequiredMixin, DetailView):
     model = Product
     context_object_name = 'product'
     permission_required = 'products.view_product'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()\
+            .select_related('category', 'supplier')\
+            .prefetch_related(
+                'order_items', 'order_items__order', 'order_items__order__customer',
+                'group_items', 'group_items__group',
+            )
+        return queryset
 
 
 class ProductCreateView(PermissionRequiredMixin, CreateView):

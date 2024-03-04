@@ -3,9 +3,9 @@ Models for Orders app
 '''
 from django.db import models
 from django.db.models import F
+from django.db.models.signals import post_save
 from django.utils.translation import gettext_lazy as _
 from django.dispatch import receiver
-from django.db.models.signals import post_save
 
 
 ORDER_STATUS_CHOICES = (
@@ -95,6 +95,13 @@ class OrderItem(models.Model):
         _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
     )
 
+    subtotal = models.GeneratedField(
+        expression=F('price') * F('quantity'),
+        output_field=models.DecimalField(decimal_places=2, max_digits=10000),
+        verbose_name=_('Subtotal'),
+        db_persist=True,
+    )
+
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
@@ -110,10 +117,13 @@ class OrderItem(models.Model):
         self.__original_quantity = self.quantity
 
     def save(self, *args, **kwargs):
+        self.price = self.product.price
+
         if self.id and self.quantity != self.__original_quantity:
             OrderItemHistory.objects.create(
                 order_item=self,
                 quantity=self.quantity,
+                price=self.price
             )
         super().save(*args, **kwargs)
 
@@ -139,6 +149,16 @@ class OrderItemHistory(models.Model):
     )
 
     quantity = models.PositiveIntegerField(_('Quantity'), default=1)
+    price = models.DecimalField(
+        _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
+    )
+    subtotal = models.GeneratedField(
+        expression=F('price') * F('quantity'),
+        output_field=models.DecimalField(decimal_places=2, max_digits=10000),
+        verbose_name=_('Subtotal'),
+        db_persist=True,
+    )
+
     comment = models.TextField(_('Comment'), blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)

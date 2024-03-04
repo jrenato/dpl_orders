@@ -88,7 +88,10 @@ class Command(BaseCommand):
             customer = self.get_customer(key)
             order, _ = Order.objects.get_or_create(customer=customer)
             order_item, created = OrderItem.objects.get_or_create(
-                order=order, product=product, defaults={'quantity': value}
+                order=order, product=product, defaults={
+                    'quantity': value,
+                    'price': product.price,
+                }
             )
 
             # If the order item already exists, update the quantity if necessary

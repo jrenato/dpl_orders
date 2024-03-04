@@ -41,8 +41,8 @@ class Product(models.Model):
     )
 
     supplier = models.ForeignKey(
-        'suppliers.Supplier', on_delete=models.CASCADE, verbose_name=_('Supplier'),
-        related_name='products', blank=True, null=True
+        'suppliers.Supplier', on_delete=models.CASCADE,
+        related_name='products', verbose_name=_('Supplier'),
     )
 
     category = models.ForeignKey(

@@ -10,6 +10,7 @@ from django.contrib.auth.models import Permission
 from django.utils.translation import gettext as _
 
 from products.models import Product
+from suppliers.models import Supplier
 
 
 class ProductsPermissionsTest(TestCase):
@@ -22,10 +23,14 @@ class ProductsPermissionsTest(TestCase):
             username='testuser',
             password='testpass123'
         )
+        self.supplier = Supplier.objects.create(name='Test Supplier')
         self.product = Product.objects.create(
             name='Test Product',
             sku='12345678901234',
             release_date=datetime.date.today(),
+            stock=10,
+            price=9.99,
+            supplier=self.supplier
         )
 
     def test_redirect_if_not_logged_in(self):
@@ -59,7 +64,7 @@ class ProductsPermissionsTest(TestCase):
         Test if the user has no permission to view the detail of a product
         '''
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('products:detail', args=[self.product.id]))
+        response = self.client.get(reverse('products:detail', args=[self.product.slug]))
         self.assertEqual(response.status_code, 403)
 
     def test_logged_in_user_has_permission_to_view_detail(self):
@@ -70,7 +75,7 @@ class ProductsPermissionsTest(TestCase):
         self.user.user_permissions.add(permission)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('products:detail', args=[1]))
+        response = self.client.get(reverse('products:detail', args=[self.product.slug]))
         self.assertEqual(response.status_code, 200)
 
     def test_logged_in_user_has_no_permission_to_create(self):
@@ -97,7 +102,7 @@ class ProductsPermissionsTest(TestCase):
         Test if the user has no permission to update a product
         '''
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('products:update', args=[self.product.id]))
+        response = self.client.get(reverse('products:update', args=[self.product.slug]))
         self.assertEqual(response.status_code, 403)
 
     def test_logged_in_user_has_permission_to_update(self):
@@ -108,7 +113,7 @@ class ProductsPermissionsTest(TestCase):
         self.user.user_permissions.add(permission)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('products:update', args=[self.product.id]))
+        response = self.client.get(reverse('products:update', args=[self.product.slug]))
         self.assertEqual(response.status_code, 200)
 
     def test_logged_in_user_has_no_permission_to_delete(self):
@@ -116,7 +121,7 @@ class ProductsPermissionsTest(TestCase):
         Test if the user has no permission to delete a product
         '''
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('products:delete', args=[self.product.id]))
+        response = self.client.get(reverse('products:delete', args=[self.product.slug]))
         self.assertEqual(response.status_code, 403)
 
     def test_logged_in_user_has_permission_to_delete(self):
@@ -127,7 +132,7 @@ class ProductsPermissionsTest(TestCase):
         self.user.user_permissions.add(permission)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('products:delete', args=[self.product.id]))
+        response = self.client.get(reverse('products:delete', args=[self.product.slug]))
         self.assertEqual(response.status_code, 200)
 
     # Template tests
@@ -189,7 +194,7 @@ class ProductsPermissionsTest(TestCase):
         permission = Permission.objects.get(codename='view_product')
         self.user.user_permissions.add(permission)
 
-        response = self.client.get(reverse('products:detail', args=[self.product.id]))
+        response = self.client.get(reverse('products:detail', args=[self.product.slug]))
         self.assertNotContains(response, _('Edit'))
 
     def test_user_with_permission_to_update_can_see_edit_button(self):
@@ -202,7 +207,7 @@ class ProductsPermissionsTest(TestCase):
         self.user.user_permissions.add(permission_to_update)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('products:detail', args=[self.product.id]))
+        response = self.client.get(reverse('products:detail', args=[self.product.slug]))
         self.assertContains(response, _('Edit'))
 
     ## Delete button
@@ -215,7 +220,7 @@ class ProductsPermissionsTest(TestCase):
         permission = Permission.objects.get(codename='view_product')
         self.user.user_permissions.add(permission)
 
-        response = self.client.get(reverse('products:detail', args=[self.product.id]))
+        response = self.client.get(reverse('products:detail', args=[self.product.slug]))
         self.assertNotContains(response, _('Delete'))
 
     def test_user_with_permission_to_delete_can_see_delete_button(self):
@@ -228,5 +233,5 @@ class ProductsPermissionsTest(TestCase):
         self.user.user_permissions.add(permission_to_delete)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('products:detail', args=[self.product.id]))
+        response = self.client.get(reverse('products:detail', args=[self.product.slug]))
         self.assertContains(response, _('Delete'))

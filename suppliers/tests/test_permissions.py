@@ -58,7 +58,7 @@ class SuppliersPermissionsTest(TestCase):
         Test if the user has no permission to view the detail of a supplier
         '''
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.slug]))
         self.assertEqual(response.status_code, 403)
 
     def test_logged_in_user_has_permission_to_view_detail(self):
@@ -69,7 +69,7 @@ class SuppliersPermissionsTest(TestCase):
         self.user.user_permissions.add(permission)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('suppliers:detail', args=[1]))
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.slug]))
         self.assertEqual(response.status_code, 200)
 
     def test_logged_in_user_has_no_permission_to_create(self):
@@ -96,7 +96,7 @@ class SuppliersPermissionsTest(TestCase):
         Test if the user has no permission to update a supplier
         '''
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('suppliers:update', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:update', args=[self.supplier.slug]))
         self.assertEqual(response.status_code, 403)
 
     def test_logged_in_user_has_permission_to_update(self):
@@ -107,7 +107,7 @@ class SuppliersPermissionsTest(TestCase):
         self.user.user_permissions.add(permission)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('suppliers:update', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:update', args=[self.supplier.slug]))
         self.assertEqual(response.status_code, 200)
 
     def test_logged_in_user_has_no_permission_to_delete(self):
@@ -115,7 +115,7 @@ class SuppliersPermissionsTest(TestCase):
         Test if the user has no permission to delete a supplier
         '''
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('suppliers:delete', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:delete', args=[self.supplier.slug]))
         self.assertEqual(response.status_code, 403)
 
     def test_logged_in_user_has_permission_to_delete(self):
@@ -126,7 +126,7 @@ class SuppliersPermissionsTest(TestCase):
         self.user.user_permissions.add(permission)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('suppliers:delete', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:delete', args=[self.supplier.slug]))
         self.assertEqual(response.status_code, 200)
 
     # Template tests
@@ -188,7 +188,7 @@ class SuppliersPermissionsTest(TestCase):
         permission = Permission.objects.get(codename='view_supplier')
         self.user.user_permissions.add(permission)
 
-        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.slug]))
         self.assertNotContains(response, _('Edit'))
 
     def test_user_with_permission_to_update_can_see_edit_button(self):
@@ -201,7 +201,7 @@ class SuppliersPermissionsTest(TestCase):
         self.user.user_permissions.add(permission_to_update)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.slug]))
         self.assertContains(response, _('Edit'))
 
     ## Delete button
@@ -214,7 +214,7 @@ class SuppliersPermissionsTest(TestCase):
         permission = Permission.objects.get(codename='view_supplier')
         self.user.user_permissions.add(permission)
 
-        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.slug]))
         self.assertNotContains(response, _('Delete'))
 
     def test_user_with_permission_to_delete_can_see_delete_button(self):
@@ -227,5 +227,5 @@ class SuppliersPermissionsTest(TestCase):
         self.user.user_permissions.add(permission_to_delete)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.id]))
+        response = self.client.get(reverse('suppliers:detail', args=[self.supplier.slug]))
         self.assertContains(response, _('Delete'))

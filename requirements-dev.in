@@ -2,5 +2,6 @@
 
 coverage
 django-debug-toolbar
+djlint
 pylint
 pylint-django

@@ -157,6 +157,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+USE_THOUSAND_SEPARATOR = True
+
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'dpl_orders', 'locale'),
 )

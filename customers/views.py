@@ -11,6 +11,7 @@ from .models import Customer
 from .forms import CustomerForm
 from orders.models import ORDER_STATUS_CHOICES
 
+
 class CustomerListView(PermissionRequiredMixin, ListView):
     '''
     List view for the Customer model

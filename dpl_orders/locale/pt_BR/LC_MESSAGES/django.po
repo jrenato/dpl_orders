@@ -750,7 +750,7 @@ msgid "Finished"
 msgstr "Concluído"
 
 #: orders/models.py:18 products/models.py:164
-msgid "Cancelled"
+msgid "Canceled"
 msgstr "Cancelado"
 
 #: orders/models.py:40 orders/models.py:106

@@ -38,6 +38,7 @@ class Order(models.Model):
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)
+    canceled = models.DateTimeField(_('Canceled at'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('Order')
@@ -104,6 +105,7 @@ class OrderItem(models.Model):
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)
+    canceled = models.DateTimeField(_('Canceled at'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('Order Item')

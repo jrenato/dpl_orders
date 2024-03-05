@@ -161,7 +161,7 @@ PRODUCT_GROUP_STATUS = [
     ('OR', _('Ordered')),
     ('SE', _('In Separation')),
     ('FI', _('Finished')),
-    ('CA', _('Cancelled')),
+    ('CA', _('Canceled')),
     ('AR', _('Archived')),
 ]
 

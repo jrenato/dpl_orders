@@ -15,7 +15,7 @@ ORDER_STATUS_CHOICES = (
     ('IN', _('Invoiced')),
     ('WT', _('Waiting Transport')),
     ('FI', _('Finished')),
-    ('CA', _('Cancelled')),
+    ('CA', _('Canceled')),
 )
 
 
@@ -77,7 +77,7 @@ class OrderStatusHistory(models.Model):
 ORDER_ITEM_STATUS_CHOICES = (
     ('PE', _('Pending')),
     ('FI', _('Finished')),
-    ('CA', _('Cancelled')),
+    ('CA', _('Canceled')),
 )
 
 class OrderItem(models.Model):

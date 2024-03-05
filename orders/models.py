@@ -74,6 +74,11 @@ class OrderStatusHistory(models.Model):
     def __str__(self):
         return f'{self.created} - {self.status}'
 
+ORDER_ITEM_STATUS_CHOICES = (
+    ('PE', _('Pending')),
+    ('FI', _('Finished')),
+    ('CA', _('Cancelled')),
+)
 
 class OrderItem(models.Model):
     '''
@@ -91,9 +96,20 @@ class OrderItem(models.Model):
         related_name='order_items',
     )
 
+    status = models.CharField(
+        max_length=2,
+        choices=ORDER_ITEM_STATUS_CHOICES,
+        default='PE',
+    )
+
     quantity = models.PositiveIntegerField(_('Quantity'), default=1)
+    delivered_quantity = models.PositiveIntegerField(_('Delivered Quantity'), default=0)
+
     price = models.DecimalField(
         _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
+    )
+    discount = models.DecimalField(
+        _('Discount'), decimal_places=2, max_digits=10000, blank=True, null=True
     )
 
     subtotal = models.GeneratedField(

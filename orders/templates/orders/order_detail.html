@@ -18,9 +18,9 @@
         </div>
         <div class="col-md-6">
             <ul>
-                <li>{% translate "Order date" %}: {{ object.created|date:"SHORT_DATE_FORMAT" }}</li>
-                <li>{% translate "Internal ID" %}: {{ object.internal_id }}</li>
-                <li>{% translate "Status" %}: {{ object.get_status_display }}</li>
+                <li>{% translate "Order date" %}: {{ order.created|date:"SHORT_DATE_FORMAT" }}</li>
+                <li>{% translate "Internal ID" %}: {{ order.internal_id }}</li>
+                <li>{% translate "Status" %}: <span class="badge bg-warning">{% translate order.get_status_display %}</span></li>
                 <li>{% translate "Shipping Company" %}: ({% translate "Soon" %})</li>
             </ul>
         </div>
@@ -35,15 +35,27 @@
                     <th scope="col">{% translate "Quantity" %}</th>
                     <th scope="col">{% translate "Price" %}</th>
                     <th scope="col">{% translate "Subtotal" %}</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in order_items %}
                     <tr>
-                        <td>{{ item.product.name }}</td>
+                        <td>
+                            <a href="{% url 'products:detail' item.product.id %}">
+                                {{ item.product.name }}</a>
+                        </td>
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.product.price|floatformat:2 }}</td>
                         <td>{{ item.subtotal|floatformat:2 }}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning btn-sm">
+                                <i data-feather="edit-2"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm">
+                                <i data-feather="trash-2"></i>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

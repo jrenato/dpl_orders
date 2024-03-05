@@ -25,12 +25,16 @@
                             <td>{{ order.customer.name }}</td>
                             <td>{{ order.total_quantity }}</td>
                             <td>{{ order.total_value|floatformat:2 }}</td>
-                            <td>{{ order.get_status_display }}</td>
+                            <td><span class="badge bg-warning">{% translate order.get_status_display %}</span></td>
                             <td>
-                                <a href="{% url 'orders:detail' pk=order.pk %}"
-                                   class="btn btn-sm btn-primary">
+                                <a href="{% url 'orders:detail' pk=order.pk %}" class="btn btn-sm btn-primary">
                                    <i data-feather="search"></i>
-                                    {% translate "View" %}
+                                </a>
+                                <a href="{% url 'orders:edit' pk=order.pk %}" class="btn btn-sm btn-secondary">
+                                    <i data-feather="edit"></i>
+                                </a>
+                                <a href="{% url 'orders:delete' pk=order.pk %}" class="btn btn-sm btn-danger">
+                                    <i data-feather="trash-2"></i>
                                 </a>
                             </td>
                         </tr>

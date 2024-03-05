@@ -11,6 +11,9 @@ from .forms import OrderForm
 
 
 class OrderListView(PermissionRequiredMixin, ListView):
+    '''
+    List view for Order model
+    '''
     model = Order
     context_object_name = 'orders'
     permission_required = 'orders.view_order'
@@ -23,6 +26,9 @@ class OrderListView(PermissionRequiredMixin, ListView):
 
 
 class OrderDetailView(PermissionRequiredMixin, DetailView):
+    '''
+    Detail view for Order model
+    '''
     model = Order
     context_object_name = 'order'
     permission_required = 'orders.view_order'
@@ -39,6 +45,9 @@ class OrderDetailView(PermissionRequiredMixin, DetailView):
         )
 
 class OrderCreateView(PermissionRequiredMixin, CreateView):
+    '''
+    Create view for Order model
+    '''
     model = Order
     form_class = OrderForm
     success_url = reverse_lazy('orders:list')
@@ -46,6 +55,9 @@ class OrderCreateView(PermissionRequiredMixin, CreateView):
 
 
 class OrderUpdateView(PermissionRequiredMixin, UpdateView):
+    '''
+    Update view for Order model
+    '''
     model = Order
     form_class = OrderForm
     success_url = reverse_lazy('orders:list')
@@ -53,6 +65,9 @@ class OrderUpdateView(PermissionRequiredMixin, UpdateView):
 
 
 class OrderDeleteView(PermissionRequiredMixin, DeleteView):
+    '''
+    Delete view for Order model
+    '''
     model = Order
     success_url = reverse_lazy('orders:list')
     permission_required = 'orders.delete_order'

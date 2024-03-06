@@ -89,7 +89,7 @@ class Product(models.Model):
         # If the product is being created, generate the slug
         if not self.id:
             self.slug = slugify_uniquely(self.name, self.__class__)
-        elif self._release_date != self.release_date:
+        elif self.release_date and self._release_date != self.release_date:
             ProductReleaseDateHistory.objects.create(
                 product=self, release_date=self.release_date
             )
@@ -105,20 +105,21 @@ class Product(models.Model):
                 pass
 
             if livro:
-                self.internal_id = livro.NBOOK
+                self.internal_id = livro.nbook
 
         # Try to get the product data from the internal id
         if self.internal_id and settings.VL_INTEGRATION:
-            livro = Livros.objects.get(NBOOK=self.internal_id)
+            livro = Livros.objects.get(nbook=self.internal_id)
             self.name = livro.title
             self.price = livro.sellpr
 
-            espec = Espec.objects.get(NBOOK=self.internal_id)
-            if espec.nome in ['HQ', 'MANGÁ', 'LIVRO', 'ALBUM']:
-                self.category = ProductCategory.objects.get_or_create(name=espec.nome)
+            if not self.category:
+                espec = Espec.objects.get(codigo=livro.subj1)
+                if espec.nome in ['HQ', 'MANGÁ', 'LIVRO', 'ALBUM']:
+                    self.category, _ = ProductCategory.objects.get_or_create(name=espec.nome)
 
-            estoque = Estoque.objects.get(NBOOK=self.internal_id)
-            self.stock = estoque.estoque
+            estoque = Estoque.objects.get(nbook=self.internal_id)
+            self.stock = estoque.disp
 
         super().save(*args, **kwargs)
 

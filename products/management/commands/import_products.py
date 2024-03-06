@@ -137,7 +137,7 @@ class Command(BaseCommand):
                 'release_date': release_date,
                 'category': category,
                 'price': product_data['Preço R$'],
-                'description': product_data['Sinopse'].strip(),
+                'description': product_data['Sinopse'].strip() if 'Sinopse' in product_data else '',
             }
         )
 

@@ -36,3 +36,8 @@ EMAIL_PORT=587
 EMAIL_HOST_USER=your-email@example.com
 EMAIL_HOST_PASSWORD=your-email-password
 EMAIL_USE_TLS=True
+
+# Metabooks
+MB_URL=http://www.metabooks.com/api/v2
+MB_USERNAME=username
+MB_PASSWORD=password

@@ -1,0 +1,38 @@
+# @name login
+POST {{$dotenv MB_URL}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "{{$dotenv MB_USERNAME}}",
+    "password": "{{$dotenv MB_PASSWORD}}"
+}
+
+###
+
+@bearer = {{login.response.body.*}}
+
+# @name get-products-by-publisher
+GET {{$dotenv MB_URL}}/products?search=VL=PANINI&page=1&size=20&sort=modificationDate&direction=desc HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{bearer}}
+
+###
+
+# @name get-product-by-id
+GET {{$dotenv MB_URL}}/product/165819eaac4d417ebf51a4eeb91e58e7 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{bearer}}
+
+###
+
+# @name get-publisher-by-id
+GET {{$dotenv MB_URL}}/publisher/BR0089650 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{bearer}}
+
+###
+
+# @name logout
+GET {{$dotenv MB_URL}}/logout HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{bearer}}

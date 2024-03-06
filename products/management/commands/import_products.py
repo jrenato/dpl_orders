@@ -113,8 +113,7 @@ class Command(BaseCommand):
         try:
             release_date = product_data['Lançamento']
         except KeyError:
-            print(product_data)
-            raise CommandError('Lançamento não encontrado')
+            release_date = None
 
         # If release_date is not None and it's a string, convert it to a date
         if release_date and isinstance(release_date, str):
@@ -124,8 +123,10 @@ class Command(BaseCommand):
             name=product_data['Categoria'].strip().upper()
         )
 
-        # Remove trailing 'BRL' from the price
-        product_data['Preço R$'] = float(product_data['Preço R$'].replace('BRL', '').strip())
+        # Check if the price is present and if it's a string
+        if product_data['Preço R$'] and isinstance(product_data['Preço R$'], str):
+            # Remove trailing 'BRL' from the price
+            product_data['Preço R$'] = float(product_data['Preço R$'].replace('BRL', '').strip())
 
         product, _ = Product.objects.get_or_create(
             name=product_data['Título'].strip().upper(),

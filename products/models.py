@@ -129,7 +129,7 @@ def product_post_save(sender, instance, created, **kwargs):
     '''
     Post save signal for the product
     '''
-    if created:
+    if created and instance.release_date:
         ProductReleaseDateHistory.objects.create(
             product=instance, release_date=instance.release_date
         )

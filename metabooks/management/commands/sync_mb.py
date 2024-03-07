@@ -2,12 +2,16 @@
 Command to sync data with metabooks
 '''
 import requests
+import datetime
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
+from tqdm import tqdm
+
 from metabooks.models import MetabooksSync
 from suppliers.models import Supplier
+from products.models import Product, ProductMBCategory
 
 
 class Command(BaseCommand):
@@ -43,7 +47,7 @@ class Command(BaseCommand):
                     mb_sync.concluded = True
                     mb_sync.save()
 
-        for supplier in Supplier.objects.filter(mb_id__isnull=False):
+        for supplier in tqdm(Supplier.objects.filter(mb_id__isnull=False), desc='Suppliers'):
             try:
                 mb_sync = MetabooksSync.objects.get(concluded=False, supplier=supplier)
             except MetabooksSync.DoesNotExist:
@@ -54,8 +58,16 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.WARNING('Bearer token not found'))
                 self.login(mb_sync)
 
-            while mb_sync.current_page <= mb_sync.last_page and not mb_sync.concluded:
+            if mb_sync.current_page <= mb_sync.last_page and not mb_sync.concluded:
+                tqdm.write('Parsing first page')
                 self.parse_current_page(mb_sync)
+
+            if not mb_sync.concluded:
+                for _ in tqdm(
+                    range(mb_sync.current_page, mb_sync.last_page),
+                    desc='Parsing pages', leave=False
+                ):
+                    self.parse_current_page(mb_sync)
 
 
     def login(self, mb_sync):
@@ -143,7 +155,7 @@ class Command(BaseCommand):
         '''
         Parse the products
         '''
-        for product_data in products_data:
+        for product_data in tqdm(products_data, desc='Parsing Products', leave=False):
             if self.debug:
                 self.stdout.write(self.style.SUCCESS(f'Parsing product {product_data["id"]}'))
             # Parse the product
@@ -154,6 +166,55 @@ class Command(BaseCommand):
         '''
         Parse the product
         '''
-        # Parse the product
-        if self.debug:
-            self.stdout.write(self.style.SUCCESS(f'Parsing product {product_data["title"]} for supplier {mb_sync.supplier}'))
+        release_date = datetime.datetime.strptime(
+            product_data['publicationDate'], '%d/%m/%Y'
+        ).date() if product_data['publicationDate'] else None
+
+        product, _ = Product.objects.update_or_create(
+            mb_id=product_data['id'],
+            defaults={
+                'supplier': mb_sync.supplier,
+                'name': product_data['title'].strip().upper(),
+                'description': product_data['mainDescription'],
+                'price': product_data['priceBrl'],
+                'sku': product_data['gtin'],
+                'release_date': release_date,
+                'supplier_internal_id': product_data['ordernumber'],
+            }
+        )
+
+        # If the product has any mb_category, remove them
+        # In that way, we can add the new ones, in case the product has changed
+        product.mb_categories.clear()
+
+        # Add the mb_categories to the product
+        for thema_code in product_data['themaSubjects']:
+            mb_category, _ = ProductMBCategory.objects.get_or_create(code=thema_code)
+            product.mb_categories.add(mb_category)
+
+        # TODO: Instead of this, just get the product details for all products
+        for mb_category in product.mb_categories.all():
+            if not mb_category.name or mb_category.name.strip() == '':
+                self.get_product_details(mb_sync, product, mb_category)
+
+
+    def get_product_details(self, mb_sync, product, mb_category):
+        '''
+        Get the product details
+        '''
+        headers = {'Authorization': f'Bearer {mb_sync.bearer}'}
+        url = f'{self.mb_url}/product/{product.mb_id}'
+        response = requests.get(url, headers=headers, timeout=self.timeout)
+
+        if response.status_code == 200:
+            # TODO: Parse the product details
+            for subject in response.json()['subjects']:
+                if 'subjectCode' not in subject:
+                    self.stdout.write(self.style.ERROR(
+                        f'Error parsing the product details for product {product.mb_id}')
+                    )
+                    raise ValueError('Error parsing the product details')
+
+                if mb_category.code == subject['subjectCode']:
+                    mb_category.name = subject['subjectHeadingText']
+                    mb_category.save()

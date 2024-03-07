@@ -19,7 +19,7 @@
         <div class="col-md-6">
             <ul>
                 <li>{% translate "Order date" %}: {{ order.created|date:"SHORT_DATE_FORMAT" }}</li>
-                <li>{% translate "Internal ID" %}: {{ order.internal_id }}</li>
+                <li>{% translate "Internal ID" %}: {{ order.vl_id }}</li>
                 <li>{% translate "Status" %}: <span class="badge bg-warning">{% translate order.get_status_display %}</span></li>
                 <li>{% translate "Shipping Company" %}: ({% translate "Soon" %})</li>
             </ul>

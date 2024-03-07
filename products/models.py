@@ -31,11 +31,31 @@ class ProductCategory(models.Model):
         return f'{self.name}'
 
 
+class ProductMBCategory(models.Model):
+    '''
+    Model for the Product Metabooks Category
+    '''
+    code = models.CharField(_('Code'), max_length=10)
+    name = models.CharField(_('Name'), max_length=60, blank=True, null=True)
+
+    class Meta:
+        '''
+        Meta options
+        '''
+        verbose_name = _('Product Metabooks Category')
+        verbose_name_plural = _('Product Metabooks Categories')
+        ordering = ['name']
+
+    def __str__(self):
+        return f'{self.name}'
+
+
 class Product(models.Model):
     '''
     Model for the Product
     '''
-    internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
+    vl_id = models.CharField(_('Vialogos id'), max_length=20, blank=True, null=True)
+    mb_id = models.CharField(_('Metabooks id'), max_length=20, blank=True, null=True)
     supplier_internal_id = models.CharField(
         _('Supplier Internal id'), max_length=40, blank=True, null=True
     )
@@ -48,6 +68,11 @@ class Product(models.Model):
     category = models.ForeignKey(
         ProductCategory, on_delete=models.CASCADE, verbose_name=_('Category'),
         related_name='products', blank=True, null=True,
+    )
+
+    mb_categories = models.ManyToManyField(
+        ProductMBCategory, verbose_name=_('Metabooks Categories'),
+        related_name='products', blank=True,
     )
 
     name = models.CharField(_('Name'), max_length=120)
@@ -97,7 +122,7 @@ class Product(models.Model):
         # Try to get the internal id from the isbn
         isbn = f'{self.sku}'
         valid_isbn = isbn and isbn.startswith('978') and len(isbn) == 13
-        if settings.VL_INTEGRATION and not self.internal_id and valid_isbn:
+        if settings.VL_INTEGRATION and not self.vl_id and valid_isbn:
             livro = None
             try:
                 livro = Livros.objects.get(isbn1=isbn)
@@ -105,11 +130,11 @@ class Product(models.Model):
                 pass
 
             if livro:
-                self.internal_id = livro.nbook
+                self.vl_id = livro.nbook
 
         # Try to get the product data from the internal id
-        if self.internal_id and settings.VL_INTEGRATION:
-            livro = Livros.objects.get(nbook=self.internal_id)
+        if self.vl_id and settings.VL_INTEGRATION:
+            livro = Livros.objects.get(nbook=self.vl_id)
             self.name = livro.title
             self.price = livro.sellpr
 
@@ -118,7 +143,7 @@ class Product(models.Model):
                 if espec.nome in ['HQ', 'MANGÁ', 'LIVRO', 'ALBUM']:
                     self.category, _ = ProductCategory.objects.get_or_create(name=espec.nome)
 
-            estoque = Estoque.objects.get(nbook=self.internal_id)
+            estoque = Estoque.objects.get(nbook=self.vl_id)
             self.stock = estoque.disp
 
         super().save(*args, **kwargs)

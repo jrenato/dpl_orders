@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'suppliers',
     'products',
     'orders',
+
+    'metabooks',
 ]
 
 MIDDLEWARE = [
@@ -207,3 +209,8 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+# Metabooks settings
+MB_URL = env('MB_URL')
+MB_USERNAME = env('MB_USERNAME')
+MB_PASSWORD = env('MB_PASSWORD')

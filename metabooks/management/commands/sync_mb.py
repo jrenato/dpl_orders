@@ -170,6 +170,14 @@ class Command(BaseCommand):
             product_data['publicationDate'], '%d/%m/%Y'
         ).date() if product_data['publicationDate'] else None
 
+        mb_create_date = datetime.datetime.strptime(
+            product_data['createDate'], '%d/%m/%Y'
+        ).date() if product_data['createDate'] else None
+
+        mb_modified_date = datetime.datetime.strptime(
+            product_data['lastModifiedDate'], '%d/%m/%Y'
+        ).date() if product_data['lastModifiedDate'] else None
+
         product, created = Product.objects.update_or_create(
             mb_id=product_data['id'],
             defaults={
@@ -186,11 +194,11 @@ class Command(BaseCommand):
         should_save_product = False
 
         if created:
-            product.mb_created = product_data['createDate']
+            product.mb_created = mb_create_date
             should_save_product = True
-            
-        if product_data['lastModifiedDate'] != product.mb_modified:
-            product.mb_modified = product_data['lastModifiedDate']
+
+        if product.mb_modified != mb_modified_date:
+            product.mb_modified = mb_modified_date
             should_save_product = True
 
         if not product.price:

@@ -1,8 +1,8 @@
 '''
 Command to sync data with metabooks
 '''
-import requests
 import datetime
+import requests
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
@@ -112,11 +112,11 @@ class Command(BaseCommand):
         if response.status_code == 200:
             # Logout successful
             self.stdout.write(self.style.SUCCESS('Logout successful'))
-            return True
         else:
             # Logout failed
             self.stdout.write(self.style.ERROR('Logout failed'))
-            return False
+
+        return True
 
 
     def parse_current_page(self, mb_sync):
@@ -205,7 +205,8 @@ class Command(BaseCommand):
             product.price = product.mb_price
             should_save_product = True
 
-        self.stdout.write(self.style.SUCCESS(f'Product {product.name} release date: {product.release_date}'))
+        if self.debug:
+            tqdm.write(f'Product {product.name} release date: {product.release_date}')
 
         if should_save_product:
             product.save()

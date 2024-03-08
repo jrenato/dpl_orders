@@ -54,12 +54,26 @@ class Product(models.Model):
     name = models.CharField(_('Name'), max_length=120)
     slug = models.SlugField(_('Slug'), max_length=140, unique=True, blank=True, null=True)
     sku = models.CharField(_('SKU'), max_length=13, blank=True, null=True)
+
     price = models.DecimalField(
         _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
     )
+    mb_price = models.DecimalField(
+        _('Metabooks Price'), decimal_places=2, max_digits=10000, blank=True, null=True
+    )
+    vl_price = models.DecimalField(
+        _('Vialogos Price'), decimal_places=2, max_digits=10000, blank=True, null=True
+    )
+
     release_date = models.DateField(_('Release Date'), blank=True, null=True)
     stock = models.IntegerField(_('Stock'), default=0)
     description = models.TextField(_('Description'), blank=True, null=True)
+
+    mb_created = models.DateField(_('Metabooks created at'), blank=True, null=True)
+    mb_modified = models.DateField(_('Metabooks modified at'), blank=True, null=True)
+
+    vl_created = models.DateField(_('Vialogos created at'), blank=True, null=True)
+    vl_modified = models.DateField(_('Vialogos modified at'), blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     modified = models.DateTimeField(_('Modified at'), auto_now=True)

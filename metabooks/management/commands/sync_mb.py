@@ -11,6 +11,7 @@ from tqdm import tqdm
 
 from metabooks.models import MetabooksSync
 from suppliers.models import Supplier
+from products.models import Product
 
 
 class Command(BaseCommand):
@@ -175,14 +176,33 @@ class Command(BaseCommand):
                 'supplier': mb_sync.supplier,
                 'name': product_data['title'].strip().upper(),
                 'description': product_data['mainDescription'],
-                'price': product_data['priceBrl'],
+                'mb_price': product_data['priceBrl'],
                 'sku': product_data['gtin'],
                 'release_date': release_date,
                 'supplier_internal_id': product_data['ordernumber'],
             }
         )
 
-        # TODO: Consider if the product was created or updated
+        should_save_product = False
+
+        if created:
+            product.mb_created = product_data['createDate']
+            should_save_product = True
+            
+        if product_data['lastModifiedDate'] != product.mb_modified:
+            product.mb_modified = product_data['lastModifiedDate']
+            should_save_product = True
+
+        if not product.price:
+            product.price = product.mb_price
+            should_save_product = True
+
+        self.stdout.write(self.style.SUCCESS(f'Product {product.name} release date: {product.release_date}'))
+
+        if should_save_product:
+            product.save()
+
+        # TODO: Consider the criteria to get the product details
         # self.get_product_details(mb_sync, product, mb_category)
 
 

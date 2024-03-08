@@ -31,25 +31,6 @@ class ProductCategory(models.Model):
         return f'{self.name}'
 
 
-class ProductMBCategory(models.Model):
-    '''
-    Model for the Product Metabooks Category
-    '''
-    code = models.CharField(_('Code'), max_length=10)
-    name = models.CharField(_('Name'), max_length=60, blank=True, null=True)
-
-    class Meta:
-        '''
-        Meta options
-        '''
-        verbose_name = _('Product Metabooks Category')
-        verbose_name_plural = _('Product Metabooks Categories')
-        ordering = ['name']
-
-    def __str__(self):
-        return f'{self.name}'
-
-
 class Product(models.Model):
     '''
     Model for the Product
@@ -68,11 +49,6 @@ class Product(models.Model):
     category = models.ForeignKey(
         ProductCategory, on_delete=models.CASCADE, verbose_name=_('Category'),
         related_name='products', blank=True, null=True,
-    )
-
-    mb_categories = models.ManyToManyField(
-        ProductMBCategory, verbose_name=_('Metabooks Categories'),
-        related_name='products', blank=True,
     )
 
     name = models.CharField(_('Name'), max_length=120)

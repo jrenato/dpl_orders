@@ -11,7 +11,6 @@ from tqdm import tqdm
 
 from metabooks.models import MetabooksSync
 from suppliers.models import Supplier
-from products.models import Product, ProductMBCategory
 
 
 class Command(BaseCommand):
@@ -170,7 +169,7 @@ class Command(BaseCommand):
             product_data['publicationDate'], '%d/%m/%Y'
         ).date() if product_data['publicationDate'] else None
 
-        product, _ = Product.objects.update_or_create(
+        product, created = Product.objects.update_or_create(
             mb_id=product_data['id'],
             defaults={
                 'supplier': mb_sync.supplier,
@@ -183,19 +182,8 @@ class Command(BaseCommand):
             }
         )
 
-        # If the product has any mb_category, remove them
-        # In that way, we can add the new ones, in case the product has changed
-        product.mb_categories.clear()
-
-        # Add the mb_categories to the product
-        for thema_code in product_data['themaSubjects']:
-            mb_category, _ = ProductMBCategory.objects.get_or_create(code=thema_code)
-            product.mb_categories.add(mb_category)
-
-        # TODO: Instead of this, just get the product details for all products
-        for mb_category in product.mb_categories.all():
-            if not mb_category.name or mb_category.name.strip() == '':
-                self.get_product_details(mb_sync, product, mb_category)
+        # TODO: Consider if the product was created or updated
+        # self.get_product_details(mb_sync, product, mb_category)
 
 
     def get_product_details(self, mb_sync, product, mb_category):
@@ -208,13 +196,4 @@ class Command(BaseCommand):
 
         if response.status_code == 200:
             # TODO: Parse the product details
-            for subject in response.json()['subjects']:
-                if 'subjectCode' not in subject:
-                    self.stdout.write(self.style.ERROR(
-                        f'Error parsing the product details for product {product.mb_id}')
-                    )
-                    raise ValueError('Error parsing the product details')
-
-                if mb_category.code == subject['subjectCode']:
-                    mb_category.name = subject['subjectHeadingText']
-                    mb_category.save()
+            product_data = response.json()

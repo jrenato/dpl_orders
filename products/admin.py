@@ -55,7 +55,7 @@ class ProductAdmin(admin.ModelAdmin):
     '''
     list_display = ('name', 'sku', 'category', 'price', 'stock')
     search_fields = ('name', 'sku', 'supplier_internal_id', 'mb_id', 'vl_id')
-    list_filter = ('category',)
+    list_filter = ('category', 'supplier',)
     prepopulated_fields = {'slug': ('name',)}
     list_per_page = 20
     inlines = [ProductReleaseDateHistoryInline]

@@ -1,8 +1,11 @@
 '''
 Command to sync data with metabooks
 '''
+import os
 import datetime
 import requests
+from PIL import Image
+from io import BytesIO
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
@@ -25,6 +28,8 @@ class Command(BaseCommand):
     timeout = 5
     max_results = 50
     debug = False
+    media_root = settings.MEDIA_ROOT
+    upload_to_path = os.path.join(media_root, 'products', 'images')
 
 
     def add_arguments(self, parser):
@@ -235,20 +240,40 @@ class Command(BaseCommand):
         '''
         size = 'l' # Possible values: l, m, s
 
-        headers = {'Authorization': f'Bearer {mb_sync.bearer}'}
+        headers = {
+            'Authorization': f'Bearer {mb_sync.bearer}',
+            'Content-Type': 'image/jpeg',
+        }
         url = f'{self.mb_url}/cover/{product.sku}/{size}'
         response = requests.get(url, headers=headers, timeout=self.timeout)
 
         if response.status_code == 200:
             # Delete old cover images
-            ProductImage.objects.filter(product=product, cover=True).delete()
+            for product_image in ProductImage.objects.filter(product=product, is_cover=True):
+                try:
+                    os.remove(product_image.image.url)
+                except FileNotFoundError:
+                    tqdm.write(f'File not found: {product_image.image.url}')
+                product_image.delete()
+
+            # Save response.content as a ProductImage
+            img_buffer = BytesIO()
+            img_buffer.write(response.content)
+            img = Image.open(img_buffer)
+            img_file_path = os.path.join(self.upload_to_path, f'{product.sku}.jpg')
+            img.save(img_file_path, format='JPEG')
 
             # Create new cover image
-            _ = ProductImage.objects.create(
+            product_image = ProductImage.objects.create(
                 product=product,
-                image=response.content,
-                cover=True
+                image=os.path.join('products', 'images', f'{product.sku}.jpg'),
+                is_cover=True
             )
+            # product_image.image.save(
+            #     f'{product.sku}.jpg',
+            #     ContentFile(response.content),
+            #     save=True
+            # )
         else:
             raise requests.HTTPError(f'Error getting the product cover with status code \
                     {response.status_code} and message {response.text}')

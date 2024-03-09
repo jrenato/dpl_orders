@@ -24,7 +24,8 @@ class ProductListView(PermissionRequiredMixin, ListView):
             .annotate(
                 order_items_sum=Sum('order_items__quantity'),
                 groups_count=Count('group_items', distinct=True)
-            )
+            )\
+            .order_by('name')
         return queryset
 
 

@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 from metabooks.models import MetabooksSync
 from suppliers.models import Supplier
-from products.models import Product
+from products.models import Product, ProductImage
 
 
 class Command(BaseCommand):
@@ -183,11 +183,11 @@ class Command(BaseCommand):
             defaults={
                 'supplier': mb_sync.supplier,
                 'name': product_data['title'].strip().upper(),
-                'description': product_data['mainDescription'],
-                'mb_price': product_data['priceBrl'],
                 'sku': product_data['gtin'],
+                'mb_price': product_data['priceBrl'],
                 'release_date': release_date,
                 'supplier_internal_id': product_data['ordernumber'],
+                'description': product_data['mainDescription'],
             }
         )
 
@@ -213,16 +213,42 @@ class Command(BaseCommand):
 
         # TODO: Consider the criteria to get the product details
         # self.get_product_details(mb_sync, product, mb_category)
+        self.get_product_cover(mb_sync, product)
 
 
-    def get_product_details(self, mb_sync, product, mb_category):
+    # def get_product_details(self, mb_sync, product, mb_category):
+    #     '''
+    #     Get the product details
+    #     '''
+    #     headers = {'Authorization': f'Bearer {mb_sync.bearer}'}
+    #     url = f'{self.mb_url}/product/{product.mb_id}'
+    #     response = requests.get(url, headers=headers, timeout=self.timeout)
+
+    #     if response.status_code == 200:
+    #         # TODO: Parse the product details
+    #         product_data = response.json()
+
+
+    def get_product_cover(self, mb_sync, product):
         '''
-        Get the product details
+        Get the product cover as image/jpeg and store it as a ProductImage
         '''
+        size = 'l' # Possible values: l, m, s
+
         headers = {'Authorization': f'Bearer {mb_sync.bearer}'}
-        url = f'{self.mb_url}/product/{product.mb_id}'
+        url = f'{self.mb_url}/cover/{product.sku}/{size}'
         response = requests.get(url, headers=headers, timeout=self.timeout)
 
         if response.status_code == 200:
-            # TODO: Parse the product details
-            product_data = response.json()
+            # Delete old cover images
+            ProductImage.objects.filter(product=product, cover=True).delete()
+
+            # Create new cover image
+            _ = ProductImage.objects.create(
+                product=product,
+                image=response.content,
+                cover=True
+            )
+        else:
+            raise requests.HTTPError(f'Error getting the product cover with status code \
+                    {response.status_code} and message {response.text}')

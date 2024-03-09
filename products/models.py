@@ -125,8 +125,10 @@ class Product(models.Model):
         # Try to get the product data from the internal id
         if self.vl_id and settings.VL_INTEGRATION:
             livro = Livros.objects.get(nbook=self.vl_id)
-            self.name = livro.title
-            self.price = livro.sellpr
+            #self.name = livro.title
+            self.vl_price = livro.sellpr
+            if not self.price or self.price < self.vl_price:
+                self.price = self.vl_price
 
             if not self.category:
                 espec = Espec.objects.get(codigo=livro.subj1)
@@ -148,6 +150,31 @@ def product_post_save(sender, instance, created, **kwargs):
         ProductReleaseDateHistory.objects.create(
             product=instance, release_date=instance.release_date
         )
+
+
+class ProductImage(models.Model):
+    '''
+    Model for the Product Image
+    '''
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, verbose_name=_('Product'), related_name='images'
+    )
+    image = models.ImageField(_('Image'), upload_to='products/images')
+    is_cover = models.BooleanField(_('Is Cover'), default=False)
+
+    created = models.DateTimeField(_('Created at'), auto_now_add=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        '''
+        Meta options
+        '''
+        verbose_name = _('Product Image')
+        verbose_name_plural = _('Product Images')
+        ordering = ['product', '-created']
+
+    def __str__(self):
+        return f'{self.product.name} - {self.image}'
 
 
 class ProductReleaseDateHistory(models.Model):

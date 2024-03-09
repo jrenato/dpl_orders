@@ -3,6 +3,7 @@ Admin for Products
 '''
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from django.utils.safestring import mark_safe
 
 from .models import ProductCategory, Product, ProductGroup,\
     ProductGroupItem, ProductReleaseDateHistory
@@ -59,6 +60,13 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_per_page = 20
     inlines = [ProductReleaseDateHistoryInline]
+
+    readonly_fields = ('cover_preview', 'created', 'modified')
+
+    def cover_preview(self, obj):
+        cover_imagem = obj.images.filter(is_cover=True).first()
+        if cover_imagem:
+            return mark_safe(f'<img src="{cover_imagem.image.url}" width="100">')
 
     # actions = ['make_available', 'make_unavailable']
 

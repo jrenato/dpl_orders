@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 
 from .models import ProductCategory, Product, ProductGroup,\
-    ProductGroupItem, ProductReleaseDateHistory
+    ProductGroupItem, ProductReleaseDateHistory, ProductImage
 
 
 class ProductGroupItemInline(admin.TabularInline):
@@ -49,6 +49,14 @@ class ProductReleaseDateHistoryInline(admin.TabularInline):
     readonly_fields = ['created',]
 
 
+class ProductImageInline(admin.TabularInline):
+    '''
+    Inline for the ProductImage model
+    '''
+    model = ProductImage
+    extra = 1
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     '''
@@ -63,10 +71,12 @@ class ProductAdmin(admin.ModelAdmin):
 
     readonly_fields = ('cover_preview', 'created', 'modified')
 
+    inlines = [ProductImageInline]
+
     def cover_preview(self, obj):
-        cover_imagem = obj.images.filter(is_cover=True).first()
-        if cover_imagem:
-            return mark_safe(f'<img src="{cover_imagem.image.url}" width="100">')
+        cover_image = obj.images.filter(is_cover=True).first()
+        if cover_image:
+            return mark_safe(f'<img src="{cover_image.image.url}" width="100">')
 
     # actions = ['make_available', 'make_unavailable']
 

@@ -5,6 +5,7 @@ django-crispy-forms
 django-environ
 django-localflavor
 mssql-django
+pillow
 pip-tools
 pyexcel-ods
 pyodbc

@@ -99,7 +99,6 @@ class Product(models.Model):
         super().__init__(*args, **kwargs)
         self._release_date = self.release_date
 
-
     def save(self, *args, **kwargs):
         # If the product is being created, generate the slug
         if not self.id:
@@ -140,7 +139,8 @@ class Product(models.Model):
             except Estoque.DoesNotExist:
                 estoque = None
             except Estoque.MultipleObjectsReturned as exc:
-                raise Estoque.MultipleObjectsReturned(f'Multiple stocks for {self.vl_id} - {self.name}') from exc
+                raise Estoque.MultipleObjectsReturned(
+                    f'Multiple stocks for {self.vl_id} - {self.name}') from exc
 
             self.stock = estoque.disp
 

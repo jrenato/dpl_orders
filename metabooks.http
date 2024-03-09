@@ -19,9 +19,31 @@ Authorization: Bearer {{ bearer }}
 ###
 
 @product_id = {{products_by_publisher.response.body.content.0.id}}
+@product_gtin = {{products_by_publisher.response.body.content.0.gtin}}
 
 # @name product_by_id
 GET {{$dotenv MB_URL}}/product/{{ product_id }} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{bearer}}
+
+###
+
+# @name product_assets_by_product_id
+GET {{$dotenv MB_URL}}/asset/mmo/{{ product_id }} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{bearer}}
+
+###
+
+# @name get_product_cover_by_gtin
+GET {{$dotenv MB_URL}}/cover/{{ product_gtin }}/l HTTP/1.1
+Content-Type: image/jpeg
+Authorization: Bearer {{bearer}}
+
+###
+
+# @name logout
+GET {{$dotenv MB_URL}}/logout HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{bearer}}
 
@@ -31,12 +53,5 @@ Authorization: Bearer {{bearer}}
 
 # @name get_publisher_by_id
 GET {{$dotenv MB_URL}}/publisher/{{ publisher_id }} HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer {{bearer}}
-
-###
-
-# @name logout
-GET {{$dotenv MB_URL}}/logout HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{bearer}}

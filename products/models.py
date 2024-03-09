@@ -166,7 +166,7 @@ class ProductImage(models.Model):
         Product, on_delete=models.CASCADE, verbose_name=_('Product'), related_name='images'
     )
     image = models.ImageField(_('Image'), upload_to='products/images')
-    is_cover = models.BooleanField(_('Is Cover'), default=False)
+    is_main = models.BooleanField(_('Is Cover'), default=False)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)

@@ -249,7 +249,7 @@ class Command(BaseCommand):
 
         if response.status_code == 200:
             # Delete old cover images
-            for product_image in ProductImage.objects.filter(product=product, is_cover=True):
+            for product_image in ProductImage.objects.filter(product=product, is_main=True):
                 # TODO: Fix error when deleting old cover images
                 # try:
                 #     os.remove(os.path.join(settings.MEDIA_ROOT, product_image.image.url))
@@ -268,7 +268,7 @@ class Command(BaseCommand):
             product_image = ProductImage.objects.create(
                 product=product,
                 image=os.path.join('products', 'images', f'{product.sku}.jpg'),
-                is_cover=True
+                is_main=True
             )
             # product_image.image.save(
             #     f'{product.sku}.jpg',

@@ -74,7 +74,7 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
 
     def cover_preview(self, obj):
-        cover_image = obj.images.filter(is_cover=True).first()
+        cover_image = obj.images.filter(is_main=True).first()
         if cover_image:
             return mark_safe(f'<img src="{cover_image.image.url}" width="100">')
 

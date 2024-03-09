@@ -135,7 +135,13 @@ class Product(models.Model):
                 if espec.nome in ['HQ', 'MANGÁ', 'LIVRO', 'ALBUM']:
                     self.category, _ = ProductCategory.objects.get_or_create(name=espec.nome)
 
-            estoque = Estoque.objects.get(nbook=self.vl_id)
+            try:
+                estoque = Estoque.objects.get(nbook=self.vl_id)
+            except Estoque.DoesNotExist:
+                estoque = None
+            except Estoque.MultipleObjectsReturned as exc:
+                raise Estoque.MultipleObjectsReturned(f'Multiple stocks for {self.vl_id} - {self.name}') from exc
+
             self.stock = estoque.disp
 
         super().save(*args, **kwargs)

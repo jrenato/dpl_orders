@@ -18,7 +18,7 @@ class Customer(models.Model):
     '''
     Customer model
     '''
-    internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
+    vl_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
 
     name = models.CharField(_('Name'), max_length=120)
     company_name = models.CharField(_('Company Name'), max_length=120, blank=True, null=True)
@@ -71,8 +71,8 @@ class Customer(models.Model):
         if not self.id:
             self.slug = slugify_uniquely(self.name, self.__class__)
 
-        if self.internal_id:
-            cliforn = Cliforn.objects.get(codigo=self.internal_id)
+        if self.vl_id:
+            cliforn = Cliforn.objects.get(codigo=self.vl_id)
             # Basic data update
             self.name = cliforn.nome
             # Customers don't have short name in vldados            

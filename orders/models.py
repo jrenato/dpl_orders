@@ -23,7 +23,7 @@ class Order(models.Model):
     '''
     Model for Order
     '''
-    internal_id = models.CharField(_('Internal ID'), max_length=100, blank=True, null=True)
+    vl_id = models.CharField(_('Internal ID'), max_length=100, blank=True, null=True)
 
     status = models.CharField(
         max_length=2,

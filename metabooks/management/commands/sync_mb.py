@@ -1,13 +1,17 @@
 '''
 Command to sync data with metabooks
 '''
+import datetime
 import requests
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
+from tqdm import tqdm
+
 from metabooks.models import MetabooksSync
 from suppliers.models import Supplier
+from products.models import Product
 
 
 class Command(BaseCommand):
@@ -43,7 +47,7 @@ class Command(BaseCommand):
                     mb_sync.concluded = True
                     mb_sync.save()
 
-        for supplier in Supplier.objects.filter(mb_id__isnull=False):
+        for supplier in tqdm(Supplier.objects.filter(mb_id__isnull=False), desc='Suppliers'):
             try:
                 mb_sync = MetabooksSync.objects.get(concluded=False, supplier=supplier)
             except MetabooksSync.DoesNotExist:
@@ -54,8 +58,16 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.WARNING('Bearer token not found'))
                 self.login(mb_sync)
 
-            while mb_sync.current_page <= mb_sync.last_page and not mb_sync.concluded:
+            if mb_sync.current_page <= mb_sync.last_page and not mb_sync.concluded:
+                tqdm.write('Parsing first page')
                 self.parse_current_page(mb_sync)
+
+            if not mb_sync.concluded:
+                for _ in tqdm(
+                    range(mb_sync.current_page, mb_sync.last_page),
+                    desc='Parsing pages', leave=False
+                ):
+                    self.parse_current_page(mb_sync)
 
 
     def login(self, mb_sync):
@@ -100,11 +112,11 @@ class Command(BaseCommand):
         if response.status_code == 200:
             # Logout successful
             self.stdout.write(self.style.SUCCESS('Logout successful'))
-            return True
         else:
             # Logout failed
             self.stdout.write(self.style.ERROR('Logout failed'))
-            return False
+
+        return True
 
 
     def parse_current_page(self, mb_sync):
@@ -143,7 +155,7 @@ class Command(BaseCommand):
         '''
         Parse the products
         '''
-        for product_data in products_data:
+        for product_data in tqdm(products_data, desc='Parsing Products', leave=False):
             if self.debug:
                 self.stdout.write(self.style.SUCCESS(f'Parsing product {product_data["id"]}'))
             # Parse the product
@@ -154,6 +166,63 @@ class Command(BaseCommand):
         '''
         Parse the product
         '''
-        # Parse the product
+        release_date = datetime.datetime.strptime(
+            product_data['publicationDate'], '%d/%m/%Y'
+        ).date() if product_data['publicationDate'] else None
+
+        mb_create_date = datetime.datetime.strptime(
+            product_data['createDate'], '%d/%m/%Y'
+        ).date() if product_data['createDate'] else None
+
+        mb_modified_date = datetime.datetime.strptime(
+            product_data['lastModifiedDate'], '%d/%m/%Y'
+        ).date() if product_data['lastModifiedDate'] else None
+
+        product, created = Product.objects.update_or_create(
+            mb_id=product_data['id'],
+            defaults={
+                'supplier': mb_sync.supplier,
+                'name': product_data['title'].strip().upper(),
+                'description': product_data['mainDescription'],
+                'mb_price': product_data['priceBrl'],
+                'sku': product_data['gtin'],
+                'release_date': release_date,
+                'supplier_internal_id': product_data['ordernumber'],
+            }
+        )
+
+        should_save_product = False
+
+        if created:
+            product.mb_created = mb_create_date
+            should_save_product = True
+
+        if product.mb_modified != mb_modified_date:
+            product.mb_modified = mb_modified_date
+            should_save_product = True
+
+        if not product.price:
+            product.price = product.mb_price
+            should_save_product = True
+
         if self.debug:
-            self.stdout.write(self.style.SUCCESS(f'Parsing product {product_data["title"]} for supplier {mb_sync.supplier}'))
+            tqdm.write(f'Product {product.name} release date: {product.release_date}')
+
+        if should_save_product:
+            product.save()
+
+        # TODO: Consider the criteria to get the product details
+        # self.get_product_details(mb_sync, product, mb_category)
+
+
+    def get_product_details(self, mb_sync, product, mb_category):
+        '''
+        Get the product details
+        '''
+        headers = {'Authorization': f'Bearer {mb_sync.bearer}'}
+        url = f'{self.mb_url}/product/{product.mb_id}'
+        response = requests.get(url, headers=headers, timeout=self.timeout)
+
+        if response.status_code == 200:
+            # TODO: Parse the product details
+            product_data = response.json()

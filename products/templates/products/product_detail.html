@@ -21,7 +21,7 @@
             <div class="col-md-6">
                 <h2 class="detail-title">{% translate 'Product Details' %}</h2>
                 <ul>
-                    <li><b>{% translate 'Internal ID' %}:</b> {{ product.internal_id }}</li>
+                    <li><b>{% translate 'Internal ID' %}:</b> {{ product.vl_id }}</li>
                     <li><b>{% translate 'Supplier Internal ID' %}:</b> {{ product.supplier_internal_id }}</li>
                     <li><b>{% translate 'Created at' %}:</b> {{ product.created|date:"d/m/Y" }}</li>
                     <li><b>{% translate 'Modified at' %}:</b> {{ product.modified|date:"d/m/Y" }}</li>

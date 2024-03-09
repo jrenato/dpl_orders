@@ -28,7 +28,7 @@
             <div class="col-md-6">
                 <h2 class="detail-title">{% translate 'Contact Details' %}</h2>
                 <ul>
-                    <li><b>{% translate 'Internal ID' %}:</b> {{ customer.internal_id }}</li>
+                    <li><b>{% translate 'Internal ID' %}:</b> {{ customer.vl_id }}</li>
                     <li><b>{% translate 'Created at' %}:</b> {{ customer.created|date:"d/m/Y" }}</li>
                     <li><b>{% translate 'Modified at' %}:</b> {{ customer.modified|date:"d/m/Y" }}</li>
                 </ul>

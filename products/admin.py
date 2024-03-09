@@ -4,8 +4,8 @@ Admin for Products
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from .models import ProductCategory, Product, ProductGroup, ProductGroupItem, \
-    ProductReleaseDateHistory
+from .models import ProductCategory, Product, ProductGroup,\
+    ProductGroupItem, ProductReleaseDateHistory
 
 
 class ProductGroupItemInline(admin.TabularInline):
@@ -54,8 +54,8 @@ class ProductAdmin(admin.ModelAdmin):
     Admin for the Product model
     '''
     list_display = ('name', 'sku', 'category', 'price', 'stock')
-    search_fields = ('name', 'sku', 'suppplier_internal_id')
-    list_filter = ('category',)
+    search_fields = ('name', 'sku', 'supplier_internal_id', 'mb_id', 'vl_id')
+    list_filter = ('category', 'supplier',)
     prepopulated_fields = {'slug': ('name',)}
     list_per_page = 20
     inlines = [ProductReleaseDateHistoryInline]

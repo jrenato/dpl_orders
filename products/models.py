@@ -35,7 +35,8 @@ class Product(models.Model):
     '''
     Model for the Product
     '''
-    internal_id = models.CharField(_('Internal id'), max_length=20, blank=True, null=True)
+    vl_id = models.CharField(_('Vialogos id'), max_length=20, blank=True, null=True)
+    mb_id = models.CharField(_('Metabooks id'), max_length=20, blank=True, null=True)
     supplier_internal_id = models.CharField(
         _('Supplier Internal id'), max_length=40, blank=True, null=True
     )
@@ -53,12 +54,26 @@ class Product(models.Model):
     name = models.CharField(_('Name'), max_length=120)
     slug = models.SlugField(_('Slug'), max_length=140, unique=True, blank=True, null=True)
     sku = models.CharField(_('SKU'), max_length=13, blank=True, null=True)
+
     price = models.DecimalField(
         _('Price'), decimal_places=2, max_digits=10000, blank=True, null=True
     )
+    mb_price = models.DecimalField(
+        _('Metabooks Price'), decimal_places=2, max_digits=10000, blank=True, null=True
+    )
+    vl_price = models.DecimalField(
+        _('Vialogos Price'), decimal_places=2, max_digits=10000, blank=True, null=True
+    )
+
     release_date = models.DateField(_('Release Date'), blank=True, null=True)
     stock = models.IntegerField(_('Stock'), default=0)
     description = models.TextField(_('Description'), blank=True, null=True)
+
+    mb_created = models.DateField(_('Metabooks created at'), blank=True, null=True)
+    mb_modified = models.DateField(_('Metabooks modified at'), blank=True, null=True)
+
+    vl_created = models.DateField(_('Vialogos created at'), blank=True, null=True)
+    vl_modified = models.DateField(_('Vialogos modified at'), blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     modified = models.DateTimeField(_('Modified at'), auto_now=True)
@@ -97,7 +112,7 @@ class Product(models.Model):
         # Try to get the internal id from the isbn
         isbn = f'{self.sku}'
         valid_isbn = isbn and isbn.startswith('978') and len(isbn) == 13
-        if settings.VL_INTEGRATION and not self.internal_id and valid_isbn:
+        if settings.VL_INTEGRATION and not self.vl_id and valid_isbn:
             livro = None
             try:
                 livro = Livros.objects.get(isbn1=isbn)
@@ -105,11 +120,11 @@ class Product(models.Model):
                 pass
 
             if livro:
-                self.internal_id = livro.nbook
+                self.vl_id = livro.nbook
 
         # Try to get the product data from the internal id
-        if self.internal_id and settings.VL_INTEGRATION:
-            livro = Livros.objects.get(nbook=self.internal_id)
+        if self.vl_id and settings.VL_INTEGRATION:
+            livro = Livros.objects.get(nbook=self.vl_id)
             self.name = livro.title
             self.price = livro.sellpr
 
@@ -118,7 +133,7 @@ class Product(models.Model):
                 if espec.nome in ['HQ', 'MANGÁ', 'LIVRO', 'ALBUM']:
                     self.category, _ = ProductCategory.objects.get_or_create(name=espec.nome)
 
-            estoque = Estoque.objects.get(nbook=self.internal_id)
+            estoque = Estoque.objects.get(nbook=self.vl_id)
             self.stock = estoque.disp
 
         super().save(*args, **kwargs)

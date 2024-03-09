@@ -136,7 +136,7 @@ class Product(models.Model):
                     self.category, _ = ProductCategory.objects.get_or_create(name=espec.nome)
 
             try:
-                estoque = Estoque.objects.get(nbook=self.vl_id)
+                estoque = Estoque.objects.get(nbook=self.vl_id, filial='01')
             except Estoque.DoesNotExist:
                 estoque = None
             except Estoque.MultipleObjectsReturned as exc:

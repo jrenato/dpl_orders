@@ -250,10 +250,11 @@ class Command(BaseCommand):
         if response.status_code == 200:
             # Delete old cover images
             for product_image in ProductImage.objects.filter(product=product, is_cover=True):
-                try:
-                    os.remove(product_image.image.url)
-                except FileNotFoundError:
-                    tqdm.write(f'File not found: {product_image.image.url}')
+                # TODO: Fix error when deleting old cover images
+                # try:
+                #     os.remove(os.path.join(settings.MEDIA_ROOT, product_image.image.url))
+                # except FileNotFoundError:
+                #     tqdm.write(f'File not found: {product_image.image.url}')
                 product_image.delete()
 
             # Save response.content as a ProductImage

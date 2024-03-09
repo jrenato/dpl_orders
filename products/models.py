@@ -131,8 +131,8 @@ class Product(models.Model):
                 self.price = self.vl_price
 
             if not self.category:
-                espec = Espec.objects.get(codigo=livro.subj1)
-                if espec.nome in ['HQ', 'MANGÁ', 'LIVRO', 'ALBUM']:
+                espec = Espec.objects.filter(codigo=livro.subj1).first()
+                if espec and espec.nome in ['HQ', 'MANGÁ', 'LIVRO', 'ALBUM']:
                     self.category, _ = ProductCategory.objects.get_or_create(name=espec.nome)
 
             try:

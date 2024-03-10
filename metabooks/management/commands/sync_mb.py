@@ -196,14 +196,17 @@ class Command(BaseCommand):
             }
         )
 
+        should_get_details = False
         should_save_product = False
 
         if created:
             product.mb_created = mb_create_date
+            should_get_details = True
             should_save_product = True
 
         if product.mb_modified != mb_modified_date:
             product.mb_modified = mb_modified_date
+            should_get_details = True
             should_save_product = True
 
         if not product.price:
@@ -213,25 +216,25 @@ class Command(BaseCommand):
         if self.debug:
             tqdm.write(f'Product {product.name} release date: {product.release_date}')
 
+        if should_get_details:
+            # self.get_product_details(mb_sync, product)
+            self.get_product_cover(mb_sync, product)
+
         if should_save_product:
             product.save()
 
-        # TODO: Consider the criteria to get the product details
-        # self.get_product_details(mb_sync, product, mb_category)
-        self.get_product_cover(mb_sync, product)
 
+    def get_product_details(self, mb_sync, product):
+        '''
+        Get the product details
+        '''
+        headers = {'Authorization': f'Bearer {mb_sync.bearer}'}
+        url = f'{self.mb_url}/product/{product.mb_id}'
+        response = requests.get(url, headers=headers, timeout=self.timeout)
 
-    # def get_product_details(self, mb_sync, product, mb_category):
-    #     '''
-    #     Get the product details
-    #     '''
-    #     headers = {'Authorization': f'Bearer {mb_sync.bearer}'}
-    #     url = f'{self.mb_url}/product/{product.mb_id}'
-    #     response = requests.get(url, headers=headers, timeout=self.timeout)
-
-    #     if response.status_code == 200:
-    #         # TODO: Parse the product details
-    #         product_data = response.json()
+        if response.status_code == 200:
+            # TODO: Parse the product details
+            product_data = response.json()
 
 
     def get_product_cover(self, mb_sync, product):

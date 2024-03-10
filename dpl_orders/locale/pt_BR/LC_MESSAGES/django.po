@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-05 09:28-0300\n"
+"POT-Creation-Date: 2024-03-10 10:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,28 +32,28 @@ msgstr "Pessoa Física"
 msgid "Company"
 msgstr "Pessoa Jurídica"
 
-#: customers/models.py:21 products/models.py:38 suppliers/models.py:23
+#: customers/models.py:21
 msgid "Internal id"
 msgstr "Código Interno"
 
 #: customers/models.py:23 customers/templates/customers/customer_detail.html:14
-#: products/models.py:20 products/models.py:53 products/models.py:173
-#: products/templates/products/product_detail.html:14 suppliers/models.py:25
+#: products/models.py:20 products/models.py:54 products/models.py:222
+#: products/templates/products/product_detail.html:42 suppliers/models.py:26
 #: suppliers/templates/suppliers/supplier_detail.html:14
 msgid "Name"
 msgstr "Nome"
 
-#: customers/models.py:24 suppliers/models.py:26
+#: customers/models.py:24 suppliers/models.py:27
 msgid "Company Name"
 msgstr "Razão Social"
 
 #: customers/models.py:25 customers/templates/customers/customer_detail.html:15
-#: suppliers/models.py:27 suppliers/templates/suppliers/supplier_detail.html:15
+#: suppliers/models.py:28 suppliers/templates/suppliers/supplier_detail.html:15
 msgid "Short Name"
 msgstr "Nome Reduzido"
 
-#: customers/models.py:26 products/models.py:54 products/models.py:174
-#: suppliers/models.py:28
+#: customers/models.py:26 products/models.py:55 products/models.py:223
+#: suppliers/models.py:29
 msgid "Slug"
 msgstr "Slug"
 
@@ -61,31 +61,31 @@ msgstr "Slug"
 msgid "Sheet Label"
 msgstr "Rótulo da Planilha"
 
-#: customers/models.py:30 suppliers/models.py:31
+#: customers/models.py:30 suppliers/models.py:32
 msgid "Person or Company"
 msgstr "Pessoa Física ou Jurídica"
 
 #: customers/models.py:32 customers/templates/customers/customer_detail.html:18
-#: suppliers/models.py:33 suppliers/models.py:124
+#: suppliers/models.py:34 suppliers/models.py:125
 #: suppliers/templates/suppliers/supplier_detail.html:20
 msgid "CNPJ"
 msgstr "CNPJ"
 
 #: customers/models.py:33 customers/templates/customers/customer_detail.html:21
-#: suppliers/models.py:34 suppliers/templates/suppliers/supplier_detail.html:23
+#: suppliers/models.py:35 suppliers/templates/suppliers/supplier_detail.html:23
 msgid "CPF"
 msgstr "CPF"
 
-#: customers/models.py:36 suppliers/models.py:37
+#: customers/models.py:36 suppliers/models.py:38
 msgid "State Registration"
 msgstr "Inscrição Estadual"
 
-#: customers/models.py:39 suppliers/models.py:40
+#: customers/models.py:39 suppliers/models.py:41
 msgid "Municipal Registration"
 msgstr "Inscrição Municipal"
 
 #: customers/models.py:42 customers/templates/customers/customer_detail.html:23
-#: suppliers/models.py:43 suppliers/templates/suppliers/supplier_detail.html:30
+#: suppliers/models.py:44 suppliers/templates/suppliers/supplier_detail.html:30
 msgid "Contact Person"
 msgstr "Contato"
 
@@ -93,36 +93,37 @@ msgstr "Contato"
 #: dpl_orders/allauth/account/forms.py:116
 #: dpl_orders/allauth/account/forms.py:325
 #: dpl_orders/allauth/account/forms.py:474
-#: dpl_orders/allauth/account/forms.py:569 suppliers/models.py:44
+#: dpl_orders/allauth/account/forms.py:569 suppliers/models.py:45
 #: suppliers/templates/suppliers/supplier_detail.html:31
 msgid "Email"
 msgstr "Email"
 
-#: customers/models.py:44 suppliers/models.py:45
+#: customers/models.py:44 suppliers/models.py:46
 msgid "Email NFe"
 msgstr "Email NFe"
 
 #: customers/models.py:45 customers/templates/customers/customer_detail.html:25
-#: suppliers/models.py:46 suppliers/models.py:188
+#: suppliers/models.py:47 suppliers/models.py:189
 #: suppliers/templates/suppliers/supplier_detail.html:32
 msgid "Phone Number"
 msgstr "Telefone"
 
 #: customers/models.py:47 customers/models.py:134 customers/models.py:169
 #: customers/templates/customers/customer_detail.html:32 orders/models.py:39
-#: orders/models.py:66 orders/models.py:105 orders/models.py:164
-#: products/models.py:63 products/models.py:145 products/models.py:180
-#: products/templates/products/product_detail.html:26 suppliers/models.py:48
-#: suppliers/models.py:126 suppliers/models.py:161 suppliers/models.py:190
+#: orders/models.py:67 orders/models.py:122 orders/models.py:182
+#: products/models.py:78 products/models.py:171 products/models.py:194
+#: products/models.py:229 products/templates/products/product_detail.html:63
+#: suppliers/models.py:49 suppliers/models.py:127 suppliers/models.py:162
+#: suppliers/models.py:191
 #: suppliers/templates/suppliers/supplier_detail.html:17
 msgid "Created at"
 msgstr "Criado em"
 
 #: customers/models.py:48 customers/models.py:135 customers/models.py:170
-#: customers/templates/customers/customer_detail.html:33 products/models.py:64
-#: products/models.py:181 products/templates/products/product_detail.html:27
-#: suppliers/models.py:49 suppliers/models.py:127 suppliers/models.py:162
-#: suppliers/models.py:191
+#: customers/templates/customers/customer_detail.html:33 products/models.py:79
+#: products/models.py:230 products/templates/products/product_detail.html:66
+#: suppliers/models.py:50 suppliers/models.py:128 suppliers/models.py:163
+#: suppliers/models.py:192
 #: suppliers/templates/suppliers/supplier_detail.html:18
 msgid "Modified at"
 msgstr "Modificado em"
@@ -131,35 +132,35 @@ msgstr "Modificado em"
 #: customers/templates/customers/customer_list.html:19 orders/models.py:36
 #: orders/templates/orders/order_detail.html:9
 #: orders/templates/orders/order_list.html:14
-#: products/templates/products/product_detail.html:56
+#: products/templates/products/product_detail.html:98
 msgid "Customer"
 msgstr "Cliente"
 
-#: customers/models.py:126 suppliers/models.py:153
+#: customers/models.py:126 suppliers/models.py:154
 msgid "Street"
 msgstr "Rua"
 
-#: customers/models.py:127 suppliers/models.py:154
+#: customers/models.py:127 suppliers/models.py:155
 msgid "Number"
 msgstr "Número"
 
-#: customers/models.py:128 suppliers/models.py:155
+#: customers/models.py:128 suppliers/models.py:156
 msgid "Complement"
 msgstr "Complemento"
 
-#: customers/models.py:129 suppliers/models.py:156
+#: customers/models.py:129 suppliers/models.py:157
 msgid "City"
 msgstr "Cidade"
 
-#: customers/models.py:130 suppliers/models.py:157
+#: customers/models.py:130 suppliers/models.py:158
 msgid "State"
 msgstr "Estado"
 
-#: customers/models.py:131 suppliers/models.py:158
+#: customers/models.py:131 suppliers/models.py:159
 msgid "District"
 msgstr "Bairro"
 
-#: customers/models.py:132 suppliers/models.py:159
+#: customers/models.py:132 suppliers/models.py:160
 msgid "Zip Code"
 msgstr "CEP"
 
@@ -200,7 +201,7 @@ msgstr "Você tem certeza que deseja excluir %(name)s?"
 #: customers/tests/test_permissions.py:218
 #: customers/tests/test_permissions.py:231
 #: products/templates/products/product_confirm_delete.html:13
-#: products/templates/products/product_detail.html:42
+#: products/templates/products/product_detail.html:84
 #: products/tests/test_permissions.py:224
 #: products/tests/test_permissions.py:237
 #: suppliers/templates/suppliers/supplier_confirm_delete.html:13
@@ -211,7 +212,6 @@ msgid "Delete"
 msgstr "Excluir"
 
 #: customers/templates/customers/customer_detail.html:12
-#: products/templates/products/product_detail.html:12
 #: suppliers/templates/suppliers/supplier_detail.html:12
 msgid "Basic Information"
 msgstr "Informações Básicas"
@@ -223,7 +223,7 @@ msgstr "Detalhes de Contato"
 
 #: customers/templates/customers/customer_detail.html:31 orders/models.py:26
 #: orders/templates/orders/order_detail.html:22
-#: products/templates/products/product_detail.html:24
+#: products/templates/products/product_detail.html:57
 #: suppliers/templates/suppliers/supplier_detail.html:16
 #, fuzzy
 #| msgid "Internal id"
@@ -243,7 +243,7 @@ msgstr "CEP"
 #: customers/templates/customers/customer_detail.html:53
 #: customers/tests/test_permissions.py:192
 #: customers/tests/test_permissions.py:205
-#: products/templates/products/product_detail.html:37
+#: products/templates/products/product_detail.html:78
 #: products/tests/test_permissions.py:198
 #: products/tests/test_permissions.py:211
 #: suppliers/templates/suppliers/supplier_detail.html:52
@@ -259,23 +259,23 @@ msgstr "Produtos Pedidos"
 
 #: customers/templates/customers/customer_detail.html:74
 #: customers/templates/customers/customer_detail.html:97
-#: products/templates/products/product_detail.html:58
-#: products/templates/products/product_detail.html:78
+#: products/templates/products/product_detail.html:100
+#: products/templates/products/product_detail.html:122
 msgid "Date"
 msgstr "Data"
 
-#: customers/templates/customers/customer_detail.html:75 orders/models.py:89
-#: orders/templates/orders/order_detail.html:34 products/models.py:70
-#: products/models.py:142 products/models.py:211
+#: customers/templates/customers/customer_detail.html:75 orders/models.py:95
+#: orders/templates/orders/order_detail.html:34 products/models.py:85
+#: products/models.py:166 products/models.py:191 products/models.py:260
 #: products/templates/products/product_list.html:9
-#: products/templates/products/product_list.html:20
+#: products/templates/products/product_list.html:21
 msgid "Product"
 msgstr "Produto"
 
 #: customers/templates/customers/customer_detail.html:76
-#: customers/templates/customers/customer_detail.html:99 orders/models.py:93
-#: orders/models.py:151 orders/templates/orders/order_detail.html:35
-#: products/templates/products/product_detail.html:57
+#: customers/templates/customers/customer_detail.html:99 orders/models.py:105
+#: orders/models.py:169 orders/templates/orders/order_detail.html:35
+#: products/templates/products/product_detail.html:99
 msgid "Quantity"
 msgstr "Quantidade"
 
@@ -285,13 +285,14 @@ msgstr "Últimos Pedidos"
 
 #: customers/templates/customers/customer_detail.html:98
 #: orders/templates/orders/order_detail.html:23
-#: orders/templates/orders/order_list.html:17 products/models.py:175
-#: products/templates/products/product_detail.html:79
+#: orders/templates/orders/order_list.html:17 products/models.py:224
+#: products/templates/products/product_detail.html:123
 msgid "Status"
 msgstr "Status"
 
 #: customers/templates/customers/customer_detail.html:106 orders/models.py:12
-#: orders/tests/test_order_model.py:29 products/models.py:160
+#: orders/models.py:78 orders/tests/test_order_model.py:26
+#: orders/tests/test_order_model.py:34 products/models.py:209
 msgid "Pending"
 msgstr "Pendente"
 
@@ -664,20 +665,20 @@ msgstr "Sair"
 msgid "Dashboard"
 msgstr "Tela Inicial"
 
-#: dpl_orders/templates/base.html:63 orders/apps.py:8 orders/models.py:44
+#: dpl_orders/templates/base.html:63 orders/apps.py:8 orders/models.py:45
 #: orders/templates/orders/order_list.html:4
 #: orders/templates/orders/order_list.html:8
-#: products/templates/products/product_detail.html:52
+#: products/templates/products/product_detail.html:94
 msgid "Orders"
 msgstr "Pedidos"
 
-#: dpl_orders/templates/base.html:70 products/apps.py:8 products/models.py:71
+#: dpl_orders/templates/base.html:70 products/apps.py:8 products/models.py:86
 #: products/tests/test_permissions.py:148
 #: products/tests/test_permissions.py:159
 msgid "Products"
 msgstr "Produtos"
 
-#: dpl_orders/templates/base.html:86 suppliers/apps.py:8 suppliers/models.py:56
+#: dpl_orders/templates/base.html:86 suppliers/apps.py:8 suppliers/models.py:57
 #: suppliers/templates/suppliers/supplier_list.html:9
 #: suppliers/tests/test_permissions.py:142
 #: suppliers/tests/test_permissions.py:153
@@ -728,7 +729,15 @@ msgstr "Esta semana"
 msgid "Section title"
 msgstr "Título da seção"
 
-#: orders/models.py:13 products/models.py:162
+#: dpl_orders/templates/includes/pagination.html:21
+msgid "Page"
+msgstr ""
+
+#: dpl_orders/templates/includes/pagination.html:21
+msgid "of"
+msgstr ""
+
+#: orders/models.py:13 products/models.py:211
 msgid "In Separation"
 msgstr "Em Separação"
 
@@ -744,20 +753,26 @@ msgstr "Faturado"
 msgid "Waiting Transport"
 msgstr "Aguardando Transporte"
 
-#: orders/models.py:17 orders/tests/test_order_model.py:30
-#: products/models.py:163
+#: orders/models.py:17 orders/models.py:79 orders/tests/test_order_model.py:35
+#: products/models.py:212
 msgid "Finished"
 msgstr "Concluído"
 
-#: orders/models.py:18 products/models.py:164
+#: orders/models.py:18 orders/models.py:80 products/models.py:213
 msgid "Canceled"
 msgstr "Cancelado"
 
-#: orders/models.py:40 orders/models.py:106
+#: orders/models.py:40 orders/models.py:123 products/models.py:172
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: orders/models.py:43 orders/models.py:57 orders/models.py:83
+#: orders/models.py:41 orders/models.py:124
+#, fuzzy
+#| msgid "Canceled"
+msgid "Canceled at"
+msgstr "Cancelado"
+
+#: orders/models.py:44 orders/models.py:58 orders/models.py:89
 #: orders/templates/orders/order_detail.html:4
 #: orders/templates/orders/order_detail.html:8
 #, fuzzy
@@ -765,43 +780,53 @@ msgstr "Atualizado em"
 msgid "Order"
 msgstr "Pedido"
 
-#: orders/models.py:69
+#: orders/models.py:70
 msgid "Order Status History"
 msgstr "Histórico de Status do Pedido"
 
-#: orders/models.py:70
+#: orders/models.py:71
 msgid "Order Status Histories"
 msgstr "Históricos de Status do Pedido"
 
-#: orders/models.py:95 orders/models.py:153
-#: orders/templates/orders/order_detail.html:36 products/models.py:57
-#: products/templates/products/product_detail.html:18
-#: products/templates/products/product_list.html:32
+#: orders/models.py:106
+#, fuzzy
+#| msgid "Quantity"
+msgid "Delivered Quantity"
+msgstr "Quantidade"
+
+#: orders/models.py:109 orders/models.py:171
+#: orders/templates/orders/order_detail.html:36 products/models.py:59
+#: products/templates/products/product_detail.html:54
+#: products/templates/products/product_list.html:33
 msgid "Price"
 msgstr "Preço"
 
-#: orders/models.py:101 orders/models.py:158
+#: orders/models.py:112 orders/templates/orders/order_detail.html:15
+msgid "Discount"
+msgstr "Desconto"
+
+#: orders/models.py:118 orders/models.py:176
 #: orders/templates/orders/order_detail.html:37
 msgid "Subtotal"
 msgstr "Subtotal"
 
-#: orders/models.py:109 orders/models.py:148
+#: orders/models.py:127 orders/models.py:166
 msgid "Order Item"
 msgstr "Item de Pedido"
 
-#: orders/models.py:110
+#: orders/models.py:128
 msgid "Order Items"
 msgstr "Itens de Pedido"
 
-#: orders/models.py:162
+#: orders/models.py:180
 msgid "Comment"
 msgstr "Comentário"
 
-#: orders/models.py:167
+#: orders/models.py:185
 msgid "Order Item History"
 msgstr "Histórico do Item de Pedido"
 
-#: orders/models.py:168
+#: orders/models.py:186
 msgid "Order Item Histories"
 msgstr "Históricos de Itens de Pedido"
 
@@ -812,10 +837,6 @@ msgstr "itens"
 #: orders/templates/orders/order_detail.html:14
 msgid "Gross Total"
 msgstr "Total Bruto"
-
-#: orders/templates/orders/order_detail.html:15
-msgid "Discount"
-msgstr "Desconto"
 
 #: orders/templates/orders/order_detail.html:16
 msgid "Net Total"
@@ -839,7 +860,7 @@ msgstr "Em breve"
 msgid "Order items"
 msgstr "Itens de Pedido"
 
-#: orders/templates/orders/order_detail.html:55
+#: orders/templates/orders/order_detail.html:67
 msgid "Go back to orders list"
 msgstr "Voltar para a lista de pedidos"
 
@@ -859,13 +880,13 @@ msgstr "Valor Total"
 msgid "Actions"
 msgstr "Ações"
 
-#: orders/templates/orders/order_list.html:33
-msgid "View"
-msgstr "Visualizar"
-
-#: orders/templates/orders/order_list.html:39
+#: orders/templates/orders/order_list.html:43
 msgid "No orders found."
 msgstr "Nenhum pedido encontrado."
+
+#: orders/tests/test_views.py:52
+msgid "No orders available"
+msgstr "Nenhum pedido está disponível."
 
 #: products/models.py:26
 msgid "Product Category"
@@ -875,79 +896,127 @@ msgstr "Categoria de Produto"
 msgid "Product Categories"
 msgstr "Categorias de Produto"
 
-#: products/models.py:40
+#: products/models.py:38 suppliers/models.py:23
+msgid "Vialogos id"
+msgstr "Código Vialogos"
+
+#: products/models.py:39 suppliers/models.py:24
+msgid "Metabooks id"
+msgstr "Código Metabooks"
+
+#: products/models.py:41
 msgid "Supplier Internal id"
 msgstr "Código Interno do Fornecedor"
 
-#: products/models.py:45 products/templates/products/product_detail.html:15
-#: products/templates/products/product_list.html:23 suppliers/models.py:55
+#: products/models.py:46 products/templates/products/product_detail.html:45
+#: products/templates/products/product_list.html:24 suppliers/models.py:56
 #: suppliers/templates/suppliers/supplier_list.html:20
 msgid "Supplier"
 msgstr "Fornecedor"
 
-#: products/models.py:49 products/templates/products/product_detail.html:17
-#: products/templates/products/product_list.html:29
+#: products/models.py:50 products/templates/products/product_detail.html:51
+#: products/templates/products/product_list.html:30
 msgid "Category"
 msgstr "Categoria"
 
-#: products/models.py:55 products/templates/products/product_detail.html:16
-#: products/templates/products/product_list.html:26
+#: products/models.py:56 products/templates/products/product_detail.html:48
+#: products/templates/products/product_list.html:27
 msgid "SKU"
 msgstr "ISBN"
 
-#: products/models.py:59 products/models.py:144
+#: products/models.py:62
+msgid "Metabooks Price"
+msgstr "Preço Metabooks"
+
+#: products/models.py:65
+msgid "Vialogos Price"
+msgstr "Preço Vialogos"
+
+#: products/models.py:68 products/models.py:193
 msgid "Release Date"
 msgstr "Data de Lançamento"
 
-#: products/models.py:60
+#: products/models.py:69
 msgid "Stock"
 msgstr "Estoque"
 
-#: products/models.py:61
+#: products/models.py:70
 msgid "Description"
 msgstr "Descrição"
 
-#: products/models.py:151
+#: products/models.py:72
+msgid "Metabooks created at"
+msgstr "Criado em Metabooks"
+
+#: products/models.py:73
+msgid "Metabooks modified at"
+msgstr "Modificado em Metabooks"
+
+#: products/models.py:75
+msgid "Vialogos created at"
+msgstr "Criado em Vialogos"
+
+#: products/models.py:76
+msgid "Vialogos modified at"
+msgstr "Modificado em Vialogos"
+
+#: products/models.py:168
+msgid "Image"
+msgstr "Imagem"
+
+#: products/models.py:169
+msgid "Is Cover"
+msgstr "É Capa"
+
+#: products/models.py:178
+msgid "Product Image"
+msgstr "Imagem do Produto"
+
+#: products/models.py:179
+msgid "Product Images"
+msgstr "Imagens de Produtos"
+
+#: products/models.py:200
 msgid "Product Release Date History"
 msgstr "Histórico de Data de Lançamento do Produto"
 
-#: products/models.py:152
+#: products/models.py:201
 msgid "Product Release Date Histories"
 msgstr "Históricos de Data de Lançamento dos Produtos"
 
-#: products/models.py:161
+#: products/models.py:210
 msgid "Ordered"
 msgstr "Pedido"
 
-#: products/models.py:165
+#: products/models.py:214
 msgid "Archived"
 msgstr "Arquivado"
 
-#: products/models.py:177
+#: products/models.py:226
 msgid "Limit Date for the Customer"
 msgstr "Data Limite para o Cliente"
 
-#: products/models.py:178
+#: products/models.py:227
 msgid "Limit Date for the Supplier"
 msgstr "Data Limite para o Fornecedor"
 
-#: products/models.py:187
+#: products/models.py:236
 msgid "Products Group"
 msgstr "Grupo de Produtos"
 
-#: products/models.py:188 products/templates/products/product_detail.html:73
+#: products/models.py:237 products/templates/products/product_detail.html:117
 msgid "Products Groups"
 msgstr "Grupos de Produtos"
 
-#: products/models.py:215 products/templates/products/product_detail.html:77
+#: products/models.py:264 products/templates/products/product_detail.html:121
 msgid "Group"
 msgstr "Grupo"
 
-#: products/models.py:223
+#: products/models.py:272
 msgid "Product Group Item"
 msgstr "Item do Grupo de Produtos"
 
-#: products/models.py:224
+#: products/models.py:273
 msgid "Product Group Items"
 msgstr "Itens do Grupo de Produtos"
 
@@ -956,11 +1025,7 @@ msgstr "Itens do Grupo de Produtos"
 msgid "Delete Product"
 msgstr "Excluir Produto"
 
-#: products/templates/products/product_detail.html:22
-msgid "Product Details"
-msgstr "Detalhes do Produto"
-
-#: products/templates/products/product_detail.html:25
+#: products/templates/products/product_detail.html:60
 #, fuzzy
 #| msgid "Supplier Internal id"
 msgid "Supplier Internal ID"
@@ -977,43 +1042,43 @@ msgstr "Inscrição Estadual"
 msgid "Product List"
 msgstr "Lista de Produtos"
 
-#: products/templates/products/product_list.html:35
+#: products/templates/products/product_list.html:36
 #, fuzzy
 #| msgid "Quantity"
 msgid "Ordered Quantity"
 msgstr "Quantidade"
 
-#: products/templates/products/product_list.html:38
+#: products/templates/products/product_list.html:39
 #, fuzzy
 #| msgid "Products Groups"
 msgid "Product Groups"
 msgstr "Grupos de Produtos"
 
-#: products/templates/products/product_list.html:73
+#: products/templates/products/product_list.html:75
 msgid "No products are available."
 msgstr "Nenhum produto está disponível."
 
-#: suppliers/models.py:133
+#: suppliers/models.py:134
 msgid "Supplier CNPJ"
 msgstr "CNPJ do Fornecedor"
 
-#: suppliers/models.py:134
+#: suppliers/models.py:135
 msgid "Supplier CNPJs"
 msgstr "CNPJs dos Fornecedores"
 
-#: suppliers/models.py:168
+#: suppliers/models.py:169
 msgid "Supplier Address"
 msgstr "Endereço do Fornecedor"
 
-#: suppliers/models.py:169
+#: suppliers/models.py:170
 msgid "Supplier Addresses"
 msgstr "Endereços dos Fornecedores"
 
-#: suppliers/models.py:197
+#: suppliers/models.py:198
 msgid "Supplier Phone"
 msgstr "Telefone do Fornecedor"
 
-#: suppliers/models.py:198
+#: suppliers/models.py:199
 msgid "Supplier Phones"
 msgstr "Telefones dos Fornecedores"
 
@@ -1038,6 +1103,12 @@ msgstr "Produtos Cadastrados"
 #: suppliers/templates/suppliers/supplier_list.html:45
 msgid "No suppliers are available."
 msgstr "Nenhum fornecedor está disponível."
+
+#~ msgid "View"
+#~ msgstr "Visualizar"
+
+#~ msgid "Product Details"
+#~ msgstr "Detalhes do Produto"
 
 #~ msgid "Customer Details"
 #~ msgstr "Informações do Cliente"

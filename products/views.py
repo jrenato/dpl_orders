@@ -16,6 +16,7 @@ class ProductListView(PermissionRequiredMixin, ListView):
     '''
     model = Product
     context_object_name = 'products'
+    paginate_by = 20
     permission_required = 'products.view_product'
 
     def get_queryset(self):
@@ -26,6 +27,7 @@ class ProductListView(PermissionRequiredMixin, ListView):
                 groups_count=Count('group_items', distinct=True)
             )\
             .order_by('name')
+
         return queryset
 
 

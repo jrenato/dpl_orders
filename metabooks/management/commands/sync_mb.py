@@ -4,6 +4,7 @@ Command to sync data with metabooks
 import os
 import datetime
 import requests
+import json
 from PIL import Image
 from io import BytesIO
 
@@ -33,14 +34,13 @@ class Command(BaseCommand):
 
 
     def add_arguments(self, parser):
-        parser.add_argument(
-            '--reset', action='store_true',
-            help='Reset all pending metabooks syncs'
-        )
+        parser.add_argument('--reset', action='store_true', help='Reset pending syncs')
+        parser.add_argument('--force', action='store_true', help='Force details update')
         parser.add_argument('--debug', action='store_true', help='Debug mode')
 
 
     def handle(self, *args, **options):
+        self.force = options['force']
         self.debug = options['debug']
         # Message about debug mode
         if self.debug:
@@ -193,6 +193,7 @@ class Command(BaseCommand):
                 'release_date': release_date,
                 'supplier_internal_id': product_data['ordernumber'],
                 'description': product_data['mainDescription'],
+                'mb_created': mb_create_date,
             }
         )
 
@@ -200,9 +201,7 @@ class Command(BaseCommand):
         should_save_product = False
 
         if created:
-            product.mb_created = mb_create_date
             should_get_details = True
-            should_save_product = True
 
         if product.mb_modified != mb_modified_date:
             product.mb_modified = mb_modified_date
@@ -216,7 +215,7 @@ class Command(BaseCommand):
         if self.debug:
             tqdm.write(f'Product {product.name} release date: {product.release_date}')
 
-        if should_get_details:
+        if should_get_details or self.force:
             # self.get_product_details(mb_sync, product)
             self.get_product_cover(mb_sync, product)
 
@@ -248,19 +247,25 @@ class Command(BaseCommand):
             'Content-Type': 'image/jpeg',
         }
 
-        # Check if FRONTCOVER is available
-        url = f'{self.mb_url}//asset/mmo/{product.id}'
-        response = requests.get(url, headers=headers, timeout=self.timeout)
+        # # Check if FRONTCOVER is available
+        # url = f'{self.mb_url}//asset/mmo/{product.id}'
+        # response = requests.get(url, headers=headers, timeout=self.timeout)
 
-        product_has_frontcover = False
-        if response.status_code == 200:
-            for product_media in response.json():
-                if product_media['type'] == 'FRONTCOVER':
-                    product_has_frontcover = True
+        # # product_has_frontcover = False
+        # if response.status_code == 200:
+        #     for product_media in response.json():
+        #         if product_media['type'] == 'FRONTCOVER':
+        #             product_has_frontcover = True
+        # else:
+        #     # Error checking if FRONTCOVER is available
+        #     self.stdout.write(self.style.ERROR(
+        #         f'Error checking if FRONTCOVER is available with status code \
+        #             {response.status_code} and message {response.text} for product {product.name}')
+        #     )
 
-        # If product does not have a frontcover, return
-        if not product_has_frontcover:
-            return
+        # # If product does not have a frontcover, return
+        # if not product_has_frontcover:
+        #     return
 
         url = f'{self.mb_url}/cover/{product.sku}/{size}'
         response = requests.get(url, headers=headers, timeout=self.timeout)
@@ -280,6 +285,11 @@ class Command(BaseCommand):
             img_buffer.write(response.content)
             img = Image.open(img_buffer)
             img_file_path = os.path.join(self.upload_to_path, f'{product.sku}.jpg')
+
+            # To prevent errors, convert to RGB
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
             img.save(img_file_path, format='JPEG')
 
             # Create new cover image
@@ -294,5 +304,18 @@ class Command(BaseCommand):
             #     save=True
             # )
         else:
-            raise requests.HTTPError(f'Error getting the product cover with status code \
-                    {response.status_code} and message {response.text} for product {product.name}')
+            if response.status_code in [404, 503]:
+                response_data = json.loads(response.json())
+                try:
+                    if 'error' in response_data and response_data['error'] == 'not_found':
+                        tqdm.write(f'Error getting the product cover for product {product.name}')
+                        return
+                    else:
+                        raise requests.HTTPError(f'Error {response.status_code} getting the product '
+                            f'cover for product {product.name} - {response.text} {type(response_data)}')
+                except TypeError:
+                    # raise an exception with response_data and what type it is
+                    raise Exception(f'Wrong type for response data, should be a dict {type(response_data)}')
+            else:
+                raise requests.HTTPError(f'Error {response.status_code} getting the product '
+                    f'cover for product {product.name} - {response.text} ')

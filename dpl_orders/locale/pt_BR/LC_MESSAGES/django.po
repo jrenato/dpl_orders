@@ -731,11 +731,11 @@ msgstr "Título da seção"
 
 #: dpl_orders/templates/includes/pagination.html:21
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
 #: dpl_orders/templates/includes/pagination.html:21
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: orders/models.py:13 products/models.py:211
 msgid "In Separation"
@@ -789,10 +789,8 @@ msgid "Order Status Histories"
 msgstr "Históricos de Status do Pedido"
 
 #: orders/models.py:106
-#, fuzzy
-#| msgid "Quantity"
 msgid "Delivered Quantity"
-msgstr "Quantidade"
+msgstr "Quantidade Entregue"
 
 #: orders/models.py:109 orders/models.py:171
 #: orders/templates/orders/order_detail.html:36 products/models.py:59
@@ -1103,15 +1101,3 @@ msgstr "Produtos Cadastrados"
 #: suppliers/templates/suppliers/supplier_list.html:45
 msgid "No suppliers are available."
 msgstr "Nenhum fornecedor está disponível."
-
-#~ msgid "View"
-#~ msgstr "Visualizar"
-
-#~ msgid "Product Details"
-#~ msgstr "Detalhes do Produto"
-
-#~ msgid "Customer Details"
-#~ msgstr "Informações do Cliente"
-
-#~ msgid "Supplier Details"
-#~ msgstr "Detalhes do Fornecedor"

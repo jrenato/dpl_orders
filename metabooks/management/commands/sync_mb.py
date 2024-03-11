@@ -247,6 +247,21 @@ class Command(BaseCommand):
             'Authorization': f'Bearer {mb_sync.bearer}',
             'Content-Type': 'image/jpeg',
         }
+
+        # Check if FRONTCOVER is available
+        url = f'{self.mb_url}//asset/mmo/{product.id}'
+        response = requests.get(url, headers=headers, timeout=self.timeout)
+
+        product_has_frontcover = False
+        if response.status_code == 200:
+            for product_media in response.json():
+                if product_media['type'] == 'FRONTCOVER':
+                    product_has_frontcover = True
+
+        # If product does not have a frontcover, return
+        if not product_has_frontcover:
+            return
+
         url = f'{self.mb_url}/cover/{product.sku}/{size}'
         response = requests.get(url, headers=headers, timeout=self.timeout)
 
@@ -280,4 +295,4 @@ class Command(BaseCommand):
             # )
         else:
             raise requests.HTTPError(f'Error getting the product cover with status code \
-                    {response.status_code} and message {response.text}')
+                    {response.status_code} and message {response.text} for product {product.name}')

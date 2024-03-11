@@ -3,10 +3,15 @@ This file is used to define the URL patterns for the products app.
 '''
 from django.urls import path
 from .views import ProductListView, ProductDetailView, ProductCreateView, \
-    ProductUpdateView, ProductDeleteView
+    ProductUpdateView, ProductDeleteView, \
+    ProductsDebugTemplateView, ProductsWithoutImagesListView
+
 
 app_name = 'products'
 urlpatterns = [
+    path('debug/', ProductsDebugTemplateView.as_view(), name='debug'),
+    path('debug/without-images/', ProductsWithoutImagesListView.as_view(), name='without-images'),
+
     path('', ProductListView.as_view(), name='list'),
     path('create/', ProductCreateView.as_view(), name='create'),
     path('<slug:slug>/', ProductDetailView.as_view(), name='detail'),

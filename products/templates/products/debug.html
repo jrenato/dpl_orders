@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Debug" %}{% translate "Products" %}{% endblock title %}
+
+{% block content %}
+    <div class="d-flex p-2 bd-highlight">
+        <div class="card">
+            {% comment %} <img src="..." class="card-img-top" alt="..."> {% endcomment %}
+            <div class="card-body">
+            <h5 class="card-title">{% translate "Products Without Image" %}</h5>
+            <p class="card-text">{{ products_without_images }}</p>
+            <a href="{% url 'products:without-images' %}" class="btn btn-primary">Visualizar</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -51,6 +51,13 @@ Authorization: Bearer {{bearer}}
 
 ###
 
+# @name get_image_by_direct_url
+GET https://api.metabooks.com/api/v1/cover/{{ product_gtin }}/l HTTP/1.1
+Content-Type: image/jpeg
+Authorization: Bearer {{bearer}}
+
+###
+
 # @name logout
 GET {{$dotenv MB_URL}}/logout HTTP/1.1
 Content-Type: application/json

@@ -1,5 +1,6 @@
 import os
 import datetime
+from collections import OrderedDict
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
@@ -101,7 +102,7 @@ class Command(BaseCommand):
 
                     preorders[customer].append(
                         {
-                            'isbn': product['ISBN'],
+                            'isbn': int(product['ISBN']) if str(product['ISBN']).isdigit() > 0 else '',
                             'title': product['TÍTULO'],
                             'qtd': product[customer],
                         }
@@ -122,14 +123,32 @@ class Command(BaseCommand):
                 # Create a directory for the time in the export path, if it doesn't exist
                 if not os.path.exists(os.path.join(self.export_path, date_string, time_string)):
                     os.makedirs(os.path.join(self.export_path, date_string, time_string))
-                # Generate the sheet
-                # self.generate_sheet(date_string, time_string, preorders[preorders_date][preorders_time]['preorders'])
+
+                # Generate the sheet for customers
+                base_file_path = os.path.join(self.export_path, date_string, time_string)
+                selected_preorders = preorders[preorders_date][preorders_time]['preorders']
+                self.generate_customer_sheets(base_file_path, selected_preorders)
 
 
-    # def generate_sheet(self, date_string, time_string, preorders):
-    #     #TODO: Generate the sheet
-    #     file_path = os.path.join(self.export_path, date_string, time_string, 'preorders.ods')
-    #     data = OrderedDict() # from collections import OrderedDict
-    #     data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
-    #     data.update({"Sheet 2": [["row 1", "row 2", "row 3"]]})
-    #     save_data("your_file.ods", data)
+    def generate_customer_sheets(self, base_file_path, preorders):
+        for customer_name in preorders.keys():
+            file_path = os.path.join(base_file_path, f'{customer_name.replace("/", "_")}.ods')
+
+            preorder_list = [
+                [
+                    'ISBN',
+                    'TÍTULO',
+                    'QTD',
+                ]
+            ]
+
+            for order_item in preorders[customer_name]:
+                preorder_list.append([
+                    order_item['isbn'],
+                    order_item['title'],
+                    order_item['qtd'],
+                ])
+
+            data = OrderedDict() # from collections import OrderedDict
+            data.update({'Automático': preorder_list})
+            save_data(file_path, data)

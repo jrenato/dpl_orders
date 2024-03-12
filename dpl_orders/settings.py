@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'suppliers',
     'products',
     'orders',
+    'preorders',
 
     'metabooks',
 ]

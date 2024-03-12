@@ -117,6 +117,9 @@ class Product(models.Model):
                 livro = Livros.objects.get(isbn1=isbn)
             except Livros.DoesNotExist:
                 pass
+            except Livros.MultipleObjectsReturned as exc:
+                raise Livros.MultipleObjectsReturned(
+                    f'Multiple books for {isbn} - {self.name}') from exc
 
             if livro:
                 self.vl_id = livro.nbook
@@ -142,7 +145,8 @@ class Product(models.Model):
                 raise Estoque.MultipleObjectsReturned(
                     f'Multiple stocks for {self.vl_id} - {self.name}') from exc
 
-            self.stock = estoque.disp
+            if estoque:
+                self.stock = estoque.disp
 
         super().save(*args, **kwargs)
 

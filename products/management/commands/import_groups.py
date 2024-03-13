@@ -190,25 +190,36 @@ class Command(BaseCommand):
         if release_date and isinstance(release_date, str):
             release_date = datetime.datetime.strptime(release_date, '%d/%m/%Y')
 
-        category, _ = ProductCategory.objects.get_or_create(
-            name=product_data['category'].strip().upper()
-        )
+        if 'category' in product_data and len(product_data['category'].strip()) > 0:
+            category, _ = ProductCategory.objects.get_or_create(
+                name=product_data['category'].strip().upper()
+            )
+        else:
+            category = None
 
         # Check if the price is present and if it's a string
         if product_data['price'] and isinstance(product_data['price'], str):
             # Remove trailing 'BRL' from the price
             product_data['price'] = float(product_data['price'].replace('BRL', '').strip())
 
+        supplier_internal_id = product_data['supplier_internal_id'].strip() \
+            if 'supplier_internal_id' in product_data \
+            and len(str(product_data['supplier_internal_id']).strip()) > 0 else None
+
+        description = product_data['description'].strip() \
+            if 'description' in product_data \
+            and len(product_data['description'].strip()) > 0 else None,
+
         product, _ = Product.objects.get_or_create(
             name=product_data['title'].strip().upper(),
             sku=product_data['sku'],
             defaults={
                 'supplier': supplier,
-                'supplier_internal_id': product_data['supplier_internal_id'].strip() if 'supplier_internal_id' in product_data else None,
+                'supplier_internal_id': supplier_internal_id,
                 'release_date': release_date,
                 'category': category,
                 'price': product_data['price'],
-                'description': product_data['description'].strip() if 'description' in product_data else '',
+                'description': description
             }
         )
 

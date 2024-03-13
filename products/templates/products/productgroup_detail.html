@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ object.name }}{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ object.name }}</h1>
+        <hr>
+        <div class="row detail-section">
+            <div class="col-md-12">
+                <h2 class="detail-title">{% translate "Basic Information" %}</h2>
+                <ul>
+                    <li><b>{% translate "Status" %}:</b> {{ object.get_status_display }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% comment %} {% if perms.products.change_product_group or perms.products.delete_product_group %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% if perms.products.change_product_group %}
+                <a href="{% url "products:group-update" product_group.pk %}" class="btn btn-primary d-inline-flex align-items-center">
+                    {% translate "Edit" %} <i data-feather="edit" class="align-middle"></i>
+                </a>
+                {% endif %}
+                {% if perms.products.delete_product_group %}
+                <a href="{% url "products:group-delete" product_group.pk %}" class="btn btn-danger d-inline-flex align-items-center">
+                    {% translate "Delete" %} <i data-feather="trash-2" class="align-middle"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %} {% endcomment %}
+
+    {% if object_list %}
+    {% include "includes/pagination.html" %}
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">
+              {% translate "Product" %}
+            </th>
+            <th scope="col">
+              {% translate "Supplier" %}
+            </th>
+            <th scope="col">
+              {% translate "SKU" %}
+            </th>
+            <th scope="col">
+              {% translate "Category" %}
+            </th>
+            <th scope="col">
+              {% translate "Price" %}
+            </th>
+            <th scope="col">
+              {% translate "Ordered Quantity" %}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for group_item in object_list %}
+            <tr>
+              <td>
+                <a href="{% url "products:detail" group_item.product.slug %}">{{ group_item.product.name }}</a>
+              </td>
+              <td>
+                {{ group_item.product.supplier }}
+              </td>
+              <td>
+                {{ group_item.product.sku }}
+              </td>
+              <td>
+                {{ group_item.product.category }}
+              </td>
+              <td>
+                {{ group_item.product.price }}
+              </td>
+              <td>
+                {{ group_item.product.order_items_sum }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include "includes/pagination.html" %}
+  {% else %}
+    <p>
+      {% translate "No products are available." %}
+    </p>
+  {% endif %}
+{% endblock content %}

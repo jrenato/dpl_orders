@@ -5,10 +5,11 @@ from django.db.models import Count, Sum
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView,\
     TemplateView
+from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
-from .models import Product, ProductGroup
-from .forms import ProductForm
+from .models import Product, ProductGroup, ProductGroupItem
+from .forms import ProductForm, ProductGroupForm
 
 
 class ProductListView(PermissionRequiredMixin, ListView):
@@ -81,6 +82,7 @@ class ProductDeleteView(PermissionRequiredMixin, DeleteView):
 
 ### Product Group views
 
+
 class ProductGroupListView(PermissionRequiredMixin, ListView):
     '''
     List view for the Product Group model
@@ -99,12 +101,23 @@ class ProductGroupListView(PermissionRequiredMixin, ListView):
         return queryset
 
 
-class ProductGroupDetailView(PermissionRequiredMixin, DetailView):
+class ProductGroupCreateView(PermissionRequiredMixin, CreateView):
+    '''
+    Create view for the Product Group model
+    '''
+    model = ProductGroup
+    form_class = ProductGroupForm
+    success_url = reverse_lazy('products:group-list')
+    permission_required = 'products.add_productgroup'
+
+
+class ProductGroupDetailView(PermissionRequiredMixin, MultipleObjectMixin, DetailView):
     '''
     Detail view for the Product Group model
     '''
     model = ProductGroup
-    context_object_name = 'product_group'
+    #context_object_name = 'product_group'
+    paginate_by = 20
     permission_required = 'products.view_productgroup'
 
     def get_queryset(self):
@@ -112,6 +125,49 @@ class ProductGroupDetailView(PermissionRequiredMixin, DetailView):
         queryset = super().get_queryset()\
             .prefetch_related('group_items', 'group_items__product')
         return queryset
+
+    def get_context_data(self, **kwargs):
+        object_list = self.get_object().group_items\
+            .select_related('product', 'product__category', 'product__supplier')\
+            .order_by('product__name')
+        context = super(ProductGroupDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        return context
+
+    # def get_context_data(self, **kwargs):
+    #     # object_list = self.get_object().group_items.annotate(
+    #     #     order_items_sum=Sum('order_items__quantity'),
+    #     # )
+    #     object_list = ProductGroupItem.objects\
+    #         .filter(group=self.get_object())\
+    #         .select_related('product', 'product__category', 'product__supplier', 'product__order_items')\
+    #         .annotate(
+    #             order_items_sum=Sum('product__order_items__quantity'),
+    #         )\
+    #         .order_by('product__name')
+
+    #     context = super(ProductGroupDetailView, self)\
+    #         .get_context_data(object_list=object_list, **kwargs)
+
+    #     return context
+
+
+class ProductGroupUpdateView(PermissionRequiredMixin, UpdateView):
+    '''
+    Update view for the Product Group model
+    '''
+    model = ProductGroup
+    form_class = ProductGroupForm
+    success_url = reverse_lazy('products:group-list')
+    permission_required = 'products.change_productgroup'
+
+
+class ProductGroupDeleteView(PermissionRequiredMixin, DeleteView):
+    '''
+    Delete view for the Product Group model
+    '''
+    model = ProductGroup
+    success_url = reverse_lazy('products:group-list')
+    permission_required = 'products.delete_productgroup'
 
 
 ### Debug views

@@ -7,7 +7,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
     TemplateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
-from .models import Product
+from .models import Product, ProductGroup
 from .forms import ProductForm
 
 
@@ -77,6 +77,41 @@ class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('products:list')
     permission_required = 'products.delete_product'
+
+
+### Product Group views
+
+class ProductGroupListView(PermissionRequiredMixin, ListView):
+    '''
+    List view for the Product Group model
+    '''
+    model = ProductGroup
+    context_object_name = 'product_groups'
+    paginate_by = 20
+    permission_required = 'products.view_productgroup'
+
+    def get_queryset(self):
+        # Annotato group_items count
+        queryset = super().get_queryset()\
+            .annotate(
+                items_count=Count('group_items', distinct=True),
+            )
+        return queryset
+
+
+class ProductGroupDetailView(PermissionRequiredMixin, DetailView):
+    '''
+    Detail view for the Product Group model
+    '''
+    model = ProductGroup
+    context_object_name = 'product_group'
+    permission_required = 'products.view_productgroup'
+
+    def get_queryset(self):
+        # Prefetch group_items
+        queryset = super().get_queryset()\
+            .prefetch_related('group_items', 'group_items__product')
+        return queryset
 
 
 ### Debug views

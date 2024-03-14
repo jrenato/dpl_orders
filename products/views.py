@@ -129,6 +129,9 @@ class ProductGroupDetailView(PermissionRequiredMixin, MultipleObjectMixin, Detai
     def get_context_data(self, **kwargs):
         object_list = self.get_object().group_items\
             .select_related('product', 'product__category', 'product__supplier')\
+            .annotate(
+                order_items_sum=Sum('product__order_items__quantity', default=0),
+            )\
             .order_by('product__name')
         context = super(ProductGroupDetailView, self).get_context_data(object_list=object_list, **kwargs)
         return context

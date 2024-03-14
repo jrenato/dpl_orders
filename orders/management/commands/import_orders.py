@@ -66,10 +66,14 @@ class Command(BaseCommand):
         '''
         Import an order
         '''
+        # Order data without a valid product
+        if not order_data['TITULO'] and not order_data['ISBN']:
+            return
+
         product = self.get_product(order_data)
         if not product:
-            #raise CommandError(f'Product not found: {order_data["ISBN"]} - {order_data["TITULO"]}')
-            return
+            # A product should exist
+            raise CommandError(f'Product not found: {order_data["ISBN"]} - {order_data["TITULO"]}')
 
         keys_to_skip = [
             "Data", "Data atualizada", "Genero", "ISBN",

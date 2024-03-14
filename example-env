@@ -10,9 +10,8 @@ DJANGO_MEDIA_ROOT=/path/to/store/media/files
 
 # Path to import sheets. Expected subdirectories:
 # * Automático
-# * Pedidos Antigos
+# * Grupos
 # * Pedidos
-# * Produtos
 IMPORT_PATH=/path/to/import/sheets
 
 # Database Configuration

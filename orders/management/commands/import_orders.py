@@ -27,7 +27,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Load IMPORT_PATH from settings
         import_path = settings.IMPORT_PATH
-        import_path = os.path.join(import_path, 'Pedidos Antigos')
+        import_path = os.path.join(import_path, 'Pedidos')
 
         # Check if the import path exists
         if not os.path.isdir(import_path):

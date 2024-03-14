@@ -8,7 +8,6 @@ DJANGO_DEBUG=True
 DJANGO_STATIC_ROOT=/path/to/collect/static/files
 DJANGO_MEDIA_ROOT=/path/to/store/media/files
 
-
 # Path to import sheets. Expected subdirectories:
 # * Automático
 # * Pedidos Antigos

@@ -13,6 +13,16 @@ from orders.models import Order, OrderItem
 from customers.models import Customer
 from products.models import Product
 
+ROWS_TRANSLATIONS = [
+    ('CÓD. PANINI', 'supplier_internal_id'),
+    ('CATEGORIA', 'category'),
+    ('TÍTULO', 'title'),
+    ('ISBN', 'sku'),
+    ('LANÇAMENTO', 'release_date'),
+    ('PREÇO R$', 'price'),
+    ('SINOPSE', 'description'),
+]
+
 
 class Command(BaseCommand):
     '''
@@ -43,18 +53,28 @@ class Command(BaseCommand):
         for filename in files:
             # Get the raw data from the file and convert it to a list of dictionaries
             raw_data = get_data(filename)
-            products = self.get_products_data(raw_data)
+            orders_data = self.get_orders_data(raw_data)
 
-            for product_data in tqdm(products, desc='Importing products orders'):
-                self.import_order(product_data)
+            for order_data in tqdm(orders_data, desc='Importing products orders'):
+                self.import_order(order_data)
 
 
-    def get_products_data(self, raw_data):
+    def get_orders_data(self, raw_data):
         '''
-        Get the products data from the raw data
+        Get the orders data from the raw data
         '''
         sheet_data = list(raw_data.values())[0]
-        products = [dict(zip(sheet_data[0], row)) for row in sheet_data[1:]]
+        header_row = sheet_data[0]
+
+        # Rename the header row
+        for translation in ROWS_TRANSLATIONS:
+            if translation[0] in header_row:
+                header_row[header_row.index(translation[0])] = translation[1]
+
+        product_rows = sheet_data[1:]
+
+        # Convert the product rows to a list of dictionaries
+        products = [dict(zip(header_row, row)) for row in product_rows]
 
         # Remove empty rows
         products = [product for product in products if product]
@@ -67,17 +87,16 @@ class Command(BaseCommand):
         Import an order
         '''
         # Order data without a valid product
-        if not order_data['TITULO'] and not order_data['ISBN']:
+        if not order_data['title'] and not order_data['sku']:
             return
 
         product = self.get_product(order_data)
         if not product:
             # A product should exist
-            raise CommandError(f'Product not found: {order_data["ISBN"]} - {order_data["TITULO"]}')
+            raise CommandError(f'Product not found: {order_data["sku"]} - {order_data["title"]}')
 
         keys_to_skip = [
-            "Data", "Data atualizada", "Genero", "ISBN",
-            "TITULO", "TOTAL",	"DPL", "NOVA QUANTIA"
+            'supplier_internal_id', 'sku', 'title',
         ]
 
         # Iterate over the order data and create the order items
@@ -108,15 +127,34 @@ class Command(BaseCommand):
         '''
         Get the product
         '''
-        # Some suppliers don't provide have a unique SKU for each product
-        # so we need to consider the product name as well
-        try:
-            product = Product.objects.get(sku=order_data['ISBN'], name=order_data['TITULO'].upper())
-        except Product.DoesNotExist:
-            return None
+        product = None
+
+        has_valid_internal_id = 'supplier_internal_id' in order_data and \
+            len(order_data['supplier_internal_id'].strip()) > 0
+
+        if has_valid_internal_id:
+            product = Product.objects.filter(
+                supplier_internal_id=str(order_data['supplier_internal_id'].strip()),
+            ).first()
+
+        # SKUs that don't start with 978 probably belong to series that contain
+        # duplicated ISBNs, so another field - supplier_internal_id - should be used
+        has_valid_sku = 'sku' in order_data and str(order_data['sku'])[:3] == '978' and \
+            (isinstance(order_data['sku'], int) or order_data['sku'].isdigit())
+
+        if has_valid_sku:
+            product = Product.objects.filter(
+                sku=str(order_data['sku']).strip(),
+            ).first()
+
+        no_valid_identifier = not has_valid_internal_id and not has_valid_sku
+
+        if not product and 'title' in order_data and no_valid_identifier:
+            product = Product.objects.filter(
+                name=order_data['title'].strip().upper(),
+            ).first()
 
         return product
-
 
     def get_customer(self, customer_name):
         '''

@@ -26,23 +26,26 @@ class Command(BaseCommand):
     mb_url = settings.MB_URL
     mb_username = settings.MB_USERNAME
     mb_password = settings.MB_PASSWORD
+    media_root = settings.MEDIA_ROOT
+
     timeout = 5
     max_results = 50
     debug = False
-    media_root = settings.MEDIA_ROOT
+    force = False
+
     upload_to_path = os.path.join(media_root, 'products', 'images')
 
 
     def add_arguments(self, parser):
         parser.add_argument('--reset', action='store_true', help='Reset pending syncs')
-        parser.add_argument('--force', action='store_true', help='Force details update')
         parser.add_argument('--debug', action='store_true', help='Debug mode')
+        parser.add_argument('--force', action='store_true', help='Force details update')
 
 
     def handle(self, *args, **options):
         self.force = options['force']
+
         self.debug = options['debug']
-        # Message about debug mode
         if self.debug:
             self.stdout.write(self.style.WARNING('Debug mode is on'))
 

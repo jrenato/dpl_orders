@@ -73,12 +73,11 @@ class Command(BaseCommand):
 
                 if not product:
                     product = self.import_product(product_data, supplier)
-                
+
                 if not product:
                     raise CommandError(f'Product not found: {product_data}')
 
-                if product:
-                    self.add_product_to_group(product, group)
+                self.add_product_to_group(product, group)
 
 
     def get_products_data(self, raw_data):
@@ -148,7 +147,7 @@ class Command(BaseCommand):
             tqdm.write(f'Seeking with SKU: {product_data["sku"]}')
 
             product = Product.objects.filter(
-                sku=int(product_data['sku'].strip()),
+                sku=int(str(product_data['sku']).strip()),
                 supplier=supplier
             ).first()
 
@@ -164,7 +163,9 @@ class Command(BaseCommand):
                 supplier=supplier
             ).first()
 
-        if not product and 'title' in product_data:
+        no_valid_identifier = not has_valid_internal_id and not has_valid_sku
+
+        if not product and 'title' in product_data and no_valid_identifier:
             if self.debug:
                 tqdm.write(f'Seeking with title: {product_data["title"]}')
 
@@ -180,7 +181,6 @@ class Command(BaseCommand):
         '''
         Import a product
         '''
-
         try:
             release_date = product_data['release_date']
         except KeyError:
@@ -215,18 +215,44 @@ class Command(BaseCommand):
             if 'description' in product_data \
             and len(product_data['description'].strip()) > 0 else None,
 
-        product, _ = Product.objects.get_or_create(
-            name=product_data['title'].strip().upper(),
-            sku=sku,
-            defaults={
-                'supplier': supplier,
-                'supplier_internal_id': supplier_internal_id,
-                'release_date': release_date,
-                'category': category,
-                'price': product_data['price'],
-                'description': description
-            }
-        )
+        common_defaults = {
+            'supplier': supplier,
+            'release_date': release_date,
+            'category': category,
+            'price': product_data['price'],
+            'description': description
+        }
+
+        if sku:
+            product, created = Product.objects.get_or_create(
+                name=product_data['title'].strip().upper(),
+                sku=sku,
+                defaults=common_defaults | {
+                    'supplier_internal_id': supplier_internal_id
+                }
+            )
+        elif supplier_internal_id:
+            product, created = Product.objects.get_or_create(
+                name=product_data['title'].strip().upper(),
+                supplier_internal_id=supplier_internal_id,
+                defaults=common_defaults | {
+                    'sku': sku
+                }
+            )
+        else:
+            product, created = Product.objects.get_or_create(
+                name=product_data['title'].strip().upper(),
+                defaults=common_defaults | {
+                    'sku': sku,
+                    'supplier_internal_id': supplier_internal_id
+                }
+            )
+
+        if self.debug:
+            if created:
+                tqdm.write(f'Product "{product.name}" created')
+            else:
+                tqdm.write(f'Product "{product.name}" already exists')
 
         return product
 
@@ -235,7 +261,10 @@ class Command(BaseCommand):
         '''
         Add a product to a group
         '''
-        ProductGroupItem.objects.get_or_create(
+        product_group_item, created = ProductGroupItem.objects.get_or_create(
             product=product,
             group=group
         )
+
+        if not created and self.debug:
+            tqdm.write(f'Product "{product.name}" already exists in group "{group.name}"')

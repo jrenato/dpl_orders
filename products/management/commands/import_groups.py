@@ -71,12 +71,10 @@ class Command(BaseCommand):
             for product_data in tqdm(products, desc='Importing products'):
                 product = self.try_to_get_product(product_data, supplier)
 
-                has_identifier = str(product_data['sku']).isdigit() or \
-                    len(str(product_data['supplier_internal_id'])) > 0
-
-                if not product or has_identifier:
+                if not product:
                     product = self.import_product(product_data, supplier)
-                else:
+                
+                if not product:
                     raise CommandError(f'Product not found: {product_data}')
 
                 if product:
@@ -146,21 +144,23 @@ class Command(BaseCommand):
         has_valid_sku = 'sku' in product_data and str(product_data['sku'])[:3] == '978' and \
             (isinstance(product_data['sku'], int) or product_data['sku'].isdigit())
 
-        if has_valid_sku:
-            if self.debug:
-                tqdm.write(f'Seeking with SKU: {product_data["sku"]}')
+        if self.debug and has_valid_sku:
+            tqdm.write(f'Seeking with SKU: {product_data["sku"]}')
 
             product = Product.objects.filter(
-                sku=product_data['sku'],
+                sku=int(product_data['sku'].strip()),
                 supplier=supplier
             ).first()
 
-        if not product and 'supplier_internal_id' in product_data:
+        has_valid_internal_id = 'supplier_internal_id' in product_data and \
+            len(product_data['supplier_internal_id'].strip()) > 0
+
+        if not product and has_valid_internal_id:
             if self.debug:
                 tqdm.write(f'Seeking with internal ID: {product_data["supplier_internal_id"]}')
 
             product = Product.objects.filter(
-                supplier_internal_id=product_data['supplier_internal_id'],
+                supplier_internal_id=str(product_data['supplier_internal_id'].strip()),
                 supplier=supplier
             ).first()
 
@@ -202,6 +202,11 @@ class Command(BaseCommand):
             # Remove trailing 'BRL' from the price
             product_data['price'] = float(product_data['price'].replace('BRL', '').strip())
 
+        sku = product_data['sku'] if 'sku' in product_data \
+            and product_data['sku'] \
+            and len(str(product_data['sku']).strip()) > 0 \
+            and str(product_data['sku']).isdigit() else None
+
         supplier_internal_id = product_data['supplier_internal_id'].strip() \
             if 'supplier_internal_id' in product_data \
             and len(str(product_data['supplier_internal_id']).strip()) > 0 else None
@@ -212,7 +217,7 @@ class Command(BaseCommand):
 
         product, _ = Product.objects.get_or_create(
             name=product_data['title'].strip().upper(),
-            sku=product_data['sku'],
+            sku=sku,
             defaults={
                 'supplier': supplier,
                 'supplier_internal_id': supplier_internal_id,

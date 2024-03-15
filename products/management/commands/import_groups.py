@@ -137,24 +137,10 @@ class Command(BaseCommand):
         '''
         product = None
 
-        # Note:
-        # SKUs that don't start with 978 probably belong to series that contain
-        # duplicated ISBNs, so another field - supplier_internal_id - should be used
-        has_valid_sku = 'sku' in product_data and str(product_data['sku'])[:3] == '978' and \
-            (isinstance(product_data['sku'], int) or product_data['sku'].isdigit())
-
-        if self.debug and has_valid_sku:
-            tqdm.write(f'Seeking with SKU: {product_data["sku"]}')
-
-            product = Product.objects.filter(
-                sku=int(str(product_data['sku']).strip()),
-                supplier=supplier
-            ).first()
-
         has_valid_internal_id = 'supplier_internal_id' in product_data and \
             len(product_data['supplier_internal_id'].strip()) > 0
 
-        if not product and has_valid_internal_id:
+        if has_valid_internal_id:
             if self.debug:
                 tqdm.write(f'Seeking with internal ID: {product_data["supplier_internal_id"]}')
 
@@ -162,6 +148,21 @@ class Command(BaseCommand):
                 supplier_internal_id=str(product_data['supplier_internal_id'].strip()),
                 supplier=supplier
             ).first()
+
+        # SKUs that don't start with 978 probably belong to series that contain
+        # duplicated ISBNs, so another field - supplier_internal_id - should be used
+        has_valid_sku = 'sku' in product_data and str(product_data['sku'])[:3] == '978' and \
+            (isinstance(product_data['sku'], int) or product_data['sku'].isdigit())
+
+        if not product and has_valid_sku:
+            if self.debug:
+                tqdm.write(f'Seeking with SKU: {product_data["sku"]}')
+
+            product = Product.objects.filter(
+                sku=str(product_data['sku']).strip(),
+                supplier=supplier
+            ).first()
+
 
         no_valid_identifier = not has_valid_internal_id and not has_valid_sku
 

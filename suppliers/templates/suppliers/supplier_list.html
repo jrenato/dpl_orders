@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load i18n %}
 
 {% block title %}
-  {% translate 'Supplier List' %}
-{% endblock %}
+  {% translate "Supplier List" %}
+{% endblock title %}
 
 {% block content %}
-  <h1>{% translate 'Suppliers' %}</h1>
+  <h1>{% translate "Suppliers" %}</h1>
   {% if perms.suppliers.add_supplier %}
-  <a class="btn btn-primary mb-3" href="{% url 'suppliers:create' %}">{% translate 'Add' %}</a>
+  <a class="btn btn-primary mb-3" href="{% url "suppliers:create" %}">{% translate "Add" %}</a>
   {% endif %}
   {{ supplier.name }}
   {% if suppliers %}
@@ -17,13 +17,13 @@
         <thead>
           <tr>
             <th scope="col">
-              {% translate 'Supplier' %}
+              {% translate "Supplier" %}
             </th>
             <th scope="col">
-              {% translate 'Registered Products' %}
+              {% translate "Registered Products" %}
             </th>
             <th scope="col">
-              {% translate 'Pending Orders' %}
+              {% translate "Pending Orders" %}
             </th>
           </tr>
         </thead>
@@ -31,7 +31,7 @@
           {% for supplier in suppliers %}
             <tr>
               <td>
-                <a href="{% url 'suppliers:detail' supplier.slug %}">{{ supplier.name }}</a>
+                <a href="{% url "suppliers:detail" supplier.slug %}">{{ supplier.name }}</a>
               </td>
               <td>{{ supplier.products.count }}</td>
               <td>0</td>
@@ -42,7 +42,7 @@
     </div>
   {% else %}
     <p>
-      {% translate 'No suppliers are available.' %}
+      {% translate "No suppliers are available." %}
     </p>
   {% endif %}
-{% endblock %}
+{% endblock content %}

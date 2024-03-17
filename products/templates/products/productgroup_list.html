@@ -35,7 +35,7 @@
                 <a href="{% url "products:group-detail" product_group.pk %}">{{ product_group.name }}</a>
               </td>
               <td>
-                {{ product_group.get_status_display }}
+                <span class="badge rounded-pill text-bg-warning">{{ product_group.get_status_display }}</span>
               </td>
               <td>
                 {{ product_group.items_count }}

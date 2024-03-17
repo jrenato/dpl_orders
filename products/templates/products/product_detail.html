@@ -5,8 +5,6 @@
 {% endblock title %}
 {% block content %}
     <div class="container">
-        <h1>{{ product.name }}</h1>
-        <hr>
         <div class="row detail-section">
             <div class="col-md-6">
                 <!-- Bootstrap Carousel with all product.images-->
@@ -14,7 +12,7 @@
                     <div class="carousel-inner">
                         {% for product_image in product.images.all %}
                             <div class="carousel-item {% if product_image.is_main %}active{% endif %}">
-                                <img src="{{ product_image.image.url }}" class="d-block w-25" alt="{{ product.name }}">
+                                <img src="{{ product_image.image.url }}" width="316" height="490" alt="{{ product.name }}">
                             </div>
                         {% endfor %}
                     </div>
@@ -35,16 +33,14 @@
                 </div>
             </div>
             <div class="col-md-6">
-                {% comment %} <h2 class="detail-title">{% translate "Basic Information" %}</h2> {% endcomment %}
+                <h1>{{ product.name }}</h1>
+                <hr>
                 <ul>
                     <li>
-                        <b>{% translate "Name" %}:</b> {{ product.name }}
+                        <b>{% translate "SKU" %}:</b> {{ product.sku }}
                     </li>
                     <li>
                         <b>{% translate "Supplier" %}</b>: <a href="{% url "suppliers:detail" product.supplier.slug %}">{{ product.supplier }}</a>
-                    </li>
-                    <li>
-                        <b>{% translate "SKU" %}:</b> {{ product.sku }}
                     </li>
                     <li>
                         <b>{% translate "Category" %}:</b> {{ product.category }}

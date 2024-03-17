@@ -9,9 +9,9 @@ from django.conf import settings
 from pyexcel_ods import get_data
 from tqdm import tqdm
 
-from orders.models import Order, OrderItem
+from orders.models import Order, OrderItem, ORDER_STATUS_CHOICES
 from customers.models import Customer
-from products.models import Product
+from products.models import Product, ProductGroup
 
 ROWS_TRANSLATIONS = [
     ('CÓD. PANINI', 'supplier_internal_id'),
@@ -55,8 +55,14 @@ class Command(BaseCommand):
             raw_data = get_data(filename)
             orders_data = self.get_orders_data(raw_data)
 
+            group_name = filename.split(os.sep)[-1].split('.')[0]
+            product_group = ProductGroup.objects.get(name=group_name)
+
+            if not product_group:
+                raise CommandError(f'The product group "{group_name}" does not exist')
+
             for order_data in tqdm(orders_data, desc='Importing products orders'):
-                self.import_order(order_data)
+                self.import_order(order_data, product_group)
 
 
     def get_orders_data(self, raw_data):
@@ -82,7 +88,7 @@ class Command(BaseCommand):
         return products
 
 
-    def import_order(self, order_data):
+    def import_order(self, order_data, product_group):
         '''
         Import an order
         '''
@@ -107,9 +113,16 @@ class Command(BaseCommand):
             if key in keys_to_skip:
                 continue
 
-            # Get the customer, the customer is the key of the order data
+            # Get or create the customer
             customer = self.get_customer(key)
-            order, _ = Order.objects.get_or_create(customer=customer)
+
+            # Get or create a pending order, using the customer
+            # and product group as primary keys.
+            order, _ = Order.objects.get_or_create(
+                customer=customer,
+                product_group=product_group,
+                status='PE',
+            )
             order_item, created = OrderItem.objects.get_or_create(
                 order=order, product=product, defaults={
                     'quantity': value,

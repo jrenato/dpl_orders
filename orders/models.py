@@ -36,6 +36,12 @@ class Order(models.Model):
         verbose_name=_('Customer'), related_name='orders',
     )
 
+    product_group = models.ForeignKey(
+        'products.ProductGroup', on_delete=models.CASCADE,
+        verbose_name=_('Product Group'), related_name='orders',
+        blank=True, null=True
+    )
+
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)
     canceled = models.DateTimeField(_('Canceled at'), blank=True, null=True)

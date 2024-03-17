@@ -27,6 +27,9 @@
               {% translate "SKU" %}
             </th>
             <th scope="col">
+              {% translate "Release Date" %}
+            </th>
+            <th scope="col">
               {% translate "Category" %}
             </th>
             <th scope="col">
@@ -51,6 +54,9 @@
               </td>
               <td>
                 {{ product.sku }}
+              </td>
+              <td>
+                {{ product.release_date|date:"d/m/Y" }}
               </td>
               <td>
                 {{ product.category }}

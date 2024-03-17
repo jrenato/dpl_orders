@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load i18n %}
 
 {% block title %}
-  {% translate 'Customer List' %}
-{% endblock %}
+  {% translate "Customer List" %}
+{% endblock title %}
 
 {% block content %}
-  <h1>{% translate 'Customer' %}</h1>
+  <h1>{% translate "Customer" %}</h1>
   {% if perms.customers.add_customer %}
-  <a class="btn btn-primary mb-3" href="{% url 'customers:create' %}">{% translate 'Add' %}</a>
+  <a class="btn btn-primary mb-3" href="{% url "customers:create" %}">{% translate "Add" %}</a>
   {% endif %}
   {{ customer.name }}
   {% if customers %}
@@ -16,15 +16,15 @@
       <table class="table table-striped table-hover table-sm">
         <thead>
           <tr>
-            <th scope="col">{% translate 'Customer' %}</th>
-            <th scope="col">{% translate 'Pending Orders' %}</th>
-            <th scope="col">{% translate 'Ordered Products' %}</th>
+            <th scope="col">{% translate "Customer" %}</th>
+            <th scope="col">{% translate "Pending Orders" %}</th>
+            <th scope="col">{% translate "Ordered Products" %}</th>
           </tr>
         </thead>
         <tbody>
           {% for customer in customers %}
             <tr>
-              <td><a href="{% url 'customers:detail' customer.slug %}">{{ customer.name }}</a></td>
+              <td><a href="{% url "customers:detail" customer.slug %}">{{ customer.name }}</a></td>
               <td>{{ customer.order_count }}</td>
               <td>{{ customer.ordered_total }}</td>
             </tr>
@@ -34,7 +34,7 @@
     </div>
   {% else %}
     <p>
-      {% translate 'No customers are available.' %}
+      {% translate "No customers are available." %}
     </p>
   {% endif %}
-{% endblock %}
+{% endblock content %}

@@ -31,8 +31,8 @@
                                 {% translate "N/A" %}
                             {% endif %}
                         </td>
-                        <td><a href="{% url 'orders:detail' pk=order.pk %}">{{ order.total_quantity }}</a></td>
-                        <td><a href="{% url 'orders:detail' pk=order.pk %}">{{ order.total_value|floatformat:2 }}</a></td>
+                        <td>{{ order.total_quantity }}</td>
+                        <td>{{ order.total_value|floatformat:2 }}</td>
                         <td><span class="badge bg-warning">{% translate order.get_status_display %}</span></td>
                         <td>
                             <a href="{% url 'orders:detail' pk=order.pk %}" class="btn btn-sm btn-primary">

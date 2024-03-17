@@ -6,17 +6,18 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-17 09:17-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-03-17 09:28-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: customers/apps.py:8 customers/models.py:55
 #: customers/tests/test_permissions.py:142
@@ -230,8 +231,6 @@ msgstr "Detalhes de Contato"
 #: orders/templates/orders/order_detail.html:22
 #: products/templates/products/product_detail.html:52
 #: suppliers/templates/suppliers/supplier_detail.html:16
-#, fuzzy
-#| msgid "Internal id"
 msgid "Internal ID"
 msgstr "Código Interno"
 
@@ -449,8 +448,6 @@ msgstr "O token de redefinição de senha é inválido."
 
 #: dpl_orders/templates/account/email_change.html:5
 #: dpl_orders/templates/account/email_change.html:9
-#, fuzzy
-#| msgid "Email address"
 msgid "Email Address"
 msgstr "Endereço de email"
 
@@ -513,12 +510,11 @@ msgstr ""
 #: dpl_orders/templates/account/email_confirm.html:35
 #, python-format
 msgid ""
-"This email confirmation link expired or is invalid. Please <a "
-"href=\"%(email_url)s\">issue a new email confirmation request</a>."
+"This email confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new email confirmation request</a>."
 msgstr ""
-"Este link de confirmação de email expirou ou é inválido. Por favor, <a "
-"href=\"%(email_url)s\">emita uma nova solicitação de confirmação de email</"
-"a>."
+"Este link de confirmação de email expirou ou é inválido. Por favor, <a href="
+"\"%(email_url)s\">emita uma nova solicitação de confirmação de email</a>."
 
 #: dpl_orders/templates/account/login.html:6
 #: dpl_orders/templates/account/login.html:9
@@ -544,8 +540,6 @@ msgstr "Entrar"
 #: dpl_orders/templates/account/logout.html:4
 #: dpl_orders/templates/account/logout.html:7
 #: dpl_orders/templates/account/logout.html:12
-#, fuzzy
-#| msgid "Sign out"
 msgid "Sign Out"
 msgstr "Sair"
 
@@ -560,8 +554,6 @@ msgid "Change Password"
 msgstr "Alterar Senha"
 
 #: dpl_orders/templates/account/password_change.html:21
-#, fuzzy
-#| msgid "Forgot your password?"
 msgid "Forgot Password?"
 msgstr "Esqueceu sua senha?"
 
@@ -613,7 +605,7 @@ msgstr "Cadastrar"
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
 msgstr ""
-"Você já tem uma conta? Então por favor <a href=\"%(login_url)s\">entre.</a>"
+"Você já tem uma conta? Então por favor <a href=\"%(login_url)s\">entre</a>."
 
 #: dpl_orders/templates/account/signup_closed.html:5
 #: dpl_orders/templates/account/signup_closed.html:9
@@ -650,7 +642,7 @@ msgid ""
 "verify ownership of your email address. "
 msgstr ""
 "Esta parte do site requer uma verificação. Para este propósito, nós "
-"solicitamos que você verifique a propriedade do seu endereço de email."
+"solicitamos que você verifique a propriedade do seu endereço de email. "
 
 #: dpl_orders/templates/account/verified_email_required.html:18
 msgid ""
@@ -694,8 +686,6 @@ msgstr "Produtos"
 #: dpl_orders/templates/base.html:79
 #: products/templates/products/product_list.html:39
 #: products/templates/products/productgroup_list.html:9
-#, fuzzy
-#| msgid "Products Groups"
 msgid "Product Groups"
 msgstr "Grupos de Produtos"
 
@@ -788,16 +778,12 @@ msgid "Updated at"
 msgstr "Atualizado em"
 
 #: orders/models.py:41 orders/models.py:124
-#, fuzzy
-#| msgid "Canceled"
 msgid "Canceled at"
-msgstr "Cancelado"
+msgstr "Cancelado em"
 
 #: orders/models.py:44 orders/models.py:58 orders/models.py:89
 #: orders/templates/orders/order_detail.html:4
 #: orders/templates/orders/order_detail.html:8
-#, fuzzy
-#| msgid "Ordered"
 msgid "Order"
 msgstr "Pedido"
 
@@ -875,8 +861,6 @@ msgid "Soon"
 msgstr "Em breve"
 
 #: orders/templates/orders/order_detail.html:29
-#, fuzzy
-#| msgid "Order Items"
 msgid "Order items"
 msgstr "Itens de Pedido"
 
@@ -906,7 +890,7 @@ msgstr "Nenhum pedido encontrado."
 
 #: orders/tests/test_views.py:52
 msgid "No orders available"
-msgstr "Nenhum pedido está disponível."
+msgstr "Nenhum pedido está disponível"
 
 #: products/models.py:26
 msgid "Product Category"
@@ -1051,23 +1035,17 @@ msgid "Debug"
 msgstr "Debug"
 
 #: products/templates/products/debug.html:12
-#, fuzzy
-#| msgid "Product Image"
 msgid "Products Without Image"
-msgstr "Imagem do Produto"
+msgstr "Produtos sem Imagem"
 
 #: products/templates/products/product_detail.html:55
-#, fuzzy
-#| msgid "Supplier Internal id"
 msgid "Supplier Internal ID"
 msgstr "Código Interno do Fornecedor"
 
 #: products/templates/products/product_form.html:5
 #: products/templates/products/product_form.html:8
-#, fuzzy
-#| msgid "State Registration"
 msgid "Product Registration"
-msgstr "Inscrição Estadual"
+msgstr "Cadastro de Produto"
 
 #: products/templates/products/product_list.html:5
 msgid "Product List"
@@ -1088,10 +1066,8 @@ msgid "Product Group List"
 msgstr "Lista de Grupos de Produtos"
 
 #: products/templates/products/productgroup_list.html:51
-#, fuzzy
-#| msgid "No products are available."
 msgid "No product groups are available."
-msgstr "Nenhum produto está disponível."
+msgstr "Nenhum grupo de produto está disponível."
 
 #: suppliers/models.py:134
 msgid "Supplier CNPJ"

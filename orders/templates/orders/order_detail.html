@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in order_items %}
+                {% for item in order.order_items.all %}
                     <tr>
                         <td>
                             <a href="{% url 'products:detail' item.product.id %}">
@@ -50,7 +50,7 @@
                         <td>{{ item.subtotal|floatformat:2 }}</td>
                         <td>
                             <a href="#" class="btn btn-warning btn-sm">
-                                <i data-feather="edit-2"></i>
+                                <i data-feather="edit"></i>
                             </a>
                             <a href="#" class="btn btn-danger btn-sm">
                                 <i data-feather="trash-2"></i>

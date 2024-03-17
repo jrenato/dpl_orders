@@ -12,29 +12,31 @@
                 <h2 class="detail-title">{% translate "Basic Information" %}</h2>
                 <ul>
                     <li><b>{% translate "Status" %}:</b> {{ object.get_status_display }}</li>
+                    <li><b>{% translate "Limit Date for the Customer" %}:</b> {{ object.customer_limit_date|date:"d/m/Y" }}</li>
+                    <li><b>{% translate "Limit Date for the Supplier" %}:</b> {{ object.supplier_limit_date|date:"d/m/Y" }}</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    {% comment %} {% if perms.products.change_product_group or perms.products.delete_product_group %}
+    {% if perms.products.change_product_group or perms.products.delete_product_group %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 {% if perms.products.change_product_group %}
-                <a href="{% url "products:group-update" product_group.pk %}" class="btn btn-primary d-inline-flex align-items-center">
+                <a href="{% url "products:group-update" object.pk %}" class="btn btn-primary d-inline-flex align-items-center">
                     {% translate "Edit" %} <i data-feather="edit" class="align-middle"></i>
                 </a>
                 {% endif %}
                 {% if perms.products.delete_product_group %}
-                <a href="{% url "products:group-delete" product_group.pk %}" class="btn btn-danger d-inline-flex align-items-center">
+                <a href="{% url "products:group-delete" object.pk %}" class="btn btn-danger d-inline-flex align-items-center">
                     {% translate "Delete" %} <i data-feather="trash-2" class="align-middle"></i>
                 </a>
                 {% endif %}
             </div>
         </div>
     </div>
-    {% endif %} {% endcomment %}
+    {% endif %}
 
     {% if object_list %}
     {% include "includes/pagination.html" %}
@@ -50,6 +52,9 @@
             </th>
             <th scope="col">
               {% translate "SKU" %}
+            </th>
+            <th scope="col">
+              {% translate "Release Date" %}
             </th>
             <th scope="col">
               {% translate "Category" %}
@@ -75,7 +80,10 @@
                 {{ group_item.product.sku }}
               </td>
               <td>
-                {{ group_item.product.category }}
+                {{ group_item.product.release_date|date:"d/m/Y" }}
+              </td>
+              <td>
+                {{ group_item.product.category|default:_("N/A") }}
               </td>
               <td>
                 {{ group_item.product.price }}

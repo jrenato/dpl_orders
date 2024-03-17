@@ -133,7 +133,8 @@ class ProductGroupDetailView(PermissionRequiredMixin, MultipleObjectMixin, Detai
                 order_items_sum=Sum('product__order_items__quantity', default=0),
             )\
             .order_by('product__name')
-        context = super(ProductGroupDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        context = super(ProductGroupDetailView, self)\
+            .get_context_data(object_list=object_list, **kwargs)
         return context
 
     # def get_context_data(self, **kwargs):

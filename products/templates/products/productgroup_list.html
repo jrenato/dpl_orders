@@ -24,6 +24,12 @@
               {% translate "Status" %}
             </th>
             <th scope="col">
+              {% translate "Limit Date for the Customer" %}
+            </th>
+            <th scope="col">
+              {% translate "Limit Date for the Supplier" %}
+            </th>
+            <th scope="col">
               {% translate "Products" %}
             </th>
           </tr>
@@ -36,6 +42,12 @@
               </td>
               <td>
                 <span class="badge rounded-pill text-bg-warning">{{ product_group.get_status_display }}</span>
+              </td>
+              <td>
+                {{ product_group.customer_limit_date|date:"d/m/Y" }}
+              </td>
+              <td>
+                {{ product_group.supplier_limit_date|date:"d/m/Y" }}
               </td>
               <td>
                 {{ product_group.items_count }}

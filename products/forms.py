@@ -18,6 +18,18 @@ class ProductGroupForm(forms.ModelForm):
     '''
     Form for the Product Group model
     '''
+    slug = forms.SlugField(max_length=110, widget=forms.HiddenInput())
+    customer_limit_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
+    supplier_limit_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
     class Meta:
         model = ProductGroup
         fields = '__all__'
+        # widget = {
+        #     'slug': forms.HiddenInput(),
+        #     'customer_limit_date': forms.DateInput(attrs={'type': 'date'}),
+        #     'supplier_limit_date': forms.DateInput(attrs={'type': 'date'}),
+        # }

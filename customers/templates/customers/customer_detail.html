@@ -67,48 +67,31 @@
     <div class="container">
         <div class="row detail-section">
             <div class="col-md-6">
-                <h2 class="detail-title">{% translate "Ordered Products" %}</h2>
+                <h2 class="detail-title">{% translate "Pending Orders" %}</h2>
                 <table class="table table-striped table-hover table-sm">
                     <thead>
                         <tr>
                             <th>{% translate "Date" %}</th>
-                            <th>{% translate "Product" %}</th>
+                            <th>{% translate "Product Group" %}</th>
                             <th>{% translate "Quantity" %}</th>
+                            <th>{% translate "Total" %}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for order in customer.orders.all %}
-                            {% for order_item in order.order_items.all %}
-                            <tr>
-                                <td>{{ order.created|date:"d/m/Y" }}</td>
-                                <td><a href="{% url "products:detail" order_item.product.slug %}">{{ order_item.product.name }}</a></td>
-                                <td>{{ order_item.quantity }}</td>
-                            </tr>
-                            {% endfor %}
+                        {% for pending_order in pending_orders %}
+                        <tr>
+                            <td><a href="{% url "orders:detail" pending_order.pk %}">{{ pending_order.created|date:"d/m/Y" }}</a></td>
+                            <td><a href="{% url "products:group-detail" pending_order.product_group.pk %}">{{ pending_order.product_group }}</a></td>
+                            <td>{{ pending_order.total_quantity }}</td>
+                            <td>{{ pending_order.total_value|floatformat:2 }}</td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="col-md-6">
-                <h2 class="detail-title">{% translate "Latest Orders" %}</h2>
-                <table class="table table-striped table-hover table-sm">
-                    <thead>
-                        <tr>
-                            <th>{% translate "Date" %}</th>
-                            <th>{% translate "Status" %}</th>
-                            <th>{% translate "Quantity" %}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for pending_order in latest_orders %}
-                        <tr>
-                            <td><a href="#">{{ pending_order.created|date:"d/m/Y" }}</a></td>
-                            <td><span class="badge bg-warning">{% translate "Pending" %}</span></td>
-                            <td>{{ pending_order.total_quantity }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <h2 class="detail-title">{% translate "Preordered Products" %}</h2>
+                <div>Soon</div>
             </div>
         </div>
     </div>

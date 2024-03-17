@@ -38,14 +38,21 @@ class CustomerDetailView(PermissionRequiredMixin, DetailView):
     context_object_name = 'customer'
     permission_required = 'customers.view_customer'
 
-    def get_queryset(self):
-        return Customer.objects\
-            .prefetch_related('orders', 'orders__order_items', 'orders__order_items__product',)\
+    # def get_queryset(self):
+    #     return Customer.objects\
+    #         .prefetch_related('orders',)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['latest_orders'] = self.object.orders.order_by('-created')\
-            .annotate(total_quantity=Sum('order_items__quantity'))
+
+        context['pending_orders'] = self.object.orders\
+            .filter(status='PE')\
+            .annotate(
+                total_quantity=Sum('order_items__quantity'),
+                total_value=Sum('order_items__subtotal')
+            )\
+            .order_by('-created')
+
         return context
 
 

@@ -5,6 +5,7 @@ from django.db import models
 from django.db.models import F
 from django.db.models.signals import post_save
 from django.utils.translation import gettext_lazy as _
+from django.utils import formats
 from django.dispatch import receiver
 
 
@@ -52,7 +53,8 @@ class Order(models.Model):
         ordering = ('-created',)
 
     def __str__(self):
-        return f'{self.customer} - {self.created}'
+        formatted_created = formats.date_format(self.created, 'SHORT_DATETIME_FORMAT')
+        return f'{self.pk} - {self.customer} - {formatted_created}'
 
 
 class OrderStatusHistory(models.Model):
@@ -133,12 +135,12 @@ class OrderItem(models.Model):
         verbose_name = _('Order Item')
         verbose_name_plural = _('Order Items')
 
-    def __str__(self):
-        return f'{self.product} - {self.quantity}'
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__original_quantity = self.quantity
+
+    def __str__(self):
+        return f'"{self.product}" x {self.quantity}'
 
     def save(self, *args, **kwargs):
         self.price = self.product.price

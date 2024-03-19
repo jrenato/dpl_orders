@@ -2,48 +2,102 @@
 Forms for the orders app
 '''
 from django import forms
-from django_select2 import forms as s2forms
-#from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
-from .models import Order
-# from products.models import Product, ProductGroup
-# from customers.models import Customer
+from django_select2 import forms as s2forms
+
+from .models import Order, OrderItem
 
 
 class CustomerWidget(s2forms.ModelSelect2Widget):
+    '''
+    Widget for the Customer model
+    '''
     search_fields = [
-        "name__icontains",
-        "cnpj__icontains",
+        'name__icontains',
+        'cnpj__icontains',
     ]
 
 
-class ProductGroupWidget(s2forms.ModelSelect2MultipleWidget):
+class ProductGroupWidget(s2forms.ModelSelect2Widget):
+    '''
+    Widget for the ProductGroup model
+    '''
     search_fields = [
-        "name__icontains",
+        'name__icontains',
     ]
 
 
-class OrderForm(forms.ModelForm):
-    # products = forms.ModelMultipleChoiceField(
-    #     queryset=Product.objects.all(),
-    #     widget=forms.SelectMultiple(attrs={'class': 'form-control'}),
-    #     required=True
-    # )
+class ProductWidget(s2forms.ModelSelect2Widget):
+    '''
+    Widget for the Product model
+    '''
+    search_fields = [
+        'name__icontains',
+        'sku__icontains',
+        'supplier_internal_id__icontains',
+    ]
 
-    # created = forms.DateTimeField(
-    #     required=False, label=_('Created at'),
-    #     widget=forms.TextInput(attrs={'disabled': 'disabled'})
-    # )
 
-    # canceled = forms.DateTimeField(
-    #     required=False, label=_('Canceled at'),
-    #     widget=forms.TextInput(attrs={'disabled': 'disabled'})
-    # )
-
+class OrderCreateForm(forms.ModelForm):
+    '''
+    Form to create an Order
+    '''
     class Meta:
         model = Order
-        exclude = ('canceled',)
+        fields = 'vl_id', 'customer', 'product_group'
         widgets = {
-            "customer": CustomerWidget,
-            "product_group": ProductGroupWidget
+            'customer': CustomerWidget,
+            'product_group': ProductGroupWidget,
         }
+
+
+class OrderUpdateForm(forms.ModelForm):
+    '''
+    Form to update an Order
+    '''
+    class Meta:
+        model = Order
+        fields = 'vl_id', 'customer', 'product_group'
+        widgets = {
+            'customer': CustomerWidget,
+            'product_group': ProductGroupWidget,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['customer'].disabled = True
+        self.fields['product_group'].disabled = True
+
+
+class OrderItemCreateForm(forms.ModelForm):
+    '''
+    Form to create an OrderItem
+    '''
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['order'].disabled = True
+
+    class Meta:
+        model = OrderItem
+        fields = 'order', 'product', 'quantity', 'discount'
+        widgets = {
+            'product': ProductWidget,
+        }
+
+
+class OrderItemUpdateForm(forms.ModelForm):
+    '''
+    Form to update an OrderItem
+    '''
+    class Meta:
+        model = OrderItem
+        fields = 'order', 'product', 'quantity', 'discount'
+        widgets = {
+            'product': ProductWidget,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['order'].disabled = True
+        self.fields['product'].disabled = True

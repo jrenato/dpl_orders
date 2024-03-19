@@ -28,8 +28,3 @@ class ProductGroupForm(forms.ModelForm):
     class Meta:
         model = ProductGroup
         fields = '__all__'
-        # widget = {
-        #     'slug': forms.HiddenInput(),
-        #     'customer_limit_date': forms.DateInput(attrs={'type': 'date'}),
-        #     'supplier_limit_date': forms.DateInput(attrs={'type': 'date'}),
-        # }

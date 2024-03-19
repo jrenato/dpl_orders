@@ -4,7 +4,7 @@
 {% block title %}{% translate "Order" %} {{ object.id }}{% endblock title %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-3">
     <h1>{% translate "Order" %} {{ object.id }}</h1>
     <h2>{% translate "Customer" %}: {{ object.customer.name }}</h2>
     <div class="row detail-section">
@@ -26,7 +26,18 @@
         </div>
     </div>
 
-    <h2>{% translate "Order items" %}</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>{% translate "Order items" %}</h2>
+            </div>
+            <div class="col-md-9 text-begin mt-1">
+                <a href="{% url 'orders:item-create' pk=order.pk %}" class="btn btn-success btn-sm me-2">
+                    <i data-feather="plus"></i> {% translate "Add" %}
+                </a>
+            </div>
+        </div>
+    </div>
     <div class="table-responsive">
         <table class="table table-striped table-hover table-sm">
             <thead>
@@ -49,10 +60,10 @@
                         <td>{{ item.product.price|floatformat:2 }}</td>
                         <td>{{ item.subtotal|floatformat:2 }}</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-sm">
+                            <a href="{% url 'orders:item-update' pk=item.pk %}" class="btn btn-warning btn-sm">
                                 <i data-feather="edit"></i>
                             </a>
-                            <a href="#" class="btn btn-danger btn-sm">
+                            <a href="{% url 'orders:item-delete' pk=item.pk %}" class="btn btn-danger btn-sm">
                                 <i data-feather="trash-2"></i>
                             </a>
                         </td>

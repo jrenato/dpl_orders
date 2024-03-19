@@ -51,6 +51,7 @@ class Command(BaseCommand):
                     files.append(os.path.join(root, filename))
 
         for filename in files:
+            tqdm.write(f'Importing orders from {os.path.basename(filename).split(".")[0]}')
             # Get the raw data from the file and convert it to a list of dictionaries
             raw_data = get_data(filename)
             orders_data = self.get_orders_data(raw_data)

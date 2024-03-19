@@ -42,6 +42,8 @@ class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ['created', 'updated']
     inlines = [OrderItemInline, OrderStatusHistoryInline]
 
+    autocomplete_fields = ['customer', 'product_group']
+
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):

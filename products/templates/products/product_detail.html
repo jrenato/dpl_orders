@@ -55,10 +55,10 @@
                         <b>{% translate "Supplier Internal ID" %}:</b> {{ product.supplier_internal_id }}
                     </li>
                     <li>
-                        <b>{% translate "Created at" %}:</b> {{ product.created|date:"d/m/Y" }}
+                        <b>{% translate "Created at" %}:</b> {{ product.created|date:"SHORT_DATE_FORMAT" }}
                     </li>
                     <li>
-                        <b>{% translate "Modified at" %}:</b> {{ product.modified|date:"d/m/Y" }}
+                        <b>{% translate "Modified at" %}:</b> {{ product.modified|date:"SHORT_DATE_FORMAT" }}
                     </li>
                 </ul>
             </div>
@@ -106,7 +106,7 @@
                                     <a href="{% url "customers:detail" order_item.order.customer.slug %}">{{ order_item.order.customer }}</a>
                                 </td>
                                 <td>{{ order_item.quantity }}</td>
-                                <td>{{ order_item.created|date:"d/m/Y" }}</td>
+                                <td>{{ order_item.created|date:"SHORT_DATE_FORMAT" }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -128,7 +128,7 @@
                                 <td>
                                     <a href="{% url "products:group-detail" group_item.group.pk %}">{{ group_item.group.name }}</a>
                                 </td>
-                                <td>{{ group_item.group.created|date:"d/m/Y" }}</td>
+                                <td>{{ group_item.group.created|date:"SHORT_DATE_FORMAT" }}</td>
                                 <td><span class="badge bg-warning">{{ group_item.group.get_status_display }}</span></td>
                             </tr>
                         {% endfor %}

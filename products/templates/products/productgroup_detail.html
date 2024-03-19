@@ -12,8 +12,8 @@
                 <h2 class="detail-title">{% translate "Basic Information" %}</h2>
                 <ul>
                     <li><b>{% translate "Status" %}:</b> {{ object.get_status_display }}</li>
-                    <li><b>{% translate "Limit Date for the Customer" %}:</b> {{ object.customer_limit_date|date:"d/m/Y" }}</li>
-                    <li><b>{% translate "Limit Date for the Supplier" %}:</b> {{ object.supplier_limit_date|date:"d/m/Y" }}</li>
+                    <li><b>{% translate "Limit Date for the Customer" %}:</b> {{ object.customer_limit_date|date:"SHORT_DATE_FORMAT" }}</li>
+                    <li><b>{% translate "Limit Date for the Supplier" %}:</b> {{ object.supplier_limit_date|date:"SHORT_DATE_FORMAT" }}</li>
                 </ul>
             </div>
         </div>
@@ -80,7 +80,7 @@
                 {{ group_item.product.sku }}
               </td>
               <td>
-                {{ group_item.product.release_date|date:"d/m/Y" }}
+                {{ group_item.product.release_date|date:"SHORT_DATE_FORMAT" }}
               </td>
               <td>
                 {{ group_item.product.category|default:_("N/A") }}

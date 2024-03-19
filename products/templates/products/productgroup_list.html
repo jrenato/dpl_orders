@@ -44,10 +44,10 @@
                 <span class="badge rounded-pill text-bg-warning">{{ product_group.get_status_display }}</span>
               </td>
               <td>
-                {{ product_group.customer_limit_date|date:"d/m/Y" }}
+                {{ product_group.customer_limit_date|date:"SHORT_DATE_FORMAT" }}
               </td>
               <td>
-                {{ product_group.supplier_limit_date|date:"d/m/Y" }}
+                {{ product_group.supplier_limit_date|date:"SHORT_DATE_FORMAT" }}
               </td>
               <td>
                 {{ product_group.items_count }}

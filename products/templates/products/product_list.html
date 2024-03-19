@@ -6,7 +6,7 @@
 {% endblock title %}
 
 {% block content %}
-  <h1>{% translate "Product" %}</h1>
+  <h1>{% translate "Product List" %}</h1>
   {% if perms.products.add_product %}
   <a class="btn btn-primary mb-3" href="{% url "products:create" %}">{% translate "Add" %}</a>
   {% endif %}
@@ -56,7 +56,7 @@
                 {{ product.sku }}
               </td>
               <td>
-                {{ product.release_date|date:"d/m/Y" }}
+                {{ product.release_date|date:"SHORT_DATE_FORMAT" }}
               </td>
               <td>
                 {{ product.category }}

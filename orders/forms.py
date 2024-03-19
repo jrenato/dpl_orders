@@ -18,11 +18,11 @@ class OrderForm(forms.ModelForm):
     #     widget=forms.TextInput(attrs={'disabled': 'disabled'})
     # )
 
-    canceled = forms.DateTimeField(
-        required=False, label=_('Canceled at'),
-        widget=forms.TextInput(attrs={'disabled': 'disabled'})
-    )
+    # canceled = forms.DateTimeField(
+    #     required=False, label=_('Canceled at'),
+    #     widget=forms.TextInput(attrs={'disabled': 'disabled'})
+    # )
 
     class Meta:
         model = Order
-        fields = '__all__'
+        exclude = ('canceled',)

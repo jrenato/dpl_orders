@@ -15,6 +15,7 @@ class SupplierListView(PermissionRequiredMixin, ListView):
     '''
     model = Supplier
     context_object_name = 'suppliers'
+    paginate_by = 20
     permission_required = 'suppliers.view_supplier'
 
 

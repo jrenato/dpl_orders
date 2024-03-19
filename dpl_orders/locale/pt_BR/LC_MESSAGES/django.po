@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-19 09:36-0300\n"
+"POT-Creation-Date: 2024-03-19 09:53-0300\n"
 "PO-Revision-Date: 2024-03-17 09:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -265,6 +265,7 @@ msgid "Pending Orders"
 msgstr "Pedidos Pendentes"
 
 #: customers/templates/customers/customer_detail.html:74
+#: orders/templates/orders/order_list.html:13
 #: products/templates/products/product_detail.html:96
 #: products/templates/products/product_detail.html:121
 msgid "Date"
@@ -303,6 +304,7 @@ msgid "Customer Registration"
 msgstr "Cadastro de Cliente"
 
 #: customers/templates/customers/customer_form.html:12
+#: orders/templates/orders/order_form.html:12
 #: products/templates/products/product_form.html:12
 #: products/templates/products/productgroup_form.html:12
 #: suppliers/templates/suppliers/supplier_form.html:12
@@ -662,8 +664,6 @@ msgid "Dashboard"
 msgstr "Tela Inicial"
 
 #: dpl_orders/templates/base.html:64 orders/apps.py:8 orders/models.py:51
-#: orders/templates/orders/order_list.html:4
-#: orders/templates/orders/order_list.html:7
 #: products/templates/products/product_detail.html:89
 msgid "Orders"
 msgstr "Pedidos"
@@ -881,9 +881,17 @@ msgstr "Itens de Pedido"
 msgid "Go back to orders list"
 msgstr "Voltar para a lista de pedidos"
 
-#: orders/templates/orders/order_list.html:13
-msgid "Order ID"
-msgstr "Código do Pedido"
+#: orders/templates/orders/order_form.html:5
+#: orders/templates/orders/order_form.html:8
+#, fuzzy
+#| msgid "Product Registration"
+msgid "Order Registration"
+msgstr "Cadastro de Produto"
+
+#: orders/templates/orders/order_list.html:4
+#: orders/templates/orders/order_list.html:7
+msgid "Orders List"
+msgstr "Lista de Pedidos"
 
 #: orders/templates/orders/order_list.html:15 products/models.py:240
 msgid "Products Group"
@@ -1142,6 +1150,9 @@ msgstr "Produtos Cadastrados"
 #: suppliers/templates/suppliers/supplier_list.html:45
 msgid "No suppliers are available."
 msgstr "Nenhum fornecedor está disponível."
+
+#~ msgid "Order ID"
+#~ msgstr "Código do Pedido"
 
 #~ msgid "Latest Orders"
 #~ msgstr "Últimos Pedidos"

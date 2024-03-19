@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% translate "Order Registration" %}{% endblock title %}
+
+{% block content %}
+    <h1>{% translate "Order Registration" %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">{% translate "Save" %}</button>
+    </form>
+{% endblock content %}

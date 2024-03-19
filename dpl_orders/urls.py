@@ -15,6 +15,8 @@ urlpatterns = [
 
     path('', login_required(TemplateView.as_view(template_name='home.html')), name='home'),
 
+    path("select2/", include("django_select2.urls")),
+
     path('suppliers/', include('suppliers.urls')),
     path('customers/', include('customers.urls')),
     path('products/', include('products.urls')),

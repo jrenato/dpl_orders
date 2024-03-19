@@ -2,6 +2,10 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
+{% block custom_css %}
+    {{ form.media.css }}
+{% endblock custom_css %}
+
 {% block title %}{% translate "Order Registration" %}{% endblock title %}
 
 {% block content %}
@@ -12,3 +16,8 @@
         <button type="submit" class="btn btn-primary">{% translate "Save" %}</button>
     </form>
 {% endblock content %}
+
+{% block custom_js %}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    {{ form.media.js }}
+{% endblock custom_js %}

@@ -3,6 +3,7 @@ Views for the orders app.
 '''
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.views.generic.list import MultipleObjectMixin
 from django.urls import reverse_lazy
 from django.db.models import Sum
 
@@ -33,12 +34,13 @@ class OrderListView(PermissionRequiredMixin, ListView):
         return queryset
 
 
-class OrderDetailView(PermissionRequiredMixin, DetailView):
+class OrderDetailView(PermissionRequiredMixin, MultipleObjectMixin, DetailView):
     '''
     Detail view for Order model
     '''
     model = Order
-    context_object_name = 'order'
+    #context_object_name = 'order'
+    paginate_by = 20
     permission_required = 'orders.view_order'
 
     def get_queryset(self):
@@ -49,6 +51,13 @@ class OrderDetailView(PermissionRequiredMixin, DetailView):
             total_value=Sum('order_items__subtotal')
         )
 
+    def get_context_data(self, **kwargs):
+        object_list = self.get_object().order_items\
+            .select_related('product', 'product__category', 'product__supplier')\
+            .order_by('product__name')
+        context = super(OrderDetailView, self)\
+            .get_context_data(object_list=object_list, **kwargs)
+        return context
 
 class OrderCreateView(PermissionRequiredMixin, CreateView):
     '''

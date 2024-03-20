@@ -43,6 +43,8 @@
             <thead>
                 <tr>
                     <th scope="col">{% translate "Product" %}</th>
+                    <th scope="col">{% translate "Supplier" %}</th>
+                    <th scope="col">{% translate "Category" %}</th>
                     <th scope="col">{% translate "Quantity" %}</th>
                     <th scope="col">{% translate "Price" %}</th>
                     <th scope="col">{% translate "Subtotal" %}</th>
@@ -54,8 +56,11 @@
                     <tr>
                         <td>
                             <a href="{% url 'products:detail' item.product.id %}">
-                                {{ item.product.name }}</a>
+                                {{ item.product.name }}
+                            </a>
                         </td>
+                        <td>{{ item.product.supplier }}</td>
+                        <td>{{ item.product.category|default:"" }}</td>
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.product.price|floatformat:2 }}</td>
                         <td>{{ item.subtotal|floatformat:2 }}</td>

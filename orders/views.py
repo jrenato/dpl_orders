@@ -45,7 +45,9 @@ class OrderDetailView(PermissionRequiredMixin, MultipleObjectMixin, DetailView):
 
     def get_queryset(self):
         return super().get_queryset()\
-        .prefetch_related('customer', 'product_group', 'order_items', 'order_items__product')\
+        .prefetch_related(
+            'customer', 'product_group',
+        )\
         .annotate(
             total_quantity=Sum('order_items__quantity'),
             total_value=Sum('order_items__subtotal')

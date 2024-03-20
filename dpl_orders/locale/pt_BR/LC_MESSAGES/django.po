@@ -287,7 +287,7 @@ msgstr "Grupo de Produtos"
 #: orders/models.py:177 orders/templates/orders/order_detail.html:46
 #: products/templates/products/product_detail.html:95
 msgid "Quantity"
-msgstr "Quantidade"
+msgstr "QTD"
 
 #: customers/templates/customers/customer_detail.html:77
 msgid "Total"

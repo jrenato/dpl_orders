@@ -3,6 +3,7 @@ Views for the products app
 '''
 from django.db.models import Count, Sum
 from django.urls import reverse_lazy
+from django.db.models import Q
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView,\
     TemplateView
 from django.views.generic.list import MultipleObjectMixin
@@ -22,14 +23,50 @@ class ProductListView(PermissionRequiredMixin, ListView):
     permission_required = 'products.view_product'
 
     def get_queryset(self):
-        queryset = super().get_queryset()\
+        queryset = super().get_queryset()
+
+        # Check if the query is present
+        # (the user is searching for something)
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(
+                Q(name__icontains=query) | \
+                Q(sku__icontains=query) | \
+                Q(vl_id__icontains=query) | \
+                Q(supplier_internal_id__icontains=query)
+            )
+
+        # Prefetch related fields and annotate relevant data
+        queryset = queryset\
             .select_related('category', 'supplier')\
             .annotate(
-                order_items_sum=Sum('order_items__quantity'),
+                order_items_sum=Sum('order_items__quantity', default=0),
                 groups_count=Count('group_items', distinct=True),
             )\
             .order_by('name')
 
+        return queryset
+
+
+class ProductSearchView(ProductListView):
+    '''
+    Search view for the Product model
+    '''
+    model = Product
+    context_object_name = 'products'
+    paginate_by = 20
+    permission_required = 'products.view_product'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(\
+                Q(name__icontains=query) | \
+                Q(sku__icontains=query) | \
+                Q(vl_id__icontains=query) | \
+                Q(supplier_internal_id__icontains=query)
+            )
         return queryset
 
 
@@ -136,23 +173,6 @@ class ProductGroupDetailView(PermissionRequiredMixin, MultipleObjectMixin, Detai
         context = super(ProductGroupDetailView, self)\
             .get_context_data(object_list=object_list, **kwargs)
         return context
-
-    # def get_context_data(self, **kwargs):
-    #     # object_list = self.get_object().group_items.annotate(
-    #     #     order_items_sum=Sum('order_items__quantity'),
-    #     # )
-    #     object_list = ProductGroupItem.objects\
-    #         .filter(group=self.get_object())\
-    #         .select_related('product', 'product__category', 'product__supplier', 'product__order_items')\
-    #         .annotate(
-    #             order_items_sum=Sum('product__order_items__quantity'),
-    #         )\
-    #         .order_by('product__name')
-
-    #     context = super(ProductGroupDetailView, self)\
-    #         .get_context_data(object_list=object_list, **kwargs)
-
-    #     return context
 
 
 class ProductGroupUpdateView(PermissionRequiredMixin, UpdateView):

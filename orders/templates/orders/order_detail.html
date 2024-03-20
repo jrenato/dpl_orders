@@ -4,7 +4,6 @@
 {% block title %}{% translate "Order" %} {{ object.id }}{% endblock title %}
 
 {% block content %}
-<div class="container mt-3">
     <h1>{% translate "Order" %} {{ object.id }}</h1>
     <h2>{% translate "Customer" %}: {{ object.customer.name }}</h2>
     <div class="row detail-section">
@@ -77,5 +76,4 @@
         <i data-feather="arrow-left"></i>
         {% translate "Go back to orders list" %}
     </a>
-</div>
 {% endblock content %}

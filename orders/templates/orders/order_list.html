@@ -6,80 +6,78 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-md-6">
-                <h1>{% translate "Orders List" %}</h1>
-            </div>
-            <div class="col-md-6 text-end">
-                <a href="{% url 'orders:create' %}" class="btn btn-success me-2">
-                    <i data-feather="plus"></i> {% translate "Add" %}
-                </a>
-                <a href="#" class="btn btn-secondary">
-                    <i data-feather="printer"></i> {% translate "Print" %}
-                </a>
-            </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>{% translate "Orders List" %}</h1>
         </div>
-
-        {% include "includes/pagination.html" %}
-
-        <div class="table-responsive">
-            <table class="table table-striped table-hover table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">{% translate "Date" %}</th>
-                        <th scope="col">{% translate "Customer" %}</th>
-                        <th scope="col">{% translate "Products Group" %}</th>
-                        <th scope="col">{% translate "Total Quantity" %}</th>
-                        <th scope="col">{% translate "Total Value" %}</th>
-                        <th scope="col">{% translate "Status" %}</th>
-                        <th scope="col">{% translate "Actions" %}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for order in object_list %}
-                        <tr>
-                            <td scope="row">
-                                <a href="{% url 'orders:detail' pk=order.pk %}">{{ order.created|date:"SHORT_DATE_FORMAT" }}</a>
-                            </td>
-                            <td>
-                                <a href="{% url 'customers:detail' order.customer.slug %}">{{ order.customer.name }}</a>
-                            </td>
-                            <td>
-                                {% if order.product_group %}
-                                    <a href="{% url 'products:group-detail' order.product_group.pk %}">{{ order.product_group.name }}</a>
-                                {% else %}
-                                    {% translate "N/A" %}
-                                {% endif %}
-                            </td>
-                            <td>{{ order.total_quantity }}</td>
-                            <td>{{ order.total_value|floatformat:2 }}</td>
-                            <td>
-                                <span class="badge bg-warning">{% translate order.get_status_display %}</span>
-                            </td>
-                            <td>
-                                <a href="{% url 'orders:detail' pk=order.pk %}"
-                                class="btn btn-sm btn-primary">
-                                    <i data-feather="search"></i>
-                                </a>
-                                <a href="{% url 'orders:update' pk=order.pk %}"
-                                class="btn btn-sm btn-secondary">
-                                    <i data-feather="edit"></i>
-                                </a>
-                                <a href="{% url 'orders:delete' pk=order.pk %}"
-                                class="btn btn-sm btn-danger">
-                                    <i data-feather="trash-2"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="6">{% translate "No orders found." %}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div class="col-md-6 text-end">
+            <a href="{% url 'orders:create' %}" class="btn btn-success me-2">
+                <i data-feather="plus"></i> {% translate "Add" %}
+            </a>
+            <a href="#" class="btn btn-secondary">
+                <i data-feather="printer"></i> {% translate "Print" %}
+            </a>
         </div>
-        {% include "includes/pagination.html" %}
     </div>
+
+    {% include "includes/pagination.html" %}
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">{% translate "Date" %}</th>
+                    <th scope="col">{% translate "Customer" %}</th>
+                    <th scope="col">{% translate "Products Group" %}</th>
+                    <th scope="col">{% translate "Total Quantity" %}</th>
+                    <th scope="col">{% translate "Total Value" %}</th>
+                    <th scope="col">{% translate "Status" %}</th>
+                    <th scope="col">{% translate "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in object_list %}
+                    <tr>
+                        <td scope="row">
+                            <a href="{% url 'orders:detail' pk=order.pk %}">{{ order.created|date:"SHORT_DATE_FORMAT" }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'customers:detail' order.customer.slug %}">{{ order.customer.name }}</a>
+                        </td>
+                        <td>
+                            {% if order.product_group %}
+                                <a href="{% url 'products:group-detail' order.product_group.pk %}">{{ order.product_group.name }}</a>
+                            {% else %}
+                                {% translate "N/A" %}
+                            {% endif %}
+                        </td>
+                        <td>{{ order.total_quantity }}</td>
+                        <td>{{ order.total_value|floatformat:2 }}</td>
+                        <td>
+                            <span class="badge bg-warning">{% translate order.get_status_display %}</span>
+                        </td>
+                        <td>
+                            <a href="{% url 'orders:detail' pk=order.pk %}"
+                            class="btn btn-sm btn-primary">
+                                <i data-feather="search"></i>
+                            </a>
+                            <a href="{% url 'orders:update' pk=order.pk %}"
+                            class="btn btn-sm btn-secondary">
+                                <i data-feather="edit"></i>
+                            </a>
+                            <a href="{% url 'orders:delete' pk=order.pk %}"
+                            class="btn btn-sm btn-danger">
+                                <i data-feather="trash-2"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">{% translate "No orders found." %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include "includes/pagination.html" %}
 {% endblock content %}

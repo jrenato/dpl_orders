@@ -115,7 +115,6 @@
                 </a>
               </li>
             </ul>
-
             <!--
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>{% translate "Saved reports" %}</span>
@@ -152,53 +151,10 @@
         </nav>
         
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          {% block content %}
-          <!--
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">{% translate "Dashboard" %}</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">{% translate "Share" %}</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">{% translate "Export" %}</button>
-              </div>
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                {% translate "This week" %}
-              </button>
-            </div>
+          <div class="container mt-3">
+            {% block content %}
+            {% endblock content %}
           </div>
-          -->
-
-          <!--
-          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-          -->
-
-          <!--
-          <h2>{% translate "Section title" %}</h2>
-          <div class="table-responsive">
-            <table class="table table-striped table-hover table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>random</td>
-                  <td>data</td>
-                  <td>placeholder</td>
-                  <td>text</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          -->
-          {% endblock content %}
         </main>
       </div>
     </div>

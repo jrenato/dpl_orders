@@ -6,24 +6,23 @@
 {% endblock title %}
 
 {% block content %}
-  <div class="container mt-3">
-    <div class="row">
-      <div class="col-md-6">
-        <h1>{% translate "Supplier List" %}</h1>
-      </div>
-      <div class="col-md-6 text-end">
-        {% if perms.suppliers.add_supplier %}
-          <a href="{% url 'suppliers:create' %}" class="btn btn-success me-2">
-            <i data-feather="plus"></i> {% translate "Add" %}
-          </a>
-        {% endif %}
-        <a href="#" class="btn btn-secondary">
-          <i data-feather="printer"></i> {% translate "Print" %}
-        </a>
-      </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h1>{% translate "Supplier List" %}</h1>
     </div>
+    <div class="col-md-6 text-end">
+      {% if perms.suppliers.add_supplier %}
+        <a href="{% url 'suppliers:create' %}" class="btn btn-success me-2">
+          <i data-feather="plus"></i> {% translate "Add" %}
+        </a>
+      {% endif %}
+      <a href="#" class="btn btn-secondary">
+        <i data-feather="printer"></i> {% translate "Print" %}
+      </a>
+    </div>
+  </div>
 
-    {% include "includes/pagination.html" %}
+  {% include "includes/pagination.html" %}
 
   {% if suppliers %}
     <div class="table-responsive">
@@ -52,5 +51,4 @@
   {% else %}
     <p>{% translate "No suppliers are available." %}</p>
   {% endif %}
-</div>
 {% endblock content %}

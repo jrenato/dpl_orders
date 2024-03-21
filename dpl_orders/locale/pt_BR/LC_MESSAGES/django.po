@@ -1126,7 +1126,7 @@ msgstr "Nenhum produto está disponível."
 #: products/templates/products/productgroup_form.html:5
 #: products/templates/products/productgroup_form.html:8
 msgid "Product Group Registration"
-msgstr "Cadastro de Gruopo de Produtos"
+msgstr "Cadastro de Grupo de Produtos"
 
 #: products/templates/products/productgroup_list.html:5
 msgid "Product Group List"

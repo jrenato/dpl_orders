@@ -26,11 +26,23 @@ class ProductGroupForm(forms.ModelForm):
         required=False
     )
     customer_limit_date = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}),
+        widget=forms.DateInput(
+            format=('%Y-%m-%d'),
+            attrs={
+                'class': 'form-control', 
+                'type': 'date'
+            }
+        ),
         required=False
     )
     supplier_limit_date = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}),
+        widget=forms.DateInput(
+            format=('%Y-%m-%d'),
+            attrs={
+                'class': 'form-control', 
+                'type': 'date'
+            }
+        ),
         required=False
     )
     class Meta:

@@ -1,70 +1,77 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{{ object.name }}{% endblock title %}
+{% block title %}
+  {{ object.name }}
+{% endblock title %}
 
 {% block content %}
-    <div class="container">
-        <h1>{{ object.name }}</h1>
-        <hr>
-        <div class="row detail-section">
-            <div class="col-md-12">
-                <h2 class="detail-title">{% translate "Basic Information" %}</h2>
-                <ul>
-                    <li><b>{% translate "Status" %}:</b> {{ object.get_status_display }}</li>
-                    <li><b>{% translate "Limit Date for the Customer" %}:</b> {{ object.customer_limit_date|date:"SHORT_DATE_FORMAT" }}</li>
-                    <li><b>{% translate "Limit Date for the Supplier" %}:</b> {{ object.supplier_limit_date|date:"SHORT_DATE_FORMAT" }}</li>
-                </ul>
-            </div>
-        </div>
+  <div class="container">
+    <h1>{{ object.name }}</h1>
+    <hr>
+    <div class="row detail-section">
+      <div class="col-md-12">
+        <h2 class="detail-title">{% translate "Basic Information" %}</h2>
+        <ul>
+          <li>
+            <b>{% translate "Status" %}:</b> {{ object.get_status_display }}
+          </li>
+          <li>
+            <b>{% translate "Limit Date for the Customer" %}:</b> {{ object.customer_limit_date|date:"SHORT_DATE_FORMAT" }}
+          </li>
+          <li>
+            <b>{% translate "Limit Date for the Supplier" %}:</b> {{ object.supplier_limit_date|date:"SHORT_DATE_FORMAT" }}
+          </li>
+        </ul>
+      </div>
     </div>
-
-    {% if perms.products.change_product_group or perms.products.delete_product_group %}
+  </div>
+  {% if perms.products.change_product_group or perms.products.delete_product_group %}
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                {% if perms.products.change_product_group %}
-                <a href="{% url "products:group-update" object.pk %}" class="btn btn-primary d-inline-flex align-items-center">
-                    {% translate "Edit" %} <i data-feather="edit" class="align-middle"></i>
-                </a>
-                {% endif %}
-                {% if perms.products.delete_product_group %}
-                <a href="{% url "products:group-delete" object.pk %}" class="btn btn-danger d-inline-flex align-items-center">
-                    {% translate "Delete" %} <i data-feather="trash-2" class="align-middle"></i>
-                </a>
-                {% endif %}
-            </div>
+      <div class="row">
+        <div class="col-md-12">
+          {% if perms.products.change_product_group %}
+            <a href="{% url "products:group-update" object.pk %}" class="btn btn-primary d-inline-flex align-items-center">
+              {% translate "Edit" %} <i data-feather="edit" class="align-middle"></i>
+            </a>
+          {% endif %}
+          {% if perms.products.delete_product_group %}
+            <a href="{% url "products:group-delete" object.pk %}" class="btn btn-danger d-inline-flex align-items-center">
+              {% translate "Delete" %} <i data-feather="trash-2" class="align-middle"></i>
+            </a>
+          {% endif %}
         </div>
+      </div>
     </div>
-    {% endif %}
+  {% endif %}
 
-    {% if object_list %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <h2>{% translate "Product Group Items" %}</h2>
+      </div>
+      <div class="col-md-7 text-begin mt-1">
+        <a href="{% url 'products:group-item-create' pk=object.pk %}" class="btn btn-success btn-sm me-2">
+          <i data-feather="plus"></i> {% translate "Add" %}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {% if object_list %}
     {% include "includes/pagination.html" %}
     <div class="table-responsive">
       <table class="table table-striped table-hover table-sm">
         <thead>
           <tr>
-            <th scope="col">
-              {% translate "Product" %}
-            </th>
-            <th scope="col">
-              {% translate "Supplier" %}
-            </th>
-            <th scope="col">
-              {% translate "SKU" %}
-            </th>
-            <th scope="col">
-              {% translate "Release Date" %}
-            </th>
-            <th scope="col">
-              {% translate "Category" %}
-            </th>
-            <th scope="col">
-              {% translate "Price" %}
-            </th>
-            <th scope="col">
-              {% translate "Ordered Quantity" %}
-            </th>
+            <th scope="col">{% translate "Product" %}</th>
+            <th scope="col">{% translate "Supplier" %}</th>
+            <th scope="col">{% translate "SKU" %}</th>
+            <th scope="col">{% translate "Release Date" %}</th>
+            <th scope="col">{% translate "Category" %}</th>
+            <th scope="col">{% translate "Price" %}</th>
+            <th scope="col">{% translate "Ordered Quantity" %}</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -73,23 +80,17 @@
               <td>
                 <a href="{% url "products:detail" group_item.product.slug %}">{{ group_item.product.name }}</a>
               </td>
+              <td>{{ group_item.product.supplier }}</td>
+              <td>{{ group_item.product.sku }}</td>
+              <td>{{ group_item.product.release_date|date:"SHORT_DATE_FORMAT" }}</td>
+              <td>{{ group_item.product.category|default:"" }}</td>
+              <td>{{ group_item.product.price }}</td>
+              <td>{{ group_item.order_items_sum }}</td>
               <td>
-                {{ group_item.product.supplier }}
-              </td>
-              <td>
-                {{ group_item.product.sku }}
-              </td>
-              <td>
-                {{ group_item.product.release_date|date:"SHORT_DATE_FORMAT" }}
-              </td>
-              <td>
-                {{ group_item.product.category|default:"" }}
-              </td>
-              <td>
-                {{ group_item.product.price }}
-              </td>
-              <td>
-                {{ group_item.order_items_sum }}
+                <a href="{% url "products:group-item-delete" pk=group_item.pk %}"
+                   class="btn btn-danger btn-sm">
+                  <i data-feather="trash-2"></i>
+                </a>
               </td>
             </tr>
           {% endfor %}
@@ -98,8 +99,6 @@
     </div>
     {% include "includes/pagination.html" %}
   {% else %}
-    <p>
-      {% translate "No products are available." %}
-    </p>
+    <p>{% translate "No products are available." %}</p>
   {% endif %}
 {% endblock content %}

@@ -10,7 +10,7 @@ from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .models import Product, ProductGroup, ProductGroupItem
-from .forms import ProductForm, ProductGroupForm
+from .forms import ProductForm, ProductGroupForm, ProductGroupItemCreateForm
 
 
 class ProductListView(PermissionRequiredMixin, ListView):
@@ -192,6 +192,42 @@ class ProductGroupDeleteView(PermissionRequiredMixin, DeleteView):
     model = ProductGroup
     success_url = reverse_lazy('products:group-list')
     permission_required = 'products.delete_productgroup'
+
+
+### Product Group Item views
+
+
+class ProductGroupItemCreateView(PermissionRequiredMixin, CreateView):
+    '''
+    Create view for the Product Group Item model
+    '''
+    model = ProductGroupItem
+    form_class = ProductGroupItemCreateForm
+    permission_required = 'products.add_productgroupitem'
+
+    def get_form_kwargs(self):
+        if 'pk' not in self.kwargs:
+            raise ValueError('Missing pk in kwargs')
+
+        product_group = ProductGroup.objects.get(pk=self.kwargs.get('pk'))
+        kwargs = super().get_form_kwargs()
+        kwargs['initial'] = {'group': product_group}
+
+        return kwargs
+
+    def get_success_url(self):
+        return reverse_lazy('products:group-detail', kwargs={'pk': self.object.group.pk})
+
+
+class ProductGroupItemDeleteView(PermissionRequiredMixin, DeleteView):
+    '''
+    Delete view for the Product Group Item model
+    '''
+    model = ProductGroupItem
+    permission_required = 'products.delete_productgroupitem'
+
+    def get_success_url(self):
+        return reverse_lazy('products:group-detail', kwargs={'pk': self.object.group.pk})
 
 
 ### Debug views

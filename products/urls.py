@@ -6,6 +6,7 @@ from .views import ProductListView, ProductDetailView, ProductCreateView, \
     ProductUpdateView, ProductDeleteView, \
     ProductGroupListView, ProductGroupDetailView, ProductGroupCreateView, \
     ProductGroupUpdateView, ProductGroupDeleteView, \
+    ProductGroupItemCreateView, ProductGroupItemDeleteView, \
     ProductsDebugTemplateView, ProductsWithoutImagesListView
 
 
@@ -13,6 +14,9 @@ app_name = 'products'
 urlpatterns = [
     path('debug/', ProductsDebugTemplateView.as_view(), name='debug'),
     path('debug/without-images/', ProductsWithoutImagesListView.as_view(), name='without-images'),
+
+    path('<int:pk>/item/create/', ProductGroupItemCreateView.as_view(), name='group-item-create'),
+    path('group/item/<int:pk>/delete/', ProductGroupItemDeleteView.as_view(), name='group-item-delete'),
 
     path('group/', ProductGroupListView.as_view(), name='group-list'),
     path('group/create/', ProductGroupCreateView.as_view(), name='group-create'),

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'customers',
     'suppliers',
     'products',
+    'product_groups',
     'orders',
     'preorders',
 

@@ -1,0 +1,67 @@
+[
+    {
+        "model": "product_groups.productgroup",
+        "pk": 1,
+        "fields": {
+            "name": "Lançamentos de Maio 2024",
+            "slug": "lancamentos-de-maio-2024",
+            "status": "PE",
+            "customer_limit_date": "2024-03-20",
+            "supplier_limit_date": "2024-03-21",
+            "created": "2024-03-15 13:18:21",
+            "updated": "2024-03-15 13:18:21"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 2,
+        "fields": {
+            "name": "Catalogo Super Promoção Março 2024",
+            "slug": "catalogo-super-promocao-marco-2024",
+            "status": "PE",
+            "customer_limit_date": null,
+            "supplier_limit_date": null,
+            "created": "2024-03-15 13:18:21",
+            "updated": "2024-03-15 13:18:21"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 3,
+        "fields": {
+            "name": "Reimpressões de Mangás de Maio 2024",
+            "slug": "reimpressoes-de-mangas-de-maio-2024",
+            "status": "PE",
+            "customer_limit_date": "2024-03-10",
+            "supplier_limit_date": "2024-03-11",
+            "created": "2024-03-15 13:18:21",
+            "updated": "2024-03-15 13:18:21"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 4,
+        "fields": {
+            "name": "Lançamentos de Abril 2024",
+            "slug": "lancamentos-de-abril-2024",
+            "status": "PE",
+            "customer_limit_date": "2024-02-22",
+            "supplier_limit_date": "2024-02-23",
+            "created": "2024-03-15 13:18:21",
+            "updated": "2024-03-15 13:18:21"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 5,
+        "fields": {
+            "name": "Reimpressões de Mangás de Abril 2024",
+            "slug": "reimpressoes-de-mangas-de-abril-2024",
+            "status": "PE",
+            "customer_limit_date": "2024-02-19",
+            "supplier_limit_date": "2024-02-20",
+            "created": "2024-03-15 13:18:21",
+            "updated": "2024-03-15 13:18:21"
+        }
+    }
+]

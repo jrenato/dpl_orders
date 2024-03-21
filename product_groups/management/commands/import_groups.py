@@ -10,11 +10,13 @@ from django.conf import settings
 from pyexcel_ods import get_data
 from tqdm import tqdm
 
-from products.models import Product, ProductCategory, ProductGroup, ProductGroupItem
+from product_groups.models import ProductGroup, ProductGroupItem
+from products.models import Product, ProductCategory
 from suppliers.models import Supplier
 
 
 ROWS_TRANSLATIONS = [
+    ('EDITORA', 'supplier'),
     ('CÓD. PANINI', 'supplier_internal_id'),
     ('CATEGORIA', 'category'),
     ('TÍTULO', 'title'),
@@ -59,9 +61,7 @@ class Command(BaseCommand):
             # Get the filename without the extension
             base_filename = os.path.basename(filename).split('.')[0]
 
-            # Get the supplier and the group
-            supplier_name = base_filename.split(' - ')[0]
-            supplier = self.get_supplier(supplier_name)
+            # Get the group
             group = self.get_products_group(base_filename)
 
             # Get the raw data from the file and convert it to a list of dictionaries
@@ -69,10 +69,10 @@ class Command(BaseCommand):
             products = self.get_products_data(raw_data)
 
             for product_data in tqdm(products, desc='Importing products'):
-                product = self.try_to_get_product(product_data, supplier)
+                product = self.try_to_get_product(product_data)
 
                 if not product:
-                    product = self.import_product(product_data, supplier)
+                    product = self.import_product(product_data)
 
                 if not product:
                     raise CommandError(f'Product not found: {product_data}')
@@ -131,10 +131,16 @@ class Command(BaseCommand):
         return supplier
 
 
-    def try_to_get_product(self, product_data, supplier):
+    def try_to_get_product(self, product_data):
         '''
         Try to get the product
         '''
+        supplier = None
+        if 'supplier' in product_data:
+            supplier = self.get_supplier(product_data['supplier'])
+        if not supplier:
+            raise CommandError(f'Supplier not found: {product_data}')
+
         product = None
 
         has_valid_internal_id = 'supplier_internal_id' in product_data and \
@@ -178,10 +184,16 @@ class Command(BaseCommand):
         return product
 
 
-    def import_product(self, product_data, supplier):
+    def import_product(self, product_data):
         '''
         Import a product
         '''
+        supplier = None
+        if 'supplier' in product_data:
+            supplier = self.get_supplier(product_data['supplier'])
+        if not supplier:
+            raise CommandError(f'Supplier not found: {product_data}')
+
         try:
             release_date = product_data['release_date']
         except KeyError:

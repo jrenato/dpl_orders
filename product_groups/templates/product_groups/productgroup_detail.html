@@ -33,7 +33,7 @@
         <h2>{% translate "Product Group Items" %}</h2>
       </div>
       <div class="col-md-7 text-begin mt-1">
-        <a href="{% url 'products:group-item-create' pk=object.pk %}" class="btn btn-success btn-sm me-2">
+        <a href="{% url 'product_groups:item-create' slug=object.slug %}" class="btn btn-success btn-sm me-2">
           <i data-feather="plus"></i> {% translate "Add" %}
         </a>
       </div>
@@ -69,8 +69,7 @@
               <td>{{ group_item.product.price }}</td>
               <td>{{ group_item.order_items_sum }}</td>
               <td>
-                <a href="{% url "products:group-item-delete" pk=group_item.pk %}"
-                   class="btn btn-danger btn-sm">
+                <a href="{% url "product_groups:item-delete" pk=group_item.pk %}" class="btn btn-danger btn-sm">
                   <i data-feather="trash-2"></i>
                 </a>
               </td>

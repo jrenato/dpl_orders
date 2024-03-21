@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             {% if order.product_group %}
-                                <a href="{% url 'products:group-detail' order.product_group.pk %}">{{ order.product_group.name }}</a>
+                                <a href="{% url 'product_groups:detail' order.product_group.pk %}">{{ order.product_group.name }}</a>
                             {% else %}
                                 {% translate "N/A" %}
                             {% endif %}

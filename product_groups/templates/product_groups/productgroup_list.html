@@ -8,7 +8,7 @@
 {% block content %}
   <h1>{% translate "Product Groups" %}</h1>
   {% if perms.products.add_product_group %}
-    <a class="btn btn-primary mb-3" href="{% url "products:group-create" %}">{% translate "Add" %}</a>
+    <a class="btn btn-primary mb-3" href="{% url "product_groups:create" %}">{% translate "Add" %}</a>
   {% endif %}
 
   {% if product_groups %}
@@ -39,7 +39,7 @@
           {% for product_group in product_groups %}
             <tr>
               <td>
-                <a href="{% url "products:group-detail" product_group.pk %}">{{ product_group.name }}</a>
+                <a href="{% url "product_groups:detail" product_group.slug %}">{{ product_group.name }}</a>
               </td>
               <td>
                 <span class="badge rounded-pill text-bg-warning">{{ product_group.get_status_display }}</span>
@@ -56,12 +56,12 @@
               <td>
                 <!-- Buttons to edit and delete a product group -->
                 {% if perms.products.change_productgroup %}
-                  <a href="{% url "products:group-update" pk=product_group.pk %}" class="btn btn-warning btn-sm">
+                  <a href="{% url "product_groups:update" slug=product_group.slug %}" class="btn btn-warning btn-sm">
                     <i data-feather="edit"></i>
                   </a>
                 {% endif %}
                 {% if perms.products.delete_productgroup %}
-                  <a href="{% url "products:group-delete" pk=product_group.pk %}" class="btn btn-danger btn-sm">
+                  <a href="{% url "product_groups:delete" slug=product_group.slug %}" class="btn btn-danger btn-sm">
                     <i data-feather="trash-2"></i>
                   </a>
                 {% endif %}

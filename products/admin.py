@@ -5,30 +5,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 
-from .models import ProductCategory, Product, ProductGroup, \
-    ProductGroupItem, ProductReleaseDateHistory, ProductImage
-
-
-class ProductGroupItemInline(admin.TabularInline):
-    '''
-    Inline for the ProductGroupItem model
-    '''
-    model = ProductGroupItem
-    extra = 1
-    autocomplete_fields = ['product',]
-
-
-@admin.register(ProductGroup)
-class ProductGroupAdmin(admin.ModelAdmin):
-    '''
-    Admin for the Product Group
-    '''
-    list_display = ['name', 'status', 'customer_limit_date', 'supplier_limit_date',]
-    search_fields = ['name', 'status',]
-    list_filter = ['status', 'customer_limit_date', 'supplier_limit_date',]
-    date_hierarchy = 'supplier_limit_date'
-    readonly_fields = ['created', 'modified']
-    inlines = [ProductGroupItemInline]
+from .models import ProductCategory, Product, ProductReleaseDateHistory, ProductImage
 
 
 @admin.register(ProductCategory)
@@ -69,7 +46,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_per_page = 20
     inlines = [ProductReleaseDateHistoryInline]
 
-    readonly_fields = ('cover_preview', 'created', 'modified')
+    readonly_fields = ('cover_preview', 'created', 'updated')
 
     inlines = [ProductImageInline]
 
@@ -89,14 +66,3 @@ class ProductAdmin(admin.ModelAdmin):
     #     queryset.update(available=False)
 
     # make_unavailable.short_description = 'Marcar como indisponível'
-
-
-@admin.register(ProductGroupItem)
-class ProductGroupItemAdmin(admin.ModelAdmin):
-    '''
-    Admin for the ProductGroupItem model
-    '''
-    list_display = ('product', 'group')
-    search_fields = ('product', 'group')
-    list_filter = ('product', 'group')
-    list_per_page = 20

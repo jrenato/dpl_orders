@@ -38,7 +38,7 @@ class Order(models.Model):
     )
 
     product_group = models.ForeignKey(
-        'products.ProductGroup', on_delete=models.CASCADE,
+        'product_groups.ProductGroup', on_delete=models.CASCADE,
         verbose_name=_('Product Group'), related_name='orders',
         blank=True, null=True
     )

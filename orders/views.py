@@ -104,16 +104,14 @@ class OrderItemCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'orders.add_orderitem'
 
     def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['initial'] = {'order': self.get_order_object()}
-        return kwargs
+        if 'pk' not in self.kwargs:
+            raise ValueError('Missing pk in kwargs')
 
-    def get_order_object(self):
-        '''
-        Get order object
-        '''
-        order_pk = self.kwargs.get('pk')
-        return Order.objects.get(pk=order_pk)
+        order = Order.objects.get(pk=self.kwargs.get('pk'))
+        kwargs = super().get_form_kwargs()
+        kwargs['initial'] = {'order': order}
+
+        return kwargs
 
     def get_success_url(self):
         return reverse_lazy('orders:detail', kwargs={'pk': self.object.order.pk})

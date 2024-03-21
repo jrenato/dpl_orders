@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 
-from .models import ProductCategory, Product, ProductGroup,\
+from .models import ProductCategory, Product, ProductGroup, \
     ProductGroupItem, ProductReleaseDateHistory, ProductImage
 
 
@@ -89,3 +89,14 @@ class ProductAdmin(admin.ModelAdmin):
     #     queryset.update(available=False)
 
     # make_unavailable.short_description = 'Marcar como indisponível'
+
+
+@admin.register(ProductGroupItem)
+class ProductGroupItemAdmin(admin.ModelAdmin):
+    '''
+    Admin for the ProductGroupItem model
+    '''
+    list_display = ('product', 'group')
+    search_fields = ('product', 'group')
+    list_filter = ('product', 'group')
+    list_per_page = 20

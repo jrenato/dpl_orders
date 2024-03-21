@@ -59,7 +59,7 @@
                 {{ product.release_date|date:"SHORT_DATE_FORMAT" }}
               </td>
               <td>
-                {{ product.category }}
+                {{ product.category|default:"" }}
               </td>
               <td>
                 {{ product.price }}

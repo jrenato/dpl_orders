@@ -83,7 +83,7 @@
                 {{ group_item.product.release_date|date:"SHORT_DATE_FORMAT" }}
               </td>
               <td>
-                {{ group_item.product.category|default:_("N/A") }}
+                {{ group_item.product.category|default:"" }}
               </td>
               <td>
                 {{ group_item.product.price }}

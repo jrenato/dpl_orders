@@ -47,7 +47,7 @@ class Supplier(models.Model):
     phone_number = models.CharField(_('Phone Number'), max_length=15, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
-    modified = models.DateTimeField(_('Modified at'), auto_now=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
     class Meta:
         '''
@@ -125,7 +125,7 @@ class SupplierCNPJ(models.Model):
     cnpj = models.CharField(_('CNPJ'), max_length=18, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
-    modified = models.DateTimeField(_('Modified at'), auto_now=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
     class Meta:
         '''
@@ -160,7 +160,7 @@ class SupplierAddress(models.Model):
     zip_code = models.CharField(_('Zip Code'), max_length=8, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
-    modified = models.DateTimeField(_('Modified at'), auto_now=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
     class Meta:
         '''
@@ -189,7 +189,7 @@ class SupplierPhone(models.Model):
     phone_number = models.CharField(_('Phone Number'), max_length=15, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
-    modified = models.DateTimeField(_('Modified at'), auto_now=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
     class Meta:
         '''

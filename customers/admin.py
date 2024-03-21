@@ -11,7 +11,7 @@ class CustomerAddressInline(admin.StackedInline):
     CustomerAddressInline class
     '''
     model = CustomerAddress
-    readonly_fields = ('created', 'modified',)
+    readonly_fields = ('created', 'updated',)
     extra = 1
 
 
@@ -22,7 +22,7 @@ class CustomerAdmin(admin.ModelAdmin):
     '''
     list_display = ('short_name', 'name', 'cnpj', 'cpf',)
     search_fields = ('name', 'short_name', 'email', 'cnpj', 'cpf',)
-    #list_filter = ('created', 'modified')
+    #list_filter = ('created', 'updated')
     list_per_page = 20
-    readonly_fields = ('created', 'modified',)
+    readonly_fields = ('created', 'updated',)
     inlines = [CustomerAddressInline]

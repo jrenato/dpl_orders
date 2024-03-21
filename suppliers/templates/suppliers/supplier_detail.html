@@ -15,7 +15,7 @@
                     <li><b>{% translate "Short Name" %}:</b> {{ supplier.short_name }}</li>
                     <li><b>{% translate "Internal ID" %}:</b> {{ supplier.vl_id }}</li>
                     <li><b>{% translate "Created at" %}:</b> {{ supplier.created|date:"SHORT_DATE_FORMAT" }}</li>
-                    <li><b>{% translate "Modified at" %}:</b> {{ supplier.modified|date:"SHORT_DATE_FORMAT" }}</li>
+                    <li><b>{% translate "Updated at" %}:</b> {{ supplier.updated|date:"SHORT_DATE_FORMAT" }}</li>
                     {% if supplier.cnpj %}
                         <li><b>{% translate "CNPJ" %}:</b> {{ supplier.cnpj }}</li>
                     {% endif %}

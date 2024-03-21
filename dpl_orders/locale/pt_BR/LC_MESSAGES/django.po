@@ -126,8 +126,8 @@ msgstr "Criado em"
 #: suppliers/models.py:50 suppliers/models.py:128 suppliers/models.py:163
 #: suppliers/models.py:192
 #: suppliers/templates/suppliers/supplier_detail.html:18
-msgid "Modified at"
-msgstr "Modificado em"
+msgid "Updated at"
+msgstr "Atualizado em"
 
 #: customers/models.py:54
 #: customers/templates/customers/customer_confirm_delete.html:4
@@ -1012,7 +1012,7 @@ msgid "Metabooks created at"
 msgstr "Criado em Metabooks"
 
 #: products/models.py:73
-msgid "Metabooks modified at"
+msgid "Metabooks updated at"
 msgstr "Modificado em Metabooks"
 
 #: products/models.py:75
@@ -1020,7 +1020,7 @@ msgid "Vialogos created at"
 msgstr "Criado em Vialogos"
 
 #: products/models.py:76
-msgid "Vialogos modified at"
+msgid "Vialogos updated at"
 msgstr "Modificado em Vialogos"
 
 #: products/models.py:172

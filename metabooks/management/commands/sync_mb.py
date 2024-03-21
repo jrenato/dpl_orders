@@ -182,7 +182,7 @@ class Command(BaseCommand):
             product_data['createDate'], '%d/%m/%Y'
         ).date() if product_data['createDate'] else None
 
-        mb_modified_date = datetime.datetime.strptime(
+        mb_updated_date = datetime.datetime.strptime(
             product_data['lastModifiedDate'], '%d/%m/%Y'
         ).date() if product_data['lastModifiedDate'] else None
 
@@ -206,8 +206,8 @@ class Command(BaseCommand):
         if created:
             should_get_details = True
 
-        if product.mb_modified != mb_modified_date:
-            product.mb_modified = mb_modified_date
+        if product.mb_updated != mb_updated_date:
+            product.mb_updated = mb_updated_date
             should_get_details = True
             should_save_product = True
 

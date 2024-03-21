@@ -45,7 +45,7 @@ class Customer(models.Model):
     phone_number = models.CharField(_('Phone Number'), max_length=15, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
-    modified = models.DateTimeField(_('Modified at'), auto_now=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
     class Meta:
         '''
@@ -132,7 +132,7 @@ class CustomerAddress(models.Model):
     zip_code = models.CharField(_('Zip Code'), max_length=8, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
-    modified = models.DateTimeField(_('Modified at'), auto_now=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
     class Meta:
         '''
@@ -167,7 +167,7 @@ class CustomerPhone(models.Model):
     phone_number = models.CharField(_('Phone'), max_length=15, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
-    modified = models.DateTimeField(_('Modified at'), auto_now=True)
+    updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
     class Meta:
         '''

@@ -57,7 +57,7 @@
                     <b>{% translate "Created at" %}:</b> {{ product.created|date:"SHORT_DATE_FORMAT" }}
                 </li>
                 <li>
-                    <b>{% translate "Modified at" %}:</b> {{ product.modified|date:"SHORT_DATE_FORMAT" }}
+                    <b>{% translate "Updated at" %}:</b> {{ product.updated|date:"SHORT_DATE_FORMAT" }}
                 </li>
             </ul>
         </div>
@@ -125,7 +125,7 @@
                     {% for group_item in product.group_items.all %}
                         <tr>
                             <td>
-                                <a href="{% url "products:group-detail" group_item.group.pk %}">{{ group_item.group.name }}</a>
+                                <a href="{% url "product_groups:detail" group_item.group.pk %}">{{ group_item.group.name }}</a>
                             </td>
                             <td>{{ group_item.group.created|date:"SHORT_DATE_FORMAT" }}</td>
                             <td><span class="badge bg-warning">{{ group_item.group.get_status_display }}</span></td>

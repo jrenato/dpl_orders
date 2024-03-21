@@ -10,7 +10,7 @@ class SupplierAddressInline(admin.StackedInline):
     SupplierAddressInline class
     '''
     model = SupplierAddress
-    readonly_fields = ('created', 'modified',)
+    readonly_fields = ('created', 'updated',)
     extra = 1
 
 
@@ -19,7 +19,7 @@ class SupplierCNPJInline(admin.StackedInline):
     SupplierCNPJInline class
     '''
     model = SupplierCNPJ
-    readonly_fields = ('created', 'modified',)
+    readonly_fields = ('created', 'updated',)
     extra = 1
 
 
@@ -30,5 +30,5 @@ class SupplierAdmin(admin.ModelAdmin):
     '''
     list_display = ('name', 'short_name', 'contact_person', 'email', 'phone_number')
     search_fields = ('name', 'short_name', 'cnpj', 'cpf')
-    readonly_fields = ('created', 'modified',)
+    readonly_fields = ('created', 'updated',)
     inlines = [SupplierAddressInline, SupplierCNPJInline]

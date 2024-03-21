@@ -11,9 +11,12 @@ from tqdm import tqdm
 
 from orders.models import Order, OrderItem, ORDER_STATUS_CHOICES
 from customers.models import Customer
-from products.models import Product, ProductGroup
+from products.models import Product
+from product_groups.models import ProductGroup
+
 
 ROWS_TRANSLATIONS = [
+    ('EDITORA', 'supplier'),
     ('CÓD. PANINI', 'supplier_internal_id'),
     ('CATEGORIA', 'category'),
     ('TÍTULO', 'title'),
@@ -103,7 +106,7 @@ class Command(BaseCommand):
             raise CommandError(f'Product not found: {order_data["sku"]} - {order_data["title"]}')
 
         keys_to_skip = [
-            'supplier_internal_id', 'sku', 'title',
+            'supplier', 'supplier_internal_id', 'sku', 'title',
         ]
 
         # Iterate over the order data and create the order items

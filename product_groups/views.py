@@ -25,7 +25,7 @@ class ProductGroupListView(PermissionRequiredMixin, ListView):
         queryset = super().get_queryset()\
             .annotate(
                 items_count=Count('group_items', distinct=True),
-            )
+            ).order_by('created', 'name')
         return queryset
 
 

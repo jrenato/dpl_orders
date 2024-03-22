@@ -17,7 +17,7 @@
           </a>
         {% endif %}
         {% if perms.products.view_products %}
-        <a href="#" class="btn  btn-sm btn-secondary">
+        <a href="#" class="btn btn-sm btn-secondary">
             <i data-feather="file-text"></i> {% translate "Export" %}
         </a>
         {% endif %}
@@ -32,30 +32,13 @@
       <table class="table table-striped table-hover table-sm">
         <thead>
           <tr>
-            <th scope="col">
-              {% translate "Product" %}
-            </th>
-            <th scope="col">
-              {% translate "Supplier" %}
-            </th>
-            <th scope="col">
-              {% translate "SKU" %}
-            </th>
-            <th scope="col">
-              {% translate "Release" %}
-            </th>
-            <th scope="col">
-              {% translate "Category" %}
-            </th>
-            <th scope="col">
-              {% translate "Price" %}
-            </th>
-            <th scope="col">
-              {% translate "Ordered Quantity" %}
-            </th>
-            <th scope="col">
-              {% translate "Groups" %}
-            </th>
+            <th scope="col" class="text-center">{% translate "Product" %}</th>
+            <th scope="col" class="text-center">{% translate "Supplier" %}</th>
+            <th scope="col" class="text-center">{% translate "SKU" %}</th>
+            <th scope="col" class="text-center">{% translate "Release" %}</th>
+            <th scope="col" class="text-center">{% translate "Category" %}</th>
+            <th scope="col" class="text-center">{% translate "Price" %}</th>
+            <th scope="col" class="text-center">{% translate "Ordered Quantity" %}</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -65,28 +48,13 @@
               <td>
                 <a href="{% url "products:detail" product.slug %}">{{ product.name }}</a>
               </td>
-              <td>
-                {{ product.supplier }}
-              </td>
-              <td>
-                {{ product.sku }}
-              </td>
-              <td>
-                {{ product.release_date|date:"SHORT_DATE_FORMAT" }}
-              </td>
-              <td>
-                {{ product.category|default:"" }}
-              </td>
-              <td>
-                {{ product.price }}
-              </td>
-              <td>
-                {{ product.order_items_sum }}
-              </td>
-              <td>
-                {{ product.groups_count }}
-              </td>
-              <td>
+              <td class="text-center">{{ product.supplier }}</td>
+              <td class="text-center">{{ product.sku }}</td>
+              <td class="text-center">{{ product.release_date|date:"SHORT_DATE_FORMAT" }}</td>
+              <td class="text-center">{{ product.category|default:"" }}</td>
+              <td class="text-center">{{ product.price }}</td>
+              <td class="text-center">{{ product.order_items_sum }}</td>
+              <td class="text-end">
                 <!-- Buttons to view, edit and delete a product -->
                 {% if perms.products.view_product %}
                   <a href="{% url "products:detail" product.slug %}" class="btn btn-sm btn-secondary">

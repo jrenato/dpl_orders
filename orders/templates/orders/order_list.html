@@ -11,7 +11,7 @@
             <h1>{% translate "Orders List" %}</h1>
         </div>
         <div class="col-md-6 text-end">
-            <a href="{% url 'orders:create' %}" class="btn btn-sm btn-success me-2">
+            <a href="{% url 'orders:create' %}" class="btn btn-sm btn-success">
                 <i data-feather="plus"></i> {% translate "Add" %}
             </a>
             <a href="#" class="btn btn-sm btn-secondary">
@@ -34,13 +34,13 @@
                     <th scope="col" class="text-center">{% translate "Total Quantity" %}</th>
                     <th scope="col" class="text-center">{% translate "Total Value" %}</th>
                     <th scope="col" class="text-center">{% translate "Status" %}</th>
-                    <th scope="col" class="text-center">{% translate "Actions" %}</th>
+                    <th scope="col" class="text-center"></th>
                 </tr>
             </thead>
             <tbody>
                 {% for order in object_list %}
                     <tr>
-                        <td scope="row">
+                        <td scope="row" class="text-center">
                             <a href="{% url 'orders:detail' pk=order.pk %}">{{ order.created|date:"SHORT_DATE_FORMAT" }}</a>
                         </td>
                         <td>
@@ -54,11 +54,11 @@
                             {% endif %}
                         </td>
                         <td class="text-center">{{ order.total_quantity }}</td>
-                        <td>{{ order.total_value|floatformat:2 }}</td>
-                        <td>
-                            <span class="badge bg-warning">{% translate order.get_status_display %}</span>
+                        <td class="text-center">{{ order.total_value|floatformat:2 }}</td>
+                        <td class="text-center">
+                            <span class="badge bg-warning text-dark">{% translate order.get_status_display %}</span>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a href="{% url 'orders:detail' pk=order.pk %}" class="btn btn-sm btn-secondary">
                                 <i data-feather="search"></i>
                             </a>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-22 11:54-0300\n"
+"POT-Creation-Date: 2024-03-22 16:47-0300\n"
 "PO-Revision-Date: 2024-03-17 09:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -276,7 +276,7 @@ msgstr "Editar"
 #: customers/templates/customers/customer_detail.html:70
 #: customers/templates/customers/customer_list.html:35
 #: dpl_orders/templates/home.html:10
-#: suppliers/templates/suppliers/supplier_list.html:34
+#: suppliers/templates/suppliers/supplier_list.html:36
 msgid "Pending Orders"
 msgstr "Pedidos Pendentes"
 
@@ -327,13 +327,7 @@ msgstr "Cadastro de Cliente"
 msgid "Save"
 msgstr "Salvar"
 
-#: customers/templates/customers/customer_list.html:5
-msgid "Customer List"
-msgstr "Lista de Clientes"
-
 #: customers/templates/customers/customer_list.html:11
-#, fuzzy
-#| msgid "Customer List"
 msgid "Customers List"
 msgstr "Lista de Clientes"
 
@@ -357,6 +351,7 @@ msgstr "Adicionar"
 #: dpl_orders/templates/home.html:22 orders/templates/orders/order_list.html:18
 #: product_groups/templates/product_groups/productgroup_list.html:21
 #: products/templates/products/product_list.html:21
+#: suppliers/templates/suppliers/supplier_list.html:20
 msgid "Export"
 msgstr "Exportar"
 
@@ -924,7 +919,7 @@ msgstr "Itens de Pedido"
 #: products/templates/products/product_list.html:39 suppliers/models.py:59
 #: suppliers/templates/suppliers/supplier_confirm_delete.html:4
 #: suppliers/templates/suppliers/supplier_confirm_delete.html:7
-#: suppliers/templates/suppliers/supplier_list.html:32
+#: suppliers/templates/suppliers/supplier_list.html:34
 msgid "Supplier"
 msgstr "Fornecedor"
 
@@ -965,7 +960,7 @@ msgstr "Valor Total"
 msgid "Actions"
 msgstr "Ações"
 
-#: orders/templates/orders/order_list.html:78
+#: orders/templates/orders/order_list.html:75
 msgid "No orders found."
 msgstr "Nenhum pedido encontrado."
 
@@ -1036,7 +1031,7 @@ msgid "Ordered Quantity"
 msgstr "Qtd Pedida"
 
 #: product_groups/templates/product_groups/productgroup_detail.html:83
-#: products/templates/products/product_list.html:109
+#: products/templates/products/product_list.html:115
 msgid "No products are available."
 msgstr "Nenhum produto está disponível."
 
@@ -1198,14 +1193,13 @@ msgstr "Cadastro de Fornecedor"
 msgid "Supplier List"
 msgstr "Lista de Fornecedores"
 
-#: suppliers/templates/suppliers/supplier_list.html:20
-msgid "Print"
-msgstr "Imprimir"
-
-#: suppliers/templates/suppliers/supplier_list.html:33
+#: suppliers/templates/suppliers/supplier_list.html:35
 msgid "Registered Products"
 msgstr "Produtos Cadastrados"
 
-#: suppliers/templates/suppliers/supplier_list.html:52
+#: suppliers/templates/suppliers/supplier_list.html:54
 msgid "No suppliers are available."
 msgstr "Nenhum fornecedor está disponível."
+
+#~ msgid "Print"
+#~ msgstr "Imprimir"

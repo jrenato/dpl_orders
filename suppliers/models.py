@@ -4,6 +4,9 @@ Models for the Suppliers app
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
+from django.conf import settings
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 from dpl_orders.helpers import slugify_uniquely
 
@@ -92,28 +95,34 @@ class Supplier(models.Model):
             self.email = cliforn.email
             self.emailnfe = cliforn.emailnfe
 
-            # Address update
-            address, _ = SupplierAddress.objects.get_or_create(supplier=self)
-            address.street = cliforn.endereco
-            address.number = cliforn.num
-            address.district = cliforn.bairro
-            address.city = cliforn.cidade
-            address.state = cliforn.estado
-            address.zip_code = cliforn.cep
-            address.complement = cliforn.complemento
-            address.save()
-
-            # Phone numbers update
-            for phone_number in [cliforn.telres, cliforn.telcom, cliforn.tel2, cliforn.fax]:
-                if not self.phone_number:
-                    self.phone_number = phone_number
-                else:
-                    _, __ = SupplierPhone.objects.get_or_create(
-                        supplier=self,
-                        phone_number=phone_number
-                    )
-
         super().save(*args, **kwargs)
+
+
+@receiver(post_save, sender=Supplier)
+def create_slug(sender, instance, created, **kwargs):
+    if instance.vl_id and settings.VL_INTEGRATION:
+        cliforn = Cliforn.objects.get(codigo=instance.vl_id)
+
+        # Address update
+        address, _ = SupplierAddress.objects.get_or_create(supplier=instance)
+        address.street = cliforn.endereco
+        address.number = cliforn.num
+        address.district = cliforn.bairro
+        address.city = cliforn.cidade
+        address.state = cliforn.estado
+        address.zip_code = cliforn.cep
+        address.complement = cliforn.complemento
+        address.save()
+
+        # Phone numbers update
+        for phone_number in [cliforn.telres, cliforn.telcom, cliforn.tel2, cliforn.fax]:
+            if not instance.phone_number:
+                instance.phone_number = phone_number
+            else:
+                _, __ = SupplierPhone.objects.get_or_create(
+                    supplier=instance,
+                    phone_number=phone_number
+                )
 
 
 class SupplierCNPJ(models.Model):

@@ -11,14 +11,16 @@
             <h1>{% translate "Orders List" %}</h1>
         </div>
         <div class="col-md-6 text-end">
-            <a href="{% url 'orders:create' %}" class="btn btn-success me-2">
+            <a href="{% url 'orders:create' %}" class="btn btn-sm btn-success me-2">
                 <i data-feather="plus"></i> {% translate "Add" %}
             </a>
-            <a href="#" class="btn btn-secondary">
-                <i data-feather="printer"></i> {% translate "Print" %}
+            <a href="#" class="btn btn-sm btn-secondary">
+                <i data-feather="file-text"></i> {% translate "Export" %}
             </a>
         </div>
     </div>
+
+    <hr />
 
     {% include "includes/pagination.html" %}
 
@@ -26,13 +28,13 @@
         <table class="table table-striped table-hover table-sm">
             <thead>
                 <tr>
-                    <th scope="col">{% translate "Date" %}</th>
-                    <th scope="col">{% translate "Customer" %}</th>
-                    <th scope="col">{% translate "Products Group" %}</th>
-                    <th scope="col">{% translate "Total Quantity" %}</th>
-                    <th scope="col">{% translate "Total Value" %}</th>
-                    <th scope="col">{% translate "Status" %}</th>
-                    <th scope="col">{% translate "Actions" %}</th>
+                    <th scope="col" class="text-center">{% translate "Date" %}</th>
+                    <th scope="col" class="text-center">{% translate "Customer" %}</th>
+                    <th scope="col" class="text-center">{% translate "Products Group" %}</th>
+                    <th scope="col" class="text-center">{% translate "Total Quantity" %}</th>
+                    <th scope="col" class="text-center">{% translate "Total Value" %}</th>
+                    <th scope="col" class="text-center">{% translate "Status" %}</th>
+                    <th scope="col" class="text-center">{% translate "Actions" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,29 +53,26 @@
                                 {% translate "N/A" %}
                             {% endif %}
                         </td>
-                        <td>{{ order.total_quantity }}</td>
+                        <td class="text-center">{{ order.total_quantity }}</td>
                         <td>{{ order.total_value|floatformat:2 }}</td>
                         <td>
                             <span class="badge bg-warning">{% translate order.get_status_display %}</span>
                         </td>
                         <td>
-                            <a href="{% url 'orders:detail' pk=order.pk %}"
-                            class="btn btn-sm btn-primary">
+                            <a href="{% url 'orders:detail' pk=order.pk %}" class="btn btn-sm btn-secondary">
                                 <i data-feather="search"></i>
                             </a>
-                            <a href="{% url 'orders:update' pk=order.pk %}"
-                            class="btn btn-sm btn-secondary">
+                            <a href="{% url 'orders:update' pk=order.pk %}" class="btn btn-sm btn-primary">
                                 <i data-feather="edit"></i>
                             </a>
-                            <a href="{% url 'orders:delete' pk=order.pk %}"
-                            class="btn btn-sm btn-danger">
+                            <a href="{% url 'orders:delete' pk=order.pk %}" class="btn btn-sm btn-danger">
                                 <i data-feather="trash-2"></i>
                             </a>
                         </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="6">{% translate "No orders found." %}</td>
+                        <td colspan="7">{% translate "No orders found." %}</td>
                     </tr>
                 {% endfor %}
             </tbody>

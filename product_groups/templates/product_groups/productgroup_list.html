@@ -6,10 +6,25 @@
 {% endblock title %}
 
 {% block content %}
-  <h1>{% translate "Product Groups" %}</h1>
-  {% if perms.products.add_product_group %}
-    <a class="btn btn-primary mb-3" href="{% url "product_groups:create" %}">{% translate "Add" %}</a>
-  {% endif %}
+  <div class="row">
+    <div class="col-md-6">
+      <h1>{% translate "Product Groups" %}</h1>
+    </div>
+    <div class="col-md-6 text-end">
+        {% if perms.product_groups.add_product_groups %}
+          <a href="{% url 'product_groups:create' %}" class="btn btn-success me-2">
+              <i data-feather="plus"></i> {% translate "Add" %}
+          </a>
+        {% endif %}
+        {% if perms.product_groups.view_product_groups %}
+        <a href="#" class="btn btn-secondary">
+            <i data-feather="file-text"></i> {% translate "Export" %}
+        </a>
+        {% endif %}
+    </div>
+  </div>
+
+  <hr />
 
   {% if product_groups %}
     {% include "includes/pagination.html" %}

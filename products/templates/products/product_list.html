@@ -6,10 +6,25 @@
 {% endblock title %}
 
 {% block content %}
-  <h1>{% translate "Product List" %}</h1>
-  {% if perms.products.add_product %}
-  <a class="btn btn-primary mb-3" href="{% url "products:create" %}">{% translate "Add" %}</a>
-  {% endif %}
+  <div class="row">
+    <div class="col-md-6">
+      <h1>{% translate "Product List" %}</h1>
+    </div>
+    <div class="col-md-6 text-end">
+        {% if perms.products.add_product %}
+          <a href="{% url 'products:create' %}" class="btn btn-sm btn-success">
+              <i data-feather="plus"></i> {% translate "Add" %}
+          </a>
+        {% endif %}
+        {% if perms.products.view_products %}
+        <a href="#" class="btn  btn-sm btn-secondary">
+            <i data-feather="file-text"></i> {% translate "Export" %}
+        </a>
+        {% endif %}
+    </div>
+  </div>
+
+  <hr />
 
   {% if products %}
     {% include "includes/pagination.html" %}
@@ -41,6 +56,7 @@
             <th scope="col">
               {% translate "Groups" %}
             </th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -69,6 +85,24 @@
               </td>
               <td>
                 {{ product.groups_count }}
+              </td>
+              <td>
+                <!-- Buttons to view, edit and delete a product -->
+                {% if perms.products.view_product %}
+                  <a href="{% url "products:detail" product.slug %}" class="btn btn-sm btn-secondary">
+                    <i data-feather="search" class="align-middle"></i>
+                  </a>
+                {% endif %}
+                {% if perms.products.change_product %}
+                  <a href="{% url "products:update" product.id %}" class="btn btn-sm btn-primary">
+                    <i data-feather="edit" class="align-middle"></i>
+                  </a>
+                {% endif %}
+                {% if perms.products.delete_product %}
+                  <a href="{% url "products:delete" product.id %}" class="btn btn-sm btn-danger">
+                    <i data-feather="trash-2" class="align-middle"></i>
+                  </a>
+                {% endif %}
               </td>
             </tr>
           {% endfor %}

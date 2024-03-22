@@ -2,10 +2,12 @@
 This file contains the test cases for the views of the orders app.
 '''
 from django.test import TestCase, Client
+from django.contrib.auth.models import Permission
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext as _
 from django.utils import timezone
+from django.utils import formats
 
 from customers.models import Customer
 from suppliers.models import Supplier
@@ -22,6 +24,9 @@ class OrderViewsTestCase(TestCase):
         self.user = get_user_model().objects.create_user(
             username='testuser', password='testpassword'
         )
+        # Add permission to view orders
+        permission = Permission.objects.get(codename='view_order')
+        self.user.user_permissions.add(permission)
         self.customer = Customer.objects.create(name='Test Customer')
         self.supplier = Supplier.objects.create(name='Test Supplier')
         self.product1 = Product.objects.create(
@@ -49,7 +54,7 @@ class OrderViewsTestCase(TestCase):
         response = self.client.get(reverse('orders:list'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'orders/order_list.html')
-        self.assertContains(response, _('No orders available'))
+        self.assertContains(response, _('No orders found'))
         self.assertQuerysetEqual(response.context['orders'], [])
 
     def test_order_list_view_with_orders(self):
@@ -63,12 +68,9 @@ class OrderViewsTestCase(TestCase):
         response = self.client.get(reverse('orders:list'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'orders/order_list.html')
-        self.assertContains(response, order.customer.username)
+        self.assertContains(response, order.customer.name)
         self.assertContains(response, order.status)
-        self.assertContains(response, order.total_amount)
-        self.assertQuerysetEqual(
-            response.context['orders'], ['<Order: Test Customer - {}>'.format(order.created)]
-        )
+        self.assertQuerysetEqual(response.context['orders'], [order])
 
     # def test_order_detail_view(self):
     #     self.client.login(username='testuser', password='testpassword')

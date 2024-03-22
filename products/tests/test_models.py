@@ -6,7 +6,7 @@ import datetime
 from django.test import TestCase
 from django.utils.translation import gettext_lazy as _
 
-from products.models import Product, ProductCategory, ProductGroup, ProductGroupItem
+from products.models import Product, ProductCategory
 from suppliers.models import Supplier
 
 

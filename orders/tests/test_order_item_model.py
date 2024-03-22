@@ -33,7 +33,7 @@ class OrderItemTest(TestCase):
         self.assertEqual(order_item.quantity, 2)
         self.assertEqual(order_item.price, self.product.price)
         self.assertEqual(order_item.subtotal, self.product.price * 2)
-        self.assertEqual(str(order_item), f"{self.product} - 2")
+        self.assertEqual(str(order_item), f'"{self.product}" x 2')
 
         # History should be created automatically
         history_item = OrderItemHistory.objects.get(order_item=order_item)

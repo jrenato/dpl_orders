@@ -3,6 +3,7 @@ This file contains the tests for the Order model.
 '''
 from django.test import TestCase
 from django.utils.translation import gettext_lazy as _
+from django.utils import formats
 
 from orders.models import Order, ORDER_STATUS_CHOICES
 from customers.models import Customer
@@ -24,7 +25,8 @@ class OrderTest(TestCase):
         Test the creation of an order
         '''
         self.assertEqual(self.order.get_status_display(), _("Pending"))
-        self.assertEqual(str(self.order), f"{self.customer} - {self.order.created}")
+        formatted_date = formats.date_format(self.order.created, 'SHORT_DATETIME_FORMAT')
+        self.assertEqual(str(self.order), f"{self.order.pk} - {self.customer} - {formatted_date}")
 
     def test_order_status_choices(self):
         '''

@@ -1,6 +1,3 @@
-from vldados.models import Cliforn
-
-
 class VialogosRouter:
     '''
     Router for the Vialogos app

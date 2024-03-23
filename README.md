@@ -25,6 +25,16 @@ manage.py makemessages -l pt_BR
 manage.py compilemessages
 ```
 
+## Testing
+
+### Updating coverage
+
+```
+coverage run manage.py test # Optional: -v 2
+coverage html
+firefox htmlcov/index.html
+```
+
 ## Restore datase in Linux
 
 Reference:

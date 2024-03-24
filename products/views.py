@@ -1,12 +1,13 @@
 '''
 Views for the products app
 '''
+import datetime
+
 from django.db.models import Count, Sum
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView,\
     TemplateView
-from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .models import Product
@@ -115,6 +116,30 @@ class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('products:list')
     permission_required = 'products.delete_product'
+
+
+class ProductReleasesListView(PermissionRequiredMixin, ListView):
+    '''
+    List view for the Product Releases
+    '''
+    model = Product
+    context_object_name = 'products'
+    #paginate_by = 20
+    template_name = 'products/product_releases_list.html'
+    permission_required = 'products.view_product'
+
+    def get_queryset(self):
+        # Release date should be equal or greater than last 12 months
+        queryset = self.model.objects.filter(
+            release_date__gte=datetime.date.today()
+        )\
+        .select_related('category', 'supplier')\
+        .annotate(
+            order_items_sum=Sum('order_items__quantity', default=0),
+            groups_count=Count('group_items', distinct=True),
+        )\
+        .order_by('-release_date__year', 'release_date__month', 'supplier__name', 'name')
+        return queryset
 
 
 ### Debug views

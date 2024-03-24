@@ -102,6 +102,14 @@
                 </a>
               </li>
               {% endif %}
+              {% if perms.products.view_product %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "products:releases" %}">
+                  <span data-feather="star"></span>
+                  {% translate "Releases" %}
+                </a>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="repeat"></span>

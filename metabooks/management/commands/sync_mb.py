@@ -174,9 +174,25 @@ class Command(BaseCommand):
         '''
         Parse the product
         '''
-        release_date = datetime.datetime.strptime(
-            product_data['publicationDate'], '%d/%m/%Y'
-        ).date() if product_data['publicationDate'] else None
+        # Evaluate the len of publication date and update the release date
+        if len(product_data['publicationDate']) == 10:
+            # It's the expected format, just use it
+            pass
+        elif len(product_data['publicationDate']) == 4:
+            # It's an year, just set it as the first day of the year
+            product_data['publicationDate'] = f'01/01/{product_data["publicationDate"]}'
+        else:
+            raise ValueError(f'Invalid publicationDate format: {product_data["publicationDate"]} '
+                f'for product {product_data["title"]} - ISBN: {product_data["gtin"]}')
+
+        try:
+            release_date = datetime.datetime.strptime(
+                product_data['publicationDate'], '%d/%m/%Y'
+            ).date() if product_data['publicationDate'] else None
+        except ValueError as exc:
+            raise ValueError('Invalid date format: '
+                f'{product_data["publicationDate"]} for product {product_data["title"]} - '
+                f'ISBN: {product_data["gtin"]}') from exc
 
         mb_create_date = datetime.datetime.strptime(
             product_data['createDate'], '%d/%m/%Y'

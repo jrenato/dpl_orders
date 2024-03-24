@@ -28,6 +28,37 @@ Authorization: Bearer {{$dotenv MC_KEY}}
 
 ###
 
+# @name get_audiences
+GET https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/lists HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{$dotenv MC_KEY}}
+
+###
+
+@audience_id = {{ get_audiences.response.body.lists.0.id }}
+
+# @name get_audience_info
+GET https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/lists/{{ audience_id }} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{$dotenv MC_KEY}}
+
+###
+
+# @name get_audience_abuse_reports
+GET https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/lists/{{ audience_id }}/abuse-reports HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{$dotenv MC_KEY}}
+
+###
+
+# @name get_audience_activity
+GET https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/lists/{{ audience_id }}/activity HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{$dotenv MC_KEY}}
+
+
+###
+
 # @name get_templates
 GET https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/templates HTTP/1.1
 Content-Type: application/json
@@ -46,5 +77,54 @@ Authorization: Bearer {{$dotenv MC_KEY}}
 
 # @name get_template_content
 GET https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/templates/{{ template_id }}/default-content HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{$dotenv MC_KEY}}
+
+###
+
+# @name create_campaign
+POST https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/campaigns HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{$dotenv MC_KEY}}
+
+{
+    "type": "regular",
+    "recipients": {
+        "list_id": "{{ audience_id }}"
+    },
+    "settings": {
+        "title": "Title",
+        "subject_line": "Subject Line",
+        "preview_text": "Preview Text",
+        "from_name": "comercial@dpl.com.br",
+        "reply_to": "comercial@dpl.com.br"
+        // "template_id": "{{ template_id }}"
+    }
+}
+
+###
+
+@new_campaign_id = {{ create_campaign.response.body.id }}
+
+# @name get_new_campaign_info
+GET https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/campaigns/{{ new_campaign_id }} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{$dotenv MC_KEY}}
+
+###
+
+# @name set_new_campaign_content
+PUT https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/campaigns/{{ new_campaign_id }}/content HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{$dotenv MC_KEY}}
+
+{
+    "template_id": "{{ template_id }}"
+}
+
+###
+
+# @name get_new_campaign_content
+GET https://{{ $dotenv MC_PREFIX }}.{{ $dotenv MC_URL }}/campaigns/{{ new_campaign_id }}/content HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{$dotenv MC_KEY}}

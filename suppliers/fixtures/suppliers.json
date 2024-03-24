@@ -1,0 +1,71 @@
+[
+    {
+        "model": "suppliers.supplier",
+        "pk": 1,
+        "fields": {
+            "vl_id": null,
+            "mb_id": "BR0089650",
+            "name": "PANINI",
+            "company_name": null,
+            "short_name": "PANINI",
+            "slug": "panini",
+            "person_or_company": null,
+            "cnpj": "",
+            "cpf": "",
+            "state_registration": null,
+            "municipal_registration": null,
+            "contact_person": null,
+            "email": null,
+            "emailnfe": null,
+            "phone_number": null,
+            "created": "2024-03-15T16:43:19.962Z",
+            "updated": "2024-03-21T20:53:16.005Z"
+        }
+    },
+    {
+        "model": "suppliers.supplier",
+        "pk": 2,
+        "fields": {
+            "vl_id": null,
+            "mb_id": "BR0092887",
+            "name": "NewPOP",
+            "company_name": null,
+            "short_name": "NewPOP",
+            "slug": "newpop",
+            "person_or_company": null,
+            "cnpj": "",
+            "cpf": "",
+            "state_registration": null,
+            "municipal_registration": null,
+            "contact_person": null,
+            "email": null,
+            "emailnfe": null,
+            "phone_number": null,
+            "created": "2024-03-24T11:55:15.411Z",
+            "updated": "2024-03-24T11:55:15.411Z"
+        }
+    },
+    {
+        "model": "suppliers.supplier",
+        "pk": 3,
+        "fields": {
+            "vl_id": null,
+            "mb_id": "BR0089972",
+            "name": "JBC",
+            "company_name": null,
+            "short_name": "JBC",
+            "slug": "jbc",
+            "person_or_company": null,
+            "cnpj": "",
+            "cpf": "",
+            "state_registration": null,
+            "municipal_registration": null,
+            "contact_person": null,
+            "email": null,
+            "emailnfe": null,
+            "phone_number": null,
+            "created": "2024-03-24T11:56:15.044Z",
+            "updated": "2024-03-24T11:56:15.044Z"
+        }
+    }
+]

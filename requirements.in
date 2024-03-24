@@ -10,4 +10,5 @@ pillow
 pip-tools
 pyexcel-ods
 pyodbc
+python-dateutil
 tqdm

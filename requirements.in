@@ -5,6 +5,7 @@ django-crispy-forms
 django-environ
 django-localflavor
 django-select2
+mailchimp-marketing
 mssql-django
 pillow
 pip-tools

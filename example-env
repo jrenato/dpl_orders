@@ -43,4 +43,6 @@ MB_USERNAME=username
 MB_PASSWORD=password
 
 # Mailchimp
+MC_BASE_URL=api.mailchimp.com/3.0 # Final format is https://${MC_SERVER_PREFIX}.api.mailchimp.com/3.0
 MC_API_KEY=your-mailchimp-api-key
+MC_SERVER_PREFIX=mailchimp-server-prefix # usually attached to the end of API KEY

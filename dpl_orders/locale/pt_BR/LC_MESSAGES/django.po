@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-22 17:44-0300\n"
+"POT-Creation-Date: 2024-03-24 10:03-0300\n"
 "PO-Revision-Date: 2024-03-17 09:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -352,6 +352,7 @@ msgstr "Adicionar"
 #: dpl_orders/templates/home.html:22 orders/templates/orders/order_list.html:18
 #: product_groups/templates/product_groups/productgroup_list.html:21
 #: products/templates/products/product_list.html:21
+#: products/templates/products/product_releases_list.html:16
 #: suppliers/templates/suppliers/supplier_list.html:20
 msgid "Export"
 msgstr "Exportar"
@@ -720,31 +721,35 @@ msgstr "Grupos de Produtos"
 msgid "Suppliers"
 msgstr "Fornecedores"
 
-#: dpl_orders/templates/base.html:108
+#: dpl_orders/templates/base.html:109
+msgid "Releases"
+msgstr "Lançamentos"
+
+#: dpl_orders/templates/base.html:116
 msgid "Automatic"
 msgstr "Automático"
 
-#: dpl_orders/templates/base.html:114
+#: dpl_orders/templates/base.html:122
 msgid "Reports"
 msgstr "Relatórios"
 
-#: dpl_orders/templates/base.html:120
+#: dpl_orders/templates/base.html:128
 msgid "Saved reports"
 msgstr "Relatórios salvos"
 
-#: dpl_orders/templates/base.html:127
+#: dpl_orders/templates/base.html:135
 msgid "Current month"
 msgstr "Mês atual"
 
-#: dpl_orders/templates/base.html:133
+#: dpl_orders/templates/base.html:141
 msgid "Last quarter"
 msgstr "Último trimestre"
 
-#: dpl_orders/templates/base.html:139
+#: dpl_orders/templates/base.html:147
 msgid "Social engagement"
 msgstr "Engajamento social"
 
-#: dpl_orders/templates/base.html:145
+#: dpl_orders/templates/base.html:153
 msgid "Year-end sale"
 msgstr "Promoção de fim de ano"
 
@@ -830,6 +835,7 @@ msgstr "Históricos de Status do Pedido"
 #: products/templates/products/product_confirm_delete.html:4
 #: products/templates/products/product_confirm_delete.html:7
 #: products/templates/products/product_list.html:35
+#: products/templates/products/product_releases_list.html:46
 msgid "Product"
 msgstr "Produto"
 
@@ -842,6 +848,7 @@ msgstr "Quantidade Entregue"
 #: product_groups/templates/product_groups/productgroup_detail.html:54
 #: products/models.py:59 products/templates/products/product_detail.html:68
 #: products/templates/products/product_list.html:40
+#: products/templates/products/product_releases_list.html:49
 msgid "Price"
 msgstr "Preço"
 
@@ -957,7 +964,7 @@ msgstr "Qtd Total"
 msgid "Total Value"
 msgstr "Valor Total"
 
-#: orders/templates/orders/order_list.html:75 orders/tests/test_views.py:56
+#: orders/templates/orders/order_list.html:75 orders/tests/test_views.py:57
 msgid "No orders found"
 msgstr "Nenhum pedido encontrado."
 
@@ -1010,16 +1017,19 @@ msgstr "Itens do Grupo de Produtos"
 #: product_groups/templates/product_groups/productgroup_detail.html:51
 #: products/models.py:56 products/templates/products/product_detail.html:59
 #: products/templates/products/product_list.html:37
+#: products/templates/products/product_releases_list.html:47
 msgid "SKU"
 msgstr "ISBN"
 
 #: product_groups/templates/product_groups/productgroup_detail.html:52
 #: products/models.py:68 products/models.py:197
+#: products/templates/products/product_releases_list.html:48
 msgid "Release Date"
 msgstr "Data de Lançamento"
 
 #: product_groups/templates/product_groups/productgroup_detail.html:55
 #: products/templates/products/product_list.html:41
+#: products/templates/products/product_releases_list.html:51
 msgid "Ordered Quantity"
 msgstr "Qtd Pedida"
 
@@ -1148,6 +1158,15 @@ msgstr "Lista de Produtos"
 msgid "Release"
 msgstr "Lançamento"
 
+#: products/templates/products/product_releases_list.html:5
+#: products/templates/products/product_releases_list.html:11
+msgid "Releases List"
+msgstr "Lista de Lançamentos"
+
+#: products/templates/products/product_releases_list.html:50
+msgid "Groups"
+msgstr "Grupos"
+
 #: suppliers/models.py:143
 msgid "Supplier CNPJ"
 msgstr "CNPJ do Fornecedor"
@@ -1195,9 +1214,6 @@ msgstr "Nenhum fornecedor está disponível."
 
 #~ msgid "No orders available"
 #~ msgstr "Nenhum pedido está disponível"
-
-#~ msgid "Groups"
-#~ msgstr "Grupos"
 
 #~ msgid "Print"
 #~ msgstr "Imprimir"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-26 11:20-0300\n"
+"POT-Creation-Date: 2024-03-26 16:21-0300\n"
 "PO-Revision-Date: 2024-03-17 09:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,6 +42,7 @@ msgstr "Código Interno"
 #: product_groups/templates/product_groups/productgroup_list.html:35
 #: products/models.py:20 products/models.py:54 suppliers/models.py:29
 #: suppliers/templates/suppliers/supplier_detail.html:14
+#: suppliers/templates/suppliers/supplier_list.html:34
 msgid "Name"
 msgstr "Nome"
 
@@ -51,6 +52,7 @@ msgstr "Razão Social"
 
 #: customers/models.py:25 customers/templates/customers/customer_detail.html:15
 #: suppliers/models.py:31 suppliers/templates/suppliers/supplier_detail.html:15
+#: suppliers/templates/suppliers/supplier_list.html:35
 msgid "Short Name"
 msgstr "Nome Reduzido"
 
@@ -278,7 +280,7 @@ msgstr "Editar"
 #: customers/templates/customers/customer_detail.html:70
 #: customers/templates/customers/customer_list.html:35
 #: dpl_orders/templates/home.html:10
-#: suppliers/templates/suppliers/supplier_list.html:36
+#: suppliers/templates/suppliers/supplier_list.html:37
 msgid "Pending Orders"
 msgstr "Pedidos Pendentes"
 
@@ -929,7 +931,6 @@ msgstr "Itens de Pedido"
 #: products/templates/products/product_list.html:36 suppliers/models.py:59
 #: suppliers/templates/suppliers/supplier_confirm_delete.html:4
 #: suppliers/templates/suppliers/supplier_confirm_delete.html:7
-#: suppliers/templates/suppliers/supplier_list.html:34
 msgid "Supplier"
 msgstr "Fornecedor"
 
@@ -975,7 +976,7 @@ msgstr "Nenhum pedido encontrado."
 msgid "Order Item Registration"
 msgstr "Cadastro de Item de Pedido"
 
-#: product_groups/management/commands/export_groups.py:31
+#: product_groups/management/commands/export_groups.py:38
 msgid "Newsletters Sheets"
 msgstr "Planilhas de Newsletters"
 
@@ -1207,7 +1208,7 @@ msgstr "Cadastro de Fornecedor"
 msgid "Supplier List"
 msgstr "Lista de Fornecedores"
 
-#: suppliers/templates/suppliers/supplier_list.html:35
+#: suppliers/templates/suppliers/supplier_list.html:36
 msgid "Registered Products"
 msgstr "Produtos Cadastrados"
 

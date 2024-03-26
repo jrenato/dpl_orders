@@ -19,6 +19,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
 IMPORT_PATH = env('IMPORT_PATH')
+EXPORT_PATH = env('EXPORT_PATH')
 
 VL_INTEGRATION = env.bool('VL_INTEGRATION', False)
 
@@ -188,8 +189,8 @@ MEDIA_ROOT = env('DJANGO_MEDIA_ROOT')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 INTERNAL_IPS = [
-     "127.0.0.1",
- ]
+    "127.0.0.1",
+]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -222,3 +223,6 @@ SOCIALACCOUNT_PROVIDERS = {
 MB_URL = env('MB_URL')
 MB_USERNAME = env('MB_USERNAME')
 MB_PASSWORD = env('MB_PASSWORD')
+
+# Document templates
+DOCUMENT_TEMPLATES_PATH = os.path.join(BASE_DIR, 'dpl_orders', 'document_templates')

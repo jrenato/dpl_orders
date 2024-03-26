@@ -13,6 +13,7 @@ DJANGO_MEDIA_ROOT=/path/to/store/media/files
 # * Grupos
 # * Pedidos
 IMPORT_PATH=/path/to/import/sheets
+EXPORT_PATH=/path/to/export/sheets
 
 # Database Configuration
 DB_NAME=your-database-name

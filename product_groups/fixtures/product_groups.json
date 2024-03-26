@@ -1,67 +1,145 @@
 [
     {
         "model": "product_groups.productgroup",
-        "pk": 1,
+        "pk": 7,
+        "fields": {
+            "name": "Lançamentos de Março 2024",
+            "slug": "lancamentos-de-marco-2024",
+            "status": "PE",
+            "customer_limit_date": "2024-01-20",
+            "supplier_limit_date": "2024-01-21",
+            "created": "2024-01-01T17:33:21.232Z",
+            "updated": "2024-01-01T17:33:21.232Z"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 8,
+        "fields": {
+            "name": "Reimpressões de Dezembro 2023",
+            "slug": "reimpressoes-de-dezembro-2023",
+            "status": "PE",
+            "customer_limit_date": "2023-10-19",
+            "supplier_limit_date": "2023-10-20",
+            "created": "2023-10-01T17:33:21.936Z",
+            "updated": "2023-10-01T17:33:21.936Z"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 10,
+        "fields": {
+            "name": "Lançamentos de Janeiro 2024",
+            "slug": "lancamentos-de-janeiro-2024",
+            "status": "PE",
+            "customer_limit_date": "2023-11-20",
+            "supplier_limit_date": "2023-11-21",
+            "created": "2023-11-01T17:40:50.939Z",
+            "updated": "2023-11-01T17:40:50.939Z"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 11,
+        "fields": {
+            "name": "Lançamentos de Dezembro 2023",
+            "slug": "lancamentos-de-dezembro-2023",
+            "status": "PE",
+            "customer_limit_date": "2023-10-20",
+            "supplier_limit_date": "2023-10-21",
+            "created": "2023-10-01T17:40:51.497Z",
+            "updated": "2023-10-01T17:40:51.497Z"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 12,
+        "fields": {
+            "name": "Reimpressões de Abril 2024",
+            "slug": "reimpressoes-de-abril-2024",
+            "status": "PE",
+            "customer_limit_date": "2024-02-20",
+            "supplier_limit_date": "2024-02-21",
+            "created": "2024-02-01T17:40:52.179Z",
+            "updated": "2024-02-01T17:40:52.179Z"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 22,
+        "fields": {
+            "name": "Catálogo Super Promoção Março 2024",
+            "slug": "catalogo-super-promocao-marco-2024",
+            "status": "PE",
+            "customer_limit_date": "2024-01-20",
+            "supplier_limit_date": "2024-01-21",
+            "created": "2024-01-01T18:28:04.173Z",
+            "updated": "2024-01-01T18:28:04.173Z"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 23,
         "fields": {
             "name": "Lançamentos de Maio 2024",
             "slug": "lancamentos-de-maio-2024",
             "status": "PE",
             "customer_limit_date": "2024-03-20",
             "supplier_limit_date": "2024-03-21",
-            "created": "2024-03-15 13:18:21",
-            "updated": "2024-03-15 13:18:21"
+            "created": "2024-03-01T18:28:12.330Z",
+            "updated": "2024-03-01T18:28:12.330Z"
         }
     },
     {
         "model": "product_groups.productgroup",
-        "pk": 2,
+        "pk": 24,
         "fields": {
-            "name": "Catalogo Super Promoção Março 2024",
-            "slug": "catalogo-super-promocao-marco-2024",
+            "name": "Reimpressões de Maio 2024",
+            "slug": "reimpressoes-de-maio-2024",
             "status": "PE",
-            "customer_limit_date": null,
-            "supplier_limit_date": null,
-            "created": "2024-03-15 13:18:21",
-            "updated": "2024-03-15 13:18:21"
+            "customer_limit_date": "2024-03-19",
+            "supplier_limit_date": "2024-03-20",
+            "created": "2024-03-01T18:28:13.182Z",
+            "updated": "2024-03-01T18:28:13.182Z"
         }
     },
     {
         "model": "product_groups.productgroup",
-        "pk": 3,
+        "pk": 25,
         "fields": {
-            "name": "Reimpressões de Mangás de Maio 2024",
-            "slug": "reimpressoes-de-mangas-de-maio-2024",
+            "name": "Lançamentos de Fevereiro 2024",
+            "slug": "lancamentos-de-fevereiro-2024",
             "status": "PE",
-            "customer_limit_date": "2024-03-10",
-            "supplier_limit_date": "2024-03-11",
-            "created": "2024-03-15 13:18:21",
-            "updated": "2024-03-15 13:18:21"
+            "customer_limit_date": "2023-12-20",
+            "supplier_limit_date": "2023-12-21",
+            "created": "2023-12-01T18:28:13.568Z",
+            "updated": "2023-12-01T18:28:13.568Z"
         }
     },
     {
         "model": "product_groups.productgroup",
-        "pk": 4,
+        "pk": 26,
+        "fields": {
+            "name": "Reimpressões de Março 2024",
+            "slug": "reimpressoes-de-marco-2024",
+            "status": "PE",
+            "customer_limit_date": "2024-01-19",
+            "supplier_limit_date": "2024-01-20",
+            "created": "2024-01-01T18:28:14.352Z",
+            "updated": "2024-01-01T18:28:14.352Z"
+        }
+    },
+    {
+        "model": "product_groups.productgroup",
+        "pk": 27,
         "fields": {
             "name": "Lançamentos de Abril 2024",
             "slug": "lancamentos-de-abril-2024",
             "status": "PE",
             "customer_limit_date": "2024-02-22",
             "supplier_limit_date": "2024-02-23",
-            "created": "2024-03-15 13:18:21",
-            "updated": "2024-03-15 13:18:21"
-        }
-    },
-    {
-        "model": "product_groups.productgroup",
-        "pk": 5,
-        "fields": {
-            "name": "Reimpressões de Mangás de Abril 2024",
-            "slug": "reimpressoes-de-mangas-de-abril-2024",
-            "status": "PE",
-            "customer_limit_date": "2024-02-19",
-            "supplier_limit_date": "2024-02-20",
-            "created": "2024-03-15 13:18:21",
-            "updated": "2024-03-15 13:18:21"
+            "created": "2024-02-01T18:28:14.651Z",
+            "updated": "2024-02-01T18:28:14.651Z"
         }
     }
 ]

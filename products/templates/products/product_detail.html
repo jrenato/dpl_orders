@@ -39,13 +39,13 @@
                     <div class="row">
                         <div class="col-md-12">
                             {% if perms.products.change_product %}
-                                <a href="{% url "products:update" product.id %}"
+                                <a href="{% url "products:update" product.slug %}"
                                     class="btn btn-primary d-inline-flex align-items-center">
                                     {% translate "Edit" %} <i data-feather="edit" class="align-middle"></i>
                                 </a>
                             {% endif %}
                             {% if perms.products.delete_product %}
-                                <a href="{% url "products:delete" product.id %}"
+                                <a href="{% url "products:delete" product.slug %}"
                                     class="btn btn-danger d-inline-flex align-items-center">
                                     {% translate "Delete" %} <i data-feather="trash-2" class="align-middle"></i>
                                 </a>

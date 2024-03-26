@@ -62,12 +62,12 @@
                   </a>
                 {% endif %}
                 {% if perms.products.change_product %}
-                  <a href="{% url "products:update" product.id %}" class="btn btn-sm btn-primary">
+                  <a href="{% url "products:update" product.slug %}" class="btn btn-sm btn-primary">
                     <i data-feather="edit" class="align-middle"></i>
                   </a>
                 {% endif %}
                 {% if perms.products.delete_product %}
-                  <a href="{% url "products:delete" product.id %}" class="btn btn-sm btn-danger">
+                  <a href="{% url "products:delete" product.slug %}" class="btn btn-sm btn-danger">
                     <i data-feather="trash-2" class="align-middle"></i>
                   </a>
                 {% endif %}

@@ -63,7 +63,7 @@ class Command(BaseCommand):
 
             # Get the group
             group_name = base_filename.split(' - ')[1]
-            group = self.get_products_group(group_name)
+            group, _ = self.get_products_group(group_name)
 
             # Get the raw data from the file and convert it to a list of dictionaries
             raw_data = get_data(filename)
@@ -127,8 +127,8 @@ class Command(BaseCommand):
         '''
         Get the products group
         '''
-        group, _ = ProductGroup.objects.get_or_create(name=group_name)
-        return group
+        group, created = ProductGroup.objects.get_or_create(name=group_name)
+        return group, created
 
 
     def get_supplier(self, supplier_name):
@@ -170,7 +170,7 @@ class Command(BaseCommand):
 
         if not product and has_valid_sku:
             if self.debug:
-                tqdm.write(f'Seeking with SKU: {product_data["sku"]}')
+                tqdm.write(f'Not found using internal ID. Seeking with SKU: {product_data["sku"]}')
 
             product = Product.objects.filter(
                 sku=str(product_data['sku']).strip(),
@@ -182,7 +182,8 @@ class Command(BaseCommand):
 
         if not product and 'title' in product_data and no_valid_identifier:
             if self.debug:
-                tqdm.write(f'Seeking with title: {product_data["title"]}')
+                tqdm.write('Not found using internal ID or SKU.'
+                    f'Seeking with title: {product_data["title"]}')
 
             product = Product.objects.filter(
                 name=product_data['title'].strip().upper(),
@@ -282,10 +283,26 @@ class Command(BaseCommand):
         '''
         Add a product to a group
         '''
-        product_group_item, created = ProductGroupItem.objects.get_or_create(
+        # Check if the product is already in the group
+        if ProductGroupItem.objects.filter(product=product, group=group).exists():
+            self.delete_group(group)
+            raise CommandError(f'Product "{product.name}" already exists in group "{group.name}"')
+
+        product_group_item = ProductGroupItem.objects.create(
             product=product,
             group=group
         )
 
-        if not created and self.debug:
-            tqdm.write(f'Product "{product.name}" already exists in group "{group.name}"')
+        if product_group_item and self.debug:
+            tqdm.write(f'Product "{product.name}" added to group "{group.name}"')
+
+    def delete_group(self, group):
+        '''
+        Delete a group
+        '''
+        for product_group_item in group.group_items.all():
+            product_group_item.delete()
+        group.delete()
+
+        if self.debug:
+            tqdm.write(f'Group "{group.name}" deleted')

@@ -85,7 +85,8 @@ class Command(BaseCommand):
             group_products = ProductGroupItem.objects.filter(group=group).count()
             if group_products != len(products):
                 raise CommandError(f'The total number of products in the group "{group_products}" '
-                    f'"{group.name}" is different from the number of products in the file "{len(products)}"')
+                    f'"{group.name}" is different from the number '
+                    f'of products in the file "{len(products)}"')
 
     def get_products_data(self, raw_data):
         '''

@@ -36,9 +36,9 @@ class Product(models.Model):
     Model for the Product
     '''
     vl_id = models.CharField(_('Vialogos id'), max_length=20, blank=True, null=True)
-    mb_id = models.CharField(_('Metabooks id'), max_length=20, blank=True, null=True)
+    mb_id = models.CharField(_('Metabooks id'), max_length=64, blank=True, null=True)
     supplier_internal_id = models.CharField(
-        _('Supplier Internal id'), max_length=40, blank=True, null=True
+        _('Supplier Internal id'), max_length=64, blank=True, null=True
     )
 
     supplier = models.ForeignKey(

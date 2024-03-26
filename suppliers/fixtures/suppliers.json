@@ -3,69 +3,256 @@
         "model": "suppliers.supplier",
         "pk": 1,
         "fields": {
-            "vl_id": null,
+            "vl_id": "901464",
             "mb_id": "BR0089650",
-            "name": "PANINI",
-            "company_name": null,
+            "name": "PANINI BRASIL",
+            "company_name": "PANINI BRASIL LTDA",
             "short_name": "PANINI",
             "slug": "panini",
-            "person_or_company": null,
+            "person_or_company": "J",
             "cnpj": "",
             "cpf": "",
             "state_registration": null,
-            "municipal_registration": null,
-            "contact_person": null,
-            "email": null,
-            "emailnfe": null,
+            "municipal_registration": "3505708",
+            "contact_person": "JESSICA",
+            "email": "jessica@panini.com.br, ",
+            "emailnfe": "s.santos@panini.com.br",
             "phone_number": null,
-            "created": "2024-03-15T16:43:19.962Z",
-            "updated": "2024-03-21T20:53:16.005Z"
+            "created": "2024-03-22T12:16:04.157Z",
+            "updated": "2024-03-22T12:16:04.157Z"
         }
     },
     {
         "model": "suppliers.supplier",
         "pk": 2,
         "fields": {
-            "vl_id": null,
+            "vl_id": "902483",
             "mb_id": "BR0092887",
-            "name": "NewPOP",
-            "company_name": null,
-            "short_name": "NewPOP",
+            "name": "NEWPOP",
+            "company_name": "NEWPOP EDITORA LTDA-ME",
+            "short_name": "NEWPOP",
             "slug": "newpop",
-            "person_or_company": null,
+            "person_or_company": "J",
             "cnpj": "",
-            "cpf": "",
-            "state_registration": null,
-            "municipal_registration": null,
+            "cpf": "07672288000190",
+            "state_registration": "148036957115",
+            "municipal_registration": "3550308",
             "contact_person": null,
-            "email": null,
-            "emailnfe": null,
+            "email": "comercial@newpop.com.br",
+            "emailnfe": "comercial@newpop.com.br,",
             "phone_number": null,
-            "created": "2024-03-24T11:55:15.411Z",
-            "updated": "2024-03-24T11:55:15.411Z"
+            "created": "2024-03-26T11:57:22.848Z",
+            "updated": "2024-03-26T11:57:22.848Z"
         }
     },
     {
         "model": "suppliers.supplier",
         "pk": 3,
         "fields": {
-            "vl_id": null,
+            "vl_id": "901245",
             "mb_id": "BR0089972",
-            "name": "JBC",
-            "company_name": null,
+            "name": "EDITORA JBC",
+            "company_name": "JAPORAMA EDITORA E COMUNICAÇÃO SA",
             "short_name": "JBC",
             "slug": "jbc",
-            "person_or_company": null,
+            "person_or_company": "J",
             "cnpj": "",
-            "cpf": "",
-            "state_registration": null,
-            "municipal_registration": null,
-            "contact_person": null,
-            "email": null,
-            "emailnfe": null,
+            "cpf": "00531662000430",
+            "state_registration": "127.897.838.117",
+            "municipal_registration": "3518800",
+            "contact_person": "BRUNA",
+            "email": "financeiro@editorajbc.com.br",
+            "emailnfe": "financeiro@editorajbc.com.br",
             "phone_number": null,
-            "created": "2024-03-24T11:56:15.044Z",
-            "updated": "2024-03-24T11:56:15.044Z"
+            "created": "2024-03-26T11:58:08.112Z",
+            "updated": "2024-03-26T11:58:08.112Z"
+        }
+    },
+    {
+        "model": "suppliers.supplier",
+        "pk": 4,
+        "fields": {
+            "vl_id": "800116",
+            "mb_id": "BR0089971",
+            "name": "CONRAD EDITORA DO BRASIL LTDA",
+            "company_name": "CONRAD EDITORA DO BRASIL LTDA",
+            "short_name": "CONRAD",
+            "slug": "conrad",
+            "person_or_company": "J",
+            "cnpj": "",
+            "cpf": "02588717000121",
+            "state_registration": "129.442.191.118",
+            "municipal_registration": "3550308",
+            "contact_person": "CLAUDIA",
+            "email": "thais.araujo@grupoibep.com.br",
+            "emailnfe": "thais.araujo@grupoibep.com.br",
+            "phone_number": null,
+            "created": "2024-03-26T14:39:14.672Z",
+            "updated": "2024-03-26T14:39:14.672Z"
+        }
+    },
+    {
+        "model": "suppliers.supplieraddress",
+        "pk": 1,
+        "fields": {
+            "supplier": 1,
+            "street": "AL. JUARI",
+            "number": "560",
+            "complement": null,
+            "city": "BARUERI",
+            "state": "SP",
+            "district": "TAMBORÉ",
+            "zip_code": "06460-090",
+            "created": "2024-03-22T12:16:04.175Z",
+            "updated": "2024-03-22T12:16:04.183Z"
+        }
+    },
+    {
+        "model": "suppliers.supplieraddress",
+        "pk": 2,
+        "fields": {
+            "supplier": 2,
+            "street": "AVENIDA ONZE DE JUNHO",
+            "number": "80",
+            "complement": "",
+            "city": "SAO PAULO",
+            "state": "SP",
+            "district": "VILA CLEMENTINO",
+            "zip_code": "04041000",
+            "created": "2024-03-26T11:57:22.876Z",
+            "updated": "2024-03-26T11:57:22.886Z"
+        }
+    },
+    {
+        "model": "suppliers.supplieraddress",
+        "pk": 3,
+        "fields": {
+            "supplier": 3,
+            "street": "AV ORLANDA BERGAMO",
+            "number": "780",
+            "complement": "GALPAO A",
+            "city": "GUARULHOS",
+            "state": "SP",
+            "district": "CUMBICA",
+            "zip_code": "07232151",
+            "created": "2024-03-26T11:58:08.140Z",
+            "updated": "2024-03-26T11:58:08.150Z"
+        }
+    },
+    {
+        "model": "suppliers.supplieraddress",
+        "pk": 4,
+        "fields": {
+            "supplier": 4,
+            "street": "RUA AGOSTINHO DE AZEVEDO",
+            "number": "S/N",
+            "complement": "SETOR 7",
+            "city": "SAO PAULO",
+            "state": "SP",
+            "district": "JARDIM BOA VISTA (ZONA OESTE)",
+            "zip_code": "05583-140",
+            "created": "2024-03-26T14:39:14.698Z",
+            "updated": "2024-03-26T14:39:14.707Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 1,
+        "fields": {
+            "supplier": 1,
+            "phone_number": "11-4133-0199 ",
+            "created": "2024-03-22T12:16:04.194Z",
+            "updated": "2024-03-22T12:16:04.194Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 2,
+        "fields": {
+            "supplier": 1,
+            "phone_number": null,
+            "created": "2024-03-22T12:16:04.204Z",
+            "updated": "2024-03-22T12:16:04.204Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 3,
+        "fields": {
+            "supplier": 1,
+            "phone_number": "11-4133-0190",
+            "created": "2024-03-22T12:16:04.214Z",
+            "updated": "2024-03-22T12:16:04.214Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 4,
+        "fields": {
+            "supplier": 2,
+            "phone_number": null,
+            "created": "2024-03-26T11:57:22.900Z",
+            "updated": "2024-03-26T11:57:22.900Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 5,
+        "fields": {
+            "supplier": 3,
+            "phone_number": "11 5575-6286  ",
+            "created": "2024-03-26T11:58:08.163Z",
+            "updated": "2024-03-26T11:58:08.163Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 6,
+        "fields": {
+            "supplier": 3,
+            "phone_number": null,
+            "created": "2024-03-26T11:58:08.172Z",
+            "updated": "2024-03-26T11:58:08.172Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 7,
+        "fields": {
+            "supplier": 3,
+            "phone_number": "(11) 5549-0319 ",
+            "created": "2024-03-26T11:58:08.183Z",
+            "updated": "2024-03-26T11:58:08.183Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 8,
+        "fields": {
+            "supplier": 4,
+            "phone_number": "112799-7799",
+            "created": "2024-03-26T14:39:14.723Z",
+            "updated": "2024-03-26T14:39:14.724Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 9,
+        "fields": {
+            "supplier": 4,
+            "phone_number": null,
+            "created": "2024-03-26T14:39:14.738Z",
+            "updated": "2024-03-26T14:39:14.738Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 10,
+        "fields": {
+            "supplier": 4,
+            "phone_number": "(11) 3346-6078",
+            "created": "2024-03-26T14:39:14.754Z",
+            "updated": "2024-03-26T14:39:14.754Z"
         }
     }
 ]

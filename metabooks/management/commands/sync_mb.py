@@ -166,8 +166,11 @@ class Command(BaseCommand):
         for product_data in tqdm(products_data, desc='Parsing Products', leave=False):
             if self.debug:
                 self.stdout.write(self.style.SUCCESS(f'Parsing product {product_data["id"]}'))
-            # Parse the product
-            self.parse_product(product_data, mb_sync)
+            # Only parse products with the expected product type
+            # pbook = published book
+            # ebook = e-book
+            if product_data['productType'] == 'pbook':
+                self.parse_product(product_data, mb_sync)
 
 
     def parse_product(self, product_data, mb_sync):

@@ -59,8 +59,12 @@ class Command(BaseCommand):
             raw_data = get_data(filename)
             orders_data = self.get_orders_data(raw_data)
 
-            group_name = filename.split(os.sep)[-1].split('.')[0]
-            product_group = ProductGroup.objects.get(name=group_name)
+            # Get filename basenamed
+            group_name = os.path.basename(filename).split(" - ")[1].split(".")[0]
+            try:
+                product_group = ProductGroup.objects.get(name=group_name)
+            except ProductGroup.DoesNotExist:
+                raise CommandError(f'The product group "{group_name}" does not exist')
 
             if not product_group:
                 raise CommandError(f'The product group "{group_name}" does not exist')
@@ -111,7 +115,7 @@ class Command(BaseCommand):
 
         # Iterate over the order data and create the order items
         for key, value in order_data.items():
-            if not value:
+            if not value or str(value).strip() == '':
                 continue
 
             if key in keys_to_skip:

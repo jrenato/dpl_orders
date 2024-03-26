@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-24 10:03-0300\n"
+"POT-Creation-Date: 2024-03-26 11:20-0300\n"
 "PO-Revision-Date: 2024-03-17 09:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -204,6 +204,7 @@ msgstr "Telefones dos Clientes"
 #: product_groups/templates/product_groups/productgroup_confirm_delete.html:4
 #: product_groups/templates/product_groups/productgroup_confirm_delete.html:7
 #: product_groups/templates/product_groups/productgroup_confirm_delete.html:13
+#: product_groups/templates/product_groups/productgroup_detail.html:25
 #: product_groups/templates/product_groups/productgroupitem_confirm_delete.html:4
 #: product_groups/templates/product_groups/productgroupitem_confirm_delete.html:7
 #: product_groups/templates/product_groups/productgroupitem_confirm_delete.html:13
@@ -234,7 +235,7 @@ msgid "Are you sure you want to delete %(name)s?"
 msgstr "Você tem certeza que deseja excluir %(name)s?"
 
 #: customers/templates/customers/customer_detail.html:12
-#: product_groups/templates/product_groups/productgroup_detail.html:14
+#: product_groups/templates/product_groups/productgroup_detail.html:34
 #: suppliers/templates/suppliers/supplier_detail.html:12
 msgid "Basic Information"
 msgstr "Informações Básicas"
@@ -264,6 +265,7 @@ msgstr "CEP"
 #: customers/templates/customers/customer_detail.html:53
 #: customers/tests/test_permissions.py:192
 #: customers/tests/test_permissions.py:205
+#: product_groups/templates/product_groups/productgroup_detail.html:18
 #: products/templates/products/product_detail.html:44
 #: products/tests/test_permissions.py:198
 #: products/tests/test_permissions.py:211
@@ -337,7 +339,7 @@ msgstr "Lista de Clientes"
 #: customers/tests/test_permissions.py:179
 #: orders/templates/orders/order_detail.html:35
 #: orders/templates/orders/order_list.html:15
-#: product_groups/templates/product_groups/productgroup_detail.html:37
+#: product_groups/templates/product_groups/productgroup_detail.html:57
 #: product_groups/templates/product_groups/productgroup_list.html:16
 #: products/templates/products/product_list.html:16
 #: products/tests/test_permissions.py:172
@@ -830,12 +832,12 @@ msgstr "Históricos de Status do Pedido"
 
 #: orders/models.py:103 orders/templates/orders/order_detail.html:45
 #: product_groups/models.py:63
-#: product_groups/templates/product_groups/productgroup_detail.html:49
+#: product_groups/templates/product_groups/productgroup_detail.html:69
 #: products/models.py:85 products/models.py:170 products/models.py:195
 #: products/templates/products/product_confirm_delete.html:4
 #: products/templates/products/product_confirm_delete.html:7
 #: products/templates/products/product_list.html:35
-#: products/templates/products/product_releases_list.html:46
+#: products/templates/products/product_releases_list.html:48
 msgid "Product"
 msgstr "Produto"
 
@@ -845,10 +847,10 @@ msgstr "Quantidade Entregue"
 
 #: orders/models.py:117 orders/models.py:179
 #: orders/templates/orders/order_detail.html:49
-#: product_groups/templates/product_groups/productgroup_detail.html:54
+#: product_groups/templates/product_groups/productgroup_detail.html:74
 #: products/models.py:59 products/templates/products/product_detail.html:68
 #: products/templates/products/product_list.html:40
-#: products/templates/products/product_releases_list.html:49
+#: products/templates/products/product_releases_list.html:51
 msgid "Price"
 msgstr "Preço"
 
@@ -907,7 +909,7 @@ msgstr "N/D"
 
 #: orders/templates/orders/order_detail.html:22
 #: orders/templates/orders/order_list.html:36 product_groups/models.py:27
-#: product_groups/templates/product_groups/productgroup_detail.html:17
+#: product_groups/templates/product_groups/productgroup_detail.html:37
 #: product_groups/templates/product_groups/productgroup_list.html:36
 #: products/templates/products/product_detail.html:121
 msgid "Status"
@@ -922,7 +924,7 @@ msgid "Order items"
 msgstr "Itens de Pedido"
 
 #: orders/templates/orders/order_detail.html:46
-#: product_groups/templates/product_groups/productgroup_detail.html:50
+#: product_groups/templates/product_groups/productgroup_detail.html:70
 #: products/models.py:46 products/templates/products/product_detail.html:62
 #: products/templates/products/product_list.html:36 suppliers/models.py:59
 #: suppliers/templates/suppliers/supplier_confirm_delete.html:4
@@ -932,7 +934,7 @@ msgid "Supplier"
 msgstr "Fornecedor"
 
 #: orders/templates/orders/order_detail.html:47
-#: product_groups/templates/product_groups/productgroup_detail.html:53
+#: product_groups/templates/product_groups/productgroup_detail.html:73
 #: products/models.py:50 products/templates/products/product_detail.html:65
 #: products/templates/products/product_list.html:39
 msgid "Category"
@@ -973,6 +975,10 @@ msgstr "Nenhum pedido encontrado."
 msgid "Order Item Registration"
 msgstr "Cadastro de Item de Pedido"
 
+#: product_groups/management/commands/export_groups.py:31
+msgid "Newsletters Sheets"
+msgstr "Planilhas de Newsletters"
+
 #: product_groups/models.py:13
 msgid "Ordered"
 msgstr "Pedido"
@@ -982,13 +988,13 @@ msgid "Archived"
 msgstr "Arquivado"
 
 #: product_groups/models.py:29
-#: product_groups/templates/product_groups/productgroup_detail.html:20
+#: product_groups/templates/product_groups/productgroup_detail.html:40
 #: product_groups/templates/product_groups/productgroup_list.html:37
 msgid "Limit Date for the Customer"
 msgstr "Data Limite para o Cliente"
 
 #: product_groups/models.py:30
-#: product_groups/templates/product_groups/productgroup_detail.html:23
+#: product_groups/templates/product_groups/productgroup_detail.html:43
 #: product_groups/templates/product_groups/productgroup_list.html:38
 msgid "Limit Date for the Supplier"
 msgstr "Data Limite para o Fornecedor"
@@ -1010,30 +1016,30 @@ msgid "Product Group Item"
 msgstr "Item do Grupo de Produtos"
 
 #: product_groups/models.py:76
-#: product_groups/templates/product_groups/productgroup_detail.html:33
+#: product_groups/templates/product_groups/productgroup_detail.html:53
 msgid "Product Group Items"
 msgstr "Itens do Grupo de Produtos"
 
-#: product_groups/templates/product_groups/productgroup_detail.html:51
+#: product_groups/templates/product_groups/productgroup_detail.html:71
 #: products/models.py:56 products/templates/products/product_detail.html:59
 #: products/templates/products/product_list.html:37
-#: products/templates/products/product_releases_list.html:47
+#: products/templates/products/product_releases_list.html:49
 msgid "SKU"
 msgstr "ISBN"
 
-#: product_groups/templates/product_groups/productgroup_detail.html:52
+#: product_groups/templates/product_groups/productgroup_detail.html:72
 #: products/models.py:68 products/models.py:197
-#: products/templates/products/product_releases_list.html:48
+#: products/templates/products/product_releases_list.html:50
 msgid "Release Date"
 msgstr "Data de Lançamento"
 
-#: product_groups/templates/product_groups/productgroup_detail.html:55
+#: product_groups/templates/product_groups/productgroup_detail.html:75
 #: products/templates/products/product_list.html:41
-#: products/templates/products/product_releases_list.html:51
+#: products/templates/products/product_releases_list.html:53
 msgid "Ordered Quantity"
 msgstr "Qtd Pedida"
 
-#: product_groups/templates/product_groups/productgroup_detail.html:83
+#: product_groups/templates/product_groups/productgroup_detail.html:103
 #: products/templates/products/product_list.html:83
 msgid "No products are available."
 msgstr "Nenhum produto está disponível."
@@ -1163,7 +1169,7 @@ msgstr "Lançamento"
 msgid "Releases List"
 msgstr "Lista de Lançamentos"
 
-#: products/templates/products/product_releases_list.html:50
+#: products/templates/products/product_releases_list.html:52
 msgid "Groups"
 msgstr "Grupos"
 

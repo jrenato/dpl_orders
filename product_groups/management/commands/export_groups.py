@@ -34,10 +34,16 @@ class Command(BaseCommand):
         parser.add_argument('--debug', action='store_true', help='Enable debug mode')
 
     def handle(self, *args, **options):
-        # Load EXPORT_PATH from settings
-        export_path = settings.EXPORT_PATH
-        export_path = os.path.join(export_path, _('Newsletters Sheets'))
+        # Set the export path
+        newsletters_path = os.path.join(settings.EXPORT_PATH, _('Newsletters Sheets'))
+        if not os.path.isdir(newsletters_path):
+            os.makedirs(newsletters_path)
 
+        # Check if the export path exists
+        if not os.path.isdir(newsletters_path):
+            raise CommandError(f'The export path "{newsletters_path}" does not exist')
+
+        # Set the template file
         self.template_file = os.path.join(
             settings.DOCUMENT_TEMPLATES_PATH, 'product_group_template.xltx'
         )
@@ -45,14 +51,10 @@ class Command(BaseCommand):
         if options['debug']:
             self.debug = True
 
-        # Check if the export path exists
-        if not os.path.isdir(export_path):
-            raise CommandError(f'The export path "{export_path}" does not exist')
-
         produt_groups = self.get_pending_product_groups()
 
         for product_group in tqdm(produt_groups, desc='Exporting groups'):
-            self.export_product_group(product_group, export_path)
+            self.export_product_group(product_group, newsletters_path)
 
 
     def get_pending_product_groups(self):
@@ -80,49 +82,40 @@ class Command(BaseCommand):
 
         ws['A1'].value = product_group.name
         if product_group.customer_limit_date:
-            ws['A9'].value = f'{_("Limit Date for the Customer")}:' \
-                f'{product_group.customer_limit_date}'
+            ws['A9'].value = 'Data limite para pedido: ' \
+                f'{product_group.customer_limit_date.strftime("%d/%m/%Y")}'
 
         line = 11
 
         for item in tqdm(product_group.group_items.all(), desc='Exporting items', leave=False):
+            # Set values
             ws[f'A{line}'].value = item.product.supplier.short_name
-            ws[f'A{line}'].alignment = self.align_center
-            ws[f'A{line}'].border = self.border
-            
             ws[f'B{line}'].value = item.product.release_date
-            ws[f'B{line}'].number_format = 'dd/mm/yyyy'
-            ws[f'B{line}'].alignment = self.align_center
-            ws[f'B{line}'].border = self.border
-
             ws[f'C{line}'].value = item.product.sku
-            ws[f'C{line}'].alignment = self.align_center
-            ws[f'C{line}'].border = self.border
-
             ws[f'D{line}'].value = item.product.name
-            #ws[f'D{line}'].alignment = self.align_center
-            ws[f'D{line}'].border = self.border
-
             ws[f'E{line}'].value = item.product.price
-            ws[f'E{line}'].number_format = '[$R$-416] #,##0.00;[$R$-416] #,##0.00-'
-            ws[f'E{line}'].alignment = self.align_center
-            ws[f'E{line}'].border = self.border
-
             ws[f'F{line}'].value = None
+
+            # Set formats
+            ws[f'B{line}'].number_format = 'dd/mm/yyyy'
+            ws[f'E{line}'].number_format = '[$R$-416] #,##0.00;[$R$-416] #,##0.00-'
             ws[f'F{line}'].number_format = '0'
-            ws[f'F{line}'].alignment = self.align_center
-            ws[f'F{line}'].border = self.border
+
+            # Set align - skip column D because it has the title
+            for letter in 'ABCEF':
+                ws[f'{letter}{line}'].alignment = self.align_center
+
+            # Set border
+            for letter in 'ABCDEF':
+                ws[f'{letter}{line}'].border = self.border
 
             # Set fill if line is an even number
             if line % 2 == 0:
-                ws[f'A{line}'].fill = self.fill
-                ws[f'B{line}'].fill = self.fill
-                ws[f'C{line}'].fill = self.fill
-                ws[f'D{line}'].fill = self.fill
-                ws[f'E{line}'].fill = self.fill
-                ws[f'F{line}'].fill = self.fill
+                for letter in 'ABCDEF':
+                    ws[f'{letter}{line}'].fill = self.fill
 
             line += 1
 
-        export_filename = f'{subdir}/{product_group.name}.xlsx'
+        export_filename = f'{subdir}/{product_group.created.day:02} - {product_group.name}.xlsx'
+
         wb.save(export_filename)

@@ -62,7 +62,8 @@ class Command(BaseCommand):
             base_filename = os.path.basename(filename).split('.')[0]
 
             # Get the group
-            group = self.get_products_group(base_filename)
+            group_name = base_filename.split(' - ')[1]
+            group = self.get_products_group(group_name)
 
             # Get the raw data from the file and convert it to a list of dictionaries
             raw_data = get_data(filename)
@@ -79,6 +80,12 @@ class Command(BaseCommand):
 
                 self.add_product_to_group(product, group)
 
+            # Compare the total number of products in the group
+            # with the number of products in the file
+            group_products = ProductGroupItem.objects.filter(group=group).count()
+            if group_products != len(products):
+                raise CommandError(f'The total number of products in the group "{group_products}" '
+                    f'"{group.name}" is different from the number of products in the file "{len(products)}"')
 
     def get_products_data(self, raw_data):
         '''

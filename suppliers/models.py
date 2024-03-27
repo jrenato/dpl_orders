@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.conf import settings
 
 from dpl_orders.helpers import slugify_uniquely
 
@@ -45,9 +46,9 @@ class Supplier(models.Model):
     )
 
     contact_person = models.CharField(_('Contact Person'), max_length=120, blank=True, null=True)
+    phone_number = models.CharField(_('Phone Number'), max_length=15, blank=True, null=True)
     email = models.EmailField(_('Email'), blank=True, null=True)
     emailnfe = models.EmailField(_('Email NFe'), blank=True, null=True)
-    phone_number = models.CharField(_('Phone Number'), max_length=15, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)
@@ -76,7 +77,7 @@ class Supplier(models.Model):
         if not self.id:
             self.slug = slugify_uniquely(self.name, self.__class__)
 
-        if self.vl_id:
+        if self.vl_id and settings.VL_INTEGRATION:
             cliforn = Cliforn.objects.get(codigo=self.vl_id)
             # Basic data update
             self.name = cliforn.nome
@@ -85,9 +86,9 @@ class Supplier(models.Model):
 
             self.person_or_company = cliforn.fj
             if self.person_or_company == 'F':
-                self.cnpj = cliforn.cgc
-            else:
                 self.cpf = cliforn.cgc
+            else:
+                self.cnpj = cliforn.cgc
 
             self.state_registration = cliforn.inscr
             self.municipal_registration = cliforn.codmun

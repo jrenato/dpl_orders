@@ -166,6 +166,7 @@ class Command(BaseCommand):
         for product_data in tqdm(products_data, desc='Parsing Products', leave=False):
             if self.debug:
                 self.stdout.write(self.style.SUCCESS(f'Parsing product {product_data["id"]}'))
+
             # Only parse products with the expected product type
             # pbook = published book
             # ebook = e-book
@@ -205,44 +206,54 @@ class Command(BaseCommand):
             product_data['lastModifiedDate'], '%d/%m/%Y'
         ).date() if product_data['lastModifiedDate'] else None
 
-        product, created = Product.objects.update_or_create(
+        product, created = Product.objects.get_or_create(
             mb_id=product_data['id'],
             defaults={
                 'supplier': mb_sync.supplier,
                 'name': product_data['title'].strip().upper(),
                 'sku': product_data['gtin'],
+                'price': product_data['priceBrl'],
                 'mb_price': product_data['priceBrl'],
                 'release_date': release_date,
                 'supplier_internal_id': product_data['ordernumber'],
                 'description': product_data['mainDescription'],
                 'mb_created': mb_create_date,
+                'mb_updated': mb_updated_date
             }
         )
 
         should_get_details = False
-        should_save_product = False
+        updated = False
 
         if created:
             should_get_details = True
 
         if product.mb_updated != mb_updated_date:
-            product.mb_updated = mb_updated_date
+            # TODO: Replace this with the implementation of parse_product_details
+            product.update(
+                supplier = mb_sync.supplier,
+                name = product_data['title'].strip().upper(),
+                sku = product_data['gtin'],
+                # price = product_data['priceBrl'],
+                mb_price = product_data['priceBrl'],
+                release_date = release_date,
+                supplier_internal_id = product_data['ordernumber'],
+                description = product_data['mainDescription'],
+                # mb_created = mb_create_date,
+                mb_updated = mb_updated_date
+            )
             should_get_details = True
-            should_save_product = True
-
-        if not product.price:
-            product.price = product.mb_price
-            should_save_product = True
+            updated = True
 
         if self.debug:
-            tqdm.write(f'Product {product.name} release date: {product.release_date}')
+            if created:
+                tqdm.write(f'Product {product.name} created')
+            elif updated:
+                tqdm.write(f'Product {product.name} updated')
 
         if should_get_details or self.force:
             # self.get_product_details(mb_sync, product)
             self.get_product_cover(mb_sync, product)
-
-        if should_save_product:
-            product.save()
 
 
     def get_product_details(self, mb_sync, product):

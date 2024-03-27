@@ -33,8 +33,8 @@
             "short_name": "NEWPOP",
             "slug": "newpop",
             "person_or_company": "J",
-            "cnpj": "",
-            "cpf": "07672288000190",
+            "cnpj": "07672288000190",
+            "cpf": "",
             "state_registration": "148036957115",
             "municipal_registration": "3550308",
             "contact_person": null,
@@ -56,8 +56,8 @@
             "short_name": "JBC",
             "slug": "jbc",
             "person_or_company": "J",
-            "cnpj": "",
-            "cpf": "00531662000430",
+            "cnpj": "00531662000430",
+            "cpf": "",
             "state_registration": "127.897.838.117",
             "municipal_registration": "3518800",
             "contact_person": "BRUNA",
@@ -79,8 +79,8 @@
             "short_name": "CONRAD",
             "slug": "conrad",
             "person_or_company": "J",
-            "cnpj": "",
-            "cpf": "02588717000121",
+            "cnpj": "02588717000121",
+            "cpf": "",
             "state_registration": "129.442.191.118",
             "municipal_registration": "3550308",
             "contact_person": "CLAUDIA",
@@ -160,7 +160,7 @@
         "pk": 1,
         "fields": {
             "supplier": 1,
-            "phone_number": "11-4133-0199 ",
+            "phone_number": "11-4133-0199",
             "created": "2024-03-22T12:16:04.194Z",
             "updated": "2024-03-22T12:16:04.194Z"
         }
@@ -200,7 +200,7 @@
         "pk": 5,
         "fields": {
             "supplier": 3,
-            "phone_number": "11 5575-6286  ",
+            "phone_number": "11 5575-6286",
             "created": "2024-03-26T11:58:08.163Z",
             "updated": "2024-03-26T11:58:08.163Z"
         }
@@ -220,7 +220,7 @@
         "pk": 7,
         "fields": {
             "supplier": 3,
-            "phone_number": "(11) 5549-0319 ",
+            "phone_number": "(11) 5549-0319",
             "created": "2024-03-26T11:58:08.183Z",
             "updated": "2024-03-26T11:58:08.183Z"
         }

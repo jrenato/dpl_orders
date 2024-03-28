@@ -50,7 +50,7 @@
                   </a>
                 {% endif %}
                 {% if perms.customers.change_customer %}
-                  <a href="{% url 'customers:update' customer.slug %}" class="btn btn-primary btn-sm">
+                  <a href="{% url 'customers:update_customer' customer.slug %}" class="btn btn-primary btn-sm">
                     <i data-feather="edit"></i>
                   </a>
                 {% endif %}

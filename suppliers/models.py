@@ -167,7 +167,7 @@ class SupplierAddress(models.Model):
     city = models.CharField(_('City'), max_length=120, blank=True, null=True)
     state = models.CharField(_('State'), max_length=2, blank=True, null=True)
     district = models.CharField(_('District'), max_length=120, blank=True, null=True)
-    zip_code = models.CharField(_('Zip Code'), max_length=8, blank=True, null=True)
+    zip_code = models.CharField(_('Zip Code'), max_length=9, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)

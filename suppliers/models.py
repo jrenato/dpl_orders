@@ -33,7 +33,7 @@ class Supplier(models.Model):
     slug = models.SlugField(_('Slug'), max_length=140, unique=True, blank=True, null=True)
 
     person_or_company = models.CharField(
-        _('Person or Company'), max_length=1, blank=True, null=True, choices=SUPPLIER_TYPES
+        _('Person or Company'), max_length=1, choices=SUPPLIER_TYPES, default='J'
     )
     cnpj = models.CharField(_('CNPJ'), max_length=18, blank=True, null=True)
     cpf = models.CharField(_('CPF'), max_length=14, blank=True, null=True)

@@ -6,9 +6,10 @@ from django.utils.translation import gettext as _
 
 from localflavor.br.forms import BRCPFField, BRCNPJField
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, HTML, Div
+from crispy_forms.layout import Layout, Fieldset, Submit, Div, Button, Field
+from crispy_forms.bootstrap import FormActions, InlineRadios
 
-from .models import Supplier
+from .models import Supplier, SUPPLIER_TYPES
 
 
 class SupplierForm(forms.ModelForm):
@@ -21,6 +22,9 @@ class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier
         fields = '__all__'
+        labels = {
+            'person_or_company': '',
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -30,7 +34,8 @@ class SupplierForm(forms.ModelForm):
                 Div(
                     Div('vl_id', css_class='col-md-3'),
                     Div('mb_id', css_class='col-md-3'),
-                    Div('short_name', css_class='col-md-6'),
+                    Div('short_name', css_class='col-md-3'),
+                    Div('slug', css_class='col-md-3'),
                     css_class='row'
                 ),
                 Div(
@@ -39,9 +44,9 @@ class SupplierForm(forms.ModelForm):
                     css_class='row'
                 ),
                 Div(
-                    Div('person_or_company', css_class='col-md-2'),
-                    Div('cnpj', css_class='col-md-5'),
-                    Div('cpf', css_class='col-md-5'),
+                    Div(InlineRadios('person_or_company'), css_class='col-md-4'),
+                    Div('cnpj', css_class='col-md-4'),
+                    Div('cpf', css_class='col-md-4'),
                     css_class='row'
                 ),
                 Div(
@@ -63,8 +68,17 @@ class SupplierForm(forms.ModelForm):
                     ),
                 ),
             ),
-            Submit('submit', _('Save'), css_class="btn-success"),
+            FormActions(
+                Submit('submit', _('Save'), css_class="btn-success"),
+                Button('cancel', _('Cancel'), css_class="btn-danger"),
+            ),
         )
 
         self.fields['cpf'] = BRCPFField(required=False)
         self.fields['cnpj'] = BRCNPJField(required=False)
+
+        self.fields['person_or_company'].widget = forms.RadioSelect()
+        self.fields['person_or_company'].choices = SUPPLIER_TYPES
+
+        # Set slug as disabled
+        self.fields['slug'].disabled = True

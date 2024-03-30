@@ -29,6 +29,7 @@ class CustomerFormSetHelper(FormHelper):
         self.layout = Layout(
             'name',
             'short_name',
+            'slug',
             'email',
             'cpf',
             'cnpj',

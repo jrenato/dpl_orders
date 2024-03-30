@@ -8,7 +8,7 @@
     <h1>{% translate "Customer Registration" %}</h1>
     <form method="post">
         {% csrf_token %}
-        {{ customer_form.as_p }}
+        {{ form.as_p }}
         {{ customer_address_formset.as_p }}
         {{ customer_phone_formset.management_form }}
         {% for phone_form in customer_phone_formset %}

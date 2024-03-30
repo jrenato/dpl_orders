@@ -4,15 +4,14 @@ Views for the customers app.
 from django.urls import reverse_lazy
 from django.db.models import Count, Sum
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.shortcuts import redirect, render
-from django.forms.models import inlineformset_factory
 
 from crispy_forms.layout import Layout, Submit
 
 from .models import Customer, CustomerAddress, CustomerPhone
 from .forms import CustomerForm, CustomerAddressForm, CustomerPhoneForm, \
-    CustomerFormSetHelper, CustomerAddressFormSetHelper, CustomerPhoneFormSetHelper
+    CustomerAddressFormSet, CustomerPhoneFormSet
 
 
 class CustomerListView(PermissionRequiredMixin, ListView):
@@ -81,29 +80,44 @@ class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
 
 # Function Based View to update the customer,
 # using inlineformset for the CustomerAddress and CustomerPhone models
-def update_customer(request, slug):
-    customer = Customer.objects.get(slug=slug)
-    CustomerAddressFormSet = inlineformset_factory(Customer, CustomerAddress, form=CustomerAddressForm, extra=1, can_delete=False)
-    CustomerPhoneFormSet = inlineformset_factory(Customer, CustomerPhone, form=CustomerPhoneForm, extra=1, can_delete=True)
+class UpdateCustomerView(FormView):
+    template_name = 'customers/customer_formset.html'
+    form_class = CustomerForm
+    success_url = reverse_lazy('customers:detail')
 
-    if request.method == 'POST':
-        customer_form = CustomerForm(request.POST, instance=customer)
-        customer_address_formset = CustomerAddressFormSet(request.POST, instance=customer)
-        customer_phone_formset = CustomerPhoneFormSet(request.POST, instance=customer)
-        if customer_form.is_valid() and customer_address_formset.is_valid() and customer_phone_formset.is_valid():
-            customer_form.save()
+    def get_object(self):
+        """
+        Retrieves a `Customer` object based on the provided `slug`.
+
+        Returns:
+            Customer: The `Customer` object matching the provided `slug`.
+        """
+        slug = self.kwargs.get('slug')
+        return Customer.objects.get(slug=slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        customer = self.get_object()
+        context['customer_address_formset'] = CustomerAddressFormSet(instance=customer)
+        context['customer_phone_formset'] = CustomerPhoneFormSet(instance=customer)
+        return context
+
+    def form_valid(self, form):
+        customer = self.get_object()
+        customer_form = form.save(commit=False)
+        customer_form.save()
+        customer_address_formset = self.get_context_data()['customer_address_formset']
+        customer_phone_formset = self.get_context_data()['customer_phone_formset']
+        if customer_address_formset.is_valid() and customer_phone_formset.is_valid():
             customer_address_formset.save()
             customer_phone_formset.save()
-            return redirect('customers:detail', slug=customer.slug)
-    else:
-        customer_form = CustomerForm(instance=customer)
-        customer_address_formset = CustomerAddressFormSet(instance=customer)
-        customer_phone_formset = CustomerPhoneFormSet(instance=customer)
-    return render(request, 'customers/customer_formset.html', {
-        'customer_form': customer_form,
-        'customer_address_formset': customer_address_formset,
-        'customer_phone_formset': customer_phone_formset,
-    })
+            return super().form_valid(form)
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
 
 
 class CustomerDeleteView(PermissionRequiredMixin, DeleteView):

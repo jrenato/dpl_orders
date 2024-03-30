@@ -2,6 +2,7 @@
 Forms for the customers app
 '''
 from django import forms
+from django.forms.models import inlineformset_factory
 
 from localflavor.br.forms import BRCPFField, BRCNPJField  # Import BRCPFField and BRCNPJField
 from crispy_forms.helper import FormHelper
@@ -22,21 +23,6 @@ class CustomerForm(forms.ModelForm):
         fields = '__all__'
 
 
-class CustomerFormSetHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.form_method = 'post'
-        self.layout = Layout(
-            'name',
-            'short_name',
-            'slug',
-            'email',
-            'cpf',
-            'cnpj',
-        )
-        self.render_required_fields = True
-
-
 class CustomerAddressForm(forms.ModelForm):
     '''
     Form for the CustomerAddress model
@@ -44,22 +30,6 @@ class CustomerAddressForm(forms.ModelForm):
     class Meta:
         model = CustomerAddress
         fields = '__all__'
-
-
-class CustomerAddressFormSetHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.form_method = 'post'
-        self.layout = Layout(
-            'street',
-            'number',
-            'complement',
-            'city',
-            'state',
-            'district',
-            'zip_code',
-        )
-        self.render_required_fields = True
 
 
 class CustomerPhoneForm(forms.ModelForm):
@@ -71,11 +41,10 @@ class CustomerPhoneForm(forms.ModelForm):
         fields = '__all__'
 
 
-class CustomerPhoneFormSetHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.form_method = 'post'
-        self.layout = Layout(
-            'phone_number',
-        )
-        self.render_required_fields = True
+CustomerAddressFormSet = inlineformset_factory(
+    Customer, CustomerAddress, form=CustomerAddressForm, extra=0, can_delete=False
+)
+
+CustomerPhoneFormSet = inlineformset_factory(
+    Customer, CustomerPhone, form=CustomerPhoneForm, extra=1, can_delete=True
+)

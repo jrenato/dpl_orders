@@ -73,7 +73,12 @@ class Command(BaseCommand):
                 product = self.try_to_get_product(product_data)
 
                 if not product:
-                    product = self.import_product(product_data)
+                    try:
+                        product = self.import_product(product_data)
+                    except CommandError as exc:
+                        # Delete the group
+                        group.delete()
+                        raise exc
 
                 if not product:
                     raise CommandError(f'Product not found: {product_data}')
@@ -222,7 +227,10 @@ class Command(BaseCommand):
         # Check if the price is present and if it's a string
         if product_data['price'] and isinstance(product_data['price'], str):
             # Remove trailing 'BRL' from the price
-            product_data['price'] = float(product_data['price'].replace('BRL', '').strip())
+            try:
+                product_data['price'] = float(product_data['price'].replace('BRL', '').replace(',', '.').strip())
+            except ValueError as exc:
+                raise CommandError(f'Invalid price format: {product_data["price"]} for product {product_data["title"]} - ISBN: {product_data["title"]}')
 
         sku = product_data['sku'] if 'sku' in product_data \
             and product_data['sku'] \

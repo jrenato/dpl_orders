@@ -69,6 +69,12 @@ class Command(BaseCommand):
             raw_data = get_data(filename)
             products = self.get_products_data(raw_data)
 
+            # If len of group items is the same as len of products
+            # then the group is already imported
+            if len(group.group_items.all()) == len(products):
+                tqdm.write(f'Group "{group.name}" already imported')
+                continue
+
             for product_data in tqdm(products, desc='Importing products'):
                 product = self.try_to_get_product(product_data)
 

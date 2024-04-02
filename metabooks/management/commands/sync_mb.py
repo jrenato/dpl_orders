@@ -230,18 +230,20 @@ class Command(BaseCommand):
 
         if product.mb_updated != mb_updated_date:
             # TODO: Replace this with the implementation of parse_product_details
-            product.update(
-                supplier = mb_sync.supplier,
-                name = product_data['title'].strip().upper(),
-                sku = product_data['gtin'],
-                # price = product_data['priceBrl'],
-                mb_price = product_data['priceBrl'],
-                release_date = release_date,
-                supplier_internal_id = product_data['ordernumber'],
-                description = product_data['mainDescription'],
-                # mb_created = mb_create_date,
-                mb_updated = mb_updated_date
-            )
+            #product.update(
+            product.supplier = mb_sync.supplier
+            product.name = product_data['title'].strip().upper()
+            product.sku = product_data['gtin']
+            # product.price = product_data['priceBrl']
+            product.mb_price = product_data['priceBrl']
+            product.release_date = release_date
+            product.supplier_internal_id = product_data['ordernumber']
+            product.description = product_data['mainDescription']
+            # product.mb_created = mb_create_date
+            product.mb_updated = mb_updated_date
+
+            product.save()
+
             should_get_details = True
             updated = True
 

@@ -7,7 +7,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db import transaction
 
-
 from .models import Customer
 from .forms import CustomerForm, CustomerAddressFormSet, CustomerAddressFormSetHelper
 
@@ -21,7 +20,6 @@ class CustomerListView(PermissionRequiredMixin, ListView):
     permission_required = 'customers.view_customer'
 
     def get_queryset(self):
-        # Prefetch the count of orders for each customer as order_count
         return Customer.objects\
             .prefetch_related('orders', 'orders__order_items')\
             .annotate(
@@ -37,10 +35,6 @@ class CustomerDetailView(PermissionRequiredMixin, DetailView):
     model = Customer
     context_object_name = 'customer'
     permission_required = 'customers.view_customer'
-
-    # def get_queryset(self):
-    #     return Customer.objects\
-    #         .prefetch_related('orders',)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -65,26 +59,6 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('customers:list')
     permission_required = 'customers.add_customer'
 
-
-class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
-    '''
-    Update view for the Customer model
-    '''
-    model = Customer
-    form_class = CustomerForm
-    success_url = reverse_lazy('customers:list')
-    permission_required = 'customers.change_customer'
-
-
-class CreateCustomerView(PermissionRequiredMixin, CreateView):
-    '''
-    Create view for the Customer model
-    '''
-    model = Customer
-    form_class = CustomerForm
-    template_name = 'customers/customer_formset.html'
-    permission_required = 'customers.add_customer'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -94,43 +68,59 @@ class CreateCustomerView(PermissionRequiredMixin, CreateView):
         else:
             context['address_formset'] = CustomerAddressFormSet()
             context['address_formset_helper'] = CustomerAddressFormSetHelper()
+
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        addresses = context['address_formset']
+
+        address_formset = context['address_formset']
         with transaction.atomic():
-            if addresses.is_valid():
+            if address_formset.is_valid():
                 customer = form.save()
-                addresses.instance = customer
-                addresses.save()
+                address_formset.instance = customer
+                address_formset.save()
+
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy('customers:detail', kwargs={'slug': self.object.slug})
 
-class UpdateCustomerView(PermissionRequiredMixin, UpdateView):
+
+class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
+    '''
+    Update view for the Customer model
+    '''
     model = Customer
     form_class = CustomerForm
-    template_name = 'customers/customer_formset.html'
     permission_required = 'customers.change_customer'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         if self.request.POST:
-            context['address_formset'] = CustomerAddressFormSet(self.request.POST, instance=self.object)
+            context['address_formset'] = CustomerAddressFormSet(
+                self.request.POST, instance=self.object)
             context['address_formset_helper'] = CustomerAddressFormSetHelper()
         else:
             context['address_formset'] = CustomerAddressFormSet(instance=self.object)
             context['address_formset_helper'] = CustomerAddressFormSetHelper()
+
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        addresses = context['address_formset']
+
+        address_formset = context['address_formset']
         with transaction.atomic():
-            if addresses.is_valid():
-                addresses.instance = self.object
-                addresses.save()
+            if address_formset.is_valid():
+                address_formset.instance = self.object
+                address_formset.save()
+
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('customers:detail', kwargs={'slug': self.object.slug})
 
 
 class CustomerDeleteView(PermissionRequiredMixin, DeleteView):

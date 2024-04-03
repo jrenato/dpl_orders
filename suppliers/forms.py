@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 
 from localflavor.br.forms import BRCPFField, BRCNPJField
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, Div, Button, Field
+from crispy_forms.layout import Layout, Fieldset, Submit, Div, Button
 from crispy_forms.bootstrap import FormActions, InlineRadios
 
 from .models import Supplier, SUPPLIER_TYPES

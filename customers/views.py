@@ -9,8 +9,7 @@ from django.db import transaction
 
 
 from .models import Customer
-from .forms import CustomerForm, CustomerAddressForm, CustomerAddressFormSet, \
-    CustomerFormHelper, CustomerAddressFormSetHelper
+from .forms import CustomerForm, CustomerAddressFormSet, CustomerAddressFormSetHelper
 
 
 class CustomerListView(PermissionRequiredMixin, ListView):
@@ -88,7 +87,6 @@ class CreateCustomerView(PermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_helper'] = CustomerFormHelper()
 
         if self.request.POST:
             context['address_formset'] = CustomerAddressFormSet(self.request.POST)
@@ -117,7 +115,6 @@ class UpdateCustomerView(PermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_helper'] = CustomerFormHelper()
         if self.request.POST:
             context['address_formset'] = CustomerAddressFormSet(self.request.POST, instance=self.object)
             context['address_formset_helper'] = CustomerAddressFormSetHelper()

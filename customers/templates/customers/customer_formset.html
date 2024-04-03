@@ -6,23 +6,17 @@
 
 {% block content %}
     <h1>{% translate "Customer Registration" %}</h1>
-    <form method="post">
-        {% csrf_token %}
-        {% crispy form form_helper %}
-        {% crispy address_formset address_formset_helper %}
-        {% comment %}
-        {{ form.as_p }}
-        {{ address_formset.management_form }}
-        <fieldset>
-            <legend>Addresses</legend>
-            {{ address_formset.non_form_errors }}
-            <ul>
-            {% for address_form in address_formset %}
-                <li>{{ address_form.as_p }}</li>
-            {% endfor %}
-            </ul>
-        </fieldset>
-        {% endcomment %}
-        <button type="submit">{% translate "Save" %}</button>
-    </form>
+    <div class="mb-5">
+        <form method="post">
+            {% csrf_token %}
+            {% crispy form %}
+            <h3>{% translate "Address" %}</h3>
+            {% crispy address_formset address_formset_helper %}
+
+            <div class="text-end">
+                <button class="btn btn-success" type="submit">{% translate "Save" %}</button>
+                <a class="btn btn-danger" href="{% url 'customers:list' %}">{% translate "Cancel" %}</a>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

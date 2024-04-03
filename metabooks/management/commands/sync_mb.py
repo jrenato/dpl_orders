@@ -77,6 +77,10 @@ class Command(BaseCommand):
                 ):
                     self.parse_current_page(mb_sync)
 
+        mb_sync.logout()
+        mb_sync.concluded = True
+        mb_sync.save()
+
 
     def login(self, mb_sync):
         '''

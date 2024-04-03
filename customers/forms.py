@@ -48,3 +48,15 @@ CustomerAddressFormSet = inlineformset_factory(
 CustomerPhoneFormSet = inlineformset_factory(
     Customer, CustomerPhone, form=CustomerPhoneForm, extra=1, can_delete=True
 )
+
+
+class CustomerFormHelper(FormHelper):
+    form_tag = False
+
+
+class CustomerAddressFormSetHelper(FormHelper):
+    form_tag = False
+
+
+class CustomerPhoneFormSetHelper(FormHelper):
+    form_tag = False

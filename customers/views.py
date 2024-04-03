@@ -4,15 +4,13 @@ Views for the customers app.
 from django.urls import reverse_lazy
 from django.db.models import Count, Sum
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db import transaction
 
-from crispy_forms.layout import Layout, Submit
 
-from .models import Customer, CustomerAddress, CustomerPhone
-from .forms import CustomerForm, CustomerAddressForm, CustomerPhoneForm, \
-    CustomerAddressFormSet, CustomerPhoneFormSet
+from .models import Customer
+from .forms import CustomerForm, CustomerAddressForm, CustomerAddressFormSet, \
+    CustomerFormHelper, CustomerAddressFormSetHelper
 
 
 class CustomerListView(PermissionRequiredMixin, ListView):
@@ -90,15 +88,19 @@ class CreateCustomerView(PermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['form_helper'] = CustomerFormHelper()
+
         if self.request.POST:
-            context['addresses'] = CustomerAddressFormSet(self.request.POST)
+            context['address_formset'] = CustomerAddressFormSet(self.request.POST)
+            context['address_formset_helper'] = CustomerAddressFormSetHelper()
         else:
-            context['addresses'] = CustomerAddressFormSet()
+            context['address_formset'] = CustomerAddressFormSet()
+            context['address_formset_helper'] = CustomerAddressFormSetHelper()
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        addresses = context['addresses']
+        addresses = context['address_formset']
         with transaction.atomic():
             if addresses.is_valid():
                 customer = form.save()
@@ -115,15 +117,18 @@ class UpdateCustomerView(PermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['form_helper'] = CustomerFormHelper()
         if self.request.POST:
-            context['addresses'] = CustomerAddressFormSet(self.request.POST, instance=self.object)
+            context['address_formset'] = CustomerAddressFormSet(self.request.POST, instance=self.object)
+            context['address_formset_helper'] = CustomerAddressFormSetHelper()
         else:
-            context['addresses'] = CustomerAddressFormSet(instance=self.object)
+            context['address_formset'] = CustomerAddressFormSet(instance=self.object)
+            context['address_formset_helper'] = CustomerAddressFormSetHelper()
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        addresses = context['addresses']
+        addresses = context['address_formset']
         with transaction.atomic():
             if addresses.is_valid():
                 addresses.instance = self.object

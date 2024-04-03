@@ -8,17 +8,21 @@
     <h1>{% translate "Customer Registration" %}</h1>
     <form method="post">
         {% csrf_token %}
+        {% crispy form form_helper %}
+        {% crispy address_formset address_formset_helper %}
+        {% comment %}
         {{ form.as_p }}
-        {{ addresses.management_form }}
+        {{ address_formset.management_form }}
         <fieldset>
             <legend>Addresses</legend>
-            {{ addresses.non_form_errors }}
+            {{ address_formset.non_form_errors }}
             <ul>
-            {% for address_form in addresses %}
+            {% for address_form in address_formset %}
                 <li>{{ address_form.as_p }}</li>
             {% endfor %}
             </ul>
         </fieldset>
+        {% endcomment %}
         <button type="submit">{% translate "Save" %}</button>
     </form>
 {% endblock content %}

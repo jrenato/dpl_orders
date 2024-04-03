@@ -9,11 +9,16 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        {{ customer_address_formset.as_p }}
-        {{ customer_phone_formset.management_form }}
-        {% for phone_form in customer_phone_formset %}
-            {{ phone_form.as_p }}
-        {% endfor %}
+        {{ addresses.management_form }}
+        <fieldset>
+            <legend>Addresses</legend>
+            {{ addresses.non_form_errors }}
+            <ul>
+            {% for address_form in addresses %}
+                <li>{{ address_form.as_p }}</li>
+            {% endfor %}
+            </ul>
+        </fieldset>
         <button type="submit">{% translate "Save" %}</button>
     </form>
 {% endblock content %}

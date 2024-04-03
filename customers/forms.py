@@ -42,7 +42,7 @@ class CustomerPhoneForm(forms.ModelForm):
 
 
 CustomerAddressFormSet = inlineformset_factory(
-    Customer, CustomerAddress, form=CustomerAddressForm, extra=0, can_delete=False
+    Customer, CustomerAddress, form=CustomerAddressForm, extra=1, can_delete=False
 )
 
 CustomerPhoneFormSet = inlineformset_factory(

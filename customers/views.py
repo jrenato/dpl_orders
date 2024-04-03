@@ -6,6 +6,7 @@ from django.db.models import Count, Sum
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.db import transaction
 
 from crispy_forms.layout import Layout, Submit
 
@@ -78,46 +79,56 @@ class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'customers.change_customer'
 
 
-# Function Based View to update the customer,
-# using inlineformset for the CustomerAddress and CustomerPhone models
-class UpdateCustomerView(FormView):
-    template_name = 'customers/customer_formset.html'
+class CreateCustomerView(PermissionRequiredMixin, CreateView):
+    '''
+    Create view for the Customer model
+    '''
+    model = Customer
     form_class = CustomerForm
-    success_url = reverse_lazy('customers:detail')
-
-    def get_object(self):
-        """
-        Retrieves a `Customer` object based on the provided `slug`.
-
-        Returns:
-            Customer: The `Customer` object matching the provided `slug`.
-        """
-        slug = self.kwargs.get('slug')
-        return Customer.objects.get(slug=slug)
+    template_name = 'customers/customer_formset.html'
+    permission_required = 'customers.add_customer'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        customer = self.get_object()
-        context['customer_address_formset'] = CustomerAddressFormSet(instance=customer)
-        context['customer_phone_formset'] = CustomerPhoneFormSet(instance=customer)
+        if self.request.POST:
+            context['addresses'] = CustomerAddressFormSet(self.request.POST)
+        else:
+            context['addresses'] = CustomerAddressFormSet()
         return context
 
     def form_valid(self, form):
-        customer = self.get_object()
-        customer_form = form.save(commit=False)
-        customer_form.save()
-        customer_address_formset = self.get_context_data()['customer_address_formset']
-        customer_phone_formset = self.get_context_data()['customer_phone_formset']
-        if customer_address_formset.is_valid() and customer_phone_formset.is_valid():
-            customer_address_formset.save()
-            customer_phone_formset.save()
-            return super().form_valid(form)
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
+        context = self.get_context_data()
+        addresses = context['addresses']
+        with transaction.atomic():
+            if addresses.is_valid():
+                customer = form.save()
+                addresses.instance = customer
+                addresses.save()
+        return super().form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        return super().post(request, *args, **kwargs)
+
+class UpdateCustomerView(PermissionRequiredMixin, UpdateView):
+    model = Customer
+    form_class = CustomerForm
+    template_name = 'customers/customer_formset.html'
+    permission_required = 'customers.change_customer'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['addresses'] = CustomerAddressFormSet(self.request.POST, instance=self.object)
+        else:
+            context['addresses'] = CustomerAddressFormSet(instance=self.object)
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        addresses = context['addresses']
+        with transaction.atomic():
+            if addresses.is_valid():
+                addresses.instance = self.object
+                addresses.save()
+        return super().form_valid(form)
 
 
 class CustomerDeleteView(PermissionRequiredMixin, DeleteView):

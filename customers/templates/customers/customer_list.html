@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-6 text-end">
         {% if perms.customers.add_customer %}
-          <a href="{% url 'customers:create' %}" class="btn btn-success me-2">
+          <a href="{% url 'customers:create_customer' %}" class="btn btn-success me-2">
               <i data-feather="plus"></i> {% translate "Add" %}
           </a>
         {% endif %}

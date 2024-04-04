@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load custom_tags %}
 
 {% block title %}{{ customer.name }}{% endblock title %}
 
@@ -14,11 +15,10 @@
                     <li><b>{% translate "Name" %}:</b> {{ customer.name }}</li>
                     <li><b>{% translate "Short Name" %}:</b> {{ customer.short_name }}</li>
                     <li><b>{% translate "Sheet Label" %}:</b> {{ customer.sheet_label }}</li>
-                    {% if customer.cnpj %}
-                    <li><b>{% translate "CNPJ" %}:</b> {{ customer.cnpj }}</li>
-                    {% endif %}
-                    {% if customer.cnpj %}
-                    <li><b>{% translate "CPF" %}:</b> {{ customer.cpf }}</li>
+                    {% if customer.person_or_company == "J" and customer.cnpj %}
+                        <li><b>{% translate "CNPJ" %}:</b> {{ customer.cnpj|format_cnpj }}</li>
+                    {% elif customer.person_or_company == "F" and customer.cpf %}
+                        <li><b>{% translate "CPF" %}:</b> {{ customer.cpf|format_cpf }}</li>
                     {% endif %}
                     <li><b>{% translate "Contact Person" %}:</b> {{ customer.contact_person }}</li>
                     <li><b>{% translate "Email" %}:</b> <a href="mailto:{{ customer.email }}">{{ customer.email }}</a></li>

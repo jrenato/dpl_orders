@@ -31,9 +31,10 @@ class CustomerForm(forms.ModelForm):
         self.helper.layout = Layout(
             Div(
                 Div(
-                    Div('vl_id', css_class='col-md-4'),
-                    Div('short_name', css_class='col-md-4'),
-                    Div('slug', css_class='col-md-4'),
+                    Div('vl_id', css_class='col-md-3'),
+                    Div('short_name', css_class='col-md-3'),
+                    Div('sheet_label', css_class='col-md-3'),
+                    Div('slug', css_class='col-md-3'),
                     css_class='row'
                 ),
                 Div(

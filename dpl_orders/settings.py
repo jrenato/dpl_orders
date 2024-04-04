@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'preorders',
 
     'metabooks',
+
+    'dpl_tags',
 ]
 
 MIDDLEWARE = [

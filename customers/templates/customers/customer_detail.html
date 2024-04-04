@@ -31,6 +31,8 @@
                     <li><b>{% translate "Internal ID" %}:</b> {{ customer.vl_id }}</li>
                     <li><b>{% translate "Created at" %}:</b> {{ customer.created|date:"SHORT_DATE_FORMAT" }}</li>
                     <li><b>{% translate "Updated at" %}:</b> {{ customer.updated|date:"SHORT_DATE_FORMAT" }}</li>
+                    <li><b>{% translate "Vl Created at" %}:</b> {{ customer.vl_created|date:"SHORT_DATE_FORMAT" }}</li>
+                    <li><b>{% translate "Vl Updated at" %}:</b> {{ customer.vl_updated|date:"SHORT_DATE_FORMAT" }}</li>
                 </ul>
             </div>
         </div>

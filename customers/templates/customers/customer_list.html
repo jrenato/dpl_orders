@@ -44,7 +44,7 @@
           {% for customer in customers %}
             <tr>
               <td><a href="{% url 'customers:detail' customer.slug %}">{{ customer.short_name }}</a></td>
-              <td>{{ customer.name }}</td>
+              <td><small>{{ customer.name }}</small></td>
               <td class="text-center">
                 {% if customer.person_or_company == "J" and customer.cnpj %}
                   {{ customer.cnpj|format_cnpj }}

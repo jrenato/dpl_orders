@@ -27,7 +27,7 @@ class Customer(models.Model):
     sheet_label = models.CharField(_('Sheet Label'), max_length=60, blank=True, null=True)
 
     person_or_company = models.CharField(
-        _('Person or Company'), max_length=1, blank=True, null=True, choices=CUSTOMER_TYPES
+        _('Person or Company'), max_length=1, choices=CUSTOMER_TYPES, default='J'
     )
     cnpj = models.CharField(_('CNPJ'), max_length=18, blank=True, null=True)
     cpf = models.CharField(_('CPF'), max_length=14, blank=True, null=True)

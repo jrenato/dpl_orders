@@ -47,6 +47,9 @@ class Customer(models.Model):
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)
 
+    vl_created = models.DateTimeField(_('Vialogos Created at'), blank=True, null=True)
+    vl_updated = models.DateTimeField(_('Vialogos Updated at'), blank=True, null=True)
+
     class Meta:
         '''
         Meta options
@@ -71,11 +74,17 @@ class Customer(models.Model):
         if not self.id:
             self.slug = slugify_uniquely(self.name, self.__class__)
 
+        cliforn = None
+        vl_updated_at = None
+
         if self.vl_id:
             cliforn = Cliforn.objects.get(codigo=self.vl_id)
+            vl_updated_at = cliforn.dtatual
+
+        if not self.vl_updated or (self.vl_updated <= vl_updated_at):
             # Basic data update
             self.name = cliforn.nome
-            # Customers don't have short name in vldados            
+            # Customers don't have short name in vldados
             # self.short_name = cliforn.shortn
             self.company_name = cliforn.razsocial
 
@@ -113,6 +122,9 @@ class Customer(models.Model):
                         customer=self,
                         phone_number=phone_number
                     )
+
+            self.vl_created = cliforn.dtcad
+            self.vl_updated = vl_updated_at
 
         super().save(*args, **kwargs)
 

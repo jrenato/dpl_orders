@@ -7,11 +7,4 @@
 {% block content %}
     <h1>{% translate "Supplier Registration" %}</h1>
     {% crispy form %}
-    {% comment %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">{% translate "Save" %}</button>
-    </form>
-    {% endcomment %}
 {% endblock content %}

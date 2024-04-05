@@ -175,7 +175,7 @@ class CustomerPhone(models.Model):
     '''
     CustomerPhone model
     '''
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='phones')
 
     phone_number = models.CharField(_('Phone'), max_length=15, blank=True, null=True)
 

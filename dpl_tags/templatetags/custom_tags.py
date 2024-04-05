@@ -58,3 +58,30 @@ def format_cpf(cpf):
         cpf = cpf.zfill(11)
 
     return f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+
+
+@register.filter(name="format_zip_code")
+def format_zip_code(zip_code):
+    """
+    A filter to format a zip code (Brazilian postal code) number.
+    
+    Parameters:
+    zip_code (str): The zip code to be formatted.
+    
+    Returns:
+    str: The formatted zip code.
+    """
+    zip_code = str(zip_code)
+
+    if len(zip_code) > 9:
+        raise ValueError("Invalid zip code length")
+
+    # It's already formatted, just return it
+    if len(zip_code) == 9:
+        return zip_code
+
+    # If not formatted, add leading zeroes and format
+    if len(zip_code) < 8:
+        zip_code = zip_code.zfill(8)
+
+    return f"{zip_code[:5]}-{zip_code[5:]}"

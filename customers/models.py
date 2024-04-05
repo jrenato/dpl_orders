@@ -2,6 +2,7 @@
 Models for Customers app
 '''
 from django.db import models
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
@@ -77,11 +78,11 @@ class Customer(models.Model):
         cliforn = None
         vl_updated_at = None
 
-        if self.vl_id:
+        if settings.VL_INTEGRATION and self.vl_id:
             cliforn = Cliforn.objects.get(codigo=self.vl_id)
             vl_updated_at = cliforn.dtatual
 
-        if not self.vl_updated or (self.vl_updated <= vl_updated_at):
+        if cliforn and (not self.vl_updated or (self.vl_updated <= vl_updated_at)):
             # Basic data update
             self.name = cliforn.nome
             # Customers don't have short name in vldados
@@ -141,7 +142,7 @@ class CustomerAddress(models.Model):
     city = models.CharField(_('City'), max_length=120, blank=True, null=True)
     state = models.CharField(_('State'), max_length=2, blank=True, null=True)
     district = models.CharField(_('District'), max_length=120, blank=True, null=True)
-    zip_code = models.CharField(_('Zip Code'), max_length=8, blank=True, null=True)
+    zip_code = models.CharField(_('Zip Code'), max_length=9, blank=True, null=True)
 
     created = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated = models.DateTimeField(_('Updated at'), auto_now=True)

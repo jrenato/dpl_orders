@@ -19,7 +19,7 @@ def format_cnpj(cnpj):
     """
     cnpj = str(cnpj)
 
-    if len(cnpj) > 14:
+    if len(cnpj) > 18:
         raise ValueError("Invalid CNPJ length")
 
     # It's already formatted, just return it

@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load custom_tags %}
+
+<p>
+    {{ address.street|default_if_none:"" }}
+    {% if address.number %}, {{ address.number }}{% endif %}
+    {% if address.complement %} - {{ address.complement }}{% endif %}
+</p>
+<p>
+    {{ address.city|default_if_none:"" }}, {{ address.state|default_if_none:"" }}
+    {% if address.zip_code %}
+        - {% translate "ZIPCODE" %}: {{ address.zip_code|format_zip_code }}
+    {% endif %}
+</p>

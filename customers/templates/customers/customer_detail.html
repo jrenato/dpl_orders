@@ -39,9 +39,7 @@
         <div class="row detail-section">
             <div class="col-md-12">
                 <h2 class="detail-title">{% translate "Address" %}</h2>
-                <p>{{ customer.customeraddress.street }}, {{ customer.customeraddress.number }}</p>
-                <p>{{ customer.customeraddress.complement }}</p>
-                <p>{{ customer.customeraddress.city }}, {{ customer.customeraddress.state }} - {% translate "ZIPCODE" %}: {{ customer.customeraddress.zip_code }}</p>
+                {% include "includes/address.html" with address=customer.customeraddress %}
             </div>
         </div>
     </div>

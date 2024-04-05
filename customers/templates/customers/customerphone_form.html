@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% translate "Customer Phone Registration" %}{% endblock title %}
+
+{% block content %}
+    <h1>{% translate "Customer Phone Registration" %}</h1>
+    {% crispy form %}
+{% endblock content %}

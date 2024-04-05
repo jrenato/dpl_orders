@@ -6,62 +6,86 @@
 
 {% block content %}
     <div class="container">
-        <h1>{{ customer.name }}</h1>
+        <div class="d-flex justify-content-between align-items-start">
+            <h1>{{ customer.name }}</h1>
+            {% if perms.customers.change_customer or perms.customers.delete_customer %}
+                <div>
+                    {% if perms.customers.change_customer %}
+                        <a href="{% url "customers:update" customer.slug %}" class="btn btn-primary d-inline-flex align-items-center">
+                            {% translate "Edit" %} <i data-feather="edit" class="align-middle"></i>
+                        </a>
+                    {% endif %}
+                    {% if perms.customers.delete_customer %}
+                        <a href="{% url "customers:delete" customer.slug %}" class="btn btn-danger d-inline-flex align-items-center">
+                            {% translate "Delete" %} <i data-feather="trash-2" class="align-middle"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
         <hr>
         <div class="row detail-section">
             <div class="col-md-6">
                 <h2 class="detail-title">{% translate "Basic Information" %}</h2>
                 <ul>
-                    <li><b>{% translate "Name" %}:</b> {{ customer.name }}</li>
-                    <li><b>{% translate "Short Name" %}:</b> {{ customer.short_name }}</li>
-                    <li><b>{% translate "Sheet Label" %}:</b> {{ customer.sheet_label }}</li>
+                    <li><b>{% translate "Internal ID" %}:</b> {{ customer.vl_id|default_if_none:"" }}</li>
+                    <li><b>{% translate "Name" %}:</b> {{ customer.name|default_if_none:"" }}</li>
+                    <li><b>{% translate "Short Name" %}:</b> {{ customer.short_name|default_if_none:"" }}</li>
+                    <li><b>{% translate "Sheet Label" %}:</b> {{ customer.sheet_label|default_if_none:"" }}</li>
                     {% if customer.person_or_company == "J" and customer.cnpj %}
                         <li><b>{% translate "CNPJ" %}:</b> {{ customer.cnpj|format_cnpj }}</li>
                     {% elif customer.person_or_company == "F" and customer.cpf %}
                         <li><b>{% translate "CPF" %}:</b> {{ customer.cpf|format_cpf }}</li>
                     {% endif %}
-                    <li><b>{% translate "Contact Person" %}:</b> {{ customer.contact_person }}</li>
-                    <li><b>{% translate "Email" %}:</b> <a href="mailto:{{ customer.email }}">{{ customer.email }}</a></li>
-                    <li><b>{% translate "Phone Number" %}:</b> {{ customer.phone_number }}</li>
+                    <li><b>{% translate "State Registration" %}:</b> {{ customer.state_registration|default_if_none:"" }}</li>
+                    <li><b>{% translate "Municipal Registration" %}:</b> {{ customer.municipal_registration|default_if_none:"" }}</li>
                 </ul>
             </div>
             <div class="col-md-6">
                 <h2 class="detail-title">{% translate "Contact Details" %}</h2>
                 <ul>
-                    <li><b>{% translate "Internal ID" %}:</b> {{ customer.vl_id }}</li>
-                    <li><b>{% translate "Created at" %}:</b> {{ customer.created|date:"SHORT_DATE_FORMAT" }}</li>
-                    <li><b>{% translate "Updated at" %}:</b> {{ customer.updated|date:"SHORT_DATE_FORMAT" }}</li>
-                    <li><b>{% translate "Vl Created at" %}:</b> {{ customer.vl_created|date:"SHORT_DATE_FORMAT" }}</li>
-                    <li><b>{% translate "Vl Updated at" %}:</b> {{ customer.vl_updated|date:"SHORT_DATE_FORMAT" }}</li>
+                    <li><b>{% translate "Contact Person" %}:</b> {{ customer.contact_person|default_if_none:"" }}</li>
+                    <li><b>{% translate "Email" %}:</b> <a href="mailto:{{ customer.email }}">{{ customer.email|default_if_none:"" }}</a></li>
+                    <li><b>{% translate "Email NFe" %}:</b> <a href="mailto:{{ customer.emailnfe }}">{{ customer.emailnfe|default_if_none:"" }}</a></li>
                 </ul>
             </div>
         </div>
         <div class="row detail-section">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <h2 class="detail-title">{% translate "Address" %}</h2>
                 {% include "includes/address.html" with address=customer.customeraddress %}
             </div>
-        </div>
-    </div>
-
-    {% if perms.customers.change_customer or perms.customers.delete_customer %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                {% if perms.customers.change_customer %}
-                <a href="{% url "customers:update" customer.slug %}" class="btn btn-primary d-inline-flex align-items-center">
-                    {% translate "Edit" %} <i data-feather="edit" class="align-middle"></i>
-                </a>
-                {% endif %}
-                {% if perms.customers.delete_customer %}
-                <a href="{% url "customers:delete" customer.slug %}" class="btn btn-danger d-inline-flex align-items-center">
-                    {% translate "Delete" %} <i data-feather="trash-2" class="align-middle"></i>
-                </a>
-                {% endif %}
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="detail-title">{% translate "Phone Numbers" %}</h2>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <a href="{% url 'customers:add_phone' customer.slug %}" class="btn btn-success btn-sm">
+                            {% translate "Add" %} {% translate "Phone Number" %} <i data-feather="plus-circle" class="align-middle"></i>
+                        </a>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                {% for phone in customer.phones.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div>
+                        <i data-feather="phone" class="align-middle"></i> {{ phone }}
+                    </div>
+                    <div>
+                        <a href="{% url 'customers:update_phone' pk=phone.pk %}" class="btn btn-primary btn-sm d-inline-flex align-items-center">
+                            <i data-feather="edit" class="align-middle"></i>
+                        </a>
+                        <a href="{% url 'customers:delete_phone' pk=phone.pk %}" class="btn btn-danger btn-sm d-inline-flex align-items-center">
+                            <i data-feather="trash-2" class="align-middle"></i>
+                        </a>
+                    </div>
+                    </li>
+                {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
-    {% endif %}
 
     <hr>
     <div class="container">

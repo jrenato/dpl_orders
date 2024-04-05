@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Delete" %} {% translate "Customer Phone" %}{% endblock title %}
+
+{% block content %}
+    <h1>{% translate "Delete" %} {% translate "Customer" %} {% translate "Phone" %}</h1>
+
+    <p>{% blocktranslate with name=customerphone.phone_number %}Are you sure you want to delete {{ name }}?{% endblocktranslate %}</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="{% translate "Delete" %}" />
+    </form>
+{% endblock content %}

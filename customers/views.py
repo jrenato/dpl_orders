@@ -7,8 +7,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db import transaction
 
-from .models import Customer
-from .forms import CustomerForm, CustomerAddressFormSet, CustomerAddressFormSetHelper
+from .models import Customer, CustomerPhone
+from .forms import CustomerForm, CustomerAddressFormSet, CustomerAddressFormSetHelper, \
+    CustomerPhoneForm
 
 
 class CustomerListView(PermissionRequiredMixin, ListView):
@@ -24,7 +25,7 @@ class CustomerListView(PermissionRequiredMixin, ListView):
             .prefetch_related('orders', 'orders__order_items')\
             .annotate(
                 order_count=Count('orders', distinct=True),
-                ordered_total=Sum('orders__order_items__quantity')
+                ordered_total=Sum('orders__order_items__quantity', default=0)
             )
 
 
@@ -130,3 +131,47 @@ class CustomerDeleteView(PermissionRequiredMixin, DeleteView):
     model = Customer
     success_url = reverse_lazy('customers:list')
     permission_required = 'customers.delete_customer'
+
+
+### Phone Views ###
+
+
+class CustomerPhoneCreateView(PermissionRequiredMixin, CreateView):
+    '''
+    Create view for the CustomerPhone model
+    '''
+    model = CustomerPhone
+    form_class = CustomerPhoneForm
+    permission_required = 'customers.add_customerphone'
+
+    def get_initial(self):
+        customer = Customer.objects.get(slug=self.kwargs['slug'])
+        return {
+            'customer': customer
+        }
+
+    def get_success_url(self):
+        return reverse_lazy('customers:detail', kwargs={'slug': self.object.customer.slug})
+
+
+class CustomerPhoneUpdateView(PermissionRequiredMixin, UpdateView):
+    '''
+    Update view for the CustomerPhone model
+    '''
+    model = CustomerPhone
+    form_class = CustomerPhoneForm
+    permission_required = 'customers.change_customerphone'
+
+    def get_success_url(self):
+        return reverse_lazy('customers:detail', kwargs={'slug': self.object.customer.slug})
+
+
+class CustomerPhoneDeleteView(PermissionRequiredMixin, DeleteView):
+    '''
+    Delete view for the CustomerPhone model
+    '''
+    model = CustomerPhone
+    permission_required = 'customers.delete_customerphone'
+
+    def get_success_url(self):
+        return reverse_lazy('customers:detail', kwargs={'slug': self.object.customer.slug})

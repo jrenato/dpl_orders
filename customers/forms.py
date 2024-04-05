@@ -97,6 +97,24 @@ class CustomerPhoneForm(forms.ModelForm):
         model = CustomerPhone
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                # Div('customer', css_class='col-md-4'),
+                Div('phone_number', css_class='col-md-4'),
+                css_class='row'
+            ),
+            FormActions(
+                Submit('submit', _('Save'), css_class="btn-success"),
+                Button('cancel', _('Cancel'), css_class="btn-danger"),
+            ),
+        )
+
+        self.fields['customer'].disabled = True
+        self.fields['customer'].widget = forms.HiddenInput()
+
 
 class CustomerAddressFormSetHelper(FormHelper):
     def __init__(self, *args, **kwargs):
@@ -119,14 +137,7 @@ class CustomerAddressFormSetHelper(FormHelper):
         )
 
 
-class CustomerPhoneFormSetHelper(FormHelper):
-    form_tag = False
-
 
 CustomerAddressFormSet = inlineformset_factory(
     Customer, CustomerAddress, form=CustomerAddressForm, extra=1, can_delete=False
-)
-
-CustomerPhoneFormSet = inlineformset_factory(
-    Customer, CustomerPhone, form=CustomerPhoneForm, extra=1, can_delete=True
 )

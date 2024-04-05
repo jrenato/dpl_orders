@@ -3,7 +3,7 @@ Admin for Customers app
 '''
 from django.contrib import admin
 
-from .models import Customer, CustomerAddress
+from .models import Customer, CustomerAddress, CustomerPhone
 
 
 class CustomerAddressInline(admin.StackedInline):
@@ -11,6 +11,15 @@ class CustomerAddressInline(admin.StackedInline):
     CustomerAddressInline class
     '''
     model = CustomerAddress
+    readonly_fields = ('created', 'updated',)
+    extra = 1
+
+
+class CustomerPhoneInline(admin.TabularInline):
+    '''
+    CustomerPhoneInline class
+    '''
+    model = CustomerPhone
     readonly_fields = ('created', 'updated',)
     extra = 1
 
@@ -25,4 +34,4 @@ class CustomerAdmin(admin.ModelAdmin):
     #list_filter = ('created', 'updated')
     list_per_page = 20
     readonly_fields = ('created', 'updated',)
-    inlines = [CustomerAddressInline]
+    inlines = [CustomerAddressInline, CustomerPhoneInline]

@@ -77,7 +77,7 @@ class Command(BaseCommand):
                 ):
                     self.parse_current_page(mb_sync)
 
-        mb_sync.logout()
+        self.logout(mb_sync)
         mb_sync.concluded = True
         mb_sync.save()
 

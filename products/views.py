@@ -187,10 +187,9 @@ class PostponedReleasesListView(PermissionRequiredMixin, ListView):
         queryset = super().get_queryset()
         queryset = queryset\
             .annotate(release_dates_count=Count('release_dates'))\
-            .filter(release_dates_count__gt=1)\
+            .filter(release_dates_count__gt=1, release_date__gte=datetime.date.today())\
             .select_related('supplier')\
             .prefetch_related('release_dates')\
             .order_by('supplier__name', 'name',)
-            #.filter(release_date__gte=datetime.date.today())\
 
         return queryset

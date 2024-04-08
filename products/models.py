@@ -202,7 +202,7 @@ class ProductReleaseDateHistory(models.Model):
         '''
         verbose_name = _('Product Release Date History')
         verbose_name_plural = _('Product Release Date Histories')
-        ordering = ['product', '-created']
+        ordering = ['product', 'release_date']
 
     def __str__(self):
         return f'{self.product.name} - {self.release_date}'

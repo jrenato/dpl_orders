@@ -6,7 +6,7 @@
 #
 asgiref==3.8.1
     # via django
-build==1.1.1
+build==1.2.1
     # via pip-tools
 certifi==2024.2.2
     # via
@@ -26,13 +26,14 @@ defusedxml==0.7.1
     # via
     #   odfpy
     #   python3-openid
-django==5.0.3
+django==5.0.4
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
     #   django-allauth
     #   django-appconf
     #   django-crispy-forms
+    #   django-filter
     #   django-localflavor
     #   django-select2
     #   mssql-django
@@ -46,13 +47,15 @@ django-crispy-forms==2.1
     #   crispy-bootstrap5
 django-environ==0.11.2
     # via -r requirements.in
+django-filter==24.2
+    # via -r requirements.in
 django-localflavor==4.0
     # via -r requirements.in
 django-select2==8.1.2
     # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
-idna==3.6
+idna==3.7
     # via requests
 lml==0.1.0
     # via pyexcel-io
@@ -68,11 +71,11 @@ openpyxl==3.1.2
     # via -r requirements.in
 packaging==24.0
     # via build
-pillow==10.2.0
+pillow==10.3.0
     # via -r requirements.in
 pip-tools==7.4.1
     # via -r requirements.in
-pycparser==2.21
+pycparser==2.22
     # via cffi
 pyexcel-io==0.6.6
     # via pyexcel-ods
@@ -109,7 +112,7 @@ six==1.16.0
     # via
     #   mailchimp-marketing
     #   python-dateutil
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via django
 tomli==2.0.1
     # via
@@ -118,7 +121,7 @@ tomli==2.0.1
     #   pyproject-hooks
 tqdm==4.66.2
     # via -r requirements.in
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via asgiref
 urllib3==2.2.1
     # via

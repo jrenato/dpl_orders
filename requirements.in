@@ -3,6 +3,7 @@ django
 django-allauth
 django-crispy-forms
 django-environ
+django-filter
 django-localflavor
 django-select2
 mailchimp-marketing

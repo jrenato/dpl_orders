@@ -10,8 +10,11 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
     TemplateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
+from django_filters.views import FilterView
+
 from .models import Product
 from .forms import ProductForm
+from .filters import ProductFilter
 
 
 class ProductListView(PermissionRequiredMixin, ListView):
@@ -47,6 +50,14 @@ class ProductListView(PermissionRequiredMixin, ListView):
             .order_by('name')
 
         return queryset
+
+
+class ProductFilterView(PermissionRequiredMixin, FilterView):
+    '''
+    Filter view for the Product model
+    '''
+    model = Product
+    filterset_class = ProductFilter
 
 
 class ProductSearchView(ProductListView):

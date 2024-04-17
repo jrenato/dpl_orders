@@ -58,6 +58,9 @@ class ProductFilterView(PermissionRequiredMixin, FilterView):
     '''
     model = Product
     filterset_class = ProductFilter
+    paginate_by = 20
+    context_object_name = 'products'
+    permission_required = 'products.view_product'
 
 
 class ProductSearchView(ProductListView):

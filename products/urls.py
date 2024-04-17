@@ -3,6 +3,7 @@ This file is used to define the URL patterns for the products app.
 '''
 from django.urls import path
 from .views import ProductListView, ProductDetailView, ProductCreateView, \
+    ProductFilterView, \
     ProductUpdateView, ProductDeleteView, ProductReleasesListView, \
     ProductsDebugTemplateView, ProductsWithoutImagesListView, \
     PostponedReleasesListView
@@ -14,6 +15,7 @@ urlpatterns = [
     path('debug/without-images/', ProductsWithoutImagesListView.as_view(), name='without-images'),
 
     path('', ProductListView.as_view(), name='list'),
+    path('filter/', ProductFilterView.as_view(), name='filter'),
     path('releases/', ProductReleasesListView.as_view(), name='releases'),
     path('releases/postponed/', PostponedReleasesListView.as_view(), name='releases-postponed'),
     path('create/', ProductCreateView.as_view(), name='create'),

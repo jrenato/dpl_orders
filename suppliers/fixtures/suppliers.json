@@ -15,9 +15,9 @@
             "state_registration": null,
             "municipal_registration": "3505708",
             "contact_person": "JESSICA",
+            "phone_number": null,
             "email": "jessica@panini.com.br, ",
             "emailnfe": "s.santos@panini.com.br",
-            "phone_number": null,
             "created": "2024-03-22T12:16:04.157Z",
             "updated": "2024-03-22T12:16:04.157Z"
         }
@@ -38,11 +38,11 @@
             "state_registration": "148036957115",
             "municipal_registration": "3550308",
             "contact_person": null,
+            "phone_number": null,
             "email": "comercial@newpop.com.br",
             "emailnfe": "comercial@newpop.com.br,",
-            "phone_number": null,
             "created": "2024-03-26T11:57:22.848Z",
-            "updated": "2024-03-26T11:57:22.848Z"
+            "updated": "2024-04-17T12:36:36.408Z"
         }
     },
     {
@@ -61,11 +61,11 @@
             "state_registration": "127.897.838.117",
             "municipal_registration": "3518800",
             "contact_person": "BRUNA",
+            "phone_number": null,
             "email": "financeiro@editorajbc.com.br",
             "emailnfe": "financeiro@editorajbc.com.br",
-            "phone_number": null,
             "created": "2024-03-26T11:58:08.112Z",
-            "updated": "2024-03-26T11:58:08.112Z"
+            "updated": "2024-04-17T12:36:23.375Z"
         }
     },
     {
@@ -84,11 +84,34 @@
             "state_registration": "129.442.191.118",
             "municipal_registration": "3550308",
             "contact_person": "CLAUDIA",
+            "phone_number": null,
             "email": "thais.araujo@grupoibep.com.br",
             "emailnfe": "thais.araujo@grupoibep.com.br",
-            "phone_number": null,
             "created": "2024-03-26T14:39:14.672Z",
-            "updated": "2024-03-26T14:39:14.672Z"
+            "updated": "2024-04-17T12:36:11.144Z"
+        }
+    },
+    {
+        "model": "suppliers.supplier",
+        "pk": 5,
+        "fields": {
+            "vl_id": "800246",
+            "mb_id": "BR0117206",
+            "name": "ZIG EDITORA E COMERCIO DE LIVROS LTDA  QS EDITORA",
+            "company_name": "ZIG EDITORA E COMERCIO DE LIVROS LTDA  QS EDITORA",
+            "short_name": "QS",
+            "slug": "zig-editora",
+            "person_or_company": "J",
+            "cnpj": "41669297000160",
+            "cpf": "",
+            "state_registration": "206.686.271.117",
+            "municipal_registration": "3505708",
+            "contact_person": null,
+            "phone_number": null,
+            "email": "loja@qscomics.com.br",
+            "emailnfe": "loja@qscomics.com.br",
+            "created": "2024-04-17T12:33:05.196Z",
+            "updated": "2024-04-17T12:33:43.337Z"
         }
     },
     {
@@ -120,7 +143,7 @@
             "district": "VILA CLEMENTINO",
             "zip_code": "04041000",
             "created": "2024-03-26T11:57:22.876Z",
-            "updated": "2024-03-26T11:57:22.886Z"
+            "updated": "2024-04-17T12:36:36.427Z"
         }
     },
     {
@@ -136,7 +159,7 @@
             "district": "CUMBICA",
             "zip_code": "07232151",
             "created": "2024-03-26T11:58:08.140Z",
-            "updated": "2024-03-26T11:58:08.150Z"
+            "updated": "2024-04-17T12:36:23.391Z"
         }
     },
     {
@@ -152,7 +175,23 @@
             "district": "JARDIM BOA VISTA (ZONA OESTE)",
             "zip_code": "05583-140",
             "created": "2024-03-26T14:39:14.698Z",
-            "updated": "2024-03-26T14:39:14.707Z"
+            "updated": "2024-04-17T12:36:11.162Z"
+        }
+    },
+    {
+        "model": "suppliers.supplieraddress",
+        "pk": 5,
+        "fields": {
+            "supplier": 5,
+            "street": "AV TAMBORE ",
+            "number": "1180",
+            "complement": "BLOCO B MODULO 10A",
+            "city": "BARUERI",
+            "state": "SP",
+            "district": "TAMBORE",
+            "zip_code": "06460000",
+            "created": "2024-04-17T12:33:05.219Z",
+            "updated": "2024-04-17T12:33:43.354Z"
         }
     },
     {
@@ -160,7 +199,7 @@
         "pk": 1,
         "fields": {
             "supplier": 1,
-            "phone_number": "11-4133-0199",
+            "phone_number": "11-4133-0199 ",
             "created": "2024-03-22T12:16:04.194Z",
             "updated": "2024-03-22T12:16:04.194Z"
         }
@@ -200,7 +239,7 @@
         "pk": 5,
         "fields": {
             "supplier": 3,
-            "phone_number": "11 5575-6286",
+            "phone_number": "11 5575-6286  ",
             "created": "2024-03-26T11:58:08.163Z",
             "updated": "2024-03-26T11:58:08.163Z"
         }
@@ -220,7 +259,7 @@
         "pk": 7,
         "fields": {
             "supplier": 3,
-            "phone_number": "(11) 5549-0319",
+            "phone_number": "(11) 5549-0319 ",
             "created": "2024-03-26T11:58:08.183Z",
             "updated": "2024-03-26T11:58:08.183Z"
         }
@@ -253,6 +292,16 @@
             "phone_number": "(11) 3346-6078",
             "created": "2024-03-26T14:39:14.754Z",
             "updated": "2024-03-26T14:39:14.754Z"
+        }
+    },
+    {
+        "model": "suppliers.supplierphone",
+        "pk": 11,
+        "fields": {
+            "supplier": 5,
+            "phone_number": null,
+            "created": "2024-04-17T12:33:05.240Z",
+            "updated": "2024-04-17T12:33:05.240Z"
         }
     }
 ]

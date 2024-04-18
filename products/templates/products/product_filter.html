@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block title %}
   {% translate "Product List" %}
@@ -28,7 +29,7 @@
 
   {% if filter.qs %}
     <form method="get">
-      {{ filter.form.as_p }}
+      {{ filter.form|crispy }}
       <input type="submit" />
     </form>
     {% include "includes/pagination.html" %}

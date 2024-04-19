@@ -47,23 +47,21 @@ class ProductFilterForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['price', 'release_date', 'supplier']
+        fields = ['supplier', 'release_date', 'price']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
-            Row(
-                Column('device_created', css_class='form-group col-12'),
-                css_class='form-row'
+            Div(
+                Div('supplier', css_class='form-group col-md-4'),
+                Div('release_date', css_class='form-group col-md-4'),
+                Div('price', css_class='form-group col-md-4'),
+                css_class='row'
             ),
-            Row(
-                Column('device_id', css_class='form-group col-12'),
-                css_class='form-row'
-            ),
-            Row(
-                Column('device_type', css_class='form-group col-6 mb-0'),
-                Column('device_group', css_class='form-group col-6 mb-0'),
-                css_class='form-row'
-            ),
+            FormActions(
+                Submit('submit', 'Filter'),
+                Button('clear', 'Clear')
+            )
         )

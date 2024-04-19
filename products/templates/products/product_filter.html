@@ -29,8 +29,7 @@
 
   {% if filter.qs %}
     <form method="get">
-      {{ filter.form|crispy }}
-      <input type="submit" />
+      {% crispy filter.form %}
     </form>
     {% include "includes/pagination.html" %}
     <div class="table-responsive">

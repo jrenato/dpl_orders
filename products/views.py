@@ -62,6 +62,13 @@ class ProductFilterView(PermissionRequiredMixin, FilterView):
     context_object_name = 'products'
     permission_required = 'products.view_product'
 
+    def get_context_data(self, *args, **kwargs):
+        _request_copy = self.request.GET.copy()
+        parameters = _request_copy.pop('page', True) and _request_copy.urlencode()
+        context = super().get_context_data(*args, **kwargs)
+        context['parameters'] = parameters
+        return context
+
 
 class ProductSearchView(ProductListView):
     '''

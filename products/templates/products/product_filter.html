@@ -27,64 +27,58 @@
 
   <hr />
 
-  {% if filter.qs %}
-    <form method="get">
-      {% crispy filter.form %}
-    </form>
-    {% include "includes/pagination.html" %}
-    <div class="table-responsive">
-      <table class="table table-striped table-hover table-sm">
-        <thead>
+  <form method="get">
+    {% crispy filter.form %}
+  </form>
+  {% include "includes/pagination.html" %}
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-sm">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">{% translate "Product" %}</th>
+          <th scope="col" class="text-center">{% translate "Supplier" %}</th>
+          <th scope="col" class="text-center">{% translate "SKU" %}</th>
+          <th scope="col" class="text-center">{% translate "Release" %}</th>
+          <th scope="col" class="text-center">{% translate "Category" %}</th>
+          <th scope="col" class="text-center">{% translate "Price" %}</th>
+          <th scope="col" class="text-center">{% translate "Ordered Quantity" %}</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
           <tr>
-            <th scope="col" class="text-center">{% translate "Product" %}</th>
-            <th scope="col" class="text-center">{% translate "Supplier" %}</th>
-            <th scope="col" class="text-center">{% translate "SKU" %}</th>
-            <th scope="col" class="text-center">{% translate "Release" %}</th>
-            <th scope="col" class="text-center">{% translate "Category" %}</th>
-            <th scope="col" class="text-center">{% translate "Price" %}</th>
-            <th scope="col" class="text-center">{% translate "Ordered Quantity" %}</th>
-            <th scope="col"></th>
+            <td>
+              <a href="{% url "products:detail" product.slug %}">{{ product.name }}</a>
+            </td>
+            <td class="text-center">{{ product.supplier }}</td>
+            <td class="text-center">{{ product.sku }}</td>
+            <td class="text-center">{{ product.release_date|date:"SHORT_DATE_FORMAT" }}</td>
+            <td class="text-center">{{ product.category|default:"" }}</td>
+            <td class="text-center">{{ product.price }}</td>
+            <td class="text-center">{{ product.order_items_sum }}</td>
+            <td class="text-end">
+              <!-- Buttons to view, edit and delete a product -->
+              {% if perms.products.view_product %}
+                <a href="{% url "products:detail" product.slug %}" class="btn btn-sm btn-secondary">
+                  <i data-feather="search" class="align-middle"></i>
+                </a>
+              {% endif %}
+              {% if perms.products.change_product %}
+                <a href="{% url "products:update" product.slug %}" class="btn btn-sm btn-primary">
+                  <i data-feather="edit" class="align-middle"></i>
+                </a>
+              {% endif %}
+              {% if perms.products.delete_product %}
+                <a href="{% url "products:delete" product.slug %}" class="btn btn-sm btn-danger">
+                  <i data-feather="trash-2" class="align-middle"></i>
+                </a>
+              {% endif %}
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {% for product in products %}
-            <tr>
-              <td>
-                <a href="{% url "products:detail" product.slug %}">{{ product.name }}</a>
-              </td>
-              <td class="text-center">{{ product.supplier }}</td>
-              <td class="text-center">{{ product.sku }}</td>
-              <td class="text-center">{{ product.release_date|date:"SHORT_DATE_FORMAT" }}</td>
-              <td class="text-center">{{ product.category|default:"" }}</td>
-              <td class="text-center">{{ product.price }}</td>
-              <td class="text-center">{{ product.order_items_sum }}</td>
-              <td class="text-end">
-                <!-- Buttons to view, edit and delete a product -->
-                {% if perms.products.view_product %}
-                  <a href="{% url "products:detail" product.slug %}" class="btn btn-sm btn-secondary">
-                    <i data-feather="search" class="align-middle"></i>
-                  </a>
-                {% endif %}
-                {% if perms.products.change_product %}
-                  <a href="{% url "products:update" product.slug %}" class="btn btn-sm btn-primary">
-                    <i data-feather="edit" class="align-middle"></i>
-                  </a>
-                {% endif %}
-                {% if perms.products.delete_product %}
-                  <a href="{% url "products:delete" product.slug %}" class="btn btn-sm btn-danger">
-                    <i data-feather="trash-2" class="align-middle"></i>
-                  </a>
-                {% endif %}
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    {% include "includes/pagination.html" %}
-  {% else %}
-    <p>
-      {% translate "No products are available." %}
-    </p>
-  {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% include "includes/pagination.html" %}
 {% endblock content %}

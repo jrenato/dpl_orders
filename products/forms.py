@@ -47,7 +47,7 @@ class ProductFilterForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['supplier', 'release_date', 'price']
+        fields = ['supplier', 'release_date']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -56,8 +56,8 @@ class ProductFilterForm(forms.ModelForm):
         self.helper.layout = Layout(
             Div(
                 Div('supplier', css_class='form-group col-md-4'),
-                Div('release_date', css_class='form-group col-md-4'),
-                Div('price', css_class='form-group col-md-4'),
+                Div('release_month', css_class='form-group col-md-4'),
+                Div('release_year', css_class='form-group col-md-4'),
                 css_class='row'
             ),
             FormActions(

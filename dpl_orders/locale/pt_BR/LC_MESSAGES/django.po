@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-08 11:56-0300\n"
+"POT-Creation-Date: 2024-04-22 12:09-0300\n"
 "PO-Revision-Date: 2024-03-17 09:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -320,6 +320,7 @@ msgstr "Telefones"
 #: orders/templates/orders/order_list.html:15
 #: product_groups/templates/product_groups/productgroup_detail.html:57
 #: product_groups/templates/product_groups/productgroup_list.html:16
+#: products/templates/products/product_filter.html:17
 #: products/templates/products/product_list.html:16
 #: products/tests/test_permissions.py:172
 #: products/tests/test_permissions.py:185
@@ -381,6 +382,7 @@ msgstr "Lista de Clientes"
 #: customers/templates/customers/customer_list.html:22
 #: dpl_orders/templates/home.html:31 orders/templates/orders/order_list.html:18
 #: product_groups/templates/product_groups/productgroup_list.html:21
+#: products/templates/products/product_filter.html:22
 #: products/templates/products/product_list.html:21
 #: products/templates/products/product_releases_list.html:16
 #: suppliers/templates/suppliers/supplier_list.html:20
@@ -882,6 +884,7 @@ msgstr "Históricos de Status do Pedido"
 #: products/models.py:84 products/models.py:169 products/models.py:194
 #: products/templates/products/product_confirm_delete.html:4
 #: products/templates/products/product_confirm_delete.html:7
+#: products/templates/products/product_filter.html:38
 #: products/templates/products/product_list.html:35
 #: products/templates/products/product_releases_list.html:48
 msgid "Product"
@@ -895,6 +898,7 @@ msgstr "Quantidade Entregue"
 #: orders/templates/orders/order_detail.html:49
 #: product_groups/templates/product_groups/productgroup_detail.html:74
 #: products/models.py:58 products/templates/products/product_detail.html:68
+#: products/templates/products/product_filter.html:43
 #: products/templates/products/product_list.html:40
 #: products/templates/products/product_releases_list.html:51
 msgid "Price"
@@ -972,6 +976,7 @@ msgstr "Itens de Pedido"
 #: orders/templates/orders/order_detail.html:46
 #: product_groups/templates/product_groups/productgroup_detail.html:70
 #: products/models.py:45 products/templates/products/product_detail.html:62
+#: products/templates/products/product_filter.html:39
 #: products/templates/products/product_list.html:36 suppliers/models.py:60
 #: suppliers/templates/suppliers/supplier_confirm_delete.html:4
 #: suppliers/templates/suppliers/supplier_confirm_delete.html:7
@@ -981,6 +986,7 @@ msgstr "Fornecedor"
 #: orders/templates/orders/order_detail.html:47
 #: product_groups/templates/product_groups/productgroup_detail.html:73
 #: products/models.py:49 products/templates/products/product_detail.html:65
+#: products/templates/products/product_filter.html:42
 #: products/templates/products/product_list.html:39
 msgid "Category"
 msgstr "Categoria"
@@ -1067,6 +1073,7 @@ msgstr "Itens do Grupo de Produtos"
 
 #: product_groups/templates/product_groups/productgroup_detail.html:71
 #: products/models.py:55 products/templates/products/product_detail.html:59
+#: products/templates/products/product_filter.html:40
 #: products/templates/products/product_list.html:37
 #: products/templates/products/product_releases_list.html:49
 msgid "SKU"
@@ -1079,6 +1086,7 @@ msgid "Release Date"
 msgstr "Data de Lançamento"
 
 #: product_groups/templates/product_groups/productgroup_detail.html:75
+#: products/templates/products/product_filter.html:44
 #: products/templates/products/product_list.html:41
 #: products/templates/products/product_releases_list.html:53
 msgid "Ordered Quantity"
@@ -1106,6 +1114,62 @@ msgstr "Nenhum grupo de produto está disponível."
 #: product_groups/templates/product_groups/productgroupitem_form.html:12
 msgid "Product Group Item Registration"
 msgstr "Cadastro de Item de Grupo de Produtos"
+
+#: products/filters.py:13
+msgid "January"
+msgstr "Janeiro"
+
+#: products/filters.py:14
+msgid "February"
+msgstr "Fevereiro"
+
+#: products/filters.py:15
+msgid "March"
+msgstr "Março"
+
+#: products/filters.py:16
+msgid "April"
+msgstr "Abril"
+
+#: products/filters.py:17
+msgid "May"
+msgstr "Maio"
+
+#: products/filters.py:18
+msgid "June"
+msgstr "Junho"
+
+#: products/filters.py:19
+msgid "July"
+msgstr "Julho"
+
+#: products/filters.py:20
+msgid "August"
+msgstr "Agosto"
+
+#: products/filters.py:21
+msgid "September"
+msgstr "Setembro"
+
+#: products/filters.py:22
+msgid "October"
+msgstr "Outubro"
+
+#: products/filters.py:23
+msgid "November"
+msgstr "Novembro"
+
+#: products/filters.py:24
+msgid "December"
+msgstr "Dezembro"
+
+#: products/filters.py:33
+msgid "Release Year"
+msgstr "Ano de Lançamento"
+
+#: products/filters.py:38
+msgid "Release Month"
+msgstr "Mês de Lançamento"
 
 #: products/models.py:25
 msgid "Product Category"
@@ -1204,19 +1268,22 @@ msgstr "Nenhum lançamento adiado está disponível."
 msgid "Supplier Internal ID"
 msgstr "Código Interno do Fornecedor"
 
-#: products/templates/products/product_form.html:5
-#: products/templates/products/product_form.html:8
-msgid "Product Registration"
-msgstr "Cadastro de Produto"
-
+#: products/templates/products/product_filter.html:6
+#: products/templates/products/product_filter.html:12
 #: products/templates/products/product_list.html:5
 #: products/templates/products/product_list.html:11
 msgid "Product List"
 msgstr "Lista de Produtos"
 
+#: products/templates/products/product_filter.html:41
 #: products/templates/products/product_list.html:38
 msgid "Release"
 msgstr "Lançamento"
+
+#: products/templates/products/product_form.html:5
+#: products/templates/products/product_form.html:8
+msgid "Product Registration"
+msgstr "Cadastro de Produto"
 
 #: products/templates/products/product_releases_list.html:5
 #: products/templates/products/product_releases_list.html:11

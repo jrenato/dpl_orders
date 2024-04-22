@@ -29,11 +29,13 @@ class ProductFilter(django_filters.FilterSet):
     release_year = django_filters.ChoiceFilter(
         field_name='release_date', lookup_expr='year',
         # Set the choices for the last five years
-        choices=[(x, str(x)) for x in range(datetime.date.today().year - 5, datetime.date.today().year + 1)]
+        choices=[(x, str(x)) for x in range(datetime.date.today().year - 5, datetime.date.today().year + 1)],
+        label=_('Release Year'),
     )
     release_month = django_filters.ChoiceFilter(
         field_name='release_date', lookup_expr='month',
-        choices=MONTH_CHOICES
+        choices=MONTH_CHOICES,
+        label=_('Release Month'),
     )
 
     class Meta:

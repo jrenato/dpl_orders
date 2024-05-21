@@ -55,9 +55,10 @@ class ProductFilterForm(forms.ModelForm):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             Div(
-                Div('supplier', css_class='form-group col-md-4'),
-                Div('release_month', css_class='form-group col-md-4'),
-                Div('release_year', css_class='form-group col-md-4'),
+                Div('name', css_class='form-group col-md-3'),
+                Div('supplier', css_class='form-group col-md-3'),
+                Div('release_month', css_class='form-group col-md-3'),
+                Div('release_year', css_class='form-group col-md-3'),
                 css_class='row'
             ),
             FormActions(

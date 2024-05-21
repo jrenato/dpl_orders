@@ -26,6 +26,11 @@ MONTH_CHOICES = (
 
 
 class ProductFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(
+        field_name='name',
+        lookup_expr='icontains',
+        label=_('Name'),
+    )
     release_year = django_filters.ChoiceFilter(
         field_name='release_date', lookup_expr='year',
         # Set the choices for the last five years
@@ -41,4 +46,4 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = Product
         form = ProductFilterForm
-        fields = ['supplier', 'release_date']
+        fields = ['name', 'supplier', 'release_date']

@@ -6,27 +6,21 @@
 #
 asgiref==3.8.1
     # via django
-build==1.2.1
+build==1.2.2.post1
     # via pip-tools
-certifi==2024.2.2
+certifi==2024.8.30
     # via
     #   mailchimp-marketing
     #   requests
-cffi==1.16.0
-    # via cryptography
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via pip-tools
-crispy-bootstrap5==2024.2
+crispy-bootstrap5==2024.10
     # via -r requirements.in
-cryptography==42.0.5
-    # via pyjwt
 defusedxml==0.7.1
-    # via
-    #   odfpy
-    #   python3-openid
-django==5.0.4
+    # via odfpy
+django==5.0.9
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -37,57 +31,51 @@ django==5.0.4
     #   django-localflavor
     #   django-select2
     #   mssql-django
-django-allauth==0.61.1
+django-allauth==65.0.2
     # via -r requirements.in
 django-appconf==1.0.6
     # via django-select2
-django-crispy-forms==2.1
+django-crispy-forms==2.3
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
 django-environ==0.11.2
     # via -r requirements.in
-django-filter==24.2
+django-filter==24.3
     # via -r requirements.in
 django-localflavor==4.0
     # via -r requirements.in
-django-select2==8.1.2
+django-select2==8.2.1
     # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
-idna==3.7
+idna==3.10
     # via requests
 lml==0.1.0
     # via pyexcel-io
 mailchimp-marketing==3.0.80
     # via -r requirements.in
-mssql-django==1.4.2
+mssql-django==1.5
     # via -r requirements.in
-oauthlib==3.2.2
-    # via requests-oauthlib
 odfpy==1.4.1
     # via pyexcel-ods
-openpyxl==3.1.2
+openpyxl==3.1.5
     # via -r requirements.in
-packaging==24.0
+packaging==24.1
     # via build
-pillow==10.3.0
+pillow==11.0.0
     # via -r requirements.in
 pip-tools==7.4.1
     # via -r requirements.in
-pycparser==2.22
-    # via cffi
 pyexcel-io==0.6.6
     # via pyexcel-ods
 pyexcel-ods==0.6.0
     # via -r requirements.in
-pyjwt[crypto]==2.8.0
-    # via django-allauth
-pyodbc==5.1.0
+pyodbc==5.2.0
     # via
     #   -r requirements.in
     #   mssql-django
-pyproject-hooks==1.0.0
+pyproject-hooks==1.2.0
     # via
     #   build
     #   pip-tools
@@ -97,37 +85,29 @@ python-dateutil==2.9.0.post0
     #   mailchimp-marketing
 python-stdnum==1.20
     # via django-localflavor
-python3-openid==3.2.0
-    # via django-allauth
-pytz==2024.1
+pytz==2024.2
     # via mssql-django
-requests==2.31.0
-    # via
-    #   django-allauth
-    #   mailchimp-marketing
-    #   requests-oauthlib
-requests-oauthlib==2.0.0
-    # via django-allauth
+requests==2.32.3
+    # via mailchimp-marketing
 six==1.16.0
     # via
     #   mailchimp-marketing
     #   python-dateutil
-sqlparse==0.5.0
+sqlparse==0.5.1
     # via django
-tomli==2.0.1
+tomli==2.0.2
     # via
     #   build
     #   pip-tools
-    #   pyproject-hooks
-tqdm==4.66.2
+tqdm==4.66.5
     # via -r requirements.in
-typing-extensions==4.11.0
+typing-extensions==4.12.2
     # via asgiref
-urllib3==2.2.1
+urllib3==2.2.3
     # via
     #   mailchimp-marketing
     #   requests
-wheel==0.43.0
+wheel==0.44.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:

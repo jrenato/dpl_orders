@@ -1,4 +1,5 @@
 crispy-bootstrap5
+cryptography
 django
 django-allauth
 django-crispy-forms
@@ -12,6 +13,11 @@ openpyxl
 pillow
 pip-tools
 pyexcel-ods
+PyJWT
 pyodbc
 python-dateutil
+python3-openid
+python3-saml
+requests
+requests-oauthlib
 tqdm

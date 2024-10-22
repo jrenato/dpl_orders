@@ -10,7 +10,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Button
 from crispy_forms.bootstrap import FormActions, InlineRadios
 
-from .models import Customer, CUSTOMER_TYPES, CustomerAddress, CustomerPhone
+from .models import Customer, CustomerType, CustomerAddress, CustomerPhone
 
 
 class CustomerForm(forms.ModelForm):
@@ -75,7 +75,7 @@ class CustomerForm(forms.ModelForm):
         self.fields['cnpj'] = BRCNPJField(required=False)
 
         self.fields['person_or_company'].widget = forms.RadioSelect()
-        self.fields['person_or_company'].choices = CUSTOMER_TYPES
+        self.fields['person_or_company'].choices = CustomerType
 
         self.fields['slug'].disabled = True
 
